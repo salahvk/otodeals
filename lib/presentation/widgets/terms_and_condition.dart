@@ -33,11 +33,11 @@ class _TermsAndConditionState extends State<TermsAndCondition> {
               },
             ),
             Text("I agree to the",
-                style: getBoldtStyle(
-                    color: const Color(0xffafafaf), fontSize: 14)),
+                style:
+                    getBoldStyle(color: const Color(0xffafafaf), fontSize: 14)),
             Text(" terms & conditions",
                 style:
-                    getBoldtStyle(color: Colormanager.textColor, fontSize: 14)),
+                    getBoldStyle(color: Colormanager.textColor, fontSize: 14)),
           ],
         ),
       ),

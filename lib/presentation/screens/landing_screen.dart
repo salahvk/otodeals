@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 
 class LandingScreen extends StatelessWidget {
@@ -20,7 +21,7 @@ class LandingScreen extends StatelessWidget {
                 children: [
                   Text(
                     "Drive Your",
-                    style: getBoldtStyle(color: Colors.black, fontSize: 56)
+                    style: getBoldStyle(color: Colors.black, fontSize: 56)
                         .copyWith(
                       fontFamily: 'Karben 105',
                     ),
@@ -29,7 +30,7 @@ class LandingScreen extends StatelessWidget {
                     height: 15,
                   ),
                   Text("Dreams",
-                      style: getBoldtStyle(
+                      style: getBoldStyle(
                               color: Colormanager.primary, fontSize: 56)
                           .copyWith(
                         fontFamily: 'Karben 105',
@@ -43,19 +44,24 @@ class LandingScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Container(
-                  width: size.width * .8,
-                  decoration: BoxDecoration(
-                      color: Colormanager.primary,
-                      borderRadius: BorderRadius.circular(12)),
-                  // height: 40,
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        "LOG IN",
-                        style: getMediumtStyle(
-                            color: Colormanager.white, fontSize: 16),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.loginScreen);
+                  },
+                  child: Container(
+                    width: size.width * .8,
+                    decoration: BoxDecoration(
+                        color: Colormanager.primary,
+                        borderRadius: BorderRadius.circular(12)),
+                    // height: 40,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "LOG IN",
+                          style: getMediumtStyle(
+                              color: Colormanager.white, fontSize: 16),
+                        ),
                       ),
                     ),
                   ),
@@ -63,19 +69,24 @@ class LandingScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  width: size.width * .8,
-                  decoration: BoxDecoration(
-                      color: Colormanager.grey,
-                      borderRadius: BorderRadius.circular(12)),
-                  // height: 40,
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        "CREATE AN ACCOUNT",
-                        style:
-                            getMediumtStyle(color: Colors.black, fontSize: 16),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.registerScreen);
+                  },
+                  child: Container(
+                    width: size.width * .8,
+                    decoration: BoxDecoration(
+                        color: Colormanager.grey,
+                        borderRadius: BorderRadius.circular(12)),
+                    // height: 40,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "CREATE AN ACCOUNT",
+                          style: getMediumtStyle(
+                              color: Colors.black, fontSize: 16),
+                        ),
                       ),
                     ),
                   ),

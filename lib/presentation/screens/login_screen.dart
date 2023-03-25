@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/presentation/widgets/terms_and_condition.dart';
 
@@ -188,9 +189,14 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    Text(
-                      "Forget Password?",
-                      style: getMediumtStyle(color: Colormanager.greyText),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.forgetPassScreen);
+                      },
+                      child: Text(
+                        "Forget Password?",
+                        style: getMediumtStyle(color: Colormanager.greyText),
+                      ),
                     ),
                     const SizedBox(
                       height: 20,

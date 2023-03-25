@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -35,17 +36,17 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                       Text(
                         "BEST",
-                        style: getSemiBoldtStyle(
+                        style: getSemiBoldStyle(
                             color: Colormanager.white, fontSize: 24),
                       ),
                       Text(
                         "CAR SELLING & BUYING",
-                        style: getSemiBoldtStyle(
+                        style: getSemiBoldStyle(
                             color: Colormanager.primary, fontSize: 24),
                       ),
                       Text(
                         "PLATFORM",
-                        style: getSemiBoldtStyle(
+                        style: getSemiBoldStyle(
                             color: Colormanager.white, fontSize: 24),
                       ),
                     ],
@@ -53,19 +54,24 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Container(
-                      width: 120,
-                      decoration: BoxDecoration(
-                          color: Colormanager.primary,
-                          borderRadius: BorderRadius.circular(10)),
-                      // height: 40,
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Explore Now",
-                            style: getMediumtStyle(
-                                color: Colormanager.white, fontSize: 16),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.landingScreen);
+                      },
+                      child: Container(
+                        width: 120,
+                        decoration: BoxDecoration(
+                            color: Colormanager.primary,
+                            borderRadius: BorderRadius.circular(10)),
+                        // height: 40,
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "Explore Now",
+                              style: getMediumtStyle(
+                                  color: Colormanager.white, fontSize: 16),
+                            ),
                           ),
                         ),
                       ),

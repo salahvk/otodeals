@@ -42,7 +42,7 @@ TextStyle getMediumtStyle({
   );
 }
 
-TextStyle getSemiBoldtStyle({
+TextStyle getSemiBoldStyle({
   double fontSize = 12,
   required Color color,
 }) {
@@ -53,7 +53,7 @@ TextStyle getSemiBoldtStyle({
   );
 }
 
-TextStyle getBoldtStyle({
+TextStyle getBoldStyle({
   double fontSize = 12,
   required Color color,
 }) {
