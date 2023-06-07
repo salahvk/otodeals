@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/routes_manager.dart';
+import 'package:otodeals/presentation/screens/welcome_screen.dart';
+
+
+
+
+//import 'package:otodeals/core/routes_manager.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +25,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: Routes.welcomeScreen,
       onGenerateRoute: RouteGenerator.getRoute,
-      // home: MainScreen(),
+      home: WelcomeScreen()
     );
   }
 }

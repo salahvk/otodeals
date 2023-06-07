@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/presentation/widgets/terms_and_condition.dart';
 
@@ -18,10 +19,11 @@ class RegisterAccount extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                height: size.height * .08,
+                height: size.height * .1,
               ),
               SizedBox(
-                  width: size.width * .6, child: Image.asset(AssetImages.logo)),
+                  width: size.width * .6,
+                  child: Image.asset(AssetImages.logoBlack)),
               SizedBox(
                 height: size.height * .03,
               ),
@@ -117,9 +119,14 @@ class RegisterAccount extends StatelessWidget {
                     "Already have an account?",
                     style: getMediumtStyle(color: Colormanager.greyText),
                   ),
-                  Text(
-                    "Log in",
-                    style: getMediumtStyle(color: Colormanager.primary),
+                  InkWell(
+                    child: Text(
+                      "Log in",
+                      style: getMediumtStyle(color: Colormanager.primary),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).pushNamed(Routes.loginScreen);
+                    },
                   )
                 ],
               ),
@@ -136,10 +143,15 @@ class RegisterAccount extends StatelessWidget {
                 child: Center(
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      "Create Account",
-                      style: getMediumtStyle(
-                          color: Colormanager.white, fontSize: 16),
+                    child: InkWell(
+                      child: Text(
+                        "Create Account",
+                        style: getMediumtStyle(
+                            color: Colormanager.white, fontSize: 16),
+                      ),
+                      onTap: () {
+                         Navigator.of(context).pushNamed(Routes.loginScreen);
+                      },
                     ),
                   ),
                 ),

@@ -17,7 +17,7 @@ class LandingScreen extends StatelessWidget {
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     "Drive Your",
@@ -29,12 +29,24 @@ class LandingScreen extends StatelessWidget {
                   const SizedBox(
                     height: 15,
                   ),
-                  Text("Dreams",
-                      style: getBoldStyle(
-                              color: Colormanager.primary, fontSize: 56)
-                          .copyWith(
-                        fontFamily: 'Karben 105',
-                      ))
+                  Row(
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: size.width * .25,
+                      ),
+                      Text("Dreams",
+                          style: getBoldStyle(
+                                  color: Colormanager.primary, fontSize: 56)
+                              .copyWith(
+                            fontFamily: 'Karben 105',
+                          )),
+                      SizedBox(
+                        width: size.width * .04,
+                      ),
+                      Image.asset('assets/slide_layer.png')
+                    ],
+                  )
                 ],
               ),
             ),
@@ -52,7 +64,7 @@ class LandingScreen extends StatelessWidget {
                     width: size.width * .8,
                     decoration: BoxDecoration(
                         color: Colormanager.primary,
-                        borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(14)),
                     // height: 40,
                     child: Center(
                       child: Padding(
@@ -77,7 +89,7 @@ class LandingScreen extends StatelessWidget {
                     width: size.width * .8,
                     decoration: BoxDecoration(
                         color: Colormanager.grey,
-                        borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(14)),
                     // height: 40,
                     child: Center(
                       child: Padding(

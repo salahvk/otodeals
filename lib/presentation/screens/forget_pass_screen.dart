@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 
 class ForgetPassScreen extends StatelessWidget {
@@ -17,17 +18,18 @@ class ForgetPassScreen extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                height: size.height * .08,
+                height: size.height * .1,
               ),
               SizedBox(
-                  width: size.width * .6, child: Image.asset(AssetImages.logo)),
+                  width: size.width * .6,
+                  child: Image.asset(AssetImages.logoBlack)),
               SizedBox(
                 height: size.height * .05,
               ),
               Text(
                 "FORGOT PASSWORD",
                 style: getMediumtStyle(
-                    color: Colormanager.textColor, fontSize: 16),
+                    color: Colormanager.textColor, fontSize: 20),
               ),
               SizedBox(
                 height: size.height * .08,
@@ -41,7 +43,11 @@ class ForgetPassScreen extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Enter Registered Email Id:"),
+                      Text(
+                        "Enter Registered Email Id:",
+                        style: getMediumtStyle(
+                            color: Colormanager.black, fontSize: 14),
+                      ),
                       SizedBox(
                           height: 25,
                           width: size.width * .7,
@@ -59,19 +65,24 @@ class ForgetPassScreen extends StatelessWidget {
               const SizedBox(
                 height: 25,
               ),
-              Container(
-                width: size.width * .8,
-                decoration: BoxDecoration(
-                    color: Colormanager.primary,
-                    borderRadius: BorderRadius.circular(12)),
-                // height: 40,
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      "SEND OTP",
-                      style: getMediumtStyle(
-                          color: Colormanager.white, fontSize: 16),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).pushNamed(Routes.mailotpScreen);
+                },
+                child: Container(
+                  width: size.width * .8,
+                  decoration: BoxDecoration(
+                      color: Colormanager.primary,
+                      borderRadius: BorderRadius.circular(14)),
+                  // height: 40,
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        "SEND OTP",
+                        style: getMediumtStyle(
+                            color: Colormanager.white, fontSize: 16),
+                      ),
                     ),
                   ),
                 ),
@@ -84,11 +95,18 @@ class ForgetPassScreen extends StatelessWidget {
                 children: [
                   Text(
                     "Don't have an account?",
-                    style: getMediumtStyle(color: Colormanager.greyText),
+                    style: getMediumtStyle(
+                        color: Colormanager.greyText, fontSize: 14),
                   ),
-                  Text(
-                    "Create One",
-                    style: getMediumtStyle(color: Colormanager.primary),
+                  InkWell(
+                    child: Text(
+                      "Create One",
+                      style: getMediumtStyle(
+                          color: Colormanager.primary, fontSize: 14),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).pushNamed(Routes.registerScreen);
+                    },
                   )
                 ],
               ),

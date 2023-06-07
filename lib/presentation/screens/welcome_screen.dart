@@ -59,10 +59,13 @@ class WelcomeScreen extends StatelessWidget {
                         Navigator.pushNamed(context, Routes.landingScreen);
                       },
                       child: Container(
-                        width: 120,
+                        // width: 120,
+                        constraints:
+                            const BoxConstraints(minWidth: 120, maxWidth: 160),
+
                         decoration: BoxDecoration(
                             color: Colormanager.primary,
-                            borderRadius: BorderRadius.circular(10)),
+                            borderRadius: BorderRadius.circular(14)),
                         // height: 40,
                         child: Center(
                           child: Padding(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 
 class MobileVerScreen extends StatelessWidget {
@@ -25,11 +26,12 @@ class MobileVerScreen extends StatelessWidget {
               height: size.height * .05,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   "Log In With Mobile Number",
                   style: getMediumtStyle(
-                      color: Colormanager.textColor, fontSize: 16),
+                      color: Colormanager.textColor, fontSize: 20),
                 ),
               ],
             ),
@@ -45,7 +47,11 @@ class MobileVerScreen extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("Your Phone Number:"),
+                    Text(
+                      "Your Phone Number:",
+                      style: getMediumtStyle(
+                          color: Colormanager.textColor, fontSize: 14),
+                    ),
                     SizedBox(
                         height: 25,
                         width: size.width * .7,
@@ -84,19 +90,24 @@ class MobileVerScreen extends StatelessWidget {
             const SizedBox(
               height: 25,
             ),
-            Container(
-              width: size.width * .8,
-              decoration: BoxDecoration(
-                  color: Colormanager.primary,
-                  borderRadius: BorderRadius.circular(12)),
-              // height: 40,
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text(
-                    "CONTINUE",
-                    style: getMediumtStyle(
-                        color: Colormanager.white, fontSize: 16),
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, Routes.otpScreen);
+              },
+              child: Container(
+                width: size.width * .8,
+                decoration: BoxDecoration(
+                    color: Colormanager.primary,
+                    borderRadius: BorderRadius.circular(12)),
+                // height: 40,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      "CONTINUE",
+                      style: getMediumtStyle(
+                          color: Colormanager.white, fontSize: 16),
+                    ),
                   ),
                 ),
               ),
@@ -109,13 +120,14 @@ class MobileVerScreen extends StatelessWidget {
               style: getMediumtStyle(color: Colormanager.primary),
             ),
             const Spacer(),
-            Text(
-              "By continuing, you agree to Terms & Conditions",
-              style: getMediumtStyle(color: Colormanager.greyText),
+            Padding(
+              padding: const EdgeInsets.only(bottom:8.0),
+              child: Text(
+                "By continuing, you agree to Terms & Conditions",
+                style: getMediumtStyle(color: Colormanager.greyText),
+              ),
             ),
-            const SizedBox(
-              height: 15,
-            ),
+            
           ],
         ),
       ),
