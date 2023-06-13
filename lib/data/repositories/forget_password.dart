@@ -20,7 +20,7 @@ async {
     
 
     // var response=await http.post(Uri.parse(url),headers:{"device-id":s});
-    var response=await http.post(Uri.parse("http://192.168.29.44:8010/api/customer/register?name=Nikhil 2&email=nikhil2@gmail.com&password=123456&confirm_password=123456"),headers:{"device-id":s});
+    var response=await http.post(Uri.parse(url),headers:{"device-id":s});
 
     if(response.statusCode!=200){
       showAnimatedSnackBar(context,"something went wrong");
