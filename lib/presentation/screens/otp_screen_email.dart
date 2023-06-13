@@ -1,11 +1,28 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print
 
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
+import 'package:http/http.dart' as http;
+import 'package:otodeals/core/util/animatedsnackbar.dart';
+
 import 'package:otodeals/core/util/pinTheme.dart';
+import 'package:otodeals/data/api/api_endpoint.dart';
+import 'package:otodeals/data/models/OTP/otpverification.dart';
+
+import 'package:otodeals/data/providers/otp_provider.dart';
+import 'package:otodeals/data/repositories/forget_password.dart';
+// import 'package:otodeals/data/repositories/otp_mail.dart';
+
 import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
 
 class OTPscreenmail extends StatefulWidget {
   const OTPscreenmail({Key? key}) : super(key: key);
@@ -17,12 +34,37 @@ class OTPscreenmail extends StatefulWidget {
 class _OTPscreenmailState extends State<OTPscreenmail> {
   bool isResendButtonClicked = false;
   bool loading = false;
-  String lang = '';
+    verifyNow() async {
+    FocusManager.instance.primaryFocus?.unfocus();
+    
+    if (Mailotpcontroller.otpcontroller.text.length < 4 ||
+       Mailotpcontroller.otpcontroller.text != '') {
+      AnimatedSnackBar.material("Sorry!!!!",
+              type: AnimatedSnackBarType.error,
+              borderRadius: BorderRadius.circular(6),
+              // brightness: Brightness.dark,
+              duration: const Duration(seconds: 1));
+         
+    } else {
+      setState(() {
+       loading=true;
+
+      });
+      await verifyOtpApi(context);
+       setState(() {
+         loading=false;
+       });
+        Navigator.of(context).pushNamed(Routes.resetPassScreen);
+      
+    }
+  }
+  
 
   @override
   void initState() {
     super.initState();
-    // PhoneNumberControllers.otpCon.text = '';
+    Mailotpcontroller.otpcontroller.text='';
+   
     // lang = Hive.box('LocalLan').get(
     //   'lang',
     // );
@@ -32,7 +74,7 @@ class _OTPscreenmailState extends State<OTPscreenmail> {
   Widget build(BuildContext context) {
     final h = MediaQuery.of(context).size.height;
     final w = MediaQuery.of(context).size.width;
-    // final otpProvider = Provider.of<OTPProvider>(context, listen: false);
+     final otpProvider = Provider.of<OTPProvider>(context, listen: false);
     // final str = AppLocalizations.of(context)!;
     // final mob = Responsive.isMobile(context);
 
@@ -62,7 +104,7 @@ class _OTPscreenmailState extends State<OTPscreenmail> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
                     child: Text(
-                        "Please type the verification code send to \n Your e-mail",
+                        "Please type the verification code send to \n ${otpProvider.email}",
                         textAlign: TextAlign.center,
                         style:
                             getMediumtStyle(color: Colors.black, fontSize: 15)),
@@ -77,15 +119,17 @@ class _OTPscreenmailState extends State<OTPscreenmail> {
                 separator: const SizedBox(
                   width: 5,
                 ),
-                length: 6,
-                // controller: PhoneNumberControllers.otpCon,
+                length: 4,
+                 controller:Mailotpcontroller.otpcontroller,
                 focusedPinTheme: focusedPinTheme,
                 // validator: (s) {
                 //   return s == '2222' ? null : 'Pin is incorrect';
                 // },
                 pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
                 showCursor: true,
-                onCompleted: (pin) {},
+                onCompleted: (pin) {
+                  verifyNow();
+                },
               ),
             ),
 
@@ -99,28 +143,27 @@ class _OTPscreenmailState extends State<OTPscreenmail> {
                           color: const Color(0xff9f9f9f), fontSize: 15)),
                   InkWell(
                     onTap: () async {
-                      // getOtp(context, {otpProvider.countryCode},
-                      //     {otpProvider.phoneNo}, true);
-                      // setState(() {
-                      //   isResendButtonClicked = true;
-                      // });
-                      // await Future.delayed(const Duration(seconds: 2));
-                      // setState(() {
-                      //   isResendButtonClicked = false;
-                      // });
+                      postForgetpasswordData(context);
+                      setState(() {
+                        isResendButtonClicked = true;
+                      });
+                      await Future.delayed(const Duration(seconds: 2));
+                      setState(() {
+                        isResendButtonClicked = false;
+                      });
                     },
                     child:
-                        //  isResendButtonClicked
-                        //     ? const SizedBox(
-                        //         width: 20,
-                        //         height: 20,
-                        //         child: CircularProgressIndicator(
-                        //           strokeWidth: 2,
-                        //           color: ColorManager.primary3,
-                        //           backgroundColor: ColorManager.whiteColor,
-                        //         ),
-                        //       )
-                        //     :
+                         isResendButtonClicked
+                            ? const SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color:Colormanager.black,
+                                  backgroundColor: Colormanager.white,
+                                ),
+                              )
+                            :
                         Text('Resend',
                             style: getRegularStyle(
                                 color: Colormanager.primary, fontSize: 15)),
@@ -132,7 +175,7 @@ class _OTPscreenmailState extends State<OTPscreenmail> {
             // * Verify Now Button
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, Routes.mainScreen);
+                Navigator.pushNamed(context, Routes.resetPassScreen);
               },
               child: Container(
                 width: w * .8,
@@ -162,77 +205,36 @@ class _OTPscreenmailState extends State<OTPscreenmail> {
     );
   }
 }
-//   verifyNow() async {
-//     FocusManager.instance.primaryFocus?.unfocus();
-//     final str = AppLocalizations.of(context)!;
-//     if (PhoneNumberControllers.otpCon.text.length < 6 ||
-//         PhoneNumberControllers.otpCon.text != '123456') {
-//       AnimatedSnackBar.material(str.o_snack,
-//               type: AnimatedSnackBarType.error,
-//               borderRadius: BorderRadius.circular(6),
-//               // brightness: Brightness.dark,
-//               duration: const Duration(seconds: 1))
-//           .show(
-//         context,
-//       );
-//     } else {
-//       setState(() {
-//         loading = true;
-//       });
-//       await verifyOtpApi();
+  verifyOtpApi(BuildContext context) async {
+    final otpProvider = Provider.of<OTPProvider>(context,listen: false);
+    //final provider = Provider.of<DataProvider>(context, listen: false);
+    print(Mailotpcontroller.otpcontroller.text);
+    print(otpProvider.getOtp?.otp.toString());
+    try {
+      var response = await http.post(
+          Uri.parse(
+              "${ApiEndpoint.otpemail}?email=${otpProvider.email}&otp=${otpProvider.getOtp?.otp.toString()}"),
+          headers: {"device-id":''});
+      if (response.statusCode == 200) {
+        var jsonResponse = jsonDecode(response.body);
+        log(response.body);
 
-//       setState(() {
-//         loading = false;
-//       });
-//     }
-//   }
+        var otpVerifiedData = OtpVerification.fromJson(jsonResponse);
+        otpProvider.getOtpVerifiedData(otpVerifiedData);
+        final apitoken = otpProvider.otpVerification?.customerdetails.apiToken;
+        print(apitoken);
 
-//   verifyOtpApi() async {
-//     final otpProvider = Provider.of<OTPProvider>(context, listen: false);
-//     final provider = Provider.of<DataProvider>(context, listen: false);
-//     try {
-//       var response = await http.post(
-//           Uri.parse(
-//               "$apiUser/otp_verification?countrycode=${otpProvider.countryCode}&phone=${otpProvider.phoneNo}&otp=${otpProvider.getOtp?.oTP.toString()}"),
-//           headers: {"device-id": provider.deviceId ?? ''});
-//       if (response.statusCode == 200) {
-//         var jsonResponse = jsonDecode(response.body);
-//         log(response.body);
+        Hive.box("token").put('api_token', apitoken ?? '');
+       
 
-//         var otpVerifiedData = OtpVerification.fromJson(jsonResponse);
-//         otpProvider.getOtpVerifiedData(otpVerifiedData);
-//         final apitoken = otpProvider.otpVerification?.customerdetails?.apiToken;
-//         print(apitoken);
+      } else {
+        print('Something went wrong');
+      }
+    } on Exception catch (_) {
+      showAnimatedSnackBar(context,'connection Timedout!!!');
+    }
+  }
 
-//         Hive.box("token").put('api_token', apitoken ?? '');
-//         await viewProfile(context);
-//         await getUserAddress(context);
-//         await getHome(context);
-//         await getChatList(context);
-//         provider.viewProfileModel?.userdetails?.userType == 'customer'
-//             ? null
-//             : await getServiceManProfileFun(context);
 
-//         otpProvider.getOtp!.action!.contains('registration')
-//             ? navigateToEdit(context)
-//             : navigateToHome(context);
-//       } else {
-//         print('Something went wrong');
-//       }
-//     } on Exception catch (_) {
-//       showSnackBar("Connection Timed Out", context);
-//     }
-//   }
-// }
 
-// navigateToHome(BuildContext context) {
-//   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (ctx) {
-//     return const HomePage();
-//   }), (route) => false);
-// }
 
-// navigateToEdit(BuildContext context) {
-//   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (ctx) {
-//     return EditProfileScreen();
-//   }), (route) => false);
-// }

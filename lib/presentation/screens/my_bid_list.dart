@@ -138,16 +138,16 @@ class _SearchScreenState extends State<MyBidList> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                padding: const EdgeInsets.fromLTRB(18, 10, 14, 0),
                 child: GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 200,
+                            maxCrossAxisExtent: 210,
                             childAspectRatio: 3 / 3,
                             crossAxisSpacing: 11,
-                            mainAxisExtent: 220,
+                            mainAxisExtent: 228,
                             mainAxisSpacing: 20),
                     itemCount: 10,
                     itemBuilder: (BuildContext ctx, index) {
@@ -174,7 +174,7 @@ class _SearchScreenState extends State<MyBidList> {
                               color: Colormanager.white,
                               borderRadius: BorderRadius.circular(10)),
                           child: Padding(
-                            padding: const EdgeInsets.all(12.0),
+                            padding: const EdgeInsets.all(7.0),
                             child: Column(
                               // mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -253,11 +253,25 @@ class _SearchScreenState extends State<MyBidList> {
                                   height: 5,
                                 ),
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text("Bid Amount"),
+                                   Text("Bid Amount:",style: getMediumtStyle(color:Colors.black,fontSize:12),),
                                     Container(
-                                      decoration: const BoxDecoration(
+                                      height:19,
+                                      width:57,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
                                         color: Colormanager.primary,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left:3.0,right: 3),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Image.asset('assets/tag.png',color: Colormanager.white,height:15,),
+                                            Text("90000",style: getMediumtStyle(color:Colormanager.white,fontSize:10),)
+                                          ],
+                                        ),
                                       ),
                                     )
                                   ],

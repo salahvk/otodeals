@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 
+// ignore: must_be_immutable
 class TermsAndCondition extends StatefulWidget {
-  const TermsAndCondition({
-    Key? key,
-  }) : super(key: key);
+  bool? isclicked;
+   TermsAndCondition({ this.isclicked=false});
 
   @override
   State<TermsAndCondition> createState() => _TermsAndConditionState();
 }
 
 class _TermsAndConditionState extends State<TermsAndCondition> {
-  bool? _isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -25,10 +25,10 @@ class _TermsAndConditionState extends State<TermsAndCondition> {
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Checkbox(
-              value: _isChecked,
+              value:widget.isclicked,
               onChanged: (value) {
                 setState(() {
-                  _isChecked = value;
+                  widget.isclicked = value;
                 });
               },
             ),

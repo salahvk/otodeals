@@ -1,8 +1,12 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
+import 'package:otodeals/core/util/animatedsnackbar.dart';
+import 'package:otodeals/data/repositories/loginweb.dart';
 import 'package:otodeals/presentation/widgets/terms_and_condition.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,28 +17,38 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+   bool _isChecked = false;
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  
 
-    String _errorMessage = '';
 
-  void _login() {
+
+  void login() async{
+    print(_isChecked);
     if (_formKey.currentState!.validate()) {
       // Perform login logic here
-      String email = _emailController.text;
-      String password = _passwordController.text;
-      
-      // Example validation
-      if (email== 'admin@gmail.com' && password == 'password') {
-        _errorMessage = '';
-        Navigator.of(context).pushNamed(Routes.mobileVerificationScreen);
-        // Navigate to home page or perform desired action
-      } else {
-        setState(() { 
-        _errorMessage = '*Invalid username or password';
-        });
-      }
+      final email = Logincontroller.emailController.text;
+      final password =Logincontroller.passwordController.text;
+
+      final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');  
+       if(email.isEmpty){
+      showAnimatedSnackBar(context,"please enter your email");
+    }else if(!emailRegex.hasMatch(email)){
+      showAnimatedSnackBar(context,"invalid email");
+    }else if(password.isEmpty){
+      showAnimatedSnackBar(context,"please enter your password");
+    }else if (password.length < 6) {
+    showAnimatedSnackBar(context,"password must contain atleast 6 characters"); 
+    }else if(!_isChecked){
+    showAnimatedSnackBar(context, "please accept the terms and conditions");
+  }else {
+   var res=await postLoginData(context);
+   print(url);
+   if(res['result']!=false){
+    Navigator.of(context).pushNamed(Routes.mainScreen);
+  showAnimatedSnackBar(context,"Welcome to Otodeals",type: AnimatedSnackBarType.success);
+   }
+  }
     }
   }
   @override
@@ -79,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                           height:40,
                           child: TextFormField(
-                            controller:_emailController ,
+                            controller:Logincontroller.emailController ,
                             decoration: InputDecoration(
 
                               
@@ -87,13 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             obscureText: true,
                             style: getRegularStyle(
                                 color: Colormanager.greyText, fontSize: 16),
-                                validator: (value) {
-                                  if(value!.isEmpty){
-                                    return 'please enter your email';
-                                  }
-                                  return null;
-                                },
-                          ),
+                          )
                           ),
                       SizedBox(
                         height: size.height * .015,
@@ -106,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                        SizedBox(
                           height: 40,
                           child: TextFormField(
-                            controller: _passwordController,
+                            controller:Logincontroller.passwordController,
                             obscureText: true,
                             obscuringCharacter: '*',
                             style: TextStyle(
@@ -117,21 +125,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                 color: Colors.grey,
                               ),
                             ),
-                            validator: (value) {
-                              if(value!.isEmpty){
-                                return 'please enter your password';
-                              }
-                              return null;
-                            },
+                           
                           ),
                           ),
                           SizedBox(height:10,),
                           Padding(
                             padding: const EdgeInsets.only(right:108.0),
-                            child: Text(
-                                          _errorMessage,
-                                          style: getSemiBoldStyle(color:Colormanager.primary),
-                                        ),
+                           
                           ),
                       const SizedBox(
                         height:15,
@@ -163,10 +163,33 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const TermsAndCondition(),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                      child: Row(
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Checkbox(
+                            value:_isChecked,
+                            onChanged: (value) {
+                              setState(() {
+                               _isChecked = value!;
+                              });
+                            },
+                          ),
+                          Text("I agree to the",
+                              style:
+                                  getBoldStyle(color: const Color(0xffafafaf), fontSize: 14)),
+                          Text(" terms & conditions",
+                              style:
+                                  getBoldStyle(color: Colormanager.textColor, fontSize: 14)),
+                        ],
+                      ),
+                    ),
                     InkWell(
-                      onTap: () {
-                        _login();
+                      onTap: ()async {
+                        login();
+                        print(Logincontroller.emailController);
+                        print(Logincontroller.passwordController);
                         // Navigator.of(context)
                         //     .pushNamed(Routes.mobileVerificationScreen);
                       },

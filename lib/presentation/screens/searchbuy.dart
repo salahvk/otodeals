@@ -6,7 +6,6 @@ import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/presentation/widgets/bottom_nav.dart';
 
 
-import 'package:otodeals/presentation/widgets/toggle.dart';
 
 class Buysearch extends StatefulWidget {
   const Buysearch({super.key});

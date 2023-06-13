@@ -1,12 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
+import 'package:otodeals/core/util/animatedsnackbar.dart';
+import 'package:otodeals/data/repositories/forget_password.dart';
 
-class ForgetPassScreen extends StatelessWidget {
+class ForgetPassScreen extends StatefulWidget {
   const ForgetPassScreen({super.key});
 
+  @override
+  State<ForgetPassScreen> createState() => _ForgetPassScreenState();
+}
+
+class _ForgetPassScreenState extends State<ForgetPassScreen> {
+  void input(){
+    final email=Forgetpasswordcontroller.emailController.text;
+     final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');   
+     if(email.isEmpty){
+      showAnimatedSnackBar(context,"please enter your email");
+    }else if(!emailRegex.hasMatch(email)){
+      showAnimatedSnackBar(context,"invalid email");
+      }
+      else{
+  Navigator.of(context).pushNamed(Routes.mailotpScreen);
+  postForgetpasswordData(context);
+  }
+      
+      }
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -35,6 +57,7 @@ class ForgetPassScreen extends StatelessWidget {
                 height: size.height * .08,
               ),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Icon(Icons.email),
                   const SizedBox(
@@ -48,10 +71,12 @@ class ForgetPassScreen extends StatelessWidget {
                         style: getMediumtStyle(
                             color: Colormanager.black, fontSize: 14),
                       ),
+                    
                       SizedBox(
-                          height: 25,
+                          height:45,
                           width: size.width * .7,
-                          child: TextField(
+                          child: TextFormField(
+                            controller: Forgetpasswordcontroller.emailController,
                             style: getRegularStyle(
                                 color: Colormanager.greyText, fontSize: 16),
                           )),
@@ -67,7 +92,7 @@ class ForgetPassScreen extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pushNamed(Routes.mailotpScreen);
+                  input();
                 },
                 child: Container(
                   width: size.width * .8,

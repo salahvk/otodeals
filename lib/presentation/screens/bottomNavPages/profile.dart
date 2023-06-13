@@ -6,6 +6,7 @@ import 'package:otodeals/core/styles_manager.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:otodeals/presentation/screens/editprofile.dart';
 import 'package:otodeals/presentation/screens/main_screen.dart';
+import 'package:otodeals/presentation/screens/my_bid_list.dart';
 
 
 class Myprofile extends StatefulWidget {
@@ -216,22 +217,27 @@ class _MyprofileState extends State<Myprofile> {
                         Column(
                           
                           children: [
-                            Row(
-                              
-                              children: [
-                                Text("My Bid List",
-                                style:getSemiBoldStyle(color: Color.fromARGB(255, 112, 112, 114) ),),
-                                SizedBox(width:128,),
-                                Container(
-                                  height: 17,
-                                  width: 17,
-                                  
-                                  decoration: BoxDecoration(
-                                    color:Color.fromARGB(255, 206, 206, 206),
-                                    borderRadius: BorderRadius.circular(9)
-                                  ),
-                                  child: Icon(Icons.arrow_forward_ios_rounded,size:12,color: const Color.fromARGB(255, 136, 136, 144),),),
-                              ],
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(FadePageRoute(page:MyBidList()));
+                              },
+                              child: Row(
+                                
+                                children: [
+                                  Text("My Bid List",
+                                  style:getSemiBoldStyle(color: Color.fromARGB(255, 112, 112, 114) ),),
+                                  SizedBox(width:128,),
+                                  Container(
+                                    height: 17,
+                                    width: 17,
+                                    
+                                    decoration: BoxDecoration(
+                                      color:Color.fromARGB(255, 206, 206, 206),
+                                      borderRadius: BorderRadius.circular(9)
+                                    ),
+                                    child: Icon(Icons.arrow_forward_ios_rounded,size:12,color: const Color.fromARGB(255, 136, 136, 144),),),
+                                ],
+                              ),
                             ),
                             SizedBox(height:8,),
                             Container(

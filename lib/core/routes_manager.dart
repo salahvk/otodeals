@@ -9,6 +9,7 @@ import 'package:otodeals/presentation/screens/main_screen.dart';
 import 'package:otodeals/presentation/screens/mobile_ver_screen.dart';
 import 'package:otodeals/presentation/screens/otp_screen.dart';
 import 'package:otodeals/presentation/screens/otp_screen_email.dart';
+import 'package:otodeals/presentation/screens/reset_pass_screen.dart';
 import 'package:otodeals/presentation/screens/resgister_account.dart';
 import 'package:otodeals/presentation/screens/search_result_bid.dart';
 import 'package:otodeals/presentation/screens/splash_screen.dart';
@@ -63,6 +64,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) =>const Myprofile());
          case Routes.editprofilescreen:
         return MaterialPageRoute(builder: (_) =>const Editprofile());
+        case Routes.resetPassScreen:
+        return MaterialPageRoute(builder: (_) =>const ResetPassScreen());
       default:
         return unDefinedRoute();
     }

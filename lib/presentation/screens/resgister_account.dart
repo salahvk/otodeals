@@ -1,12 +1,90 @@
+
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
-import 'package:otodeals/presentation/widgets/terms_and_condition.dart';
+import 'package:otodeals/core/util/animatedsnackbar.dart';
 
-class RegisterAccount extends StatelessWidget {
+import 'package:otodeals/data/repositories/registerweb.dart';
+
+
+
+class RegisterAccount extends StatefulWidget {
   const RegisterAccount({super.key});
+
+  @override
+  State<RegisterAccount> createState() => _RegisterAccountState();
+}
+
+class _RegisterAccountState extends State<RegisterAccount> {
+     bool _isChecked = false;
+
+  // bool _isLoading = false;
+
+  // void initState() {
+  //   super.initState();
+  //   Registercontrollerr.namecontroller.addListener(_validateInput);
+  //   Registercontrollerr.emailController.addListener(_validateInput);
+  //   Registercontrollerr.passwordController.addListener(_validateInput);
+  //   Registercontrollerr.confirmpasswordController.addListener(_validateInput);
+  // }
+
+  void validateInput(){
+    print(_isChecked);
+final name=Registercontrollerr.namecontroller.text;
+final email=Registercontrollerr.emailController.text;
+final password=Registercontrollerr.passwordController.text;
+final confirmpassword=Registercontrollerr.confirmpasswordController.text;
+
+
+
+    
+ final nameRegex = RegExp(r'^[a-zA-Z]+$');
+  final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');    
+   if(name.isEmpty){
+    showAnimatedSnackBar(context, "Please enter your name");
+   }else if(!nameRegex.hasMatch(name)){
+    showAnimatedSnackBar(context,"invalid Name");
+   
+   }
+    else if(email.isEmpty){
+      showAnimatedSnackBar(context,"please enter your email");
+    }else if(!emailRegex.hasMatch(email)){
+      showAnimatedSnackBar(context,"invalid email");
+ 
+    }  
+ else if (password.isEmpty ||confirmpassword.isEmpty) {
+    showAnimatedSnackBar(context,'please enter password');
+    // Password or confirm password is empty
+  } else if (password.length < 6) {
+    showAnimatedSnackBar(context,"password must contain atleast 6 characters");
+    // Password length is less than 6 characters
+  } else if (password !=confirmpassword) {
+    showAnimatedSnackBar(context,"your confirmed password mismatched");
+    // Password and confirm password do not match
+  }else if(!_isChecked){
+    showAnimatedSnackBar(context, "please accept the terms and conditions");
+  }
+  else{
+  Navigator.of(context).pushNamed(Routes.loginScreen);
+  showAnimatedSnackBar(context,"You have successfully Registerd",type: AnimatedSnackBarType.success);
+  postRegisterData(context);
+  }
+  }
+    //      setState(() {
+    //   _isButtonDisabled = Registercontrollerr.namecontroller.text.isEmpty ||
+    //   Registercontrollerr.emailController.text.isEmpty ||
+    //       Registercontrollerr.passwordController.text.isEmpty ||Registercontrollerr.passwordController.length<6||
+    //       Registercontrollerr.passwordController!=Registercontrollerr.confirmpasswordController||
+    //       Registercontrollerr.confirmpasswordController.text.isEmpty ||
+    //       !isnameValid ||!isemailValid ||
+    //       !isPasswordValid ||!isconfirmPasswordValid;
+    // });
+  
+  
 
   @override
   Widget build(BuildContext context) {
@@ -42,27 +120,28 @@ class RegisterAccount extends StatelessWidget {
               ),
               SizedBox(
                   height: 25,
-                  child: TextField(
+                  child: TextFormField(
+                    controller: Registercontrollerr.namecontroller,
                     style: getRegularStyle(
                         color: Colormanager.greyText, fontSize: 16),
                   )),
               SizedBox(
                 height: size.height * .015,
               ),
-              Row(
-                children: const [
-                  Text("Enter Phone number:"),
-                ],
-              ),
-              SizedBox(
-                  height: 25,
-                  child: TextField(
-                    style: getRegularStyle(
-                        color: Colormanager.greyText, fontSize: 16),
-                  )),
-              SizedBox(
-                height: size.height * .015,
-              ),
+              // Row(
+              //   children: const [
+              //     Text("Enter Phone number:"),
+              //   ],
+              // ),
+              // SizedBox(
+              //     height: 25,
+              //     child: TextFormField(
+              //       style: getRegularStyle(
+              //           color: Colormanager.greyText, fontSize: 16),
+              //     )),
+              // SizedBox(
+              //   height: size.height * .015,
+              // ),
               Row(
                 children: const [
                   Text("Enter Email:"),
@@ -70,7 +149,8 @@ class RegisterAccount extends StatelessWidget {
               ),
               SizedBox(
                   height: 25,
-                  child: TextField(
+                  child: TextFormField(
+                    controller: Registercontrollerr.emailController,
                     style: getRegularStyle(
                         color: Colormanager.greyText, fontSize: 16),
                   )),
@@ -84,7 +164,8 @@ class RegisterAccount extends StatelessWidget {
               ),
               SizedBox(
                   height: 25,
-                  child: TextField(
+                  child: TextFormField(
+                    controller: Registercontrollerr.passwordController,
                     style: getRegularStyle(
                         color: Colormanager.greyText, fontSize: 16),
                   )),
@@ -96,9 +177,10 @@ class RegisterAccount extends StatelessWidget {
                   Text("Confirm Password :"),
                 ],
               ),
-              const SizedBox(
+               SizedBox(
                   height: 25,
-                  child: TextField(
+                  child: TextFormField(
+                    controller: Registercontrollerr.confirmpasswordController,
                     obscureText: true,
                     obscuringCharacter: '*',
                     style:
@@ -133,25 +215,64 @@ class RegisterAccount extends StatelessWidget {
               const SizedBox(
                 height: 35,
               ),
-              const TermsAndCondition(),
-              Container(
-                width: size.width * .8,
-                decoration: BoxDecoration(
-                    color: Colormanager.primary,
-                    borderRadius: BorderRadius.circular(12)),
-                // height: 40,
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: InkWell(
+              
+                 
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                      child: Row(
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Checkbox(
+                            value:_isChecked,
+                            onChanged: (value) {
+                              setState(() {
+                               _isChecked = value!;
+                              });
+                            },
+                          ),
+                          Text("I agree to the",
+                              style:
+                                  getBoldStyle(color: const Color(0xffafafaf), fontSize: 14)),
+                          Text(" terms & conditions",
+                              style:
+                                  getBoldStyle(color: Colormanager.textColor, fontSize: 14)),
+                        ],
+                      ),
+                    ),
+                  
+           
+              InkWell(
+                onTap: ()async{
+                  
+                    validateInput();
+                 
+                 
+                  // if(status){
+                  //   Navigator.of(context).pushReplacementNamed(Routes.loginScreen);
+                  //    showAnimatedSnackBar(context, "REGISTERED SUCCESSFULY",
+                  //                   type: AnimatedSnackBarType.success);
+                  // }else {
+                  //               showAnimatedSnackBar(context, "",
+                  //                   type: AnimatedSnackBarType.error);}
+                  //                   setState(() {
+                  //                     _isLoading=false;
+                  //                   });
+
+                },
+                child: Container(
+                  width: size.width * .8,
+                  decoration: BoxDecoration(
+                      color: Colormanager.primary,
+                      borderRadius: BorderRadius.circular(12)),
+                  // height: 40,
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
                       child: Text(
                         "Create Account",
                         style: getMediumtStyle(
                             color: Colormanager.white, fontSize: 16),
                       ),
-                      onTap: () {
-                         Navigator.of(context).pushNamed(Routes.loginScreen);
-                      },
                     ),
                   ),
                 ),

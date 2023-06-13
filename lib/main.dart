@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/routes_manager.dart';
+import 'package:otodeals/data/providers/otp_provider.dart';
 import 'package:otodeals/presentation/screens/welcome_screen.dart';
+import 'package:provider/provider.dart';
 
 
 
@@ -17,7 +19,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiProvider(providers: [
+         ChangeNotifierProvider(create: (_) => OTPProvider()),
+    ],
+    child :MaterialApp(
       title: 'Otodeals',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -26,6 +31,6 @@ class MyApp extends StatelessWidget {
       initialRoute: Routes.welcomeScreen,
       onGenerateRoute: RouteGenerator.getRoute,
       home: WelcomeScreen()
-    );
+    ));
   }
 }
