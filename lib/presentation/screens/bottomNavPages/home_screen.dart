@@ -1,9 +1,4 @@
-
-
-
 import 'package:otodeals/core/routes_manager.dart';
-
-
 
 import 'package:flutter/material.dart';
 
@@ -32,50 +27,44 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    
   }
-  
 
-  void inputcurrentlyrunnigbid(index){
-    
-     final homeres = Provider.of<DataProvider>(context, listen: false);
-     int? id=homeres.homemodel?.currentlyRunning![index].id; 
-     homeres.id=id;
-     getvehicledetails(context,id!);
-      Navigator.of(context).push(FadePageRoute(page:Porductdetails()));
-    
+  void inputcurrentlyrunnigbid(index) {
+    final homeres = Provider.of<DataProvider>(context, listen: false);
+    int? id = homeres.homemodel?.currentlyRunning![index].id;
+    homeres.id = id;
+    getvehicledetails(context, id!);
+    Navigator.of(context).push(FadePageRoute(page: const Porductdetails()));
   }
-  void inputlatestarrivals(index){
-     final homeres = Provider.of<DataProvider>(context, listen: false);
-     int? id=homeres.homemodel?.saleVehicles![index].id; 
-      homeres.id=id;
-     getvehicledetails(context,id!);
-      Navigator.of(context).push(FadePageRoute(page:Porductdetails()));
+
+  void inputlatestarrivals(index) {
+    final homeres = Provider.of<DataProvider>(context, listen: false);
+    int? id = homeres.homemodel?.saleVehicles![index].id;
+    homeres.id = id;
+    getvehicledetails(context, id!);
+    Navigator.of(context).push(FadePageRoute(page: const Porductdetails()));
   }
-   void inputbidnow(index){
-     final homeres = Provider.of<DataProvider>(context, listen: false);
-     int? id=homeres.homemodel?.bidVehicles![index].id; 
-      homeres.id=id;
-     getvehicledetails(context,id!);
-      Navigator.of(context).push(FadePageRoute(page:Porductdetails()));
+
+  void inputbidnow(index) {
+    final homeres = Provider.of<DataProvider>(context, listen: false);
+    int? id = homeres.homemodel?.bidVehicles![index].id;
+    homeres.id = id;
+    getvehicledetails(context, id!);
+    Navigator.of(context).push(FadePageRoute(page: const Porductdetails()));
   }
-  
-  
-  
+
   int current = 0;
 
   @override
   Widget build(BuildContext context) {
-    
-    
     final size = MediaQuery.of(context).size;
-  
-    final homeres = Provider.of<DataProvider>(context, listen:true);
+
+    final homeres = Provider.of<DataProvider>(context, listen: true);
     print(homeres.homemodel?.currentlyRunning?.length);
     // final homedata=provider.homemodel!.result;
-  
+
     return Scaffold(
         endDrawer: SizedBox(
           height: size.height,
@@ -108,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   Container(
-                    height:200 ,
+                    height: 200,
                     width: size.width,
                     color: Colormanager.background,
                     child: Column(
@@ -117,26 +106,50 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top:10.0),
+                              padding: const EdgeInsets.only(top: 10.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                 Text("Drive Your",style: getMediumtStyle(color:const Color.fromARGB(255, 0, 0, 0),fontSize:30),),
-                                    Row(
-                                      children: [
-                                        Text("Dreams",style: getMediumtStyle(color:Colormanager.primary,fontSize:30),),
-                                            SizedBox(width:8,),
-                                   Image.asset('assets/slide_layer.png',height:24,),
-                                   
-                                      ],
-                                    ),
-                                    SizedBox(height: 15,),
-                                       Text("Selling your car amid a hectic schedule is a challenging task.\nWe are here to help you sell used premium cars through\n our luxurious and grand showroom at Calicut\n having an obsessed team to assist you with years of\nexperience and reputation in the automobile business.  ",
-                                                                    style: getRegularStyle(color:Colormanager.black,fontSize:8), ),
+                                  Text(
+                                    "Drive Your",
+                                    style: getMediumtStyle(
+                                        color:
+                                            const Color.fromARGB(255, 0, 0, 0),
+                                        fontSize: 30),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Dreams",
+                                        style: getMediumtStyle(
+                                            color: Colormanager.primary,
+                                            fontSize: 30),
+                                      ),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      Image.asset(
+                                        'assets/slide_layer.png',
+                                        height: 24,
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    "Selling your car amid a hectic schedule is a challenging task.\nWe are here to help you sell used premium cars through\n our luxurious and grand showroom at Calicut\n having an obsessed team to assist you with years of\nexperience and reputation in the automobile business.  ",
+                                    style: getRegularStyle(
+                                        color: Colormanager.black, fontSize: 8),
+                                  ),
                                 ],
                               ),
                             ),
-                            Image.asset("assets/oto.jpg",height:200,width:130,)
+                            Image.asset(
+                              "assets/oto.jpg",
+                              height: 200,
+                              width: 130,
+                            )
                           ],
                         )
                       ],
@@ -159,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   //   ),
                   // ),
                   const SizedBox(
-                    height:25,
+                    height: 25,
                   ),
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -208,11 +221,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   //             top: 5, bottom: 5, right: 5),
                   //         child: ClipRRect(
                   //           borderRadius: BorderRadius.circular(6),
-                            
+
                   //           child:Image.network(
                   //             "$endpoint${homeres.vbrands?.brands![index].image??""}",
                   //             width: 80,
-                              
+
                   //             fit: BoxFit.cover,
                   //           ),
                   //         ),
@@ -222,7 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   //   ),
                   // ),
                   const SizedBox(
-                    height:20,
+                    height: 20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -275,121 +288,147 @@ class _HomeScreenState extends State<HomeScreen> {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.only(
-                              top:5, right: 20),
-                          child: InkWell(
-                            onTap: (){
-                              inputcurrentlyrunnigbid(index);
-                             
-                            },
-                            child: Container(
-                              height: size.height*.25,
-                              width: size.width/2,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 10.0,
-                                      color: Colors.grey.shade300,
-                                      offset: const Offset(2, 2.5),
-                                    ),
-                                  ],
-                                  color: Colormanager.white,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  // mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(homeres.homemodel?.currentlyRunning![index].vehicleName??"",
-                                            style: getSemiBoldStyle(
-                                                color: Colors.black)),
-                                        Container(
-                                          width: 40,
-                                          height: 15,
-                                          decoration: BoxDecoration(
-                                              color: Colormanager.primary,
-                                              borderRadius:
-                                                  BorderRadius.circular(15)),
-                                          child: Center(
-                                            child: Text(
-                                              "Bid Now",
-                                              style: getRegularStyle(
-                                                  color: Colormanager.white,
-                                                  fontSize: 7),
+                            padding: const EdgeInsets.only(top: 5, right: 20),
+                            child: InkWell(
+                              onTap: () {
+                                inputcurrentlyrunnigbid(index);
+                              },
+                              child: Container(
+                                height: size.height * .25,
+                                width: size.width / 2,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 10.0,
+                                        color: Colors.grey.shade300,
+                                        offset: const Offset(2, 2.5),
+                                      ),
+                                    ],
+                                    color: Colormanager.white,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    // mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                              homeres
+                                                      .homemodel
+                                                      ?.currentlyRunning![index]
+                                                      .vehicleName ??
+                                                  "",
+                                              style: getSemiBoldStyle(
+                                                  color: Colors.black)),
+                                          Container(
+                                            width: 40,
+                                            height: 15,
+                                            decoration: BoxDecoration(
+                                                color: Colormanager.primary,
+                                                borderRadius:
+                                                    BorderRadius.circular(15)),
+                                            child: Center(
+                                              child: Text(
+                                                "Bid Now",
+                                                style: getRegularStyle(
+                                                    color: Colormanager.white,
+                                                    fontSize: 7),
+                                              ),
                                             ),
+                                          )
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                              homeres
+                                                      .homemodel
+                                                      ?.currentlyRunning![index]
+                                                      .price
+                                                      .toString() ??
+                                                  "",
+                                              style: getMediumtStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 10)),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      SizedBox(
+                                          width: size.width / 1.2,
+                                          height: 90,
+                                          child: Image.network(
+                                              "$endpoint ${homeres.homemodel?.currentlyRunning?[index].image}")),
+                                      const Spacer(),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          SizedBox(
+                                              width: 22,
+                                              height: 18,
+                                              child: Image.asset(
+                                                  'assets/petrol.png')),
+                                          Text(
+                                              homeres
+                                                      .homemodel
+                                                      ?.currentlyRunning![index]
+                                                      .fueltype ??
+                                                  "",
+                                              style: getMediumtStyle(
+                                                  color: Colormanager.textColor,
+                                                  fontSize: 10)),
+                                          Row(
+                                            children: [
+                                              const Icon(
+                                                Icons.timelapse,
+                                                size: 15,
+                                              ),
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                  homeres
+                                                          .homemodel
+                                                          ?.currentlyRunning![
+                                                              index]
+                                                          .starttime ??
+                                                      "",
+                                                  style: getMediumtStyle(
+                                                      color: Colormanager
+                                                          .textColor,
+                                                      fontSize: 10)),
+                                            ],
                                           ),
-                                        )
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height:8,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(homeres.homemodel?.currentlyRunning![index].price.toString()??"",
-                                            style: getMediumtStyle(
-                                                color: Colors.black,
-                                                fontSize: 10)),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height:20,
-                                    ),
-                                    SizedBox(
-                                      width: size.width/1.2,
-                                      height:90,
-                                      child: Image.network("$endpoint ${homeres.homemodel?.currentlyRunning?[index].image}")
-                                    ),
-                                    const Spacer(),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        SizedBox(
-                                            width:22,
-                                            height:18,
-                                            child: Image.asset(
-                                                'assets/petrol.png')),
-                                        Text(homeres.homemodel?.currentlyRunning![index].fueltype??"",
-                                            style: getMediumtStyle(
-                                                color: Colormanager.textColor,
-                                                fontSize: 10)),
-                                        Row(
-                                          children: [
-                                            Icon(Icons.timelapse,size: 15,),
-                                            SizedBox(width: 5,),
-                                            Text(homeres.homemodel?.currentlyRunning![index].starttime??"",
-                                                style: getMediumtStyle(
-                                                    color: Colormanager.textColor,
-                                                    fontSize: 10)),
-                                                   
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height:5,
-                                    )
-                                    // Text(homeData![index].service ?? '',
-                                    //     textAlign: TextAlign.center,
-                                    //     style: getRegularStyle(
-                                    //         color: Colormanager.primary,
-                                    //         fontSize:
-                                    //            10
-                                    //                )),
-                                  ],
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      )
+                                      // Text(homeData![index].service ?? '',
+                                      //     textAlign: TextAlign.center,
+                                      //     style: getRegularStyle(
+                                      //         color: Colormanager.primary,
+                                      //         fontSize:
+                                      //            10
+                                      //                )),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ));
+                            ));
                       },
-                      itemCount:homeres.homemodel?.currentlyRunning?.length,
+                      itemCount: homeres.homemodel?.currentlyRunning?.length,
                     ),
                   ),
                   // SizedBox(
@@ -409,16 +448,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   //             width: size.width/1.9,
                   //             color: Colors.white,
                   //             child: Stack(
-                                
+
                   //                 children:[ Container(
                   //                 height:140,
-                  //                 width:size.width, 
+                  //                 width:size.width,
                   //                 decoration: BoxDecoration(
                   //                 color: Colormanager.primary,
                   //                 borderRadius:
                   //                 BorderRadius.only(topLeft:Radius.circular(10),topRight:Radius.circular(10),bottomLeft:Radius.circular(20),bottomRight:
                   //                 Radius.circular(20) )
-                                  
+
                   //                 ),
                   //                 child: Row(
                   //                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -441,7 +480,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   //                 width: 20,
                   //                 decoration: BoxDecoration(
                   //                 borderRadius: BorderRadius.circular(10),
-                                  
+
                   //                 boxShadow:[
                   //                 BoxShadow(
                   //                 blurRadius:5,
@@ -452,7 +491,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   //                 ),
                   //                 child:Icon(Icons.favorite,size:17,color: Colormanager.primary,)),
                   //                 )
-                                  
+
                   //                 ],
                   //                 ),
                   //                 ),
@@ -461,7 +500,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   //                 child: Container(
                   //                 height:size.height/3,
                   //                 width: MediaQuery.of(context).size.width/1.5,
-                          
+
                   //                 decoration: BoxDecoration(
                   //                 color:Colormanager.white,
                   //                 borderRadius:
@@ -470,7 +509,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   //                 BoxShadow(
                   //                 blurRadius:4,
                   //                 color: Color.fromARGB(255, 147, 146, 146)
-                          
+
                   //                 )
                   //                 ]
                   //                 ),
@@ -518,7 +557,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   //                 SizedBox(
                   //                 height:2,
                   //                 ),
-                          
+
                   //                 Text(homeres.homemodel?.saleVehicles?[index].gearshift??"", style:getSemiBoldStyle(color:Colormanager.primary,fontSize:8),),
                   //                 ],
                   //                 ),
@@ -540,7 +579,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   //                 SizedBox(
                   //                 height:2,
                   //                 ),
-                          
+
                   //                 Text("5 seats", style:getSemiBoldStyle(color:Colormanager.primary,fontSize:8),),
                   //                 ],
                   //                 ),
@@ -561,7 +600,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   //                 SizedBox(
                   //                 height:2,
                   //                 ),
-                          
+
                   //                 Text(homeres.homemodel?.saleVehicles?[index].fueltype ??"" , style:getSemiBoldStyle(color:Colormanager.primary,fontSize:8),),
                   //                 ],
                   //                 ),
@@ -570,11 +609,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   //                 ),
                   //                 ]),
                   //                 )
-                          
+
                   //                 ],
                   //                 ),
-                          
-                          
+
                   //                 ),
                   //                 ),
                   //                 Padding(
@@ -592,13 +630,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 20,
                   ),
                   Text(
-                    homeres.homemodel?.nextAccutionTime?.label??"",
-                    style: getSemiBoldStyle(color: Colors.black,fontSize:17),
+                    homeres.homemodel?.nextAccutionTime?.label ?? "",
+                    style: getSemiBoldStyle(color: Colors.black, fontSize: 17),
                   ),
-                  SizedBox(height: 16,),
+                  const SizedBox(
+                    height: 16,
+                  ),
                   TimerScreen(),
-                   const SizedBox(
-                    height:25,
+                  const SizedBox(
+                    height: 25,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -641,8 +681,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                   const SizedBox(
-                    height:26,
+                  const SizedBox(
+                    height: 26,
                   ),
                   SizedBox(
                     height: size.height * .28,
@@ -651,119 +691,138 @@ class _HomeScreenState extends State<HomeScreen> {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.only(
-                              top:5, right: 20),
-                          child: InkWell(
-                            onTap: () {
-                              inputlatestarrivals(index);
-
-     
-                            },
-                            child: Container(
-                              height: size.height*.25,
-                              width: size.width/2,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 10.0,
-                                      color: Colors.grey.shade300,
-                                      offset: const Offset(2, 2.5),
-                                    ),
-                                  ],
-                                  color: Colormanager.white,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  // mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(homeres.homemodel?.saleVehicles?[index].vehicleName??"",
-                                            style: getSemiBoldStyle(
-                                                color: Colors.black)),
-                                        Container(
-                                          width: 40,
-                                          height: 15,
-                                          decoration: BoxDecoration(
-                                              color: Colormanager.primary,
-                                              borderRadius:
-                                                  BorderRadius.circular(15)),
-                                          child: Center(
-                                            child: Text(
-                                              "Bid Now",
-                                              style: getRegularStyle(
-                                                  color: Colormanager.white,
-                                                  fontSize: 7),
+                            padding: const EdgeInsets.only(top: 5, right: 20),
+                            child: InkWell(
+                              onTap: () {
+                                inputlatestarrivals(index);
+                              },
+                              child: Container(
+                                height: size.height * .25,
+                                width: size.width / 2,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 10.0,
+                                        color: Colors.grey.shade300,
+                                        offset: const Offset(2, 2.5),
+                                      ),
+                                    ],
+                                    color: Colormanager.white,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    // mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                              homeres
+                                                      .homemodel
+                                                      ?.saleVehicles?[index]
+                                                      .vehicleName ??
+                                                  "",
+                                              style: getSemiBoldStyle(
+                                                  color: Colors.black)),
+                                          Container(
+                                            width: 40,
+                                            height: 15,
+                                            decoration: BoxDecoration(
+                                                color: Colormanager.primary,
+                                                borderRadius:
+                                                    BorderRadius.circular(15)),
+                                            child: Center(
+                                              child: Text(
+                                                "Bid Now",
+                                                style: getRegularStyle(
+                                                    color: Colormanager.white,
+                                                    fontSize: 7),
+                                              ),
                                             ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height:8,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(homeres.homemodel?.saleVehicles?[index].price.toString()??"",
-                                            style: getMediumtStyle(
-                                                color: Colors.black,
-                                                fontSize: 10)),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height:20,
-                                    ),
-                                    SizedBox(
-                                      width: size.width/1.2,
-                                      height:90,
-                                      child: Image.network("$endpoint ${homeres.homemodel?.saleVehicles?[index].image}")
-                                    ),
-                                    const Spacer(),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        SizedBox(
-                                            width:22,
-                                            height:18,
-                                            child: Image.asset(
-                                                'assets/petrol.png')),
-                                        Text(homeres.homemodel?.saleVehicles?[index].fueltype ??"",
-                                            style: getMediumtStyle(
-                                                color: Colormanager.textColor,
-                                                fontSize: 12)),
-                                        Text(homeres.homemodel?.saleVehicles?[index].gearshift??"",
-                                            style: getMediumtStyle(
-                                                color: Colormanager.textColor,
-                                                fontSize: 10)),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height:5,
-                                    )
-                                    // Text(homeData![index].service ?? '',
-                                    //     textAlign: TextAlign.center,
-                                    //     style: getRegularStyle(
-                                    //         color: Colormanager.primary,
-                                    //         fontSize:
-                                    //            10
-                                    //                )),
-                                  ],
+                                          )
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                              homeres
+                                                      .homemodel
+                                                      ?.saleVehicles?[index]
+                                                      .price
+                                                      .toString() ??
+                                                  "",
+                                              style: getMediumtStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 10)),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      SizedBox(
+                                          width: size.width / 1.2,
+                                          height: 90,
+                                          child: Image.network(
+                                              "$endpoint ${homeres.homemodel?.saleVehicles?[index].image}")),
+                                      const Spacer(),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          SizedBox(
+                                              width: 22,
+                                              height: 18,
+                                              child: Image.asset(
+                                                  'assets/petrol.png')),
+                                          Text(
+                                              homeres
+                                                      .homemodel
+                                                      ?.saleVehicles?[index]
+                                                      .fueltype ??
+                                                  "",
+                                              style: getMediumtStyle(
+                                                  color: Colormanager.textColor,
+                                                  fontSize: 12)),
+                                          Text(
+                                              homeres
+                                                      .homemodel
+                                                      ?.saleVehicles?[index]
+                                                      .gearshift ??
+                                                  "",
+                                              style: getMediumtStyle(
+                                                  color: Colormanager.textColor,
+                                                  fontSize: 10)),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      )
+                                      // Text(homeData![index].service ?? '',
+                                      //     textAlign: TextAlign.center,
+                                      //     style: getRegularStyle(
+                                      //         color: Colormanager.primary,
+                                      //         fontSize:
+                                      //            10
+                                      //                )),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ));
+                            ));
                       },
-                      itemCount:homeres.homemodel?.saleVehicles?.length,
+                      itemCount: homeres.homemodel?.saleVehicles?.length,
                     ),
                   ),
                   const SizedBox(
-                    height:25,
+                    height: 25,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -806,8 +865,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                   const SizedBox(
-                    height:26,
+                  const SizedBox(
+                    height: 26,
                   ),
                   SizedBox(
                     height: size.height * .28,
@@ -816,112 +875,110 @@ class _HomeScreenState extends State<HomeScreen> {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.only(
-                              top:5, right: 20),
-                          child: Container(
-                            height: size.height*.25,
-                            width: size.width/2,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 10.0,
-                                    color: Colors.grey.shade300,
-                                    offset: const Offset(2, 2.5),
-                                  ),
-                                ],
-                                color: Colormanager.white,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                // mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text("HYUNDAI",
-                                          style: getSemiBoldStyle(
-                                              color: Colors.black)),
-                                      Container(
-                                        width: 40,
-                                        height: 15,
-                                        decoration: BoxDecoration(
-                                            color: Colormanager.primary,
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: Center(
-                                          child: Text(
-                                            "Bid Now",
-                                            style: getRegularStyle(
-                                                color: Colormanager.white,
-                                                fontSize: 7),
+                            padding: const EdgeInsets.only(top: 5, right: 20),
+                            child: Container(
+                              height: size.height * .25,
+                              width: size.width / 2,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 10.0,
+                                      color: Colors.grey.shade300,
+                                      offset: const Offset(2, 2.5),
+                                    ),
+                                  ],
+                                  color: Colormanager.white,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  // mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text("HYUNDAI",
+                                            style: getSemiBoldStyle(
+                                                color: Colors.black)),
+                                        Container(
+                                          width: 40,
+                                          height: 15,
+                                          decoration: BoxDecoration(
+                                              color: Colormanager.primary,
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          child: Center(
+                                            child: Text(
+                                              "Bid Now",
+                                              style: getRegularStyle(
+                                                  color: Colormanager.white,
+                                                  fontSize: 7),
+                                            ),
                                           ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height:8,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text("RS 4.64 - 5.99 Lakh",
-                                          style: getMediumtStyle(
-                                              color: Colors.black,
-                                              fontSize: 10)),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height:20,
-                                  ),
-                                  SizedBox(
-                                    width: size.width/1.2,
-                                    height:90,
-                                    child: Image.asset('assets/carr.jpeg')
-                                  ),
-                                  const Spacer(),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SizedBox(
-                                          width:22,
-                                          height:18,
-                                          child: Image.asset(
-                                              'assets/petrol.png')),
-                                      Text("PETROL",
-                                          style: getMediumtStyle(
-                                              color: Colormanager.textColor,
-                                              fontSize: 10)),
-                                      Text("35667 KM",
-                                          style: getMediumtStyle(
-                                              color: Colormanager.textColor,
-                                              fontSize: 10)),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height:5,
-                                  )
-                                  // Text(homeData![index].service ?? '',
-                                  //     textAlign: TextAlign.center,
-                                  //     style: getRegularStyle(
-                                  //         color: Colormanager.primary,
-                                  //         fontSize:
-                                  //            10
-                                  //                )),
-                                ],
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text("RS 4.64 - 5.99 Lakh",
+                                            style: getMediumtStyle(
+                                                color: Colors.black,
+                                                fontSize: 10)),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    SizedBox(
+                                        width: size.width / 1.2,
+                                        height: 90,
+                                        child: Image.asset('assets/carr.jpeg')),
+                                    const Spacer(),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(
+                                            width: 22,
+                                            height: 18,
+                                            child: Image.asset(
+                                                'assets/petrol.png')),
+                                        Text("PETROL",
+                                            style: getMediumtStyle(
+                                                color: Colormanager.textColor,
+                                                fontSize: 10)),
+                                        Text("35667 KM",
+                                            style: getMediumtStyle(
+                                                color: Colormanager.textColor,
+                                                fontSize: 10)),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    )
+                                    // Text(homeData![index].service ?? '',
+                                    //     textAlign: TextAlign.center,
+                                    //     style: getRegularStyle(
+                                    //         color: Colormanager.primary,
+                                    //         fontSize:
+                                    //            10
+                                    //                )),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ));
+                            ));
                       },
                       itemCount: 10,
                     ),
                   ),
                   const SizedBox(
-                    height:25,
+                    height: 25,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -943,7 +1000,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.of(context).push(FadePageRoute(page:MyBidList()));
+                          Navigator.of(context)
+                              .push(FadePageRoute(page: const MyBidList()));
                         },
                         child: Container(
                           width: 25,
@@ -969,257 +1027,345 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                   const SizedBox(
-                    height:26,
+                  const SizedBox(
+                    height: 26,
                   ),
                   SizedBox(
-                    height: size.height *.36,
+                    height: size.height * .36,
                     width: size.width,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.only(
-                              top:9,right: 20),
-                          child:  InkWell(
-                            onTap: () {
-                              
-                              inputbidnow(index);
-                             
-                            },
-                            child: Container(
-                              height:size.height,
-                              width:size.width/1.8,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 10.0,
-                                      color: Colors.grey.shade300,
-                                      offset: const Offset(2, 2.5),
-                                    ),
-                                  ],
-                                  color: Colormanager.white,
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top:8.0,left:3.0,right:3.0),
-                                    child: Column(
-                                      
-                                      // mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(homeres.homemodel?.bidVehicles?[index].vehicleName??"",
-                                                style: getSemiBoldStyle(
-                                                    color: Colors.black)),
-                                            // Container(
-                                            //   width: 40,
-                                            //   height: 15,
-                                            //   decoration: BoxDecoration(
-                                            //       color: Colormanager.primary,
-                                            //       borderRadius:
-                                            //           BorderRadius.circular(15)),
-                                            //   child: Center(
-                                            //     child: Text(
-                                            //       "Bid Now",
-                                            //       style: getRegularStyle(
-                                            //           color: Colormanager.white,
-                                            //           fontSize: 7),
-                                            //     ),
-                                            //   ),
-                                            // )
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text("₹\t"),
-                                            Text(homeres.homemodel?.saleVehicles?[index].price?.toString()??"",
-                                                style: getMediumtStyle(
-                                                    color: Colors.black, fontSize: 12)),
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        SizedBox(
-                                          width: size.width,
-                                          height:50,
-                                          child: Image.network(
-                                            width: 40,
-                                            
-                                               "$endpoint${homeres.homemodel?.bidVehicles?[index].image}",
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            SizedBox(
-                                                width:30,
-                                                height:50,
-                                                child:
-                                                    Image.asset('assets/petrol.png')),
-                                            Text(homeres.homemodel?.saleVehicles?[index].fueltype??" "  "\t\t\t",
-                                                style: getMediumtStyle(
-                                                    color: Colormanager.textColor,
-                                                    fontSize: 10)),
-                                            Text(homeres.homemodel?.saleVehicles?[index].gearshift??"",
-                                                style: getMediumtStyle(
-                                                    color: Colormanager.textColor,
-                                                    fontSize: 10)),
-                                          ],
-                                        
-                                       
-                                        // Text(homeData![index].service ?? '',
-                                        //     textAlign: TextAlign.center,
-                                        //     style: getRegularStyle(
-                                        //         color: Colormanager.primary,
-                                        //         fontSize:
-                                        //            10
-                                        //                )),
-                                    ),
-                                    
-                                  
-                                    ],
-                                    ),
-                                  ),
-                                  SizedBox(height:10,),
-                                    Container(
-                                      height:69,
-                                      width:size.width,
-                                      decoration: BoxDecoration(
-                                        color: Color.fromARGB(255, 255, 254, 254),
-                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight:Radius.circular(15) )
-                              
+                            padding: const EdgeInsets.only(top: 9, right: 20),
+                            child: InkWell(
+                              onTap: () {
+                                inputbidnow(index);
+                              },
+                              child: Container(
+                                height: size.height,
+                                width: size.width / 1.8,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 10.0,
+                                        color: Colors.grey.shade300,
+                                        offset: const Offset(2, 2.5),
                                       ),
-                                      child:AttendanceScreen(),
-                                    )
-                                ],
+                                    ],
+                                    color: Colormanager.white,
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 8.0, left: 3.0, right: 3.0),
+                                        child: Column(
+                                          // mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                    homeres
+                                                            .homemodel
+                                                            ?.bidVehicles?[
+                                                                index]
+                                                            .vehicleName ??
+                                                        "",
+                                                    style: getSemiBoldStyle(
+                                                        color: Colors.black)),
+                                                // Container(
+                                                //   width: 40,
+                                                //   height: 15,
+                                                //   decoration: BoxDecoration(
+                                                //       color: Colormanager.primary,
+                                                //       borderRadius:
+                                                //           BorderRadius.circular(15)),
+                                                //   child: Center(
+                                                //     child: Text(
+                                                //       "Bid Now",
+                                                //       style: getRegularStyle(
+                                                //           color: Colormanager.white,
+                                                //           fontSize: 7),
+                                                //     ),
+                                                //   ),
+                                                // )
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            Row(
+                                              children: [
+                                                const Text("₹\t"),
+                                                Text(
+                                                    homeres
+                                                            .homemodel
+                                                            ?.saleVehicles?[
+                                                                index]
+                                                            .price
+                                                            ?.toString() ??
+                                                        "",
+                                                    style: getMediumtStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 12)),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            SizedBox(
+                                              width: size.width,
+                                              height: 50,
+                                              child: Image.network(
+                                                width: 40,
+                                                "$endpoint${homeres.homemodel?.bidVehicles?[index].image}",
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                SizedBox(
+                                                    width: 30,
+                                                    height: 50,
+                                                    child: Image.asset(
+                                                        'assets/petrol.png')),
+                                                Text(
+                                                    homeres
+                                                            .homemodel
+                                                            ?.saleVehicles?[
+                                                                index]
+                                                            .fueltype ??
+                                                        " " "\t\t\t",
+                                                    style: getMediumtStyle(
+                                                        color: Colormanager
+                                                            .textColor,
+                                                        fontSize: 10)),
+                                                Text(
+                                                    homeres
+                                                            .homemodel
+                                                            ?.saleVehicles?[
+                                                                index]
+                                                            .gearshift ??
+                                                        "",
+                                                    style: getMediumtStyle(
+                                                        color: Colormanager
+                                                            .textColor,
+                                                        fontSize: 10)),
+                                              ],
+
+                                              // Text(homeData![index].service ?? '',
+                                              //     textAlign: TextAlign.center,
+                                              //     style: getRegularStyle(
+                                              //         color: Colormanager.primary,
+                                              //         fontSize:
+                                              //            10
+                                              //                )),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Container(
+                                        height: 69,
+                                        width: size.width,
+                                        decoration: const BoxDecoration(
+                                            color: Color.fromARGB(
+                                                255, 255, 254, 254),
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(15),
+                                                topRight: Radius.circular(15))),
+                                        child: AttendanceScreen(),
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ),
-                            ),
-                          ));
+                            ));
                       },
-                      itemCount:homeres.homemodel?.bidVehicles?.length,
+                      itemCount: homeres.homemodel?.bidVehicles?.length,
                     ),
                   ),
-                 
-                  SizedBox(height:50,),
+
+                  const SizedBox(
+                    height: 50,
+                  ),
                   Column(
                     children: [
                       Row(
                         children: [
-                          Text("World Largest",style: getRegularStyle(color:Colormanager.black,fontSize:23),),
-                          SizedBox(width: 6,),
-                          Text("Automotive",style: getRegularStyle(color: Colormanager.primary,fontSize:23),)
+                          Text(
+                            "World Largest",
+                            style: getRegularStyle(
+                                color: Colormanager.black, fontSize: 23),
+                          ),
+                          const SizedBox(
+                            width: 6,
+                          ),
+                          Text(
+                            "Automotive",
+                            style: getRegularStyle(
+                                color: Colormanager.primary, fontSize: 23),
+                          )
                         ],
                       ),
-                      SizedBox(height: 10,),
-                      
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Row(
                         children: [
-                          
-                          Text("Marketplace",style: getRegularStyle(color: Colormanager.black,fontSize:23),),
+                          Text(
+                            "Marketplace",
+                            style: getRegularStyle(
+                                color: Colormanager.black, fontSize: 23),
+                          ),
                         ],
                       ),
-                      SizedBox(height:20,),
+                      const SizedBox(
+                        height: 20,
+                      ),
                       Row(
                         children: [
                           Container(
                             height: 120,
                             width: 120,
-                            decoration: BoxDecoration(
-                            color: Colors.amber,
-                            image: DecorationImage(image: 
-                            AssetImage('assets/carr.jpeg',),fit: BoxFit.cover)
-                            ),),
-                            SizedBox(width:8,),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Pre-Owned vehicle",style: getSemiBoldStyle(color:Colormanager.black,fontSize:14),),
-                                SizedBox(height: 6,),
-                                Text("Sale and purchase",style: getSemiBoldStyle(color:Colormanager.black,fontSize:14),),
-                                SizedBox(height: 8,),
-                                Text("Browse through the new and pre-owned\nvehicles which has been recently added\n to our collection",
-                               style: getRegularStyle(color:Colormanager.greyText,fontSize:10), ),
-                               SizedBox(height:10,),
-                               InkWell(
+                            decoration: const BoxDecoration(
+                                color: Colors.amber,
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                      'assets/carr.jpeg',
+                                    ),
+                                    fit: BoxFit.cover)),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Pre-Owned vehicle",
+                                style: getSemiBoldStyle(
+                                    color: Colormanager.black, fontSize: 14),
+                              ),
+                              const SizedBox(
+                                height: 6,
+                              ),
+                              Text(
+                                "Sale and purchase",
+                                style: getSemiBoldStyle(
+                                    color: Colormanager.black, fontSize: 14),
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                "Browse through the new and pre-owned\nvehicles which has been recently added\n to our collection",
+                                style: getRegularStyle(
+                                    color: Colormanager.greyText, fontSize: 10),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              InkWell(
                                 onTap: () {
-                                  Navigator.pushNamed(context,Routes.searchs);
+                                  Navigator.pushNamed(context, Routes.searchs);
                                 },
-                                 child: Row(
+                                child: Row(
                                   children: [
-                                    Text("Discover",style: getSemiBoldStyle(color:Colormanager.primary,fontSize:20),),
-                                    SizedBox(width:8,),
-                                   Image.asset('assets/slide_layer.png',height: 18,),
+                                    Text(
+                                      "Discover",
+                                      style: getSemiBoldStyle(
+                                          color: Colormanager.primary,
+                                          fontSize: 20),
+                                    ),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    Image.asset(
+                                      'assets/slide_layer.png',
+                                      height: 18,
+                                    ),
                                   ],
-                                 ),
-                               )
-                              ],
-                            )
+                                ),
+                              )
+                            ],
+                          )
                         ],
                       ),
-                      SizedBox(height:15,),
+                      const SizedBox(
+                        height: 15,
+                      ),
                       Padding(
-                        padding: const EdgeInsets.only(top:14.0,bottom:20),
+                        padding: const EdgeInsets.only(top: 14.0, bottom: 20),
                         child: Stack(
-                          
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top:30.0),
+                              padding: const EdgeInsets.only(top: 30.0),
                               child: Container(
-                                height:80,
+                                height: 80,
                                 width: 205,
-                               
                                 decoration: BoxDecoration(
-                                   color: Colormanager.white,
-                                  borderRadius: BorderRadius.circular(16),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius:10,
-                                      blurStyle: BlurStyle.outer,
-                                      spreadRadius:1.5,
-                                      color: Colormanager.greyText.withOpacity(0.2)
-                                    )
-                                  ]
-                                ),
-                                child: Center(child: Padding(
-                                  padding: const EdgeInsets.only(top:11.0),
-                                  child: Text("Feel free to connect with us",style:getSemiBoldStyle(color:Colormanager.black,fontSize:13),),
+                                    color: Colormanager.white,
+                                    borderRadius: BorderRadius.circular(16),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          blurRadius: 10,
+                                          blurStyle: BlurStyle.outer,
+                                          spreadRadius: 1.5,
+                                          color: Colormanager.greyText
+                                              .withOpacity(0.2))
+                                    ]),
+                                child: Center(
+                                    child: Padding(
+                                  padding: const EdgeInsets.only(top: 11.0),
+                                  child: Text(
+                                    "Feel free to connect with us",
+                                    style: getSemiBoldStyle(
+                                        color: Colormanager.black,
+                                        fontSize: 13),
+                                  ),
                                 )),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left:70.0,),
+                              padding: const EdgeInsets.only(
+                                left: 70.0,
+                              ),
                               child: Container(
                                 height: 60,
                                 width: 60,
-                                decoration:BoxDecoration(
-                                  color: Colormanager.primary,
-                                  borderRadius: BorderRadius.circular(50),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius:10,
-                                      color: Colormanager.greyText,
-                                      spreadRadius: 1.7
-                                    )
-                                  ]
-                                ),
+                                decoration: BoxDecoration(
+                                    color: Colormanager.primary,
+                                    borderRadius: BorderRadius.circular(50),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          blurRadius: 10,
+                                          color: Colormanager.greyText,
+                                          spreadRadius: 1.7)
+                                    ]),
                                 child: Padding(
                                   padding: const EdgeInsets.all(10.0),
-                                  child: Image.asset('assets/contactus.png',color: Colormanager.white,height: 14,),
+                                  child: Image.asset(
+                                    'assets/contactus.png',
+                                    color: Colormanager.white,
+                                    height: 14,
+                                  ),
                                 ),
                               ),
                             )
