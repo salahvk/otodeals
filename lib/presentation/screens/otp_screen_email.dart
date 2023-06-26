@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -25,6 +26,7 @@ import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 
 class OTPscreenmail extends StatefulWidget {
+  
   const OTPscreenmail({Key? key}) : super(key: key);
 
   @override
@@ -35,26 +37,34 @@ class _OTPscreenmailState extends State<OTPscreenmail> {
   bool isResendButtonClicked = false;
   bool loading = false;
     verifyNow() async {
+
+    
+        final otpProvider = Provider.of<OTPProvider>(context, listen: false);
+        print(otpProvider.getOtp?.otp.toString());
+        print(Mailotpcontroller.otpcontroller.text);
     FocusManager.instance.primaryFocus?.unfocus();
     
     if (Mailotpcontroller.otpcontroller.text.length < 4 ||
-       Mailotpcontroller.otpcontroller.text != '') {
+    Mailotpcontroller.otpcontroller.text.isEmpty
+        // Mailotpcontroller.otpcontroller.text.toString() !=
+        //     otpProvider.getOtp?.otp.toString()
+        ) {
       AnimatedSnackBar.material("Sorry!!!!",
               type: AnimatedSnackBarType.error,
               borderRadius: BorderRadius.circular(6),
               // brightness: Brightness.dark,
               duration: const Duration(seconds: 1));
          
-    } else {
-      setState(() {
-       loading=true;
+    }
+    
+    
+     else {
 
-      });
       await verifyOtpApi(context);
        setState(() {
          loading=false;
        });
-        Navigator.of(context).pushNamed(Routes.resetPassScreen);
+       
       
     }
   }
@@ -128,7 +138,9 @@ class _OTPscreenmailState extends State<OTPscreenmail> {
                 pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
                 showCursor: true,
                 onCompleted: (pin) {
-                  verifyNow();
+                  print(pin);
+                  print(Mailotpcontroller.otpcontroller);
+                 // verifyNow();
                 },
               ),
             ),
@@ -175,7 +187,8 @@ class _OTPscreenmailState extends State<OTPscreenmail> {
             // * Verify Now Button
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, Routes.resetPassScreen);
+                print("aaaa");
+                verifyNow();
               },
               child: Container(
                 width: w * .8,
@@ -205,26 +218,44 @@ class _OTPscreenmailState extends State<OTPscreenmail> {
     );
   }
 }
-  verifyOtpApi(BuildContext context) async {
+  Future verifyOtpApi(BuildContext context) async {
     final otpProvider = Provider.of<OTPProvider>(context,listen: false);
     //final provider = Provider.of<DataProvider>(context, listen: false);
     print(Mailotpcontroller.otpcontroller.text);
     print(otpProvider.getOtp?.otp.toString());
     try {
+      final url="${ApiEndpoint.otpemail}?email=${Forgetpasswordcontroller.emailController.text}&otp=${Mailotpcontroller.otpcontroller.text}";
+      print(url);
       var response = await http.post(
           Uri.parse(
-              "${ApiEndpoint.otpemail}?email=${otpProvider.email}&otp=${otpProvider.getOtp?.otp.toString()}"),
-          headers: {"device-id":''});
+              url),
+          headers: {"device-id":s,});
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(response.body);
         log(response.body);
-
-        var otpVerifiedData = OtpVerification.fromJson(jsonResponse);
-        otpProvider.getOtpVerifiedData(otpVerifiedData);
-        final apitoken = otpProvider.otpVerification?.customerdetails.apiToken;
+     // print(jsonResponse);
+     var customerdetails = OtpVerification.fromJson(jsonResponse);
+      otpProvider.getOtpVerifiedData(customerdetails);
+      final apitoken = otpProvider.otpVerification?.customerdetails?.apiToken;
+       Hive.box("token").put('api_token', apitoken ?? '');
         print(apitoken);
+      if(jsonResponse['result']==false){
+        showAnimatedSnackBar(context,"Invalid otp,please request  again for otp");
+      return jsonResponse;
+      }else{
+        Navigator.of(context).pushNamed(Routes.resetPassScreen);
+      return jsonResponse;
+      }
+      
 
-        Hive.box("token").put('api_token', apitoken ?? '');
+        // var otpVerifiedData = OtpVerification.fromJson(jsonResponse);
+        // otpProvider.getOtpVerifiedData(otpVerifiedData);
+        // final deviceid=otpProvider.otpVerification?.customerdetails?.deviceId;
+        
+        // print(deviceid);
+
+       //Hive.box("token").put('api_token', apitoken ?? '');
+       // Hive.box("deviceid").put('device-id',deviceid??'');
        
 
       } else {

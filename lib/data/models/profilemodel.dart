@@ -1,4 +1,30 @@
-class CustomerDDetails {
+class Profilemodel {
+  bool? result;
+  String? message;
+  UserDetails? userDetails;
+
+  Profilemodel({this.result, this.message, this.userDetails});
+
+  Profilemodel.fromJson(Map<String, dynamic> json) {
+    result = json['result'];
+    message = json['message'];
+    userDetails = json['userDetails'] != null
+        ? new UserDetails.fromJson(json['userDetails'])
+        : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['result'] = this.result;
+    data['message'] = this.message;
+    if (this.userDetails != null) {
+      data['userDetails'] = this.userDetails!.toJson();
+    }
+    return data;
+  }
+}
+
+class UserDetails {
   int? id;
   String? name;
   String? email;
@@ -7,12 +33,9 @@ class CustomerDDetails {
   String? updatedAt;
   Null profilePic;
   String? isApproved;
-  int? userId;
-  String? deviceId;
-  String? apiToken;
-  String? apiTokenExpiry;
+  Null profileimage;
 
-  CustomerDDetails(
+  UserDetails(
       {this.id,
       this.name,
       this.email,
@@ -21,12 +44,9 @@ class CustomerDDetails {
       this.updatedAt,
       this.profilePic,
       this.isApproved,
-      this.userId,
-      this.deviceId,
-      this.apiToken,
-      this.apiTokenExpiry});
+      this.profileimage});
 
-  CustomerDDetails.fromJson(Map<String, dynamic> json) {
+  UserDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
@@ -35,10 +55,7 @@ class CustomerDDetails {
     updatedAt = json['updated_at'];
     profilePic = json['profile_pic'];
     isApproved = json['is_approved'];
-    userId = json['user_id'];
-    deviceId = json['device_id'];
-    apiToken = json['api_token'];
-    apiTokenExpiry = json['api_token_expiry'];
+    profileimage = json['profileimage'];
   }
 
   Map<String, dynamic> toJson() {
@@ -51,10 +68,7 @@ class CustomerDDetails {
     data['updated_at'] = this.updatedAt;
     data['profile_pic'] = this.profilePic;
     data['is_approved'] = this.isApproved;
-    data['user_id'] = this.userId;
-    data['device_id'] = this.deviceId;
-    data['api_token'] = this.apiToken;
-    data['api_token_expiry'] = this.apiTokenExpiry;
+    data['profileimage'] = this.profileimage;
     return data;
   }
 }

@@ -3,7 +3,7 @@ import 'package:otodeals/data/models/customer_detail.dart';
 class Regmodel {
   bool? result;
   String? message;
-  Customerdetails? customerdetails;
+  CustomerDDetails? customerdetails;
 
   Regmodel({this.result, this.message, this.customerdetails});
 
@@ -11,7 +11,7 @@ class Regmodel {
     result = json['result'];
     message = json['message'];
     customerdetails = json['customerdetails'] != null
-        ? new Customerdetails.fromJson(json['customerdetails'])
+        ? new CustomerDDetails.fromJson(json['customerdetails'])
         : null;
   }
 

@@ -5,6 +5,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
+import 'package:otodeals/data/providers/dataprovider.dart';
+
+import 'package:provider/provider.dart';
 
 class  TimerScreen extends StatefulWidget {
   TimerScreen();
@@ -14,28 +17,37 @@ class  TimerScreen extends StatefulWidget {
 }
 
 class _TimerScreenState extends State<TimerScreen> {
-  static var countdownDuration = Duration(minutes:15);
+    
+  static var countdownDuration = Duration();
  
   Duration duration = Duration();
-  Duration duration1 = Duration();
+  
   Timer? timer;
   bool countDown = true;
   
 
   @override
   void initState() {
-    var hours;
-    var mints;
-    var secs;
-    hours = int.parse("01");
-    mints = int.parse("10");
-    secs = int.parse("45");
+     final homeres = Provider.of<DataProvider>(context, listen:false);
+ 
+
+    int hours;
+    int mints;
+    int secs;
+    hours =int.parse (homeres.homemodel?.nextAccutionTime?.hours.toString()?? "0");
+    mints = int.parse(homeres.homemodel?.nextAccutionTime?.minutes.toString()?? "0");
+    secs = int.parse(homeres.homemodel?.nextAccutionTime?.seconds.toString()?? "0");
     countdownDuration = Duration(hours: hours, minutes: mints, seconds: secs);
     startTimer();
     reset();
     
     super.initState();
   }
+  @override
+void dispose() {
+  timer?.cancel(); // Cancel the timer
+  super.dispose();
+}
 
   @override
   Widget build(BuildContext context) {

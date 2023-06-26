@@ -8,7 +8,7 @@
 class OtpVerification{
     bool result;
     String message;
-    Customerdetails customerdetails;
+    Customerdetails? customerdetails;
 
     OtpVerification({
         required this.result,
@@ -19,13 +19,15 @@ class OtpVerification{
     factory OtpVerification.fromJson(Map<String, dynamic> json) => OtpVerification(
         result: json["result"],
         message: json["message"],
-        customerdetails: Customerdetails.fromJson(json["customerdetails"]),
+        customerdetails: json['customerdetails']!= null?
+        Customerdetails.fromJson(json["customerdetails"])
+        :null
     );
 
     Map<String, dynamic> toJson() => {
         "result": result,
         "message": message,
-        "customerdetails": customerdetails.toJson(),
+        "customerdetails": customerdetails?.toJson(),
     };
 }
 
@@ -39,8 +41,8 @@ class Customerdetails {
    // dynamic profilePic;
     //String isApproved;
     int userId;
-    String deviceId;
-    String apiToken;
+    String?deviceId;
+    String? apiToken;
     DateTime apiTokenExpiry;
 
     Customerdetails({

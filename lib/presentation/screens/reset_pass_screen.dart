@@ -1,5 +1,6 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
+
 import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/controllers.dart';
@@ -16,6 +17,11 @@ class ResetPassScreen extends StatefulWidget {
 }
 
 class _ResetPassScreenState extends State<ResetPassScreen> {
+
+
+
+
+
   void reset(){
     final newpassword=Resetpassword.newpasswordController.text;
     final confirmpassword=Resetpassword.confirmpasswordController.text;
@@ -30,9 +36,10 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
     showAnimatedSnackBar(context,"your confirmed password mismatched");
   }
   else{
+     postResetpasswordData(context);
   Navigator.of(context).pushNamed(Routes.loginScreen);
   showAnimatedSnackBar(context,"Password changed!",type: AnimatedSnackBarType.success);
-  postResetpasswordData(context);
+ 
   }
   }
   @override

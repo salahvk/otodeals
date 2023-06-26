@@ -20,7 +20,7 @@ async {
     
 
     // var response=await http.post(Uri.parse(url),headers:{"device-id":s});
-    var response=await http.post(Uri.parse(url),headers:{"device-id":s});
+    var response=await http.post(Uri.parse(url),headers:{"device-id":s,});
 
     if(response.statusCode!=200){
       showAnimatedSnackBar(context,"something went wrong");

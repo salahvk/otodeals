@@ -11,14 +11,15 @@ import 'package:otodeals/data/api/api_endpoint.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 // import 'package:otodeals/data/viewmodel/registerviewmodel.dart';
-final name=Registercontrollerr.namecontroller.text;
+
+
+ Future postRegisterData(BuildContext context)
+async {
+  final name=Registercontrollerr.namecontroller.text;
 final email=Registercontrollerr.emailController.text;
 final password=Registercontrollerr.passwordController.text;
 final confirmpassword=Registercontrollerr.confirmpasswordController.text;
  String url = "${ApiEndpoint.registerApi}?name=$name&email=$email&password=$password&confirm_password=$confirmpassword";
-
- postRegisterData(BuildContext context)
-async {
  print(url);
   try{
     
@@ -29,13 +30,26 @@ async {
       showAnimatedSnackBar(context,"something went wrong");
       return;
 
-    }
+    }else{
     var jsonResponse=jsonDecode(response.body);
     print(jsonResponse);
     // Regmodel ws=Regmodel.fromJson(jsonResponse);
+      if(jsonResponse['result']==false){
+      
+     
+       showAnimatedSnackBar(context,"This email is already Registered!!");
+      //  log(jsonResponse['result']);
+      //  log(jsonResponse);
+      print(jsonResponse);
+     return jsonResponse;
+       
     
+    }
+    else{
+       return jsonResponse;
+    }
   
-
+    }
   }on Exception catch(e){
     
     print(e);

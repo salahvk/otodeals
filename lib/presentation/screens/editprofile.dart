@@ -22,20 +22,27 @@ class _EditprofileState extends State<Editprofile> {
       body: SafeArea(
         child:Column(
           children: [
-            Container(
-              height:50,
-              width:MediaQuery.of(context).size.width,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  children: [
-                    Icon(Icons.arrow_back_ios,color: Colormanager.primary,size:20,),
-                    SizedBox(width: 20,),
-                    Text("Edit Profile",style:getRegularStyle(
-                      color:Colormanager.black,
-                      fontSize:18
-                    ) ,)
-                  ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height:50,
+                width:MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Icon(Icons.arrow_back_ios,color: Colormanager.primary,size:20,)),
+                      SizedBox(width: 22,),
+                      Text("Edit Profile",style:getRegularStyle(
+                        color:Colormanager.black,
+                        fontSize:20,
+                      ) ,)
+                    ],
+                  ),
                 ),
               ),
             ),

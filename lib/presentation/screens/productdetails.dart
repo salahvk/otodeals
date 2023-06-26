@@ -4,10 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
+import 'package:otodeals/data/api/api_endpoint.dart';
+import 'package:otodeals/data/providers/vehicledetails.dart';
+import 'package:otodeals/data/repositories/vehicledetails.dart';
 import 'package:otodeals/presentation/widgets/bottom_nav.dart';
 
 
-import 'package:otodeals/presentation/widgets/timer2.dart';
+import 'package:otodeals/presentation/widgets/timer3.dart';
+import 'package:provider/provider.dart';
 
 class Porductdetails extends StatefulWidget {
 const Porductdetails({super.key});
@@ -17,6 +21,8 @@ State<Porductdetails> createState() => _PorductdetailsState();
     }
 
     class _PorductdetailsState extends State<Porductdetails> {
+    
+  
        bool showSecondContainer = false;
        bool isExpanded = false;
 
@@ -25,12 +31,15 @@ State<Porductdetails> createState() => _PorductdetailsState();
       showSecondContainer = !showSecondContainer;
     });
   }
-    
-  
+
+       
   
      
       @override
         Widget build(BuildContext context) {
+           
+    final vres = Provider.of<Vehicledetailsprovider>(context, listen:true);
+   
         return Scaffold(
         body:
         SingleChildScrollView(
@@ -58,14 +67,14 @@ State<Porductdetails> createState() => _PorductdetailsState();
           child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-          Text("HYUNDAI",style: getSemiBoldStyle(color: Colormanager.white,fontSize:20),),
+          Text(vres.vehdet?.vehicle?.vehicleName??"",style: getSemiBoldStyle(color: Colormanager.white,fontSize:20),),
           SizedBox(height:10,),
-          Text("\$56.7",style: getBoldStyle(color: Colormanager.white,fontSize: 20),)
+          Text(vres.vehdet?.vehicle?.price.toString()??"",style: getBoldStyle(color: Colormanager.white,fontSize: 20),)
           ],
           ),
           ),
           Padding(
-          padding: const EdgeInsets.only(left:180.0,top:45),
+          padding: const EdgeInsets.only(left:150.0,top:45),
           child: Container(
           height:35,
           width: 35,
@@ -108,23 +117,23 @@ State<Porductdetails> createState() => _PorductdetailsState();
           children: [
           Padding(
           padding: const EdgeInsets.only(top:80),
-          child: Container(
-          height: 27,
-          width: 67,
-          decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: Colors.amber,
-          ),
-          child: Padding(
-          padding: const EdgeInsets.only(left:10.0),
-          child: Row(
-          children: [
-          Icon(Icons.star,color: Colors.white,size:18,),
-          Text("4.5",style: getSemiBoldStyle(color:Colormanager.white,fontSize:15),)
-          ],
-          ),
-          ),
-          ),
+          // child: Container(
+          // height: 27,
+          // width: 67,
+          // decoration: BoxDecoration(
+          // borderRadius: BorderRadius.circular(15),
+          // color: Colors.amber,
+          // ),
+          // child: Padding(
+          // padding: const EdgeInsets.only(left:10.0),
+          // child: Row(
+          // children: [
+          // Icon(Icons.star,color: Colors.white,size:18,),
+          // Text(vres.vehdet?.vehicle?.type??"",style: getSemiBoldStyle(color:Colormanager.white,fontSize:15),)
+          // ],
+          // ),
+          // ),
+          // ),
           ),
           SizedBox(height:5,),
           Padding(
@@ -148,7 +157,7 @@ State<Porductdetails> createState() => _PorductdetailsState();
           height:6,
           ),
         
-          Text("Automatic", style:getSemiBoldStyle(color:Colormanager.primary,fontSize:9),),
+          Text(vres.vehdet?.vehicle?.gearshift??"", style:getSemiBoldStyle(color:Colormanager.primary,fontSize:9),),
           ],
           ),
           ),
@@ -191,7 +200,7 @@ State<Porductdetails> createState() => _PorductdetailsState();
           height:6,
           ),
         
-          Text("diesel", style:getSemiBoldStyle(color:Colormanager.primary,fontSize:9),),
+          Text(vres.vehdet?.vehicle?.fueltype??"", style:getSemiBoldStyle(color:Colormanager.primary,fontSize:9),),
           ],
           ),
           ),
@@ -206,15 +215,228 @@ State<Porductdetails> createState() => _PorductdetailsState();
         
           ),
           ),
+          
           Padding(
-          padding: const EdgeInsets.only(top:10.0,left:50),
-          child: Image.asset('assets/result.png',height:290,width:290,),
+          padding: const EdgeInsets.only(top:70.0,left:110),
+          child: Image.network("$endpoint${vres.vehdet?.vehicle?.productimage??""}",height:170,width:170,),
           ),
           ]),
-          SizedBox(height:20,),
+          SizedBox(height:25,),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 500,
+              width: MediaQuery.of(context).size.width,
+             
+              decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 245, 245, 245),
+                borderRadius: BorderRadius.circular(20)
+              ),
+              child: Stack(
+                children: [
+                  Image.asset("assets/carparts.png"),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left:0.0,right:80),
+                        child: Container(
+                          height: 20,
+                          width: 25,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFbfd836e),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(child: Text("E1",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
+                        ),
+                      ),
+                      SizedBox(height:68,),
+                      Row(
+                        children: [
+                           Padding(
+                        padding: const EdgeInsets.only(left:60.0),
+                        child: Container(
+                          height: 20,
+                          width: 25,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFbbdb7368),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(child: Text("E2",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
+                        ),
+                      ),
+                      SizedBox(width:40,),
+                           Padding(
+                        padding: const EdgeInsets.only(left:13.0,),
+                        child: Container(
+                          height: 20,
+                          width: 28,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFb6c0bce),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(child: Text("A2",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
+                        ),
+                      ),
+                       SizedBox(width:40,),
+                           Padding(
+                        padding: const EdgeInsets.only(left:70.0),
+                        child: Container(
+                          height: 20,
+                          width: 28,
+                          decoration: BoxDecoration(
+                            color:Color(0xFFb13a36),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(child: Text("S2",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
+                        ),
+                      ),
+
+
+                        ],
+                      ),
+                      SizedBox(height:45,),
+                       Padding(
+                        padding: const EdgeInsets.only(left:0.0,right:40),
+                        child: Container(
+                          height: 20,
+                          width: 28,
+                          decoration: BoxDecoration(
+                            color:Color(0xFFb4c8ee5),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(child: Text("G1",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
+                        ),
+                      ),
+                       Row(
+                         children: [
+                           SizedBox(height:2,),
+                           Padding(
+                        padding: const EdgeInsets.only(left:50.0,right:100),
+                        child: Container(
+                          height: 20,
+                          width: 28,
+                          decoration: BoxDecoration(
+                            color:Color(0xFFbb13a36),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(child: Text("S2",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
+                        ),
+                      ),
+                          SizedBox(width:10,),
+                           Padding(
+                        padding: const EdgeInsets.only(left:100.0,right:50),
+                        child: Container(
+                          height: 20,
+                          width: 28,
+                          decoration: BoxDecoration(
+                            color:Color(0xFFbfd836e),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(child: Text("E1",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
+                        ),
+                      ),
+                         ],
+                       ),
+                          SizedBox(height:50,),
+                           Padding(
+                        padding: const EdgeInsets.only(left:100.0,right:100),
+                        child: Container(
+                          height: 20,
+                          width: 28,
+                          decoration: BoxDecoration(
+                            color:Color(0xFFbfd836e),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(child: Text("E1",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
+                        ),
+                      ),
+                      SizedBox(height: 0,),
+                      Padding(
+                        padding: const EdgeInsets.only(left:0.0,right:240),
+                        child: Container(
+                          height: 20,
+                          width: 28,
+                          decoration: BoxDecoration(
+                            color:Color(0xFFbfd836e),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(child: Text("E1",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
+                        ),
+                      ),
+                      SizedBox(height:60,),
+                       Row(
+                         children: [
+                           SizedBox(height:2,),
+                           Padding(
+                        padding: const EdgeInsets.only(left:60.0,right:80),
+                        child: Container(
+                          height: 20,
+                          width: 28,
+                          decoration: BoxDecoration(
+                            color:Color(0xFFb6c0bce),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(child: Text("A2",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
+                        ),
+                      ),
+                          SizedBox(width:10,),
+                           Padding(
+                        padding: const EdgeInsets.only(left:100.0,right:50),
+                        child: Container(
+                          height: 20,
+                          width: 28,
+                          decoration: BoxDecoration(
+                            color:Color(0xFFb6c0bce),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(child: Text("A2",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
+                        ),
+                      ),
+                         ],
+                       ),
+                       SizedBox(height:60,),
+                        Padding(
+                        padding: const EdgeInsets.only(left:20.0,right:50),
+                        child: Container(
+                          height: 20,
+                          width: 28,
+                          decoration: BoxDecoration(
+                            color:Color(0xFFb6c0bce),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(child: Text("A2",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
+                        ),
+                      ),
+                      SizedBox(height:25,),
+                       Padding(
+                        padding: const EdgeInsets.only(left:0.0,right:70),
+                        child: Container(
+                          height: 20,
+                          width: 25,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFbbdb7368),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(child: Text("E2",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
+                        ),
+                      ),
+
+                       
+
+
+                      
+                    ],
+
+                  )
+                  
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height:40,),
           Text("NEXT AUCTION CLOSES IN",style:getSemiBoldStyle(color:Colors.black,fontSize:16),),
         
-          TimerScreen(),
+          // TimerScreen2(),
           SizedBox(
           height: 15,
           ),

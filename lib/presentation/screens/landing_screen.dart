@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
+import 'package:otodeals/data/repositories/homeweb.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({super.key});
@@ -56,53 +57,85 @@ class LandingScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, Routes.loginScreen);
-                  },
-                  child: Container(
-                    width: size.width * .8,
-                    decoration: BoxDecoration(
-                        color: Colormanager.primary,
-                        borderRadius: BorderRadius.circular(14)),
-                    // height: 40,
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Text(
-                          "LOG IN",
-                          style: getMediumtStyle(
-                              color: Colormanager.white, fontSize: 16),
-                        ),
+                 SizedBox(
+                  width: size.width*.8,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      gethome(context);
+                    Navigator.pushNamed(context,Routes.mainScreen);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary:Colormanager.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(
+                        'EXPLORE',
+                        style: getSemiBoldStyle(
+                          color: Colormanager.white,
+                          fontSize: 16,
+                        )
                       ),
                     ),
                   ),
+                ),
+                SizedBox(height: 10,),
+                SizedBox(
+                  width: size.width*.8,
+                  child: ElevatedButton(
+                  onPressed: () {
+                                Navigator.pushNamed(context,Routes.loginScreen);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary:Colormanager.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(
+                      'LOG IN',
+                      style: TextStyle(
+                        color: Colormanager.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                                ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, Routes.registerScreen);
-                  },
-                  child: Container(
-                    width: size.width * .8,
-                    decoration: BoxDecoration(
-                        color: Colormanager.grey,
-                        borderRadius: BorderRadius.circular(14)),
-                    // height: 40,
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Text(
-                          "CREATE AN ACCOUNT",
-                          style: getMediumtStyle(
-                              color: Colors.black, fontSize: 16),
-                        ),
+                SizedBox(
+                  width: size.width*.8,
+                  child: ElevatedButton(
+                    onPressed: () {
+                    Navigator.pushNamed(context,Routes.registerScreen);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary:Colormanager.grey,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(
+                        'CREATE AN ACCOUNT',
+                        style: getMediumtStyle(
+                          color: const Color.fromARGB(245, 0, 0, 0),
+                          fontSize: 16,
+                        )
                       ),
                     ),
                   ),
                 ),
+                 
                 SizedBox(
                   height: size.height * .05,
                 )

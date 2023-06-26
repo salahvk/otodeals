@@ -1,27 +1,30 @@
-
- import 'dart:convert';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/util/animatedsnackbar.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:http/http.dart' as http;
+import 'package:otodeals/data/models/profilemodel.dart';
+import 'package:otodeals/data/providers/dataprovider.dart';
+import 'package:provider/provider.dart';
 
-final newpassword=Resetpassword.newpasswordController.text;
-final confirmpassword=Resetpassword.confirmpasswordController.text;
-String url = "${ApiEndpoint.resetpassword}?newpassword=$newpassword&confirmpassword=$confirmpassword";
+
+
+Future postprofileData(BuildContext context)
+async {
+ String url = "${ApiEndpoint.profile}";
 String s='abc';
  String? token;
-
-postResetpasswordData(BuildContext context)
-async {
+ Profilemodel? profiledatas;
    token=Hive.box('token').get('api_token');
    print(token);
  print(url);
   
 
   try{
+    print(url);
+    final profileprovider=Provider.of<DataProvider>(context,listen:false);
     
 
     var response=await http.post(Uri.parse(url),headers:{"device-id":s,"api-token":token??'',});
@@ -32,7 +35,11 @@ async {
 
     }
     var jsonResponse=jsonDecode(response.body);
+    final profiledatas=Profilemodel.fromJson(jsonResponse);
+  profileprovider.profiledata(profiledatas);
     print(jsonResponse);
+    return jsonResponse;
+   
     // Regmodel ws=Regmodel.fromJson(jsonResponse);
     
   
@@ -41,4 +48,5 @@ async {
     
     print(e);
   }
+  return profiledatas;
 }

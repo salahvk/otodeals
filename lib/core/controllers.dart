@@ -22,3 +22,18 @@ class Resetpassword{
   static TextEditingController newpasswordController = TextEditingController();
   static TextEditingController confirmpasswordController=TextEditingController();
 }
+class Changepasswordcontoller{
+  static TextEditingController currentpasswordController = TextEditingController();
+  static TextEditingController newpasswordController = TextEditingController();
+  static TextEditingController confirmpasswordController=TextEditingController();
+}
+class Searchcontroller{
+  static TextEditingController vehicletypecontroller=TextEditingController();
+  static TextEditingController vehiclebrandcontroller=TextEditingController();
+  static TextEditingController fueltypecontroller=TextEditingController();
+  static TextEditingController gearshiftcontroller=TextEditingController();
+  static TextEditingController minpricecontroller=TextEditingController();
+  static TextEditingController   maxpricecontroller=TextEditingController();
+  static TextEditingController modelyearcontroller=TextEditingController();
+  static TextEditingController searchdatacontroller=TextEditingController();
+}

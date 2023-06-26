@@ -1,12 +1,18 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:otodeals/data/providers/dataprovider.dart';
+
+
 import 'package:otodeals/presentation/screens/editprofile.dart';
-import 'package:otodeals/presentation/screens/main_screen.dart';
+
 import 'package:otodeals/presentation/screens/my_bid_list.dart';
+import 'package:provider/provider.dart';
 
 
 class Myprofile extends StatefulWidget {
@@ -18,35 +24,43 @@ class Myprofile extends StatefulWidget {
 
 class _MyprofileState extends State<Myprofile> {
   @override
+  // void initState(){
+  //   super.initState();
+  //    final profileres = Provider.of<DataProvider>(context, listen: false);
+  //    print(profileres.profiles?.userDetails?.name??'');
+
+  // }
+  @override
   Widget build(BuildContext context) {
+    final profileres = Provider.of<DataProvider>(context, listen: false);
+
     return Scaffold(
       backgroundColor:Colormanager.background,
       body: SingleChildScrollView(
         child:Column(
           children: [
-            Container(
-              height:50,
-              width:MediaQuery.of(context).size.width,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                      Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => MainScreen()),
-            );
-                      },
-                      child: 
-                      Icon(Icons.arrow_back_ios,color: Colormanager.primary,
-                      size:20,)),
-                    SizedBox(width: 20,),
-                    Text("Profile",style:getRegularStyle(
-                      color:Colormanager.black,
-                      fontSize:18
-                    ) ,)
-                  ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height:50,
+                width:MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    children: [
+                      // InkWell(
+                      //   onTap: () {
+                      //   Navigator.pop(context);  },
+                      //   child: 
+                      //   Icon(Icons.arrow_back_ios,color: Colormanager.primary,
+                      //   size:22,)),
+                      SizedBox(width: 20,),
+                      Text("Profile",style:getRegularStyle(
+                        color:Colormanager.black,
+                        fontSize:20
+                      ) ,)
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -112,7 +126,7 @@ class _MyprofileState extends State<Myprofile> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Aysha",
+                                Text(profileres.profiles?.userDetails?.name??'',
                                 style:getRegularStyle(
                                   fontSize:20,
                                   color: Colormanager.white
@@ -121,7 +135,7 @@ class _MyprofileState extends State<Myprofile> {
                                   
                                 ),),
                                 SizedBox(height: 8,),
-                                Text("seludashabeer@gmail.com",
+                                Text(profileres.profiles?.userDetails?.email??'',
                                 style: getMediumtStyle(color:Colormanager.white,
                                 fontSize:13),),
                                 SizedBox(height:10,),
@@ -401,22 +415,27 @@ class _MyprofileState extends State<Myprofile> {
                         Column(
                           
                           children: [
-                            Row(
-                              
-                              children: [
-                                Text("Change Password",
-                                style:getSemiBoldStyle(color: Color.fromARGB(255, 112, 112, 114) ),),
-                                SizedBox(width:82,),
-                                Container(
-                                  height: 17,
-                                  width: 17,
-                                  
-                                  decoration: BoxDecoration(
-                                    color:Color.fromARGB(255, 206, 206, 206),
-                                    borderRadius: BorderRadius.circular(9)
-                                  ),
-                                  child: Icon(Icons.arrow_forward_ios_rounded,size:12,color: const Color.fromARGB(255, 136, 136, 144),),),
-                              ],
+                            InkWell(
+                              onTap: (){
+                                Navigator.of(context).pushNamed(Routes.changePassScreen);
+                              },
+                              child: Row(
+                                
+                                children: [
+                                  Text("Change Password",
+                                  style:getSemiBoldStyle(color: Color.fromARGB(255, 112, 112, 114) ),),
+                                  SizedBox(width:82,),
+                                  Container(
+                                    height: 17,
+                                    width: 17,
+                                    
+                                    decoration: BoxDecoration(
+                                      color:Color.fromARGB(255, 206, 206, 206),
+                                      borderRadius: BorderRadius.circular(9)
+                                    ),
+                                    child: Icon(Icons.arrow_forward_ios_rounded,size:12,color: const Color.fromARGB(255, 136, 136, 144),),),
+                                ],
+                              ),
                             ),
                             SizedBox(height:8,),
                             Container(
@@ -434,22 +453,31 @@ class _MyprofileState extends State<Myprofile> {
               ),
             ),
             SizedBox(height:18,),
-            InkWell(
-              child: Container(
-                height: 40,
-                width: 150,
-                decoration: BoxDecoration(
-                   color: Colormanager.primary,
-                   borderRadius: BorderRadius.circular(20)
-            
-                ),
-               
-               child:Center(child: Text("Log Out",style: getSemiBoldStyle(color:Colormanager.white,fontSize:15),)),
-               ),
-               onTap: () {
-                 
-               },
-            ),
+           SizedBox(
+            width:200,
+             child: ElevatedButton(
+                    onPressed: () {
+                    
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary:Colormanager.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(
+                        'LOG OUT',
+                        style: TextStyle(
+                          color: Colormanager.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+           ),
           ],
         ) ),
     

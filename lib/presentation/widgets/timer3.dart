@@ -6,39 +6,42 @@ import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
+import 'package:otodeals/data/providers/vehicledetails.dart';
 
+import 'package:otodeals/data/repositories/vehicledetails.dart';
 import 'package:provider/provider.dart';
 
-class AttendanceScreen extends StatefulWidget {
-  AttendanceScreen();
+class  TimerScreen2 extends StatefulWidget {
+  TimerScreen2();
 
   @override
-  _AttendanceScreenState createState() => _AttendanceScreenState();
+  _TimerScreen2State createState() => _TimerScreen2State();
 }
 
-class _AttendanceScreenState extends State<AttendanceScreen> {
-  static var countdownDuration = Duration(minutes:15);
+class _TimerScreen2State extends State<TimerScreen2> {
+    
+  static var countdownDuration = Duration();
  
   Duration duration = Duration();
- 
+  
   Timer? timer;
   bool countDown = true;
-  int index=0;
   
 
   @override
   void initState() {
-       final homeres = Provider.of<DataProvider>(context, listen:false);
-    
+    final hom=Provider.of<DataProvider>(context,listen: false);
+   int? id=hom.id;
+     final vehres = Provider.of<Vehicledetailsprovider>(context, listen:false);
+  getvehicledetails(context,id!);
 
-     
     int hours;
     int mints;
     int secs;
-    hours = int.parse(homeres.homemodel?.bidVehicles?[index].hours.toString()??"0");
-    mints = int.parse(homeres.homemodel?.bidVehicles?[index].minutes.toString()??"0");
-    secs = int.parse(homeres.homemodel?.bidVehicles?[index].seconds.toString()??"0");
-    countdownDuration = Duration(hours: hours, minutes: mints, seconds: secs);
+    // hours =int.parse (vehres.vehdet?.vehicle?.hours.toString()?? "0");
+    // mints = int.parse(vehres.vehdet?.vehicle?.minutes.toString()?? "0");
+    // secs = int.parse(vehres.vehdet?.vehicle?.seconds.toString()?? "0");
+    // countdownDuration = Duration(hours: hours, minutes: mints, seconds: secs);
     startTimer();
     reset();
     
@@ -56,28 +59,16 @@ void dispose() {
       onWillPop: _onWillPop,
       child:SafeArea(
         
-        child: Container(
-          height:50,
-          
-          
-          decoration: BoxDecoration(
-            color: Color.fromARGB(255, 238, 236, 236),
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10))
-
-          ),
-          
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                
-                Container(
-                    margin: EdgeInsets.only(top:10, bottom:10),
-                    child: buildTime()),
-               
-              ]),
-        ),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              
+              Container(
+                  margin: EdgeInsets.only(top:1, bottom:10),
+                  child: buildTime()),
+             
+            ]),
       ),
     );
   }
@@ -126,11 +117,11 @@ void dispose() {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
       buildTimeCard(time: hours, header:'HOURS'),
       SizedBox(
-        width:6,
+        width:10,
       ),
       buildTimeCard(time: minutes, header: 'MINUTES'),
       SizedBox(
-        width:6,
+        width:10,
       ),
       buildTimeCard(time: seconds, header: 'SECONDS'),
     ]);
@@ -143,24 +134,36 @@ void dispose() {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-           height:30 ,
-           width: 50,
+           height:75 ,
+           width: 75,
             decoration: BoxDecoration(
-                color: Color.fromARGB(255, 238, 236, 236), borderRadius: BorderRadius.circular(10)),
+                color: Color.fromARGB(255, 238, 236, 236), borderRadius: BorderRadius.circular(14)),
             child: Center(
-              child: Text(
-                time,
-                style: getBoldStyle(
-                   
-                    color: Colors.black,
-                    fontSize:15),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Text(
+                      time,
+                      style: getBoldStyle(
+                         
+                          color: Colors.black,
+                          fontSize:30),
+                    ),
+                     SizedBox(
+                          height:6,
+                        ),
+                    
+                    Text(header, style:getSemiBoldStyle(color:Colormanager.primary,fontSize:9),),
+                  ],
+                ),
               ),
             ),
           ),
           SizedBox(
             height:3,
           ),
-          Text(header, style:getSemiBoldStyle(color:Colormanager.primary,fontSize:8),),
+          
         ],
       );
 }
