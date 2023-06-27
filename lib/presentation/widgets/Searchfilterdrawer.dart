@@ -37,7 +37,7 @@ Color _inactiveColor = Colormanager.grey;
     super.initState();
     selectedYear = DateTime.now().year;
        filters = widget.initialFilters;
-        selectedYear = int.tryParse(filters?.modelyear ?? '');
+        // selectedYear = int.tryParse(filters?.modelyear ?? '');
   }
 
 
@@ -329,12 +329,7 @@ Color _inactiveColor = Colormanager.grey;
       double maxPrice = _currentRangeValues.end;
 
        SearchFilters selectedFilters = SearchFilters(
-                    fuelType: selectedFuelTypes.toString(),
-                    gearshift: selectedgearshift.toString(),
-                    modelyear: selectedModelYear.toString(),
-                    minPrice: minPrice,
-                    maxPrice: maxPrice, type: '', 
-                 
+                  
       );
       print(selectedFilters);
       widget.onFiltersChanged(selectedFilters);
@@ -361,16 +356,10 @@ Color _inactiveColor = Colormanager.grey;
   }
 }
 class SearchFilters {
-  String fuelType=Searchcontroller.fueltypecontroller.text; // Replace with the actual filter options you have
-  String gearshift=Searchcontroller.gearshiftcontroller.text;
-  String type=Searchcontroller.vehicletypecontroller.text;
-  String minPrice=Searchcontroller.minpricecontroller.text;
-  String maxPrice=Searchcontroller.maxpricecontroller.text;
-  String modelyear=Searchcontroller.modelyearcontroller.text;
 
 
   // Add more filter options if needed
 
-  SearchFilters({ required this.gearshift,required this.type,required this.modelyear, required this.fuelType, required  minPrice, required maxPrice});
+  SearchFilters();
 } 
        

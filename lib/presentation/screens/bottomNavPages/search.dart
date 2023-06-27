@@ -6,13 +6,16 @@ import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
+import 'package:otodeals/data/models/vehicledetails.dart';
 import 'package:otodeals/data/models/vehiclelisting.dart';
+import 'package:otodeals/data/providers/vehicleprovider.dart';
 
 
 import 'package:otodeals/presentation/widgets/Searchfilterdrawer.dart';
 
 
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class searchs extends StatefulWidget {
   const searchs({Key? key}) : super(key: key);
@@ -26,9 +29,13 @@ class _searchsState extends State<searchs> {
   String s="abc";
   List<dynamic>allresults=[];
    List<dynamic> searchResults = [];
+   String? type;
    void initState(){
+    Searchcontroller.vehicletypecontroller.text="sale";
     super.initState();
-_fetchSearchResults();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp)async {
+      await _fetchSearchResults();
+    });
      
 
   }
@@ -38,45 +45,48 @@ _fetchSearchResults();
   void toggleSelection(bool isBuy)async {
     setState(() {
       isBuySelected = isBuy;
-      searchResults.clear();
-      _fetchSearchResults();
+     
      
     });}
     Future<void> _fetchSearchResults() async {
-        SearchFilters filters = SearchFilters(fuelType:Searchcontroller.fueltypecontroller.text,
-        gearshift:Searchcontroller.gearshiftcontroller.text,
-        type:Searchcontroller.vehicletypecontroller.text,modelyear:Searchcontroller.modelyearcontroller.text,
-        maxPrice:Searchcontroller.maxpricecontroller.text, 
-        minPrice:Searchcontroller.minpricecontroller.text);
-    final url = '${ApiEndpoint.vehiclelisting}'; // Replace with your actual web service URL
-
+      final type=Searchcontroller.vehicletypecontroller.text;
+      final gearshift=Searchcontroller.gearshiftcontroller.text;
+      final fueltype=Searchcontroller.fueltypecontroller.text;
+      final minprice=Searchcontroller.minpricecontroller.text;
+      final maxprice=Searchcontroller.maxpricecontroller.text;
+      final modelyearrange1=Searchcontroller.yearrange1controller.text;
+        final modelyearrange2=Searchcontroller.yearrange2controller.text;
+      final brand=Searchcontroller.vehiclebrandcontroller.text;
+      final searchdata=Searchcontroller.searchdatacontroller.text;
+      final url="${ApiEndpoint.vehiclelisting}?type=$type";
+    // final url = "${ApiEndpoint.vehiclelisting}?type=$type&filter_brand[]=$brand&filter_fueltype[]=$fueltype&filter_gearshift[]=$gearshift&min=$minprice&max=$maxprice&modelyear['range1']=$modelyearrange1&modelyear['range2']=$modelyearrange2&searchdata=$searchdata]"; // Replace with your actual web service URL
+final provider=Provider.of<Vehicleprovider>(context,listen:false);
     final response = await http.post(
       Uri.parse(url),headers:{'device-id':s} ,
-      body: {
-        Searchcontroller.vehicletypecontroller: isBuySelected ? 'sale' : 'bid',
-       Searchcontroller.fueltypecontroller:filters.fuelType,
-       Searchcontroller.gearshiftcontroller:filters.gearshift,
-       Searchcontroller.minpricecontroller:filters.minPrice,
-       Searchcontroller.maxpricecontroller:filters.maxPrice,
-       Searchcontroller.maxpricecontroller:filters.modelyear
-      },
+  
     );
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
-      final List<VehicleListing> results = [];
-       searchResults.addAll(results);
+      final data=VehicleListing.fromJson(jsonData);
+      provider.vlistdata(data);
+      // print(jsonData);
+      // print(data);
 
-      for (var item in jsonData) {
-        final vehicle = VehicleListing(
-          type:item['type'],
-          price:item['price'],
-          gearshift:item['gearshift'],
-          fueltype:item['fueltype'],
-          modelyear:item['modelyear'],
-        );
-        results.add(vehicle);
+      // final List<VehicleListing> results = [];
+      //  results.addAll(results);
+       print(data);
+
+      // for (var item in jsonData) {
+      //   final vehicle = VehicleListing(
+      //     type:item['type'],
+      //     price:item['price'],
+      //     gearshift:item['gearshift'],
+      //     fueltype:item['fueltype'],
+      //     modelyear:item['modelyear'],
+      //   );
+      //   results.add(vehicle);
        
-      }
+      // }
     }
 
    
@@ -87,12 +97,8 @@ _fetchSearchResults();
   @override
  
   Widget build(BuildContext context) {
-     SearchFilters filters = SearchFilters(fuelType:Searchcontroller.fueltypecontroller.text,
-        gearshift:Searchcontroller.gearshiftcontroller.text,
-        type:Searchcontroller.vehicletypecontroller.text,modelyear:Searchcontroller.modelyearcontroller.text,
-        maxPrice:Searchcontroller.maxpricecontroller.text, 
-        minPrice:Searchcontroller.minpricecontroller.text);
-    
+   
+    final res=Provider.of<Vehicleprovider>(context,listen: false);
       // final searchres = Provider.of<DataProvider>(context, listen: false);
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -100,7 +106,7 @@ _fetchSearchResults();
         child: SizedBox(
             height: size.height,
             width: size.width * 0.8,
-            child: FilterDrawer(initialFilters:filters, onFiltersChanged: (SearchFilters ) {  },),
+            // child: FilterDrawer(initialFilters:, onFiltersChanged: (SearchFilters ) {  },),
           ),
       ),
 
@@ -257,7 +263,12 @@ _fetchSearchResults();
                           Align(
                             alignment: Alignment(1, 0),
                             child: GestureDetector(
-                              onTap: () => toggleSelection(false),
+                              onTap: ()async{
+                                toggleSelection(false);
+                                 Searchcontroller.vehicletypecontroller.text="bid";
+                                 await _fetchSearchResults();
+
+                                },
                               child: Container(
                                 width: 45.0,
                                 color: Colors.transparent,
@@ -290,12 +301,17 @@ _fetchSearchResults();
 }
 
 class BuyFunction extends StatelessWidget {
+  
  
     final List<VehicleListing> searchResults;
     const BuyFunction({Key?key,required this.searchResults}):super(key: key);
      @override
     Widget build(BuildContext context) {
+      final res=Provider.of<Vehicleprovider>(context,listen: true);
       final size = MediaQuery.of(context).size;
+      final l=res.vlist?.products?.data?.length;
+      print(l);
+
     // Replace this with your GridViewBuilder implementation for the Buy functionality
     return GridView.builder(
                     shrinkWrap: true,
@@ -307,8 +323,8 @@ class BuyFunction extends StatelessWidget {
                             crossAxisSpacing:16,
                             mainAxisExtent:220,
                             mainAxisSpacing: 20),
-                    itemCount:searchResults.length,
-                    itemBuilder: (BuildContext ctx, index) {
+                    itemCount:res.vlist?.products?.data?.length??0,
+                    itemBuilder: (BuildContext ctx,index ) {
                       return InkWell(
                         onTap: () {
                           // Navigator.push(context,
@@ -345,7 +361,7 @@ class BuyFunction extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(searchResults[index].products?.data![index].vehicleName??"",
+                                        Text(res.vlist?.products?.data![index].vehicleName??"",
                                             style: getSemiBoldStyle(
                                                 color: Colors.black)),
                                         // Container(
@@ -371,7 +387,7 @@ class BuyFunction extends StatelessWidget {
                                     ),
                                     Row(
                                       children: [
-                                        Text(searchResults[index].products?.data![index].price.toString()??"",
+                                        Text(res.vlist?.products?.data![index].price.toString()??"",
                                             style: getMediumtStyle(
                                                 color: Colors.black, fontSize: 10)),
                                       ],
@@ -382,10 +398,10 @@ class BuyFunction extends StatelessWidget {
                                     SizedBox(
                                       width: size.width,
                                       height: 110,
-                                      child: CachedNetworkImage(
+                                      child:Image.network( "$endpoint${res.vlist?.products?.data![index].image}",
                                         width: 60,
-                                        imageUrl:
-                                            "https://wallpapercave.com/wp/wp2060860.jpg",
+                                        
+                                           
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -401,11 +417,11 @@ class BuyFunction extends StatelessWidget {
                                             height:20,
                                             child:
                                                 Image.asset('assets/petrol.png')),
-                                        Text(searchResults[index].products?.data![index].fueltype??"",
+                                        Text(res.vlist?.products?.data![index].fueltype??"",
                                             style: getMediumtStyle(
                                                 color: Colormanager.textColor,
                                                 fontSize: 10)),
-                                        Text(searchResults[index].products?.data![index].gearshift??"",
+                                        Text(res.vlist?.products?.data![index].gearshift??"",
                                             style: getMediumtStyle(
                                                 color: Colormanager.textColor,
                                                 fontSize: 10)),
@@ -436,6 +452,7 @@ class BidFunction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+       final res=Provider.of<Vehicleprovider>(context,listen: true);
       final size = MediaQuery.of(context).size;
     // Replace this with your GridViewBuilder implementation for the Bid functionality
     return GridView.builder(
@@ -448,7 +465,7 @@ class BidFunction extends StatelessWidget {
                             crossAxisSpacing:16,
                             mainAxisExtent:280,
                             mainAxisSpacing: 20),
-                    itemCount: searchResults.length,
+                    itemCount:res.vlist?.products?.data?.length??0,
                     itemBuilder: (BuildContext ctx, index) {
                       return InkWell(
                         onTap: () {
@@ -486,7 +503,7 @@ class BidFunction extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(searchResults[index].products?.data![index].vehicleName??"",
+                                        Text(res.vlist?.products?.data![index].vehicleName??"",
                                             style: getSemiBoldStyle(
                                                 color: Colors.black)),
                                         // Container(
@@ -512,7 +529,7 @@ class BidFunction extends StatelessWidget {
                                     ),
                                     Row(
                                       children: [
-                                        Text(searchResults[index].products?.data![index].price.toString()??"",
+                                        Text(res.vlist?.products?.data![index].price.toString()??"",
                                             style: getMediumtStyle(
                                                 color: Colors.black, fontSize: 10)),
                                       ],
@@ -523,10 +540,10 @@ class BidFunction extends StatelessWidget {
                                     SizedBox(
                                       width: size.width,
                                       height: 100,
-                                      child: CachedNetworkImage(
+                                      child: Image.network(
+                                            "$endpoint${res.vlist?.products?.data![index].image}",
                                         width: 60,
-                                        imageUrl:
-                                            "https://wallpapercave.com/wp/wp2060860.jpg",
+                                        
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -542,11 +559,11 @@ class BidFunction extends StatelessWidget {
                                             height:20,
                                             child:
                                                 Image.asset('assets/petrol.png')),
-                                        Text(searchResults[index].products?.data![index].fueltype??"",
+                                        Text(res.vlist?.products?.data![index].fueltype??"",
                                             style: getMediumtStyle(
                                                 color: Colormanager.textColor,
                                                 fontSize: 10)),
-                                        Text(searchResults[index].products?.data![index].gearshift??"",
+                                        Text(res.vlist?.products?.data![index].gearshift??"",
                                             style: getMediumtStyle(
                                                 color: Colormanager.textColor,
                                                 fontSize: 10)),

@@ -976,8 +976,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: size.height *.36,
                     width: size.width,
                     child: ListView.builder(
+
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
+                        
                         return Padding(
                           padding: const EdgeInsets.only(
                               top:9,right: 20),
@@ -1104,7 +1106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight:Radius.circular(15) )
                               
                                       ),
-                                      child:AttendanceScreen(),
+                                      // child:AttendanceScreen(),
                                     )
                                 ],
                               ),

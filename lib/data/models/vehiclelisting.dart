@@ -1,18 +1,21 @@
 class VehicleListing {
   bool? result;
   Products? products;
-  Upcomingbid? upcomingbid;
+  // List<Null>? upcomingbid;
 
-  VehicleListing({this.result, this.products, this.upcomingbid, required type, required price, required gearshift, required fueltype, required modelyear});
+  VehicleListing({this.result, this.products, });
 
   VehicleListing.fromJson(Map<String, dynamic> json) {
     result = json['result'];
     products = json['products'] != null
         ? new Products.fromJson(json['products'])
         : null;
-    upcomingbid = json['upcomingbid'] != null
-        ? new Upcomingbid.fromJson(json['upcomingbid'])
-        : null;
+    // if (json['upcomingbid'] != null) {
+    //   upcomingbid = <Null>[];
+    //   json['upcomingbid'].forEach((v) {
+    //     upcomingbid!.add(new Null.fromJson(v));
+    //   });
+    // }
   }
 
   Map<String, dynamic> toJson() {
@@ -21,9 +24,9 @@ class VehicleListing {
     if (this.products != null) {
       data['products'] = this.products!.toJson();
     }
-    if (this.upcomingbid != null) {
-      data['upcomingbid'] = this.upcomingbid!.toJson();
-    }
+    // if (this.upcomingbid != null) {
+    //   data['upcomingbid'] = this.upcomingbid!.map((v) => v.toJson()).toList();
+    // }
     return data;
   }
 }
@@ -39,7 +42,7 @@ class Products {
   String? nextPageUrl;
   String? path;
   int? perPage;
-  Null prevPageUrl;
+  Null? prevPageUrl;
   int? to;
   int? total;
 
@@ -121,9 +124,9 @@ class Data {
   int? mileage;
   String? gearshift;
   int? price;
-  String? starttime;
-  String? endtime;
-  int? minimumbitamount;
+  Null? starttime;
+  Null? endtime;
+  Null? minimumbitamount;
   String? seoUrl;
   String? registration;
   String? insurance;
@@ -134,15 +137,7 @@ class Data {
   String? status;
   String? createdAt;
   String? updatedAt;
-  String? categoryName;
   String? image;
-  String? name;
-  int? years;
-  int? months;
-  int? days;
-  int? hours;
-  int? minutes;
-  int? seconds;
 
   Data(
       {this.id,
@@ -171,15 +166,7 @@ class Data {
       this.status,
       this.createdAt,
       this.updatedAt,
-      this.categoryName,
-      this.image,
-      this.name,
-      this.years,
-      this.months,
-      this.days,
-      this.hours,
-      this.minutes,
-      this.seconds});
+      this.image});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -208,15 +195,7 @@ class Data {
     status = json['status'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    categoryName = json['category_name'];
     image = json['image'];
-    name = json['name'];
-    years = json['years'];
-    months = json['months'];
-    days = json['days'];
-    hours = json['hours'];
-    minutes = json['minutes'];
-    seconds = json['seconds'];
   }
 
   Map<String, dynamic> toJson() {
@@ -247,15 +226,7 @@ class Data {
     data['status'] = this.status;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
-    data['category_name'] = this.categoryName;
     data['image'] = this.image;
-    data['name'] = this.name;
-    data['years'] = this.years;
-    data['months'] = this.months;
-    data['days'] = this.days;
-    data['hours'] = this.hours;
-    data['minutes'] = this.minutes;
-    data['seconds'] = this.seconds;
     return data;
   }
 }
@@ -278,85 +249,6 @@ class Links {
     data['url'] = this.url;
     data['label'] = this.label;
     data['active'] = this.active;
-    return data;
-  }
-}
-
-class Upcomingbid {
-  int? currentPage;
-  List<Data>? data;
-  String? firstPageUrl;
-  int? from;
-  int? lastPage;
-  String? lastPageUrl;
-  List<Links>? links;
-  Null nextPageUrl;
-  String? path;
-  int? perPage;
-  Null prevPageUrl;
-  int? to;
-  int? total;
-
-  Upcomingbid(
-      {this.currentPage,
-      this.data,
-      this.firstPageUrl,
-      this.from,
-      this.lastPage,
-      this.lastPageUrl,
-      this.links,
-      this.nextPageUrl,
-      this.path,
-      this.perPage,
-      this.prevPageUrl,
-      this.to,
-      this.total});
-
-  Upcomingbid.fromJson(Map<String, dynamic> json) {
-    currentPage = json['current_page'];
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
-      });
-    }
-    firstPageUrl = json['first_page_url'];
-    from = json['from'];
-    lastPage = json['last_page'];
-    lastPageUrl = json['last_page_url'];
-    if (json['links'] != null) {
-      links = <Links>[];
-      json['links'].forEach((v) {
-        links!.add(new Links.fromJson(v));
-      });
-    }
-    nextPageUrl = json['next_page_url'];
-    path = json['path'];
-    perPage = json['per_page'];
-    prevPageUrl = json['prev_page_url'];
-    to = json['to'];
-    total = json['total'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['current_page'] = this.currentPage;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    data['first_page_url'] = this.firstPageUrl;
-    data['from'] = this.from;
-    data['last_page'] = this.lastPage;
-    data['last_page_url'] = this.lastPageUrl;
-    if (this.links != null) {
-      data['links'] = this.links!.map((v) => v.toJson()).toList();
-    }
-    data['next_page_url'] = this.nextPageUrl;
-    data['path'] = this.path;
-    data['per_page'] = this.perPage;
-    data['prev_page_url'] = this.prevPageUrl;
-    data['to'] = this.to;
-    data['total'] = this.total;
     return data;
   }
 }

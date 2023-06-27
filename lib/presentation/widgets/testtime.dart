@@ -1,72 +1,131 @@
-import 'package:flutter/material.dart';
-
 import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:otodeals/core/color_manager.dart';
 
-
-class Ttime extends StatefulWidget {
+class AttendanceScreen1 extends StatefulWidget {
   @override
-  _TtimeState createState() => _TtimeState();
+  _AttendanceScreen1State createState() => _AttendanceScreen1State();
 }
 
-class _TtimeState extends State<Ttime> {
-  DateTime startTime = DateTime(2023, 1, 15, 12, 0, 0);
-  DateTime endTime = DateTime(2023, 4, 1, 15, 30, 45);
-  Duration? remainingTime;
-  Timer? countdownTimer;
+class _AttendanceScreen1State extends State<AttendanceScreen1> {
+  static const Duration countdownDuration = Duration(minutes: 15);
+  late DateTime startDate;
+  late DateTime endDate;
+  late Duration remainingTime;
+  late Timer timer;
 
   @override
   void initState() {
     super.initState();
-    remainingTime = endTime.difference(startTime);
-    startCountdown();
-  }
-
-  void startCountdown() {
-    countdownTimer = Timer.periodic(Duration(seconds: 1), (timer) {
+    startDate = DateTime.now();
+    endDate = startDate.add(countdownDuration);
+    remainingTime = endDate.difference(DateTime.now());
+    timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
       setState(() {
-        if (remainingTime!.inSeconds > 0) {
-          remainingTime = (remainingTime! - Duration(seconds: 1));
-        } else {
-          countdownTimer?.cancel();
-        }
+        remainingTime = endDate.difference(DateTime.now());
       });
     });
   }
 
   @override
   void dispose() {
-    countdownTimer?.cancel();
+    timer.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    int remainingHours = remainingTime!.inHours % 24;
-    int remainingMinutes = remainingTime!.inMinutes % 60;
-    int remainingSeconds = remainingTime!.inSeconds % 60;
+    int days = remainingTime.inDays;
+    int hours = remainingTime.inHours.remainder(24);
+    int minutes = remainingTime.inMinutes.remainder(60);
+    int seconds = remainingTime.inSeconds.remainder(60);
 
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Countdown Timer'),
-        ),
-        body: Center(
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: SafeArea(
+        child: Container(
+          height: 50,
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 238, 236, 236),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+            ),
+          ),
+          width: MediaQuery.of(context).size.width,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                'Remaining Time:',
-                style: TextStyle(fontSize: 24),
-              ),
-              SizedBox(height: 16),
-              Text(
-                '${remainingTime?.inDays}d ${remainingHours}h ${remainingMinutes}m ${remainingSeconds}s',
-                style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
+              Container(
+                margin: EdgeInsets.only(top: 10, bottom: 10),
+                child: buildTime(days, hours, minutes, seconds),
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Future<bool> _onWillPop() async {
+    timer.cancel();
+    Navigator.of(context, rootNavigator: true).pop(context);
+    return true;
+  }
+
+  Widget buildTime(int days, int hours, int minutes, int seconds) {
+    String twoDigits(int n) => n.toString().padLeft(2, '0');
+    final daysStr = days > 0 ? '$days Days ' : '';
+    final hoursStr = twoDigits(hours);
+    final minutesStr = twoDigits(minutes);
+    final secondsStr = twoDigits(seconds);
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(daysStr, style: TextStyle(fontWeight: FontWeight.bold)),
+        buildTimeCard(time: hoursStr, header: 'HOURS'),
+        SizedBox(width: 6),
+        buildTimeCard(time: minutesStr, header: 'MINUTES'),
+        SizedBox(width: 6),
+        buildTimeCard(time: secondsStr, header: 'SECONDS'),
+      ],
+    );
+  }
+
+  Widget buildTimeCard({required String time, required String header}) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          height: 30,
+          width: 50,
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 238, 236, 236),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Center(
+            child: Text(
+              time,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 3),
+        Text(
+          header,
+          style: TextStyle(
+            color: Colormanager.primary,
+            fontSize: 8,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
     );
   }
 }
