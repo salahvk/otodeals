@@ -40,7 +40,7 @@ class _SellingpageState extends State<Sellingpage> {
                   decoration: BoxDecoration(
                     color:const Color.fromARGB(255, 239, 239, 239),
                     borderRadius: BorderRadius.circular(20),
-                    boxShadow:[BoxShadow(
+                    boxShadow:const [BoxShadow(
                       blurRadius:6,
                       color: Color.fromARGB(255, 174, 174, 174),
                       blurStyle: BlurStyle.normal
@@ -124,7 +124,7 @@ class _SellingpageState extends State<Sellingpage> {
                  ) ,
                  SizedBox(height: 20,),
                  Padding(padding: EdgeInsets.only(left: 5)),
-                 Container(
+                 SizedBox(
                   height: 120,
                   width: MediaQuery.of(context).size.width,
                    child: ListView.builder(

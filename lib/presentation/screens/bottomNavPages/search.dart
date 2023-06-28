@@ -1,12 +1,10 @@
 import 'dart:convert';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
-import 'package:otodeals/data/models/vehicledetails.dart';
 import 'package:otodeals/data/models/vehiclelisting.dart';
 import 'package:otodeals/data/providers/vehicleprovider.dart';
 
@@ -17,20 +15,21 @@ import 'package:otodeals/presentation/widgets/Searchfilterdrawer.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-class searchs extends StatefulWidget {
-  const searchs({Key? key}) : super(key: key);
+class Searchs extends StatefulWidget {
+  const Searchs({Key? key}) : super(key: key);
 
   @override
-  State<searchs> createState() => _searchsState();
+  State<Searchs> createState() => _SearchsState();
 }
 
-class _searchsState extends State<searchs> {
+class _SearchsState extends State<Searchs> {
   bool isBuySelected = true;
   String s="abc";
   List<dynamic>allresults=[];
    List<dynamic> searchResults = [];
    String? type;
-   void initState(){
+   @override
+  void initState(){
     Searchcontroller.vehicletypecontroller.text="sale";
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp)async {
@@ -50,14 +49,14 @@ class _searchsState extends State<searchs> {
     });}
     Future<void> _fetchSearchResults() async {
       final type=Searchcontroller.vehicletypecontroller.text;
-      final gearshift=Searchcontroller.gearshiftcontroller.text;
-      final fueltype=Searchcontroller.fueltypecontroller.text;
-      final minprice=Searchcontroller.minpricecontroller.text;
-      final maxprice=Searchcontroller.maxpricecontroller.text;
-      final modelyearrange1=Searchcontroller.yearrange1controller.text;
-        final modelyearrange2=Searchcontroller.yearrange2controller.text;
-      final brand=Searchcontroller.vehiclebrandcontroller.text;
-      final searchdata=Searchcontroller.searchdatacontroller.text;
+      // final gearshift=Searchcontroller.gearshiftcontroller.text;
+      // final fueltype=Searchcontroller.fueltypecontroller.text;
+      // final minprice=Searchcontroller.minpricecontroller.text;
+      // final maxprice=Searchcontroller.maxpricecontroller.text;
+      // final modelyearrange1=Searchcontroller.yearrange1controller.text;
+      //   final modelyearrange2=Searchcontroller.yearrange2controller.text;
+      // final brand=Searchcontroller.vehiclebrandcontroller.text;
+      // final searchdata=Searchcontroller.searchdatacontroller.text;
       final url="${ApiEndpoint.vehiclelisting}?type=$type";
     // final url = "${ApiEndpoint.vehiclelisting}?type=$type&filter_brand[]=$brand&filter_fueltype[]=$fueltype&filter_gearshift[]=$gearshift&min=$minprice&max=$maxprice&modelyear['range1']=$modelyearrange1&modelyear['range2']=$modelyearrange2&searchdata=$searchdata]"; // Replace with your actual web service URL
 final provider=Provider.of<Vehicleprovider>(context,listen:false);
@@ -98,7 +97,7 @@ final provider=Provider.of<Vehicleprovider>(context,listen:false);
  
   Widget build(BuildContext context) {
    
-    final res=Provider.of<Vehicleprovider>(context,listen: false);
+    // final res=Provider.of<Vehicleprovider>(context,listen: false);
       // final searchres = Provider.of<DataProvider>(context, listen: false);
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -106,7 +105,7 @@ final provider=Provider.of<Vehicleprovider>(context,listen:false);
         child: SizedBox(
             height: size.height,
             width: size.width * 0.8,
-            // child: FilterDrawer(initialFilters:, onFiltersChanged: (SearchFilters ) {  },),
+            child: FilterDrawer(),
           ),
       ),
 
@@ -291,7 +290,7 @@ final provider=Provider.of<Vehicleprovider>(context,listen:false);
                 ),
               ),
               SizedBox(height:40.0),
-              isBuySelected ? BuyFunction(searchResults:[],) : BidFunction(searchResults:[],),
+              isBuySelected ? BuyFunction(searchResults:const [],) : BidFunction(searchResults:const [],),
             ],
           ),
         ),

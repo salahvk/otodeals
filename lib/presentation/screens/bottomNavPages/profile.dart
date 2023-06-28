@@ -41,7 +41,7 @@ class _MyprofileState extends State<Myprofile> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
+              child: SizedBox(
                 height:50,
                 width:MediaQuery.of(context).size.width,
                 child: Padding(
@@ -88,7 +88,7 @@ class _MyprofileState extends State<Myprofile> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 
-                                boxShadow:[
+                                boxShadow:const [
                                   BoxShadow(
                                     blurRadius:5,
                                     color:Colormanager.white,
@@ -460,7 +460,7 @@ class _MyprofileState extends State<Myprofile> {
                     
                     },
                     style: ElevatedButton.styleFrom(
-                      primary:Colormanager.primary,
+                      backgroundColor: Colormanager.primary,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 
 class AttendanceScreen1 extends StatefulWidget {
+  const AttendanceScreen1({super.key});
+
   @override
   _AttendanceScreen1State createState() => _AttendanceScreen1State();
 }

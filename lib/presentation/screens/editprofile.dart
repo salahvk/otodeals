@@ -24,7 +24,7 @@ class _EditprofileState extends State<Editprofile> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
+              child: SizedBox(
                 height:50,
                 width:MediaQuery.of(context).size.width,
                 child: Padding(
@@ -86,7 +86,7 @@ class _EditprofileState extends State<Editprofile> {
                                       height:27,
                                       width: 27,
                                       decoration: BoxDecoration(
-                                         boxShadow:[
+                                         boxShadow:const [
                                   BoxShadow(
                                     blurRadius:5,
                                     color:Colormanager.white,

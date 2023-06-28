@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
-import 'package:otodeals/data/providers/vehicledetails.dart';
+
 
 import 'package:otodeals/data/repositories/vehicledetails.dart';
 import 'package:provider/provider.dart';
 
 class  TimerScreen2 extends StatefulWidget {
-  TimerScreen2();
+  const TimerScreen2({super.key});
 
   @override
   _TimerScreen2State createState() => _TimerScreen2State();
@@ -32,12 +32,12 @@ class _TimerScreen2State extends State<TimerScreen2> {
   void initState() {
     final hom=Provider.of<DataProvider>(context,listen: false);
    int? id=hom.id;
-     final vehres = Provider.of<Vehicledetailsprovider>(context, listen:false);
+    //  final vehres = Provider.of<Vehicledetailsprovider>(context, listen:false);
   getvehicledetails(context,id!);
 
-    int hours;
-    int mints;
-    int secs;
+    // int hours;
+    // int mints;
+    // int secs;
     // hours =int.parse (vehres.vehdet?.vehicle?.hours.toString()?? "0");
     // mints = int.parse(vehres.vehdet?.vehicle?.minutes.toString()?? "0");
     // secs = int.parse(vehres.vehdet?.vehicle?.seconds.toString()?? "0");
@@ -98,7 +98,7 @@ void dispose() {
   
 
   void subTime() {
-    final subSeconds = 1;
+    const subSeconds = 1;
     setState(() {
       final seconds = duration.inSeconds - subSeconds;
       if (seconds < 0) {

@@ -63,7 +63,7 @@ class _TestwrkState extends State<Testwrk> {
         decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         
-        boxShadow:[
+        boxShadow:const [
         BoxShadow(
         blurRadius:5,
         color:Colormanager.white,
@@ -87,7 +87,7 @@ class _TestwrkState extends State<Testwrk> {
         color:Colormanager.white,
         borderRadius:
         BorderRadius.only(topLeft:Radius.circular(40),topRight:Radius.circular(40),bottomLeft:Radius.circular(10),bottomRight:Radius.circular(10)),
-        boxShadow: [
+        boxShadow: const [
         BoxShadow(
         blurRadius:4,
         color: Color.fromARGB(255, 147, 146, 146)

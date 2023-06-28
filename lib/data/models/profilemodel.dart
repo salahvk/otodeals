@@ -9,16 +9,16 @@ class Profilemodel {
     result = json['result'];
     message = json['message'];
     userDetails = json['userDetails'] != null
-        ? new UserDetails.fromJson(json['userDetails'])
+        ? UserDetails.fromJson(json['userDetails'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['result'] = this.result;
-    data['message'] = this.message;
-    if (this.userDetails != null) {
-      data['userDetails'] = this.userDetails!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['result'] = result;
+    data['message'] = message;
+    if (userDetails != null) {
+      data['userDetails'] = userDetails!.toJson();
     }
     return data;
   }
@@ -28,47 +28,48 @@ class UserDetails {
   int? id;
   String? name;
   String? email;
-  Null emailVerifiedAt;
+  // String? emailVerifiedAt;
   String? createdAt;
   String? updatedAt;
-  Null profilePic;
+  //  profilePic;
   String? isApproved;
-  Null profileimage;
+  // void profileimage;
 
   UserDetails(
       {this.id,
       this.name,
       this.email,
-      this.emailVerifiedAt,
+      // this.emailVerifiedAt,
       this.createdAt,
       this.updatedAt,
-      this.profilePic,
+      // this.profilePic,
       this.isApproved,
-      this.profileimage});
+      // this.profileimage});
+      });
 
   UserDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
-    emailVerifiedAt = json['email_verified_at'];
+    // emailVerifiedAt = json['email_verified_at'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    profilePic = json['profile_pic'];
+    // profilePic = json['profile_pic'];
     isApproved = json['is_approved'];
-    profileimage = json['profileimage'];
+    // profileimage = json['profileimage'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['email'] = this.email;
-    data['email_verified_at'] = this.emailVerifiedAt;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['profile_pic'] = this.profilePic;
-    data['is_approved'] = this.isApproved;
-    data['profileimage'] = this.profileimage;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['email'] = email;
+    // data['email_verified_at'] = emailVerifiedAt;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    // data['profile_pic'] = profilePic;
+    data['is_approved'] = isApproved;
+    // data['profileimage'] = profileimage;
     return data;
   }
 }

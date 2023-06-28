@@ -326,7 +326,7 @@ final confirmpassword=Registercontrollerr.confirmpasswordController.text;
                   validateInput();
                   },
                   style: ElevatedButton.styleFrom(
-                    primary:Colormanager.primary,
+                    backgroundColor: Colormanager.primary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),

@@ -31,7 +31,6 @@ if(response.statusCode==200){
   
 }else{
    showAnimatedSnackBar(context,"something went wrong");
-     ;
 
    
 }

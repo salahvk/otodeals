@@ -12,7 +12,7 @@ class MainScreen extends StatelessWidget {
   MainScreen({Key? key}) : super(key: key);
   final pages = [
     const HomeScreen(),
-    const searchs(),
+    const Searchs(),
     const CartScreen(),
     const Myprofile(),
     const MoreScreen()

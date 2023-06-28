@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 
 Future postprofileData(BuildContext context)
 async {
- String url = "${ApiEndpoint.profile}";
+ String url = ApiEndpoint.profile;
 String s='abc';
  String? token;
  Profilemodel? profiledatas;

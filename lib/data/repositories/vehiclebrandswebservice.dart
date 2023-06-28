@@ -12,7 +12,7 @@ import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
-String url="${ApiEndpoint.vehiclebrands}";
+String url=ApiEndpoint.vehiclebrands;
 String s='abc';
 VehicleBrands? branddata;
 Future getvehiclebrands(BuildContext context)async{
@@ -33,7 +33,6 @@ if(response.statusCode==200){
   
 }else{
    showAnimatedSnackBar(context,"something went wrong");
-     ;
 
    
 }

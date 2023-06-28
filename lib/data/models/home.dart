@@ -15,44 +15,44 @@ class Home {
   Home.fromJson(Map<String, dynamic> json) {
     result = json['result'];
     nextAccutionTime = json['next_accution_time'] != null
-        ? new NextAccutionTime.fromJson(json['next_accution_time'])
+        ? NextAccutionTime.fromJson(json['next_accution_time'])
         : null;
     if (json['currently_running'] != null) {
       currentlyRunning = <CurrentlyRunning>[];
       json['currently_running'].forEach((v) {
-        currentlyRunning!.add(new CurrentlyRunning.fromJson(v));
+        currentlyRunning!.add(CurrentlyRunning.fromJson(v));
       });
     }
     if (json['sale_vehicles'] != null) {
       saleVehicles = <SaleVehicles>[];
       json['sale_vehicles'].forEach((v) {
-        saleVehicles!.add(new SaleVehicles.fromJson(v));
+        saleVehicles!.add(SaleVehicles.fromJson(v));
       });
     }
     if (json['bid_vehicles'] != null) {
       bidVehicles = <BidVehicles>[];
       json['bid_vehicles'].forEach((v) {
-        bidVehicles!.add(new BidVehicles.fromJson(v));
+        bidVehicles!.add(BidVehicles.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['result'] = this.result;
-    if (this.nextAccutionTime != null) {
-      data['next_accution_time'] = this.nextAccutionTime!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['result'] = result;
+    if (nextAccutionTime != null) {
+      data['next_accution_time'] = nextAccutionTime!.toJson();
     }
-    if (this.currentlyRunning != null) {
+    if (currentlyRunning != null) {
       data['currently_running'] =
-          this.currentlyRunning!.map((v) => v.toJson()).toList();
+          currentlyRunning!.map((v) => v.toJson()).toList();
     }
-    if (this.saleVehicles != null) {
+    if (saleVehicles != null) {
       data['sale_vehicles'] =
-          this.saleVehicles!.map((v) => v.toJson()).toList();
+          saleVehicles!.map((v) => v.toJson()).toList();
     }
-    if (this.bidVehicles != null) {
-      data['bid_vehicles'] = this.bidVehicles!.map((v) => v.toJson()).toList();
+    if (bidVehicles != null) {
+      data['bid_vehicles'] = bidVehicles!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -87,14 +87,14 @@ class NextAccutionTime {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['years'] = this.years;
-    data['months'] = this.months;
-    data['days'] = this.days;
-    data['hours'] = this.hours;
-    data['minutes'] = this.minutes;
-    data['seconds'] = this.seconds;
-    data['label'] = this.label;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['years'] = years;
+    data['months'] = months;
+    data['days'] = days;
+    data['hours'] = hours;
+    data['minutes'] = minutes;
+    data['seconds'] = seconds;
+    data['label'] = label;
     return data;
   }
 }
@@ -188,34 +188,34 @@ class CurrentlyRunning {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['type'] = this.type;
-    data['vehicletype'] = this.vehicletype;
-    data['category_id'] = this.categoryId;
-    data['brand_id'] = this.brandId;
-    data['vehicle_name'] = this.vehicleName;
-    data['description'] = this.description;
-    data['fueltype'] = this.fueltype;
-    data['owner'] = this.owner;
-    data['modelyear'] = this.modelyear;
-    data['mileage'] = this.mileage;
-    data['gearshift'] = this.gearshift;
-    data['price'] = this.price;
-    data['starttime'] = this.starttime;
-    data['endtime'] = this.endtime;
-    data['minimumbitamount'] = this.minimumbitamount;
-    data['seo_url'] = this.seoUrl;
-    data['registration'] = this.registration;
-    data['insurance'] = this.insurance;
-    data['rto'] = this.rto;
-    data['taxupto'] = this.taxupto;
-    data['fitnessupto'] = this.fitnessupto;
-    data['location'] = this.location;
-    data['status'] = this.status;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['image'] = this.image;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['type'] = type;
+    data['vehicletype'] = vehicletype;
+    data['category_id'] = categoryId;
+    data['brand_id'] = brandId;
+    data['vehicle_name'] = vehicleName;
+    data['description'] = description;
+    data['fueltype'] = fueltype;
+    data['owner'] = owner;
+    data['modelyear'] = modelyear;
+    data['mileage'] = mileage;
+    data['gearshift'] = gearshift;
+    data['price'] = price;
+    data['starttime'] = starttime;
+    data['endtime'] = endtime;
+    data['minimumbitamount'] = minimumbitamount;
+    data['seo_url'] = seoUrl;
+    data['registration'] = registration;
+    data['insurance'] = insurance;
+    data['rto'] = rto;
+    data['taxupto'] = taxupto;
+    data['fitnessupto'] = fitnessupto;
+    data['location'] = location;
+    data['status'] = status;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['image'] = image;
     return data;
   }
 }
@@ -234,9 +234,9 @@ class SaleVehicles {
   int? mileage;
   String? gearshift;
   int? price;
-  Null starttime;
-  Null endtime;
-  Null minimumbitamount;
+  var starttime;
+  var endtime;
+  var minimumbitamount;
   String? seoUrl;
   String? registration;
   String? insurance;
@@ -309,34 +309,34 @@ class SaleVehicles {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['type'] = this.type;
-    data['vehicletype'] = this.vehicletype;
-    data['category_id'] = this.categoryId;
-    data['brand_id'] = this.brandId;
-    data['vehicle_name'] = this.vehicleName;
-    data['description'] = this.description;
-    data['fueltype'] = this.fueltype;
-    data['owner'] = this.owner;
-    data['modelyear'] = this.modelyear;
-    data['mileage'] = this.mileage;
-    data['gearshift'] = this.gearshift;
-    data['price'] = this.price;
-    data['starttime'] = this.starttime;
-    data['endtime'] = this.endtime;
-    data['minimumbitamount'] = this.minimumbitamount;
-    data['seo_url'] = this.seoUrl;
-    data['registration'] = this.registration;
-    data['insurance'] = this.insurance;
-    data['rto'] = this.rto;
-    data['taxupto'] = this.taxupto;
-    data['fitnessupto'] = this.fitnessupto;
-    data['location'] = this.location;
-    data['status'] = this.status;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['image'] = this.image;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['type'] = type;
+    data['vehicletype'] = vehicletype;
+    data['category_id'] = categoryId;
+    data['brand_id'] = brandId;
+    data['vehicle_name'] = vehicleName;
+    data['description'] = description;
+    data['fueltype'] = fueltype;
+    data['owner'] = owner;
+    data['modelyear'] = modelyear;
+    data['mileage'] = mileage;
+    data['gearshift'] = gearshift;
+    data['price'] = price;
+    data['starttime'] = starttime;
+    data['endtime'] = endtime;
+    data['minimumbitamount'] = minimumbitamount;
+    data['seo_url'] = seoUrl;
+    data['registration'] = registration;
+    data['insurance'] = insurance;
+    data['rto'] = rto;
+    data['taxupto'] = taxupto;
+    data['fitnessupto'] = fitnessupto;
+    data['location'] = location;
+    data['status'] = status;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['image'] = image;
     return data;
   }
 }
@@ -448,40 +448,40 @@ class BidVehicles {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['type'] = this.type;
-    data['vehicletype'] = this.vehicletype;
-    data['category_id'] = this.categoryId;
-    data['brand_id'] = this.brandId;
-    data['vehicle_name'] = this.vehicleName;
-    data['description'] = this.description;
-    data['fueltype'] = this.fueltype;
-    data['owner'] = this.owner;
-    data['modelyear'] = this.modelyear;
-    data['mileage'] = this.mileage;
-    data['gearshift'] = this.gearshift;
-    data['price'] = this.price;
-    data['starttime'] = this.starttime;
-    data['endtime'] = this.endtime;
-    data['minimumbitamount'] = this.minimumbitamount;
-    data['seo_url'] = this.seoUrl;
-    data['registration'] = this.registration;
-    data['insurance'] = this.insurance;
-    data['rto'] = this.rto;
-    data['taxupto'] = this.taxupto;
-    data['fitnessupto'] = this.fitnessupto;
-    data['location'] = this.location;
-    data['status'] = this.status;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['image'] = this.image;
-    data['years'] = this.years;
-    data['months'] = this.months;
-    data['days'] = this.days;
-    data['hours'] = this.hours;
-    data['minutes'] = this.minutes;
-    data['seconds'] = this.seconds;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['type'] = type;
+    data['vehicletype'] = vehicletype;
+    data['category_id'] = categoryId;
+    data['brand_id'] = brandId;
+    data['vehicle_name'] = vehicleName;
+    data['description'] = description;
+    data['fueltype'] = fueltype;
+    data['owner'] = owner;
+    data['modelyear'] = modelyear;
+    data['mileage'] = mileage;
+    data['gearshift'] = gearshift;
+    data['price'] = price;
+    data['starttime'] = starttime;
+    data['endtime'] = endtime;
+    data['minimumbitamount'] = minimumbitamount;
+    data['seo_url'] = seoUrl;
+    data['registration'] = registration;
+    data['insurance'] = insurance;
+    data['rto'] = rto;
+    data['taxupto'] = taxupto;
+    data['fitnessupto'] = fitnessupto;
+    data['location'] = location;
+    data['status'] = status;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['image'] = image;
+    data['years'] = years;
+    data['months'] = months;
+    data['days'] = days;
+    data['hours'] = hours;
+    data['minutes'] = minutes;
+    data['seconds'] = seconds;
     return data;
   }
 }

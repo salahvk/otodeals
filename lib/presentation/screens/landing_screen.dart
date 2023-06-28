@@ -61,11 +61,11 @@ class LandingScreen extends StatelessWidget {
                   width: size.width*.8,
                   child: ElevatedButton(
                     onPressed: () {
-                      gethome(context);
+                    //   gethome(context);
                     Navigator.pushNamed(context,Routes.mainScreen);
                     },
                     style: ElevatedButton.styleFrom(
-                      primary:Colormanager.primary,
+                      backgroundColor: Colormanager.primary,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -90,7 +90,7 @@ class LandingScreen extends StatelessWidget {
                                 Navigator.pushNamed(context,Routes.loginScreen);
                   },
                   style: ElevatedButton.styleFrom(
-                    primary:Colormanager.primary,
+                    backgroundColor: Colormanager.primary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -118,7 +118,7 @@ class LandingScreen extends StatelessWidget {
                     Navigator.pushNamed(context,Routes.registerScreen);
                     },
                     style: ElevatedButton.styleFrom(
-                      primary:Colormanager.grey,
+                      backgroundColor: Colormanager.grey,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),

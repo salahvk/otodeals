@@ -59,7 +59,7 @@ class RouteGenerator {
       case Routes.mainScreen:
         return MaterialPageRoute(builder: (_) => MainScreen());
          case Routes.searchs:
-        return MaterialPageRoute(builder: (_) =>const searchs());
+        return MaterialPageRoute(builder: (_) =>const Searchs());
        
          case Routes.profilescreen:
         return MaterialPageRoute(builder: (_) =>const Myprofile());

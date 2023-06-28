@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/providers/otp_provider.dart';
 import 'package:otodeals/data/providers/vehicledetails.dart';
 import 'package:otodeals/data/providers/vehicleprovider.dart';
 import 'package:otodeals/presentation/screens/welcome_screen.dart';
+
 import 'package:provider/provider.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -45,9 +45,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-       //initialRoute:RouteGenerator,
+      // initialRoute:RouteGenerator,
       onGenerateRoute: RouteGenerator.getRoute,
-      home: WelcomeScreen()
+      home: WelcomeScreen(),
+      
     ));
   }
 }

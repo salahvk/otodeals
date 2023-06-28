@@ -75,7 +75,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   Navigator.pushNamed(context,Routes.landingScreen);
                   },
                   style: ElevatedButton.styleFrom(
-                    primary:Colormanager.primary,
+                    backgroundColor: Colormanager.primary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),

@@ -12,7 +12,7 @@ import 'package:http/http.dart' as http;
 
 Future gethome(BuildContext context)async{
   
-String url="${ApiEndpoint.home}";
+String url=ApiEndpoint.home;
 String s='abc';
 Home? homedata;
   try{
@@ -31,7 +31,6 @@ if(response.statusCode==200){
   
 }else{
    showAnimatedSnackBar(context,"something went wrong");
-     ;
 
    
 }

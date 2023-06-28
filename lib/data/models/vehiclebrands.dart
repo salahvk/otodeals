@@ -9,16 +9,16 @@ class VehicleBrands {
     if (json['brands'] != null) {
       brands = <Brands>[];
       json['brands'].forEach((v) {
-        brands!.add(new Brands.fromJson(v));
+        brands!.add(Brands.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['result'] = this.result;
-    if (this.brands != null) {
-      data['brands'] = this.brands!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['result'] = result;
+    if (brands != null) {
+      data['brands'] = brands!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -42,12 +42,12 @@ class Brands {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['image'] = this.image;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['image'] = image;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

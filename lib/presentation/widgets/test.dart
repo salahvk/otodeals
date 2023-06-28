@@ -3,6 +3,8 @@ import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 
 class DropdownContainer extends StatefulWidget {
+  const DropdownContainer({super.key});
+
   @override
   _DropdownContainerState createState() => _DropdownContainerState();
 }
@@ -28,10 +30,10 @@ class _DropdownContainerState extends State<DropdownContainer> {
                                  decoration: BoxDecoration(
                                  borderRadius: BorderRadius.circular(20),
                          
-                                 boxShadow:[
+                                 boxShadow:const [
                                  BoxShadow(
                                  blurRadius:5,
-                                 color:const Color.fromARGB(255, 198, 197, 197),
+                                 color:Color.fromARGB(255, 198, 197, 197),
                                  spreadRadius:0,
                                  offset: Offset(0,4))],
                                  color: Colormanager.white
@@ -175,10 +177,10 @@ class _DropdownContainerState extends State<DropdownContainer> {
                                  decoration: BoxDecoration(
                                  borderRadius: BorderRadius.circular(20),
                          
-                                 boxShadow:[
+                                 boxShadow:const [
                                  BoxShadow(
                                  blurRadius:5,
-                                 color:const Color.fromARGB(255, 198, 197, 197),
+                                 color:Color.fromARGB(255, 198, 197, 197),
                                  spreadRadius:0,
                                  offset: Offset(0,4))],
                                  color: Colormanager.white
@@ -234,10 +236,10 @@ class _DropdownContainerState extends State<DropdownContainer> {
                                  decoration: BoxDecoration(
                                  borderRadius: BorderRadius.circular(20),
                          
-                                 boxShadow:[
+                                 boxShadow:const [
                                  BoxShadow(
                                  blurRadius:5,
-                                 color:const Color.fromARGB(255, 198, 197, 197),
+                                 color:Color.fromARGB(255, 198, 197, 197),
                                  spreadRadius:0,
                                  offset: Offset(0,4))],
                                  color: Colormanager.white
@@ -266,10 +268,10 @@ class _DropdownContainerState extends State<DropdownContainer> {
                                   
                                  borderRadius: BorderRadius.circular(20),
                          
-                                 boxShadow:[
+                                 boxShadow:const [
                                  BoxShadow(
                                  blurRadius:5,
-                                 color:const Color.fromARGB(255, 198, 197, 197),
+                                 color:Color.fromARGB(255, 198, 197, 197),
                                  spreadRadius:0,
                                  offset: Offset(0,4))],
                                  color:Color.fromARGB(255, 246, 154, 160)
@@ -303,10 +305,10 @@ class _DropdownContainerState extends State<DropdownContainer> {
                                   
                                  borderRadius: BorderRadius.circular(20),
                          
-                                 boxShadow:[
+                                 boxShadow:const [
                                  BoxShadow(
                                  blurRadius:5,
-                                 color:const Color.fromARGB(255, 198, 197, 197),
+                                 color:Color.fromARGB(255, 198, 197, 197),
                                  spreadRadius:0,
                                  offset: Offset(0,4))],
                                  color:Color.fromARGB(255, 246, 154, 160)
@@ -337,10 +339,10 @@ class _DropdownContainerState extends State<DropdownContainer> {
                                   
                                  borderRadius: BorderRadius.circular(20),
                          
-                                 boxShadow:[
+                                 boxShadow:const [
                                  BoxShadow(
                                  blurRadius:5,
-                                 color:const Color.fromARGB(255, 198, 197, 197),
+                                 color:Color.fromARGB(255, 198, 197, 197),
                                  spreadRadius:0,
                                  offset: Offset(0,4))],
                                  color:Color.fromARGB(255, 246, 154, 160)

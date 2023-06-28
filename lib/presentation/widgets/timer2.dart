@@ -6,11 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
+import 'package:otodeals/data/repositories/homeweb.dart';
 
 import 'package:provider/provider.dart';
 
 class  TimerScreen extends StatefulWidget {
-  TimerScreen();
+  const TimerScreen({super.key});
 
   @override
   _TimerScreenState createState() => _TimerScreenState();
@@ -29,7 +30,9 @@ class _TimerScreenState extends State<TimerScreen> {
   @override
   void initState() {
      final homeres = Provider.of<DataProvider>(context, listen:false);
- 
+ WidgetsBinding.instance.addPostFrameCallback((timeStamp)async {
+      await gethome(context);
+    });
 
     int hours;
     int mints;
@@ -94,7 +97,7 @@ void dispose() {
   
 
   void subTime() {
-    final subSeconds = 1;
+    const subSeconds = 1;
     setState(() {
       final seconds = duration.inSeconds - subSeconds;
       if (seconds < 0) {

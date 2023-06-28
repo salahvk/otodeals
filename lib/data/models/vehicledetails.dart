@@ -44,7 +44,7 @@ class Vehicledetails {
     if (json['productimages'] != null) {
       productimages = <Productimages>[];
       json['productimages'].forEach((v) {
-        productimages!.add(new Productimages.fromJson(v));
+        productimages!.add(Productimages.fromJson(v));
       });
     }
     // if (json['interiors'] != null) {
@@ -86,28 +86,28 @@ class Vehicledetails {
     if (json['brands'] != null) {
       brands = <Brands>[];
       json['brands'].forEach((v) {
-        brands!.add(new Brands.fromJson(v));
+        brands!.add(Brands.fromJson(v));
       });
     }
     bodyImage = json['body_image'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['result'] = this.result;
-    if (this.vehicle != null) {
-      data['vehicle'] = this.vehicle!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['result'] = result;
+    if (vehicle != null) {
+      data['vehicle'] = vehicle!.toJson();
     }
-    if (this.vehiclespecification != null) {
-      data['vehiclespecification'] = this.vehiclespecification!.toJson();
+    if (vehiclespecification != null) {
+      data['vehiclespecification'] = vehiclespecification!.toJson();
     }
     // if (this.similarproducts != null) {
     //   data['similarproducts'] =
     //       this.similarproducts!.map((v) => v.toJson()).toList();
     // }
-    if (this.productimages != null) {
+    if (productimages != null) {
       data['productimages'] =
-          this.productimages!.map((v) => v.toJson()).toList();
+          productimages!.map((v) => v.toJson()).toList();
     }
     // if (this.interiors != null) {
     //   data['interiors'] = this.interiors!.map((v) => v.toJson()).toList();
@@ -127,10 +127,10 @@ class Vehicledetails {
     // if (this.oilchange != null) {
     //   data['oilchange'] = this.oilchange!.map((v) => v.toJson()).toList();
     // }
-    if (this.brands != null) {
-      data['brands'] = this.brands!.map((v) => v.toJson()).toList();
+    if (brands != null) {
+      data['brands'] = brands!.map((v) => v.toJson()).toList();
     }
-    data['body_image'] = this.bodyImage;
+    data['body_image'] = bodyImage;
     return data;
   }
 }
@@ -245,41 +245,41 @@ class Vehicle {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['type'] = this.type;
-    data['vehicletype'] = this.vehicletype;
-    data['category_id'] = this.categoryId;
-    data['brand_id'] = this.brandId;
-    data['vehicle_name'] = this.vehicleName;
-    data['description'] = this.description;
-    data['fueltype'] = this.fueltype;
-    data['owner'] = this.owner;
-    data['modelyear'] = this.modelyear;
-    data['mileage'] = this.mileage;
-    data['gearshift'] = this.gearshift;
-    data['price'] = this.price;
-    data['starttime'] = this.starttime;
-    data['endtime'] = this.endtime;
-    data['minimumbitamount'] = this.minimumbitamount;
-    data['seo_url'] = this.seoUrl;
-    data['registration'] = this.registration;
-    data['insurance'] = this.insurance;
-    data['rto'] = this.rto;
-    data['taxupto'] = this.taxupto;
-    data['fitnessupto'] = this.fitnessupto;
-    data['location'] = this.location;
-    data['status'] = this.status;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['productimage'] = this.productimage;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['type'] = type;
+    data['vehicletype'] = vehicletype;
+    data['category_id'] = categoryId;
+    data['brand_id'] = brandId;
+    data['vehicle_name'] = vehicleName;
+    data['description'] = description;
+    data['fueltype'] = fueltype;
+    data['owner'] = owner;
+    data['modelyear'] = modelyear;
+    data['mileage'] = mileage;
+    data['gearshift'] = gearshift;
+    data['price'] = price;
+    data['starttime'] = starttime;
+    data['endtime'] = endtime;
+    data['minimumbitamount'] = minimumbitamount;
+    data['seo_url'] = seoUrl;
+    data['registration'] = registration;
+    data['insurance'] = insurance;
+    data['rto'] = rto;
+    data['taxupto'] = taxupto;
+    data['fitnessupto'] = fitnessupto;
+    data['location'] = location;
+    data['status'] = status;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['productimage'] = productimage;
     // data['years'] = this.years;
     // data['months'] = this.months;
     // data['days'] = this.days;
     // data['hours'] = this.hours.toString();
     // data['minutes'] = this.minutes.toString();
     // data['seconds'] = this.seconds.toString();
-    data['label'] = this.label;
+    data['label'] = label;
     return data;
   }
 }
@@ -349,26 +349,26 @@ class Vehiclespecification {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['product_id'] = this.productId;
-    data['frontbumper'] = this.frontbumper;
-    data['frontbonnet'] = this.frontbonnet;
-    data['frontwindshield'] = this.frontwindshield;
-    data['roof'] = this.roof;
-    data['backwindshield'] = this.backwindshield;
-    data['trunk'] = this.trunk;
-    data['backbumper'] = this.backbumper;
-    data['frontlefttire'] = this.frontlefttire;
-    data['frontrighttire'] = this.frontrighttire;
-    data['frontleftdoor'] = this.frontleftdoor;
-    data['frontrightdoor'] = this.frontrightdoor;
-    data['backleftdoor'] = this.backleftdoor;
-    data['backrightdoor'] = this.backrightdoor;
-    data['backlefttyre'] = this.backlefttyre;
-    data['backrighttyre'] = this.backrighttyre;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['product_id'] = productId;
+    data['frontbumper'] = frontbumper;
+    data['frontbonnet'] = frontbonnet;
+    data['frontwindshield'] = frontwindshield;
+    data['roof'] = roof;
+    data['backwindshield'] = backwindshield;
+    data['trunk'] = trunk;
+    data['backbumper'] = backbumper;
+    data['frontlefttire'] = frontlefttire;
+    data['frontrighttire'] = frontrighttire;
+    data['frontleftdoor'] = frontleftdoor;
+    data['frontrightdoor'] = frontrightdoor;
+    data['backleftdoor'] = backleftdoor;
+    data['backrightdoor'] = backrightdoor;
+    data['backlefttyre'] = backlefttyre;
+    data['backrighttyre'] = backrighttyre;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
@@ -399,13 +399,13 @@ class Productimages {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['product_id'] = this.productId;
-    data['image'] = this.image;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['productimage'] = this.productimage;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['product_id'] = productId;
+    data['image'] = image;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['productimage'] = productimage;
     return data;
   }
 }
@@ -428,12 +428,12 @@ class Brands {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['image'] = this.image;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['image'] = image;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

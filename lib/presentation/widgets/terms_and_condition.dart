@@ -5,7 +5,7 @@ import 'package:otodeals/core/styles_manager.dart';
 // ignore: must_be_immutable
 class TermsAndCondition extends StatefulWidget {
   bool? isclicked;
-   TermsAndCondition({ this.isclicked=false});
+   TermsAndCondition({super.key,  this.isclicked=false});
 
   @override
   State<TermsAndCondition> createState() => _TermsAndConditionState();

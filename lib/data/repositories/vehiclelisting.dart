@@ -10,7 +10,7 @@ import 'dart:convert';
 class VehiclelistingService{
  static  Future<VehicleListing>searchvehlistingData({String? type,String? fueltype,String? gearshift,int?price,int?modelyear,String? search})async{
   // final vehtype=Searchcontroller.vehicletypecontroller.text;
-  String url="${ApiEndpoint.vehiclelisting}";
+  String url=ApiEndpoint.vehiclelisting;
   final Map<String,dynamic>requestbody={
     'type':type,
     'fueltype':fueltype,

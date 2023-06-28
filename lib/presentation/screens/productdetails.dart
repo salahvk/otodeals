@@ -6,11 +6,9 @@ import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:otodeals/data/providers/vehicledetails.dart';
-import 'package:otodeals/data/repositories/vehicledetails.dart';
+
 import 'package:otodeals/presentation/widgets/bottom_nav.dart';
 
-
-import 'package:otodeals/presentation/widgets/timer3.dart';
 import 'package:provider/provider.dart';
 
 class Porductdetails extends StatefulWidget {
@@ -81,7 +79,7 @@ State<Porductdetails> createState() => _PorductdetailsState();
           decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
         
-          boxShadow:[
+          boxShadow:const [
           BoxShadow(
           blurRadius:5,
           color:Colormanager.white,
@@ -105,7 +103,7 @@ State<Porductdetails> createState() => _PorductdetailsState();
           color:Colormanager.white,
           borderRadius:
           BorderRadius.only(topLeft:Radius.circular(50),topRight:Radius.circular(50),bottomLeft:Radius.circular(20),bottomRight:Radius.circular(20)),
-          boxShadow: [
+          boxShadow: const [
           BoxShadow(
           blurRadius:4,
           color: Color.fromARGB(255, 147, 146, 146)
@@ -243,7 +241,7 @@ State<Porductdetails> createState() => _PorductdetailsState();
                           height: 20,
                           width: 25,
                           decoration: BoxDecoration(
-                            color: Color(0xFFbfd836e),
+                            color:const Color(0xffbfd836e),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(child: Text("E1",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
@@ -258,7 +256,7 @@ State<Porductdetails> createState() => _PorductdetailsState();
                           height: 20,
                           width: 25,
                           decoration: BoxDecoration(
-                            color: Color(0xFFbbdb7368),
+                            color: Color(0xffbbdb7368),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(child: Text("E2",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
@@ -271,7 +269,7 @@ State<Porductdetails> createState() => _PorductdetailsState();
                           height: 20,
                           width: 28,
                           decoration: BoxDecoration(
-                            color: Color(0xFFb6c0bce),
+                            color: Color(0xffb6c0bce),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(child: Text("A2",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
@@ -301,7 +299,7 @@ State<Porductdetails> createState() => _PorductdetailsState();
                           height: 20,
                           width: 28,
                           decoration: BoxDecoration(
-                            color:Color(0xFFb4c8ee5),
+                            color:Color(0xffb4c8ee5),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(child: Text("G1",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
@@ -316,7 +314,7 @@ State<Porductdetails> createState() => _PorductdetailsState();
                           height: 20,
                           width: 28,
                           decoration: BoxDecoration(
-                            color:Color(0xFFbb13a36),
+                            color:Color(0xffbb13a36),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(child: Text("S2",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
@@ -329,7 +327,7 @@ State<Porductdetails> createState() => _PorductdetailsState();
                           height: 20,
                           width: 28,
                           decoration: BoxDecoration(
-                            color:Color(0xFFbfd836e),
+                            color:Color(0xffbfd836e),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(child: Text("E1",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
@@ -344,7 +342,7 @@ State<Porductdetails> createState() => _PorductdetailsState();
                           height: 20,
                           width: 28,
                           decoration: BoxDecoration(
-                            color:Color(0xFFbfd836e),
+                            color:Color(0xffbfd836e),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(child: Text("E1",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
@@ -357,7 +355,7 @@ State<Porductdetails> createState() => _PorductdetailsState();
                           height: 20,
                           width: 28,
                           decoration: BoxDecoration(
-                            color:Color(0xFFbfd836e),
+                            color:Color(0xffbfd836e),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(child: Text("E1",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
@@ -373,7 +371,7 @@ State<Porductdetails> createState() => _PorductdetailsState();
                           height: 20,
                           width: 28,
                           decoration: BoxDecoration(
-                            color:Color(0xFFb6c0bce),
+                            color:Color(0xffb6c0bce),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(child: Text("A2",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
@@ -386,7 +384,7 @@ State<Porductdetails> createState() => _PorductdetailsState();
                           height: 20,
                           width: 28,
                           decoration: BoxDecoration(
-                            color:Color(0xFFb6c0bce),
+                            color:Color(0xffb6c0bce),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(child: Text("A2",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
@@ -401,7 +399,7 @@ State<Porductdetails> createState() => _PorductdetailsState();
                           height: 20,
                           width: 28,
                           decoration: BoxDecoration(
-                            color:Color(0xFFb6c0bce),
+                            color:Color(0xffb6c0bce),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(child: Text("A2",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
@@ -414,7 +412,7 @@ State<Porductdetails> createState() => _PorductdetailsState();
                           height: 20,
                           width: 25,
                           decoration: BoxDecoration(
-                            color: Color(0xFFbbdb7368),
+                            color: Color(0xffbbdb7368),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(child: Text("E2",style: getMediumtStyle(color:Colors.white,fontSize:10 ),)),
@@ -445,7 +443,7 @@ State<Porductdetails> createState() => _PorductdetailsState();
             children: [
               Padding(
                 padding: const EdgeInsets.only(right:1.0,left:12,bottom:10),
-                child: ExpansionTile(trailing: Container(height:0,width:0.2),
+                child: ExpansionTile(trailing: SizedBox(height:0,width:0.2),
                   title: Container(
                   height: 50,
                   width: MediaQuery.of(context).size.width,
@@ -468,7 +466,7 @@ State<Porductdetails> createState() => _PorductdetailsState();
                               decoration: BoxDecoration(
                                 color:const Color.fromARGB(255, 239, 239, 239),
                                 borderRadius: BorderRadius.circular(20),
-                                boxShadow:[BoxShadow(
+                                boxShadow:const [BoxShadow(
                                   blurRadius:6,
                                   color: Color.fromARGB(255, 174, 174, 174),
                                   blurStyle: BlurStyle.normal
@@ -534,10 +532,10 @@ State<Porductdetails> createState() => _PorductdetailsState();
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 238, 238, 238),
                 borderRadius: BorderRadius.circular(20),
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     blurRadius: 10,
-                    color: const Color.fromARGB(255, 184, 185, 198)
+                    color: Color.fromARGB(255, 184, 185, 198)
                   )
                 ]
                   
@@ -565,10 +563,10 @@ State<Porductdetails> createState() => _PorductdetailsState();
                                          decoration: BoxDecoration(
                                          borderRadius: BorderRadius.circular(20),
                                  
-                                         boxShadow:[
+                                         boxShadow:const [
                                          BoxShadow(
                                          blurRadius:5,
-                                         color:const Color.fromARGB(255, 198, 197, 197),
+                                         color:Color.fromARGB(255, 198, 197, 197),
                                          spreadRadius:0,
                                          offset: Offset(0,4))],
                                          color: Colormanager.white
@@ -712,10 +710,10 @@ State<Porductdetails> createState() => _PorductdetailsState();
                                          decoration: BoxDecoration(
                                          borderRadius: BorderRadius.circular(20),
                                  
-                                         boxShadow:[
+                                         boxShadow:const [
                                          BoxShadow(
                                          blurRadius:5,
-                                         color:const Color.fromARGB(255, 198, 197, 197),
+                                         color:Color.fromARGB(255, 198, 197, 197),
                                          spreadRadius:0,
                                          offset: Offset(0,4))],
                                          color: Colormanager.white
@@ -771,10 +769,10 @@ State<Porductdetails> createState() => _PorductdetailsState();
                                          decoration: BoxDecoration(
                                          borderRadius: BorderRadius.circular(20),
                                  
-                                         boxShadow:[
+                                         boxShadow:const [
                                          BoxShadow(
                                          blurRadius:5,
-                                         color:const Color.fromARGB(255, 198, 197, 197),
+                                         color:Color.fromARGB(255, 198, 197, 197),
                                          spreadRadius:0,
                                          offset: Offset(0,4))],
                                          color: Colormanager.white
@@ -803,10 +801,10 @@ State<Porductdetails> createState() => _PorductdetailsState();
                                           
                                          borderRadius: BorderRadius.circular(20),
                                  
-                                         boxShadow:[
+                                         boxShadow:const [
                                          BoxShadow(
                                          blurRadius:5,
-                                         color:const Color.fromARGB(255, 198, 197, 197),
+                                         color:Color.fromARGB(255, 198, 197, 197),
                                          spreadRadius:0,
                                          offset: Offset(0,4))],
                                          color:Color.fromARGB(255, 246, 154, 160)
@@ -840,10 +838,10 @@ State<Porductdetails> createState() => _PorductdetailsState();
                                           
                                          borderRadius: BorderRadius.circular(20),
                                  
-                                         boxShadow:[
+                                         boxShadow:const [
                                          BoxShadow(
                                          blurRadius:5,
-                                         color:const Color.fromARGB(255, 198, 197, 197),
+                                         color:Color.fromARGB(255, 198, 197, 197),
                                          spreadRadius:0,
                                          offset: Offset(0,4))],
                                          color:Color.fromARGB(255, 246, 154, 160)
@@ -874,10 +872,10 @@ State<Porductdetails> createState() => _PorductdetailsState();
                                           
                                          borderRadius: BorderRadius.circular(20),
                                  
-                                         boxShadow:[
+                                         boxShadow:const [
                                          BoxShadow(
                                          blurRadius:5,
-                                         color:const Color.fromARGB(255, 198, 197, 197),
+                                         color:Color.fromARGB(255, 198, 197, 197),
                                          spreadRadius:0,
                                          offset: Offset(0,4))],
                                          color:Color.fromARGB(255, 246, 154, 160)
