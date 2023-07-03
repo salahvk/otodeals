@@ -8,6 +8,7 @@ import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/repositories/vehicledetails.dart';
 import 'package:otodeals/presentation/screens/productdetails.dart';
 import 'package:otodeals/presentation/widgets/custom_drawer.dart';
+import 'package:otodeals/presentation/widgets/timer.dart';
 import 'package:otodeals/presentation/widgets/timer2.dart';
 import 'package:provider/provider.dart';
 
@@ -542,6 +543,7 @@ class _LiveState extends State<Live> {
                                               style: getMediumtStyle(
                                                   color: Colors.black,
                                                   fontSize: 10)),
+
                                     ],
                                   ),
                                 )
@@ -592,10 +594,10 @@ class _UpcomingState extends State<Upcoming> {
                             
                         
                             return Padding(
-                              padding: const EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: Container(
-                              height: size.height/3.9,
-                              width: size.width/1.17,
+                              height: size.height/3.6,
+                              width: size.width/1.16,
                                                       
                                                       
                               decoration: BoxDecoration(
@@ -704,24 +706,32 @@ class _UpcomingState extends State<Upcoming> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text("Minimum Bid Amount",style: getMediumtStyle(color:Colors.black,fontSize:12),),
-                                     Text("Starts In",style: getMediumtStyle(color:Colormanager.primary,fontSize:12),)
+                                     Padding(
+                                       padding: const EdgeInsets.only(left:120.0),
+                                       child: Text("Starts In",style: getMediumtStyle(color:Colormanager.primary,fontSize:12),),
+                                     )
                                   ],
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(left:12.0),
-                                child: Row(
-                                      children: [
-                                         Text(homeres.homemodel?.bidVehicles![index].price.toString()??"",
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                       Padding(
+                                         padding: const EdgeInsets.only(left:8.0),
+                                         child: Text(homeres.homemodel?.bidVehicles![index].price.toString()??"",
                                                 style: getMediumtStyle(
                                                     color: Colors.black,
                                                     fontSize: 10)),
-                                      ],
-                                    ),
-                              ),
+                                       ),
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(right:10),
+                                                    child: AttendanceScreen(index),
+                                                  ),
+                                    ],
+                                  ),
                                                       
                                                       
                               ],

@@ -62,7 +62,7 @@ class LandingScreen extends StatelessWidget {
                   width: size.width*.8,
                   child: ElevatedButton(
                     onPressed: () {
-                    //   gethome(context);
+                      gethome(context);
                     Navigator.push(context,MaterialPageRoute(builder:(context)=>MainScreen()));
                     },
                     style: ElevatedButton.styleFrom(

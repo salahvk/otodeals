@@ -61,23 +61,24 @@ void dispose() {
       child:SafeArea(
         
         child: Container(
-          height:50,
+          height:30,
+          
           
           
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 238, 236, 236),
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10))
+            color:Colormanager.background,
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(2),topRight: Radius.circular(2))
 
           ),
           
-          width:MediaQuery.of(context).size.width,
+          width:MediaQuery.of(context).size.width/2.7,
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 
                 Container(
-                    margin: EdgeInsets.only(top:10, bottom:10),
+                  
                     child: buildTime()),
                
               ]),
@@ -129,13 +130,11 @@ void dispose() {
     final seconds = twoDigits(duration.inSeconds.remainder(60));
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
       buildTimeCard(time: hours, header:'HOURS'),
-      SizedBox(
-        width:6,
-      ),
+      SizedBox(width: 3,),
+   
       buildTimeCard(time: minutes, header: 'MINUTES'),
-      SizedBox(
-        width:6,
-      ),
+      SizedBox(width: 3,),
+   
       buildTimeCard(time: seconds, header: 'SECONDS'),
     ]);
   }
@@ -147,24 +146,24 @@ void dispose() {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-           height:30 ,
-           width: 50,
+           height:17 ,
+           width:20,
             decoration: BoxDecoration(
-                color: Color.fromARGB(255, 238, 236, 236), borderRadius: BorderRadius.circular(10)),
+                color: Colormanager.background, borderRadius: BorderRadius.circular(4)),
             child: Center(
               child: Text(
                 time,
                 style: getBoldStyle(
                    
                     color: Colors.black,
-                    fontSize:15),
+                    fontSize:10),
               ),
             ),
           ),
           SizedBox(
             height:3,
           ),
-          Text(header, style:getSemiBoldStyle(color:Colormanager.primary,fontSize:8),),
+          Text(header, style:getSemiBoldStyle(color:Colormanager.primary,fontSize:5),),
         ],
       );
 }
