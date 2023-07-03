@@ -17,6 +17,9 @@ void homemodeldata(value){
   homemodel=value;
   notifyListeners();
 }
+void cleardata(){
+ homemodel=null; 
+}
 CustomerDDetails? loggin;
 void logdata(value){
   loggin=value;

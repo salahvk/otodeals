@@ -23,9 +23,12 @@ var response=await http.post(Uri.parse(url),headers: {"device-id":s});
 
 if(response.statusCode==200){
   var jsonResponse=jsonDecode(response.body);
+   homeprovider.cleardata();
 
   final homedata=Home.fromJson(jsonResponse);
+ 
   homeprovider.homemodeldata(homedata) ;
+  
     print(jsonResponse);
     return jsonResponse;
   

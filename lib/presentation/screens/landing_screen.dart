@@ -3,6 +3,7 @@ import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/repositories/homeweb.dart';
+import 'package:otodeals/presentation/screens/main_screen.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({super.key});
@@ -62,7 +63,7 @@ class LandingScreen extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                     //   gethome(context);
-                    Navigator.pushNamed(context,Routes.mainScreen);
+                    Navigator.push(context,MaterialPageRoute(builder:(context)=>MainScreen()));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colormanager.primary,

@@ -366,9 +366,7 @@ State<HomeScreen> createState() => _HomeScreenState();
                         const SizedBox(
                         height: 30,
                         ),
-                        if(isBuySelected)Buy(),
-                        if (selectedContainer == 1) Live(),
-                        if (selectedContainer == 2) Upcoming(),
+                       isBuySelected?Buy():selectedContainer==1?Live():Upcoming()
                        
                    
                         ],
@@ -762,11 +760,12 @@ class _BuyState extends State<Buy> {
       },
     );
   }
-  void inputlatestarrivals(index) {
+  void inputlatestarrivals(index) async{
             final homeres = Provider.of<DataProvider>(context, listen: false);
                 int? id = homeres.homemodel?.saleVehicles![index].id;
                 homeres.id = id;
-                getvehicledetails(context, id!);
+           await     getvehicledetails(context, id!);
+             
                 Navigator.of(context).push(FadePageRoute(page: Porductdetails()));
                 }
                         @override
@@ -776,11 +775,14 @@ class _BuyState extends State<Buy> {
                         final size = MediaQuery.of(context).size;
                         return  Container(
                           child: ListView.builder(
+                            
                             scrollDirection: Axis.vertical,
-                            itemCount: homeres.homemodel?.saleVehicles?.length,
+                            itemCount: homeres.homemodel?.saleVehicles?.length??0,
                              shrinkWrap: true,
                                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
+                                 print(homeres.homemodel?.saleVehicles?.length);
+                print("aaaaaaaaaaaaaa");
                               
                             
                         
