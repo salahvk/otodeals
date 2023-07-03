@@ -1,169 +1,133 @@
 
 
-// import 'dart:async';
+import 'dart:async';
 
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/styles_manager.dart';
 // import 'package:otodeals/core/color_manager.dart';
 // import 'package:otodeals/core/styles_manager.dart';
-// import 'package:otodeals/data/providers/dataprovider.dart';
-// import 'package:otodeals/data/repositories/homeweb.dart';
+import 'package:otodeals/data/providers/dataprovider.dart';
+import 'package:otodeals/data/repositories/homeweb.dart';
 
-// import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
+import 'package:timer_builder/timer_builder.dart';
 
-// class LivetimerScreen extends StatefulWidget {
-//   final int index;
-//   const LivetimerScreen(this.index, {super.key});
+class LivetimerScreen extends StatefulWidget {
+  final int index;
+  const LivetimerScreen(this.index, {super.key});
 
-//   @override
-//   _LivetimerScreenState createState() => _LivetimerScreenState();
-// }
+  @override
+  _LivetimerScreenState createState() => _LivetimerScreenState();
+}
 
-// class _LivetimerScreenState extends State<LivetimerScreen> {
-//   static var countdownDuration = Duration(minutes:15);
+class _LivetimerScreenState extends State<LivetimerScreen> {
+  static var countdownDuration = Duration(minutes:15);
  
-//   Duration duration = Duration();
+  Duration duration = Duration();
  
-//   Timer? timer;
-//   bool countDown = true;
-//   int index=0;
+  Timer? timer;
+  bool countDown = true;
+  int index=0;
   
 
-//   @override
-//   void initState() {
-//        final homeres = Provider.of<DataProvider>(context, listen:false);
-//      WidgetsBinding.instance.addPostFrameCallback((timeStamp)async {
-//       await gethome(context);
-//     });
+  @override
+  void initState() {
+       final homeres = Provider.of<DataProvider>(context, listen:false);
+     WidgetsBinding.instance.addPostFrameCallback((timeStamp)async {
+      await gethome(context);
+    });
 
      
-//     int hours;
-//     int mints;
-//     int secs;
-//     hours = int.parse(homeres.homemodel?.bidVehicles?[widget.index].hours.toString()??"0");
-//     mints = int.parse(homeres.homemodel?.bidVehicles?[widget.index].minutes.toString()??"0");
-//     secs = int.parse(homeres.homemodel?.bidVehicles?[widget.index].seconds.toString()??"0");
-//     countdownDuration = Duration(hours: hours, minutes: mints, seconds: secs);
-//     startTimer();
-//     reset();
+    // int hours;
+    // int mints;
+    // int secs;
+    // hours = int.parse(homeres.homemodel?.bidVehicles?[widget.index].hours.toString()??"0");
+    // mints = int.parse(homeres.homemodel?.bidVehicles?[widget.index].minutes.toString()??"0");
+    // secs = int.parse(homeres.homemodel?.bidVehicles?[widget.index].seconds.toString()??"0");
+    // countdownDuration = Duration(hours: hours, minutes: mints, seconds: secs);
+    // startTimer();
+    // reset();
     
-//     super.initState();
-//   }
-//   @override
-// void dispose() {
-//   timer?.cancel(); // Cancel the timer
-//   super.dispose();
-// }
+    super.initState();
+  }
+  @override
+void dispose() {
+  timer?.cancel(); // Cancel the timer
+  super.dispose();
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return WillPopScope(
-//       onWillPop: _onWillPop,
-//       child:SafeArea(
-        
-//         child: Container(
-//           height:30,
-          
-          
-          
-//           decoration: BoxDecoration(
-//             color:Colormanager.background,
-//             borderRadius: BorderRadius.only(topLeft: Radius.circular(2),topRight: Radius.circular(2))
+  @override
+  @override
+Widget build(BuildContext context) {
+  final homeres = Provider.of<DataProvider>(context, listen:false);
 
-//           ),
-          
-//           width:MediaQuery.of(context).size.width/2.7,
-//           child: Column(
-//               mainAxisAlignment: MainAxisAlignment.start,
-//               crossAxisAlignment: CrossAxisAlignment.center,
-//               children: [
-                
-//                 Container(
-                  
-//                     child: buildTime()),
-               
-//               ]),
-//         ),
-//       ),
-//     );
-//   }
+  return Container(
+    
+    child: TimerBuilder.periodic(Duration(seconds: 1), builder: (context) {
+      DateTime currentTime = DateTime.now();
 
-//   Future<bool> _onWillPop() async {
-//     final isRunning = timer == null ? false : timer!.isActive;
-//     if (isRunning) {
-//       timer!.cancel();
-//     }
-//     Navigator.of(context, rootNavigator: true).pop(context);
-//     return true;
-//   }
+      DateTime startTime = DateTime.parse(homeres.homemodel?.currentlyRunning?[widget.index].starttime.toString()??"0");
+      DateTime endTime = DateTime.parse(homeres.homemodel?.currentlyRunning?[widget.index].endtime.toString()??"0");
 
-//   void reset() {
-//     if (countDown) {
-//       setState(() => duration = countdownDuration);
-//     } else {
-//       setState(() => duration = Duration());
-//     }
-//   }
+      if (currentTime.isAfter(endTime)) {
+        // Countdown has ended
+        return Text('Countdown Ended');
+      }
 
+      Duration remainingTime = endTime.difference(currentTime);
 
-//   void startTimer() {
-//     timer = Timer.periodic(Duration(seconds: 1), (_) => subTime());
-//   }
+      int days = remainingTime.inDays;
+      int hours = remainingTime.inHours.remainder(24);
+      int minutes = remainingTime.inMinutes.remainder(60);
+      int seconds = remainingTime.inSeconds.remainder(60);
 
-  
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TimeContainer(value: days.toString(), header: 'Days'),
+          SizedBox(width:2),
+          TimeContainer(value: hours.toString().padLeft(2, '0'), header: 'Hours'),
+          SizedBox(width:2),
+          TimeContainer(value: minutes.toString().padLeft(2, '0'), header: 'Minutes'),
+          SizedBox(width:2),
+          TimeContainer(value: seconds.toString().padLeft(2, '0'), header: 'Seconds'),
+        ],
+      );
+    }),
+  );
+}
+}
+class TimeContainer extends StatelessWidget {
+  final String value;
+  final String header;
 
-//   void subTime() {
-//     const subSeconds = 1;
-//     setState(() {
-//       final seconds = duration.inSeconds - subSeconds;
-//       if (seconds < 0) {
-//         timer?.cancel();
-//       } else {
-//         duration = Duration(seconds: seconds);
-//       }
-//     });
-//   }
+  TimeContainer({required this.value, required this.header});
 
-//   Widget buildTime() {
-//     String twoDigits(int n) => n.toString().padLeft(2, '0');
-//     final hours = twoDigits(duration.inHours);
-//     final minutes = twoDigits(duration.inMinutes.remainder(60));
-//     final seconds = twoDigits(duration.inSeconds.remainder(60));
-//     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-//       buildTimeCard(time: hours, header:'HOURS'),
-//       SizedBox(width: 3,),
-   
-//       buildTimeCard(time: minutes, header: 'MINUTES'),
-//       SizedBox(width: 3,),
-   
-//       buildTimeCard(time: seconds, header: 'SECONDS'),
-//     ]);
-//   }
-
- 
-
-//   Widget buildTimeCard({required String time, required String header}) =>
-//       Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           Container(
-//            height:17 ,
-//            width:20,
-//             decoration: BoxDecoration(
-//                 color: Colormanager.background, borderRadius: BorderRadius.circular(4)),
-//             child: Center(
-//               child: Text(
-//                 time,
-//                 style: getBoldStyle(
-                   
-//                     color: Colors.black,
-//                     fontSize:10),
-//               ),
-//             ),
-//           ),
-//           SizedBox(
-//             height:3,
-//           ),
-//           Text(header, style:getSemiBoldStyle(color:Colormanager.primary,fontSize:5),),
-//         ],
-//       );
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          width: 20,
+          height: 20,
+          decoration: BoxDecoration(
+            color: Colormanager.background,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Center(
+            child: Text(
+              value,
+              style: getBoldStyle(fontSize:10, color:Colormanager.black),
+            ),
+          ),
+        ),
+       
+        Text(
+          header,
+          style: getSemiBoldStyle(color: Colormanager.primary,fontSize:6),
+        ),
+      ],
+    );
+  }
+}
