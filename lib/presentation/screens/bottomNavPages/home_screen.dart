@@ -8,6 +8,8 @@ import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/repositories/vehicledetails.dart';
 import 'package:otodeals/presentation/screens/productdetails.dart';
 import 'package:otodeals/presentation/widgets/custom_drawer.dart';
+import 'package:otodeals/presentation/widgets/livetimer.dart';
+import 'package:otodeals/presentation/widgets/numberinput.dart';
 import 'package:otodeals/presentation/widgets/timer.dart';
 import 'package:otodeals/presentation/widgets/timer2.dart';
 import 'package:provider/provider.dart';
@@ -418,7 +420,7 @@ class _LiveState extends State<Live> {
                                   // inputcurrentlyrunnigbid(index);
                                 },
                                 child: Container(
-                                height: size.height/3.9,
+                                height: size.height/3.7,
                                 width: size.width/1.17,
                                                         
                                                         
@@ -525,8 +527,9 @@ class _LiveState extends State<Live> {
                                     
                                   ],
                                 ),
+                                const SizedBox(height: 5,),
                                 Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.only(left:8.0,right:15),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -536,14 +539,16 @@ class _LiveState extends State<Live> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left:13.0),
+                                  padding: const EdgeInsets.only(left:8.0,right:10),
                                   child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                        Text(homeres.homemodel?.currentlyRunning![index].price.toString()??"",
                                               style: getMediumtStyle(
                                                   color: Colors.black,
                                                   fontSize: 10)),
-
+                                                  LivetimerScreen(index)
+                                
                                     ],
                                   ),
                                 )
@@ -756,15 +761,66 @@ class _BuyState extends State<Buy> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Pop-up Window'),
-          content: Text('This is a small pop-up window.'),
+          title:FractionallySizedBox(
+            widthFactor: 0.5,
+            child: ElevatedButton(onPressed: (){}, child:Text("2000"), style: ElevatedButton.styleFrom(
+                        backgroundColor: Colormanager.primary,
+                        shape: RoundedRectangleBorder(
+                          
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        )),
+          ),
+          content: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    height: 20,
+                    width: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                       color: Colormanager.grey,
+
+                    ),
+                    child: Center(child: Text("5000",style: getSemiBoldStyle(color:Colormanager.black,fontSize:12 ),)),
+                  ),
+                  Container(
+                    height: 20,
+                    width: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                       color: Colormanager.grey,
+
+                    ),
+                    child: Center(child: Text("10000",style: getSemiBoldStyle(color:Colormanager.black,fontSize:12 ),)),
+                  ),
+                  Container(
+                    height: 20,
+                    width: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                       color: Colormanager.grey,
+
+                    ),
+                    child: Center(child: Text("20000",style: getSemiBoldStyle(color:Colormanager.black,fontSize:12 ),)),
+                  ),
+              
+                ],
+              ),
+              const SizedBox(height: 20,),
+                  AddButton(),
+            ],
+          ),
           actions: <Widget>[
-            TextButton(
-              child: Text('Close'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
+            ElevatedButton(onPressed: (){}, child:Text("place Bid"), style: ElevatedButton.styleFrom(
+                        backgroundColor: Colormanager.primary,
+                        shape: RoundedRectangleBorder(
+                          
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        )),
           ],
         );
       },
