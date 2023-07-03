@@ -33,7 +33,7 @@ class UserDetails {
   String? updatedAt;
   //  profilePic;
   String? isApproved;
-  // void profileimage;
+  String? profileimage;
 
   UserDetails(
       {this.id,
@@ -44,8 +44,7 @@ class UserDetails {
       this.updatedAt,
       // this.profilePic,
       this.isApproved,
-      // this.profileimage});
-      });
+      this.profileimage});
 
   UserDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -56,7 +55,7 @@ class UserDetails {
     updatedAt = json['updated_at'];
     // profilePic = json['profile_pic'];
     isApproved = json['is_approved'];
-    // profileimage = json['profileimage'];
+    profileimage = json['profileimage'];
   }
 
   Map<String, dynamic> toJson() {
@@ -69,7 +68,7 @@ class UserDetails {
     data['updated_at'] = updatedAt;
     // data['profile_pic'] = profilePic;
     data['is_approved'] = isApproved;
-    // data['profileimage'] = profileimage;
+    data['profileimage'] = profileimage;
     return data;
   }
 }
