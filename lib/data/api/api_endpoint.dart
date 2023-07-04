@@ -20,4 +20,6 @@ class ApiEndpoint {
   static String vehicledetails = "$api/vehicle-details";
   static String profileImageUpdate = "$api/profile-image-update";
   static String profileEdit = "$api/profile-edit";
+  static String buyNow = "$api/buy-now";
+  static String placeBid = "$api/place-bid";
 }

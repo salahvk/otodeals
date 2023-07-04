@@ -7,6 +7,7 @@ import 'package:otodeals/core/styles_manager.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
+import 'package:otodeals/data/repositories/logout_func.dart';
 import 'package:otodeals/data/repositories/profileweb.dart';
 
 import 'package:otodeals/presentation/screens/editprofile.dart';
@@ -590,7 +591,9 @@ class _MyprofileState extends State<Myprofile> {
           SizedBox(
             width: 200,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                logout(context);
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colormanager.primary,
                 shape: RoundedRectangleBorder(

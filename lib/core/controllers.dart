@@ -54,3 +54,7 @@ class EditProfilecontoller {
   static TextEditingController phoneNoController = TextEditingController();
   static TextEditingController locationController = TextEditingController();
 }
+
+class ProductController {
+  static TextEditingController bidController = TextEditingController();
+}
