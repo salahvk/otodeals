@@ -11,7 +11,6 @@ import 'package:otodeals/data/repositories/loginweb.dart';
 import 'package:otodeals/data/repositories/profileweb.dart';
 import 'package:otodeals/data/repositories/vehiclebrandswebservice.dart';
 
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -22,41 +21,42 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   //  bool _isChecked = false;
   final _formKey = GlobalKey<FormState>();
-  bool passwordvisible=false;
-  
+  bool passwordvisible = false;
 
-
-
-  void login() async{
+  void login() async {
     // print(_isChecked);
     if (_formKey.currentState!.validate()) {
       // Perform login logic here
       final email = Logincontroller.emailController.text;
-      final password =Logincontroller.passwordController.text;
+      final password = Logincontroller.passwordController.text;
 
-      final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');  
-       if(email.isEmpty){
-      showAnimatedSnackBar(context,"please enter your email");
-    }else if(!emailRegex.hasMatch(email)){
-      showAnimatedSnackBar(context,"invalid email");
-    }else if(password.isEmpty){
-      showAnimatedSnackBar(context,"please enter your password");
-    }else if (password.length < 6) {
-    showAnimatedSnackBar(context,"password must contain atleast 6 characters"); 
-    }else {
-   var res=await postLoginData(context);
- 
-   if(res['result']!=false){
-    await gethome(context);
-    await getvehiclebrands(context);
-   
-    await postprofileData(context);
-    Navigator.of(context).pushNamed(Routes.mainScreen);
-  showAnimatedSnackBar(context,"Welcome to Otodeals",type: AnimatedSnackBarType.success);
-   }
-  }
+      final emailRegex =
+          RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+      if (email.isEmpty) {
+        showAnimatedSnackBar(context, "please enter your email");
+      } else if (!emailRegex.hasMatch(email)) {
+        showAnimatedSnackBar(context, "invalid email");
+      } else if (password.isEmpty) {
+        showAnimatedSnackBar(context, "please enter your password");
+      } else if (password.length < 6) {
+        showAnimatedSnackBar(
+            context, "password must contain atleast 6 characters");
+      } else {
+        var res = await postLoginData(context);
+
+        if (res['result'] != false) {
+          await gethome(context);
+          await getvehiclebrands(context);
+
+          await postprofileData(context);
+          Navigator.of(context).pushNamed(Routes.mainScreen);
+          showAnimatedSnackBar(context, "Welcome to Otodeals",
+              type: AnimatedSnackBarType.success);
+        }
+      }
     }
   }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -68,11 +68,10 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: size.height * .5,
                 child: Form(
                   key: _formKey,
                   child: Column(
-                    children:<Widget> [
+                    children: <Widget>[
                       SizedBox(
                         height: size.height * .13,
                       ),
@@ -93,22 +92,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       Row(
                         children: const [
                           Text("Email :"),
-                          
                         ],
                       ),
                       SizedBox(
-                          height:32,
+                          height: 32,
                           child: TextFormField(
-                            controller:Logincontroller.emailController ,
-                            decoration: InputDecoration(
-                  
-                              
-                            ),
-                            
+                            controller: Logincontroller.emailController,
+                            decoration: InputDecoration(),
                             style: getRegularStyle(
                                 color: Colormanager.greyText, fontSize: 16),
-                          )
-                          ),
+                          )),
                       SizedBox(
                         height: size.height * .016,
                       ),
@@ -117,65 +110,64 @@ class _LoginScreenState extends State<LoginScreen> {
                           Text("Password :"),
                         ],
                       ),
-                       SizedBox(
-                          height: 33,
-                          child: TextFormField(
-                            controller:Logincontroller.passwordController,
-                            obscureText:passwordvisible,
-                            obscuringCharacter: '*',
-                            style: TextStyle(
-                                color: Colormanager.greyText, fontSize: 16),
-                            decoration: InputDecoration(
-                              
-                              hintStyle: TextStyle(
-                                color: Colors.grey,
-                              ),
-                              suffixIcon: IconButton(onPressed:(){
-                                setState(() {
-                                  passwordvisible=!passwordvisible;
-                                });
-                              }
-                               , 
-                               icon:Icon(
-                                passwordvisible?Icons.visibility_off
-                                :Icons.visibility),color: Colormanager.grey,),
-                                
+                      SizedBox(
+                        height: 33,
+                        child: TextFormField(
+                          controller: Logincontroller.passwordController,
+                          obscureText: passwordvisible,
+                          obscuringCharacter: '*',
+                          style: TextStyle(
+                              color: Colormanager.greyText, fontSize: 16),
+                          decoration: InputDecoration(
+                            hintStyle: TextStyle(
+                              color: Colors.grey,
                             ),
-                            keyboardType:TextInputType.visiblePassword,
-                            textInputAction: TextInputAction.done,
-                            
-                            
-                           
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  passwordvisible = !passwordvisible;
+                                });
+                              },
+                              icon: Icon(passwordvisible
+                                  ? Icons.visibility_off
+                                  : Icons.visibility),
+                              color: Colormanager.grey,
+                            ),
                           ),
-                          ),
-                          SizedBox(height:10,),
-                          Padding(
-                            padding: const EdgeInsets.only(right:108.0),
-                           
-                          ),
+                          keyboardType: TextInputType.visiblePassword,
+                          textInputAction: TextInputAction.done,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 108.0),
+                      ),
                       const SizedBox(
-                        height:15,
+                        height: 15,
                       ),
                       Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                  Text(
-                    "Don't have an account?",
-                    style: getMediumtStyle(
-                        color: Colormanager.greyText, fontSize: 14),
-                  ),
-                  InkWell(
-                    child: Text(
-                      "Create One",
-                      style: getMediumtStyle(
-                          color: Colormanager.primary, fontSize: 14),
-                    ),
-                    onTap: () {
-                      Navigator.of(context).pushNamed(Routes.registerScreen);
-                    },
-                  )
-                                ],
-                              ),
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Don't have an account?",
+                            style: getMediumtStyle(
+                                color: Colormanager.greyText, fontSize: 14),
+                          ),
+                          InkWell(
+                            child: Text(
+                              "Create One",
+                              style: getMediumtStyle(
+                                  color: Colormanager.primary, fontSize: 14),
+                            ),
+                            onTap: () {
+                              Navigator.of(context)
+                                  .pushNamed(Routes.registerScreen);
+                            },
+                          )
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -207,31 +199,31 @@ class _LoginScreenState extends State<LoginScreen> {
                     //     ],
                     //   ),
                     // ),
-                     SizedBox(
-                width: size.width * .8,
-                child: ElevatedButton(
-                  onPressed: () {
-                  login();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colormanager.primary,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      'LOG IN',
-                      style: TextStyle(
-                        color: Colormanager.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                    SizedBox(
+                      width: size.width * .8,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          login();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colormanager.primary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Text(
+                            'LOG IN',
+                            style: TextStyle(
+                              color: Colormanager.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                     ),
                     // InkWell(
                     //   onTap: ()async {
                     //     login();

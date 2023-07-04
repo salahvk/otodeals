@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 
 String endpoint = "http://192.168.29.44:8010";
-// String endpoint="https://projects.techoriz.in/ottodeals/public";
+// String endpoint = "https://projects.techoriz.in/ottodeals/public";
 // String api="$endpoint/api";
 String api = "$endpoint/api/customer";
 String deviceid = Hive.box("device_id").get('id');

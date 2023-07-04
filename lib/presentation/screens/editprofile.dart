@@ -58,6 +58,7 @@ class _EditprofileState extends State<Editprofile> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final profileres = Provider.of<DataProvider>(context, listen: true);
     return Scaffold(
       backgroundColor: Colormanager.background,
@@ -68,10 +69,10 @@ class _EditprofileState extends State<Editprofile> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
-                height: 50,
+                // height: 50,
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: Row(
                     children: [
                       InkWell(
@@ -101,7 +102,7 @@ class _EditprofileState extends State<Editprofile> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                  height: 180,
+                  height: size.height * .25,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                       color: Colormanager.primary,
