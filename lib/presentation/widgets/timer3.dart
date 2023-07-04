@@ -1,16 +1,5 @@
 
 
-import 'dart:async';
-
-import 'package:flutter/material.dart';
-import 'package:otodeals/core/color_manager.dart';
-import 'package:otodeals/core/styles_manager.dart';
-import 'package:otodeals/data/providers/dataprovider.dart';
-
-
-import 'package:otodeals/data/repositories/vehicledetails.dart';
-import 'package:provider/provider.dart';
-
 
 // class  TimerScreen2 extends StatefulWidget {
 //   const TimerScreen2({super.key});
