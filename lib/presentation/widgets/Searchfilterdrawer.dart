@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/styles_manager.dart';
+import 'package:otodeals/data/repositories/vehiclelisting.dart';
 
 class FilterDrawer extends StatefulWidget {
   // final SearchFilters initialFilters;
@@ -18,24 +20,34 @@ class FilterDrawer extends StatefulWidget {
 }
 
 class _FilterDrawerState extends State<FilterDrawer> {
+  
   bool _isChecked1 = false;
   bool _isChecked2 = false;
   bool _isChecked3 = false;
   bool _isChecked4 = false;
   bool _isautomatic = false;
   bool _ismanual = false;
-  int? selectedYear;
-  List<int> years = List<int>.generate(
-    100,
-    (int index) => DateTime.now().year - index,
-  );
+  // int? selectedYear;
+  // List<int> years = List<int>.generate(
+  //   100,
+  //   (int index) => DateTime.now().year - index,
+  // );
   RangeValues _currentRangeValues = RangeValues(60000, 40000000);
   final double _interval = 10000000.0;
+
+  RangeValues _currentRangeYears=RangeValues(1994,2023);
+  final double _yearinterval=1;
+  final minyear=Searchcontroller.yearrange1controller.text;
+  final maxyear=Searchcontroller.yearrange2controller.text;
+  final minprice=Searchcontroller.minpricecontroller.text;
+  final maxprice=Searchcontroller.maxpricecontroller.text;
+
+
 
   @override
   void initState() {
     super.initState();
-    selectedYear = DateTime.now().year;
+    // selectedYear = DateTime.now().year;
   }
 
   @override
@@ -81,6 +93,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     Checkbox(
                       value: _isChecked1,
                       onChanged: (value) {
+                        Searchcontroller.fueltypecontroller.text='&filter_fueltype[]=diesel';
                         setState(() {
                           _isChecked1 = value ?? false;
                         });
@@ -97,6 +110,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     Checkbox(
                       value: _isChecked2,
                       onChanged: (value) {
+                         Searchcontroller.fueltypecontroller.text='&filter_fueltype[]=petrol';
                         setState(() {
                           _isChecked2 = value ?? false;
                         });
@@ -113,6 +127,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     Checkbox(
                       value: _isChecked3,
                       onChanged: (value) {
+                         Searchcontroller.fueltypecontroller.text='&filter_fueltype[]=hybrid';
                         setState(() {
                           _isChecked3 = value ?? false;
                         });
@@ -129,6 +144,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     Checkbox(
                       value: _isChecked4,
                       onChanged: (value) {
+                           Searchcontroller.fueltypecontroller.text='&filter_fueltype[]=electric';
                         setState(() {
                           _isChecked4 = value ?? false;
                         });
@@ -154,9 +170,13 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     Checkbox(
                       value: _isautomatic,
                       onChanged: (value) {
+                        Searchcontroller.gearshiftcontroller.text='&filter_gearshift[]=automatic';
                         setState(() {
                           _isautomatic = value ?? false;
                         });
+                        if(_isautomatic=false){
+                          Searchcontroller.gearshiftcontroller.text='';
+                        }
                       },
                     ),
                     Text(
@@ -170,9 +190,14 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     Checkbox(
                       value: _ismanual,
                       onChanged: (value) {
+                         Searchcontroller.gearshiftcontroller.text='&filter_gearshift[]=manual';
                         setState(() {
                           _ismanual = value ?? false;
                         });
+                         if(_ismanual=false){
+                          Searchcontroller.gearshiftcontroller.text='';
+                        }
+                        
                       },
                     ),
                     Text(
@@ -190,22 +215,23 @@ class _FilterDrawerState extends State<FilterDrawer> {
                   ),
                 ),
                 SizedBox(height: 3),
-                Padding(
-                  padding: const EdgeInsets.only(left: 18.0, right: 18),
-                  child: DropdownButton<int>(
-                    value: selectedYear,
-                    onChanged: (int? newValue) {
-                      setState(() {
-                        selectedYear = newValue;
-                      });
-                    },
-                    items: years.map<DropdownMenuItem<int>>((int value) {
-                      return DropdownMenuItem<int>(
-                        value: value,
-                        child: Text(value.toString()),
-                      );
-                    }).toList(),
+              RangeSlider(
+                
+                  values: _currentRangeYears,
+                  min: 1994,
+                  max:2023,
+                  divisions: (_currentRangeYears.end - _currentRangeYears.start) ~/ _yearinterval,
+                  labels: RangeLabels(
+                    '${_currentRangeYears.start.round()}',
+                    '${_currentRangeYears.end.round()}',
                   ),
+                  onChanged: (RangeValues values) {
+                    Searchcontroller.yearrange1controller.text=_currentRangeYears.start.toString();
+                    Searchcontroller.yearrange2controller.text=_currentRangeYears.end.toString();
+                    setState(() {
+                      _currentRangeYears = values;
+                    });
+                  },
                 ),
                 const SizedBox(height: 20),
                 Padding(
@@ -217,15 +243,20 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 ),
                 SizedBox(height: 3),
                 RangeSlider(
+                  
                   values: _currentRangeValues,
                   min: 60000,
                   max: 40000000,
                   divisions: (_currentRangeValues.end - _currentRangeValues.start) ~/ _interval,
+                  
                   labels: RangeLabels(
                     '${_currentRangeValues.start.round()}',
                     '${_currentRangeValues.end.round()}',
                   ),
                   onChanged: (RangeValues values) {
+                    Searchcontroller.minpricecontroller.text=_currentRangeValues.start.toString();
+                    Searchcontroller.maxpricecontroller.text=_currentRangeValues.end.toString();
+            
                     setState(() {
                       _currentRangeValues = values;
                     });
@@ -238,14 +269,20 @@ class _FilterDrawerState extends State<FilterDrawer> {
               padding: const EdgeInsets.symmetric(horizontal: 18.0),
               child: ElevatedButton(
                 onPressed: () {
-                  SearchFilters selectedFilters = SearchFilters(
-                    fuelTypes: getSelectedFuelTypes(),
-                    gearShifts: getSelectedGearShifts(),
-                    modelYear: selectedYear,
-                    minPrice: _currentRangeValues.start,
-                    maxPrice: _currentRangeValues.end,
-                  );
-                  print(selectedFilters);
+                fetchSearchResults(context);
+                  
+                  print(_currentRangeValues.start);
+                    print(_currentRangeValues.end);
+                  print(_currentRangeYears);
+                  // SearchFilters selectedFilters = SearchFilters(
+                  //   fuelTypes: getSelectedFuelTypes(),
+                  //   gearShifts: getSelectedGearShifts(),
+                  //  minmodelYear:_currentRangeYears.start,
+                  //  maxmodelYear:_currentRangeYears.end,
+                  //   minPrice: _currentRangeValues.start,
+                  //   maxPrice: _currentRangeValues.end,
+                  // );
+                  // print(selectedFilters);
                   // widget.onFiltersChanged(selectedFilters);
                 },
                 style: ElevatedButton.styleFrom(
@@ -266,48 +303,10 @@ class _FilterDrawerState extends State<FilterDrawer> {
     );
   }
 
-  List<FuelType> getSelectedFuelTypes() {
-    List<FuelType> selectedTypes = [];
-    if (_isChecked1) selectedTypes.add(FuelType.diesel);
-    if (_isChecked2) selectedTypes.add(FuelType.petrol);
-    if (_isChecked3) selectedTypes.add(FuelType.hybrid);
-    if (_isChecked4) selectedTypes.add(FuelType.electric);
-    return selectedTypes;
-  }
+  
 
-  List<GearShift> getSelectedGearShifts() {
-    List<GearShift> selectedShifts = [];
-    if (_isautomatic) selectedShifts.add(GearShift.automatic);
-    if (_ismanual) selectedShifts.add(GearShift.manual);
-    return selectedShifts;
-  }
-}
-class SearchFilters {
-  List<FuelType>? fuelTypes;
-  List<GearShift>? gearShifts;
-  int? modelYear;
-  double? minPrice;
-  double? maxPrice;
-
-  SearchFilters({
-    this.fuelTypes,
-    this.gearShifts,
-    this.modelYear,
-    this.minPrice,
-    this.maxPrice,
-  });
+ 
 }
 
-enum FuelType {
-  diesel,
-  petrol,
-  hybrid,
-  electric,
-}
-
-enum GearShift {
-  automatic,
-  manual,
-}
 
        

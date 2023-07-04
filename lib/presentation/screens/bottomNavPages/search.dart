@@ -7,6 +7,7 @@ import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:otodeals/data/models/vehiclelisting.dart';
 import 'package:otodeals/data/providers/vehicleprovider.dart';
+import 'package:otodeals/data/repositories/vehiclelisting.dart';
 
 
 import 'package:otodeals/presentation/widgets/Searchfilterdrawer.dart';
@@ -25,15 +26,17 @@ class Searchs extends StatefulWidget {
 class _SearchsState extends State<Searchs> {
   bool isBuySelected = true;
   String s="abc";
-  List<dynamic>allresults=[];
-   List<dynamic> searchResults = [];
+  // List<dynamic>allresults=[];
+  //  List<dynamic> searchResults = [];
+   final searchdata=Searchcontroller.searchdatacontroller.text;
+   
    String? type;
    @override
   void initState(){
     Searchcontroller.vehicletypecontroller.text="sale";
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp)async {
-      await _fetchSearchResults();
+      await fetchSearchResults(context);
     });
      
 
@@ -47,51 +50,7 @@ class _SearchsState extends State<Searchs> {
      
      
     });}
-    Future<void> _fetchSearchResults() async {
-      final type=Searchcontroller.vehicletypecontroller.text;
-      // final gearshift=Searchcontroller.gearshiftcontroller.text;
-      // final fueltype=Searchcontroller.fueltypecontroller.text;
-      // final minprice=Searchcontroller.minpricecontroller.text;
-      // final maxprice=Searchcontroller.maxpricecontroller.text;
-      // final modelyearrange1=Searchcontroller.yearrange1controller.text;
-      //   final modelyearrange2=Searchcontroller.yearrange2controller.text;
-      // final brand=Searchcontroller.vehiclebrandcontroller.text;
-      // final searchdata=Searchcontroller.searchdatacontroller.text;
-      final url="${ApiEndpoint.vehiclelisting}?type=$type";
-    // final url = "${ApiEndpoint.vehiclelisting}?type=$type&filter_brand[]=$brand&filter_fueltype[]=$fueltype&filter_gearshift[]=$gearshift&min=$minprice&max=$maxprice&modelyear['range1']=$modelyearrange1&modelyear['range2']=$modelyearrange2&searchdata=$searchdata]"; // Replace with your actual web service URL
-final provider=Provider.of<Vehicleprovider>(context,listen:false);
-    final response = await http.post(
-      Uri.parse(url),headers:{'device-id':s} ,
-  
-    );
-    if (response.statusCode == 200) {
-      final jsonData = json.decode(response.body);
-      final data=VehicleListing.fromJson(jsonData);
-      provider.vlistdata(data);
-      // print(jsonData);
-      // print(data);
-
-      // final List<VehicleListing> results = [];
-      //  results.addAll(results);
-       print(data);
-
-      // for (var item in jsonData) {
-      //   final vehicle = VehicleListing(
-      //     type:item['type'],
-      //     price:item['price'],
-      //     gearshift:item['gearshift'],
-      //     fueltype:item['fueltype'],
-      //     modelyear:item['modelyear'],
-      //   );
-      //   results.add(vehicle);
-       
-      // }
-    }
-
-   
-
-    }
-  
+    
 
   @override
  
@@ -155,9 +114,10 @@ final provider=Provider.of<Vehicleprovider>(context,listen:false);
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: TextField(
-                            onChanged: (value) {
+                            controller: Searchcontroller.searchdatacontroller,
+                            // onChanged: (value) {
                               
-                            },
+                            // },
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Search',
@@ -165,14 +125,19 @@ final provider=Provider.of<Vehicleprovider>(context,listen:false);
                                 color: Colormanager.textColor,
                                 fontSize: 15,
                               ),
-                              prefixIcon: const Icon(
-                                Icons.search,
-                                color: Colormanager.textColor,
+                              prefixIcon: InkWell(
+                                onTap: () {
+                                  fetchSearchResults(context);
+                                },
+                                child: const Icon(
+                                  Icons.search,
+                                  color: Colormanager.textColor,
+                                ),
                               ),
-                              suffixIcon: const Icon(
-                                Icons.location_on_sharp,
-                                color: Colormanager.primary,
-                              ),
+                              // suffixIcon: const Icon(
+                              //   Icons.location_on_sharp,
+                              //   color: Colormanager.primary,
+                              // ),
                             ),
                           ),
                         ),
@@ -265,7 +230,7 @@ final provider=Provider.of<Vehicleprovider>(context,listen:false);
                               onTap: ()async{
                                 toggleSelection(false);
                                  Searchcontroller.vehicletypecontroller.text="bid";
-                                 await _fetchSearchResults();
+                                 await fetchSearchResults(context);
 
                                 },
                               child: Container(
