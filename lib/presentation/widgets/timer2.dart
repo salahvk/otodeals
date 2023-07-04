@@ -32,9 +32,7 @@ class _TimerScreenState extends State<TimerScreen> {
      final homeres = Provider.of<DataProvider>(context, listen:false);
  WidgetsBinding.instance.addPostFrameCallback((timeStamp)async {
       await gethome(context);
-    });
-
-    int hours;
+        int hours;
     int mints;
     int secs;
     hours =int.parse (homeres.homemodel?.nextAccutionTime?.hours.toString()?? "0");
@@ -44,6 +42,9 @@ class _TimerScreenState extends State<TimerScreen> {
     startTimer();
     reset();
     
+    });
+
+  
     super.initState();
   }
   @override
