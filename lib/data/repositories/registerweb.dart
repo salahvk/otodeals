@@ -1,7 +1,3 @@
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/controllers.dart';
 // import 'package:otodeals/core/controllers.dart';
@@ -12,46 +8,35 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 // import 'package:otodeals/data/viewmodel/registerviewmodel.dart';
 
+Future postRegisterData(BuildContext context) async {
+  final name = Registercontrollerr.namecontroller.text;
+  final email = Registercontrollerr.emailController.text;
+  final password = Registercontrollerr.passwordController.text;
+  final confirmpassword = Registercontrollerr.confirmpasswordController.text;
+  String url =
+      "${ApiEndpoint.registerApi}?name=$name&email=$email&password=$password&confirm_password=$confirmpassword";
+  print(url);
+  try {
+    var response = await http.post(Uri.parse(url));
 
- Future postRegisterData(BuildContext context)
-async {
-  final name=Registercontrollerr.namecontroller.text;
-final email=Registercontrollerr.emailController.text;
-final password=Registercontrollerr.passwordController.text;
-final confirmpassword=Registercontrollerr.confirmpasswordController.text;
- String url = "${ApiEndpoint.registerApi}?name=$name&email=$email&password=$password&confirm_password=$confirmpassword";
- print(url);
-  try{
-    
-
-    var response=await http.post(Uri.parse(url));
-
-    if(response.statusCode!=200){
-      showAnimatedSnackBar(context,"something went wrong");
+    if (response.statusCode != 200) {
+      // showAnimatedSnackBar(context,"something went wrong");
       return;
-
-    }else{
-    var jsonResponse=jsonDecode(response.body);
-    print(jsonResponse);
-    // Regmodel ws=Regmodel.fromJson(jsonResponse);
-      if(jsonResponse['result']==false){
-      
-     
-       showAnimatedSnackBar(context,"This email is already Registered!!");
-      //  log(jsonResponse['result']);
-      //  log(jsonResponse);
+    } else {
+      var jsonResponse = jsonDecode(response.body);
       print(jsonResponse);
-     return jsonResponse;
-       
-    
+      // Regmodel ws=Regmodel.fromJson(jsonResponse);
+      if (jsonResponse['result'] == false) {
+        showAnimatedSnackBar(context, "This email is already Registered!!");
+        //  log(jsonResponse['result']);
+        //  log(jsonResponse);
+        print(jsonResponse);
+        return jsonResponse;
+      } else {
+        return jsonResponse;
+      }
     }
-    else{
-       return jsonResponse;
-    }
-  
-    }
-  }on Exception catch(e){
-    
+  } on Exception catch (e) {
     print(e);
   }
 }

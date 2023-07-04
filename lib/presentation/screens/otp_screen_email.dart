@@ -3,7 +3,6 @@
 import 'dart:convert';
 import 'dart:developer';
 
-
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -26,7 +25,6 @@ import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 
 class OTPscreenmail extends StatefulWidget {
-  
   const OTPscreenmail({Key? key}) : super(key: key);
 
   @override
@@ -36,45 +34,35 @@ class OTPscreenmail extends StatefulWidget {
 class _OTPscreenmailState extends State<OTPscreenmail> {
   bool isResendButtonClicked = false;
   bool loading = false;
-    verifyNow() async {
-
-    
-        final otpProvider = Provider.of<OTPProvider>(context, listen: false);
-        print(otpProvider.getOtp?.otp.toString());
-        print(Mailotpcontroller.otpcontroller.text);
+  verifyNow() async {
+    final otpProvider = Provider.of<OTPProvider>(context, listen: false);
+    print(otpProvider.getOtp?.otp.toString());
+    print(Mailotpcontroller.otpcontroller.text);
     FocusManager.instance.primaryFocus?.unfocus();
-    
+
     if (Mailotpcontroller.otpcontroller.text.length < 4 ||
-    Mailotpcontroller.otpcontroller.text.isEmpty
+            Mailotpcontroller.otpcontroller.text.isEmpty
         // Mailotpcontroller.otpcontroller.text.toString() !=
         //     otpProvider.getOtp?.otp.toString()
         ) {
       AnimatedSnackBar.material("Sorry!!!!",
-              type: AnimatedSnackBarType.error,
-              borderRadius: BorderRadius.circular(6),
-              // brightness: Brightness.dark,
-              duration: const Duration(seconds: 1));
-         
-    }
-    
-    
-     else {
-
+          type: AnimatedSnackBarType.error,
+          borderRadius: BorderRadius.circular(6),
+          // brightness: Brightness.dark,
+          duration: const Duration(seconds: 1));
+    } else {
       await verifyOtpApi(context);
-       setState(() {
-         loading=false;
-       });
-       
-      
+      setState(() {
+        loading = false;
+      });
     }
   }
-  
 
   @override
   void initState() {
     super.initState();
-    Mailotpcontroller.otpcontroller.text='';
-   
+    Mailotpcontroller.otpcontroller.text = '';
+
     // lang = Hive.box('LocalLan').get(
     //   'lang',
     // );
@@ -84,7 +72,7 @@ class _OTPscreenmailState extends State<OTPscreenmail> {
   Widget build(BuildContext context) {
     final h = MediaQuery.of(context).size.height;
     final w = MediaQuery.of(context).size.width;
-     final otpProvider = Provider.of<OTPProvider>(context, listen: false);
+    final otpProvider = Provider.of<OTPProvider>(context, listen: false);
     // final str = AppLocalizations.of(context)!;
     // final mob = Responsive.isMobile(context);
 
@@ -130,7 +118,7 @@ class _OTPscreenmailState extends State<OTPscreenmail> {
                   width: 5,
                 ),
                 length: 4,
-                 controller:Mailotpcontroller.otpcontroller,
+                controller: Mailotpcontroller.otpcontroller,
                 focusedPinTheme: focusedPinTheme,
                 // validator: (s) {
                 //   return s == '2222' ? null : 'Pin is incorrect';
@@ -140,7 +128,7 @@ class _OTPscreenmailState extends State<OTPscreenmail> {
                 onCompleted: (pin) {
                   print(pin);
                   print(Mailotpcontroller.otpcontroller);
-                 // verifyNow();
+                  // verifyNow();
                 },
               ),
             ),
@@ -164,19 +152,17 @@ class _OTPscreenmailState extends State<OTPscreenmail> {
                         isResendButtonClicked = false;
                       });
                     },
-                    child:
-                         isResendButtonClicked
-                            ? const SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  color:Colormanager.black,
-                                  backgroundColor: Colormanager.white,
-                                ),
-                              )
-                            :
-                        Text('Resend',
+                    child: isResendButtonClicked
+                        ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Colormanager.black,
+                              backgroundColor: Colormanager.white,
+                            ),
+                          )
+                        : Text('Resend',
                             style: getRegularStyle(
                                 color: Colormanager.primary, fontSize: 15)),
                   ),
@@ -218,54 +204,49 @@ class _OTPscreenmailState extends State<OTPscreenmail> {
     );
   }
 }
-  Future verifyOtpApi(BuildContext context) async {
-    final otpProvider = Provider.of<OTPProvider>(context,listen: false);
-    //final provider = Provider.of<DataProvider>(context, listen: false);
-    print(Mailotpcontroller.otpcontroller.text);
-    print(otpProvider.getOtp?.otp.toString());
-    try {
-      final url="${ApiEndpoint.otpemail}?email=${Forgetpasswordcontroller.emailController.text}&otp=${Mailotpcontroller.otpcontroller.text}";
-      print(url);
-      var response = await http.post(
-          Uri.parse(
-              url),
-          headers: {"device-id":s,});
-      if (response.statusCode == 200) {
-        var jsonResponse = jsonDecode(response.body);
-        log(response.body);
-     // print(jsonResponse);
-     var customerdetails = OtpVerification.fromJson(jsonResponse);
+
+Future verifyOtpApi(BuildContext context) async {
+  final otpProvider = Provider.of<OTPProvider>(context, listen: false);
+  //final provider = Provider.of<DataProvider>(context, listen: false);
+  print(Mailotpcontroller.otpcontroller.text);
+  print(otpProvider.getOtp?.otp.toString());
+  try {
+    final url =
+        "${ApiEndpoint.otpemail}?email=${Forgetpasswordcontroller.emailController.text}&otp=${Mailotpcontroller.otpcontroller.text}";
+    print(url);
+    var response = await http.post(Uri.parse(url), headers: {
+      "device-id": s,
+    });
+    if (response.statusCode == 200) {
+      var jsonResponse = jsonDecode(response.body);
+      log(response.body);
+      // print(jsonResponse);
+      var customerdetails = OtpVerification.fromJson(jsonResponse);
       otpProvider.getOtpVerifiedData(customerdetails);
       final apitoken = otpProvider.otpVerification?.customerdetails?.apiToken;
-       Hive.box("token").put('api_token', apitoken ?? '');
-        print(apitoken);
-      if(jsonResponse['result']==false){
-        showAnimatedSnackBar(context,"Invalid otp,please request  again for otp");
-      return jsonResponse;
-      }else{
-        Navigator.of(context).pushNamed(Routes.resetPassScreen);
-      return jsonResponse;
-      }
-      
-
-        // var otpVerifiedData = OtpVerification.fromJson(jsonResponse);
-        // otpProvider.getOtpVerifiedData(otpVerifiedData);
-        // final deviceid=otpProvider.otpVerification?.customerdetails?.deviceId;
-        
-        // print(deviceid);
-
-       //Hive.box("token").put('api_token', apitoken ?? '');
-       // Hive.box("deviceid").put('device-id',deviceid??'');
-       
-
+      Hive.box("token").put('api_token', apitoken ?? '');
+      print(apitoken);
+      if (jsonResponse['result'] == false) {
+        showAnimatedSnackBar(
+            context, "Invalid otp,please request  again for otp");
+        return jsonResponse;
       } else {
-        print('Something went wrong');
+        Navigator.of(context).pushNamed(Routes.resetPassScreen);
+        return jsonResponse;
       }
-    } on Exception catch (_) {
-      showAnimatedSnackBar(context,'connection Timedout!!!');
+
+      // var otpVerifiedData = OtpVerification.fromJson(jsonResponse);
+      // otpProvider.getOtpVerifiedData(otpVerifiedData);
+      // final deviceid=otpProvider.otpVerification?.customerdetails?.deviceId;
+
+      // print(deviceid);
+
+      //Hive.box("token").put('api_token', apitoken ?? '');
+      // Hive.box("deviceid").put('device-id',deviceid??'');
+    } else {
+      // print('Something went wrong');
     }
+  } on Exception catch (_) {
+    showAnimatedSnackBar(context, 'connection Timedout!!!');
   }
-
-
-
-
+}
