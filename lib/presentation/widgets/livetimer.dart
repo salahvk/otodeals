@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -22,23 +20,21 @@ class LivetimerScreen extends StatefulWidget {
 }
 
 class _LivetimerScreenState extends State<LivetimerScreen> {
-  static var countdownDuration = Duration(minutes:15);
- 
+  static var countdownDuration = Duration(minutes: 15);
+
   Duration duration = Duration();
- 
+
   Timer? timer;
   bool countDown = true;
-  int index=0;
-  
+  int index = 0;
 
   @override
   void initState() {
-       final homeres = Provider.of<DataProvider>(context, listen:false);
-     WidgetsBinding.instance.addPostFrameCallback((timeStamp)async {
+    final homeres = Provider.of<DataProvider>(context, listen: false);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await gethome(context);
     });
 
-     
     // int hours;
     // int mints;
     // int secs;
@@ -48,61 +44,71 @@ class _LivetimerScreenState extends State<LivetimerScreen> {
     // countdownDuration = Duration(hours: hours, minutes: mints, seconds: secs);
     // startTimer();
     // reset();
-    
+
     super.initState();
   }
-  @override
-void dispose() {
-  timer?.cancel(); // Cancel the timer
-  super.dispose();
-}
 
   @override
+  void dispose() {
+    timer?.cancel(); // Cancel the timer
+    super.dispose();
+  }
+
   @override
-Widget build(BuildContext context) {
-  final homeres = Provider.of<DataProvider>(context, listen:false);
+  @override
+  Widget build(BuildContext context) {
+    final homeres = Provider.of<DataProvider>(context, listen: false);
 
-  return Container(
-    
-    child: TimerBuilder.periodic(Duration(seconds: 1), builder: (context) {
-      DateTime currentTime = DateTime.now();
+    return Container(
+      child: TimerBuilder.periodic(Duration(seconds: 1), builder: (context) {
+        DateTime currentTime = DateTime.now();
 
-      DateTime startTime = DateTime.parse(homeres.homemodel?.currentlyRunning?[widget.index].starttime.toString()??"0");
-      DateTime endTime = DateTime.parse(homeres.homemodel?.currentlyRunning?[widget.index].endtime.toString()??"0");
+        DateTime startTime = DateTime.parse(homeres
+                .homemodel?.currentlyRunning?[widget.index].starttime
+                .toString() ??
+            "0");
+        DateTime endTime = DateTime.parse(homeres
+                .homemodel?.currentlyRunning?[widget.index].endtime
+                .toString() ??
+            "0");
 
-      if (currentTime.isAfter(endTime)) {
-        // Countdown has ended
-        return Text('Countdown Ended');
-      }
+        if (currentTime.isAfter(endTime)) {
+          // Countdown has ended
+          return Text('Countdown Ended');
+        }
 
-      Duration remainingTime = endTime.difference(currentTime);
+        Duration remainingTime = endTime.difference(currentTime);
 
-      int days = remainingTime.inDays;
-      int hours = remainingTime.inHours.remainder(24);
-      int minutes = remainingTime.inMinutes.remainder(60);
-      int seconds = remainingTime.inSeconds.remainder(60);
+        int days = remainingTime.inDays;
+        int hours = remainingTime.inHours.remainder(24);
+        int minutes = remainingTime.inMinutes.remainder(60);
+        int seconds = remainingTime.inSeconds.remainder(60);
 
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TimeContainer(value: days.toString(), header: 'Days'),
-          SizedBox(width:2),
-          TimeContainer(value: hours.toString().padLeft(2, '0'), header: 'Hours'),
-          SizedBox(width:2),
-          TimeContainer(value: minutes.toString().padLeft(2, '0'), header: 'Minutes'),
-          SizedBox(width:2),
-          TimeContainer(value: seconds.toString().padLeft(2, '0'), header: 'Seconds'),
-        ],
-      );
-    }),
-  );
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TimeContainer(value: days.toString(), header: 'Days'),
+            SizedBox(width: 5),
+            TimeContainer(
+                value: hours.toString().padLeft(2, '0'), header: 'Hours'),
+            SizedBox(width: 5),
+            TimeContainer(
+                value: minutes.toString().padLeft(2, '0'), header: 'Minutes'),
+            SizedBox(width: 5),
+            TimeContainer(
+                value: seconds.toString().padLeft(2, '0'), header: 'Seconds'),
+          ],
+        );
+      }),
+    );
+  }
 }
-}
+
 class TimeContainer extends StatelessWidget {
   final String value;
   final String header;
 
-  TimeContainer({required this.value, required this.header});
+  const TimeContainer({super.key, required this.value, required this.header});
 
   @override
   Widget build(BuildContext context) {
@@ -118,14 +124,13 @@ class TimeContainer extends StatelessWidget {
           child: Center(
             child: Text(
               value,
-              style: getBoldStyle(fontSize:10, color:Colormanager.black),
+              style: getBoldStyle(fontSize: 15, color: Colormanager.black),
             ),
           ),
         ),
-       
         Text(
           header,
-          style: getSemiBoldStyle(color: Colormanager.primary,fontSize:6),
+          style: getSemiBoldStyle(color: Colormanager.primary, fontSize: 5),
         ),
       ],
     );
