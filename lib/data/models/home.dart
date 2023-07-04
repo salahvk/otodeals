@@ -66,6 +66,8 @@ class NextAccutionTime {
   String? minutes;
   String? seconds;
   String? label;
+  String? nextstarttime;
+  String? nextendtime;
 
   NextAccutionTime(
       {this.years,
@@ -74,7 +76,9 @@ class NextAccutionTime {
       this.hours,
       this.minutes,
       this.seconds,
-      this.label});
+      this.label,
+      this.nextstarttime,
+      this.nextendtime});
 
   NextAccutionTime.fromJson(Map<String, dynamic> json) {
     years = json['years'];
@@ -84,6 +88,8 @@ class NextAccutionTime {
     minutes = json['minutes'];
     seconds = json['seconds'];
     label = json['label'];
+    nextstarttime=json['next_start_time'];
+    nextendtime=json['next_end_time'];
   }
 
   Map<String, dynamic> toJson() {
@@ -95,6 +101,8 @@ class NextAccutionTime {
     data['minutes'] = minutes;
     data['seconds'] = seconds;
     data['label'] = label;
+    data['next_start_time']=nextstarttime;
+    data['next_end_time']=nextendtime;
     return data;
   }
 }

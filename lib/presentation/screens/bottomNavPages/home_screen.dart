@@ -5,11 +5,13 @@ import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
+import 'package:otodeals/data/repositories/forget_password.dart';
 import 'package:otodeals/data/repositories/vehicledetails.dart';
 import 'package:otodeals/presentation/screens/productdetails.dart';
 import 'package:otodeals/presentation/widgets/custom_drawer.dart';
 import 'package:otodeals/presentation/widgets/livetimer.dart';
 import 'package:otodeals/presentation/widgets/numberinput.dart';
+
 import 'package:otodeals/presentation/widgets/timer.dart';
 import 'package:otodeals/presentation/widgets/timer2.dart';
 import 'package:provider/provider.dart';
@@ -933,7 +935,7 @@ class _BuyState extends State<Buy> {
                   inputlatestarrivals(index);
                 },
                 child: Container(
-                  // height: size.height/3.9,
+                  
                   width: size.width / 1.17,
 
                   decoration: BoxDecoration(
@@ -955,24 +957,30 @@ class _BuyState extends State<Buy> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                                homeres.homemodel?.saleVehicles![index]
-                                        .vehicleName ??
-                                    "",
-                                style: getSemiBoldStyle(color: Colors.black)),
+                            Padding(
+                              padding: const EdgeInsets.only(top:5.0,left:8),
+                              child: Text(
+                                  homeres.homemodel?.saleVehicles![index]
+                                          .vehicleName ??
+                                      "",
+                                  style: getMediumtStyle(color: Colors.black,fontSize: 15)),
+                            ),
                             InkWell(
                               onTap: () => _showDialog(context),
-                              child: Container(
-                                width: 40,
-                                height: 15,
-                                decoration: BoxDecoration(
-                                    color: Colormanager.primary,
-                                    borderRadius: BorderRadius.circular(15)),
-                                child: Center(
-                                  child: Text(
-                                    "Bid Now",
-                                    style: getRegularStyle(
-                                        color: Colormanager.white, fontSize: 7),
+                              child: Padding(
+                                padding: const EdgeInsets.only(right:8.0,top:5),
+                                child: Container(
+                                  width: 60,
+                                  height: 20,
+                                  decoration: BoxDecoration(
+                                      color: Colormanager.primary,
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: Center(
+                                    child: Text(
+                                      "Buy Now",
+                                      style: getSemiBoldStyle(
+                                          color: Colormanager.white, fontSize: 10),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -980,14 +988,15 @@ class _BuyState extends State<Buy> {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 70,
-                        width: 150,
+                      Container(
+                        // height:100,
+                        width: 240,
+                        color: Colors.amber,
                         child: Image.network(
-                            "$endpoint ${homeres.homemodel?.saleVehicles?[index].image}"),
+                            "$endpoint${homeres.homemodel?.saleVehicles?[index].image}",fit:BoxFit.cover ,),
                       ),
                       const SizedBox(
-                        height: 10,
+                        height: 6,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -1,32 +1,29 @@
 class VehicleListing {
   bool? result;
   Products? products;
-  // List<Null>? upcomingbid;
+  Products? upcomingbid;
 
-  VehicleListing({this.result, this.products, });
+  VehicleListing({this.result, this.products, this.upcomingbid});
 
   VehicleListing.fromJson(Map<String, dynamic> json) {
     result = json['result'];
     products = json['products'] != null
-        ? Products.fromJson(json['products'])
+        ? new Products.fromJson(json['products'])
         : null;
-    // if (json['upcomingbid'] != null) {
-    //   upcomingbid = <Null>[];
-    //   json['upcomingbid'].forEach((v) {
-    //     upcomingbid!.add(new Null.fromJson(v));
-    //   });
-    // }
+    upcomingbid = json['upcomingbid'] != null
+        ? new Products.fromJson(json['upcomingbid'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['result'] = result;
-    if (products != null) {
-      data['products'] = products!.toJson();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['result'] = this.result;
+    if (this.products != null) {
+      data['products'] = this.products!.toJson();
     }
-    // if (this.upcomingbid != null) {
-    //   data['upcomingbid'] = this.upcomingbid!.map((v) => v.toJson()).toList();
-    // }
+    if (this.upcomingbid != null) {
+      data['upcomingbid'] = this.upcomingbid!.toJson();
+    }
     return data;
   }
 }
@@ -42,7 +39,7 @@ class Products {
   String? nextPageUrl;
   String? path;
   int? perPage;
-  // void prevPageUrl;
+  // Null? prevPageUrl;
   int? to;
   int? total;
 
@@ -66,7 +63,7 @@ class Products {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(new Data.fromJson(v));
       });
     }
     firstPageUrl = json['first_page_url'];
@@ -76,7 +73,7 @@ class Products {
     if (json['links'] != null) {
       links = <Links>[];
       json['links'].forEach((v) {
-        links!.add(Links.fromJson(v));
+        links!.add(new Links.fromJson(v));
       });
     }
     nextPageUrl = json['next_page_url'];
@@ -88,24 +85,24 @@ class Products {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['current_page'] = currentPage;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['current_page'] = this.currentPage;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    data['first_page_url'] = firstPageUrl;
-    data['from'] = from;
-    data['last_page'] = lastPage;
-    data['last_page_url'] = lastPageUrl;
-    if (links != null) {
-      data['links'] = links!.map((v) => v.toJson()).toList();
+    data['first_page_url'] = this.firstPageUrl;
+    data['from'] = this.from;
+    data['last_page'] = this.lastPage;
+    data['last_page_url'] = this.lastPageUrl;
+    if (this.links != null) {
+      data['links'] = this.links!.map((v) => v.toJson()).toList();
     }
-    data['next_page_url'] = nextPageUrl;
-    data['path'] = path;
-    data['per_page'] = perPage;
-    // data['prev_page_url'] = prevPageUrl;
-    data['to'] = to;
-    data['total'] = total;
+    data['next_page_url'] = this.nextPageUrl;
+    data['path'] = this.path;
+    data['per_page'] = this.perPage;
+    // data['prev_page_url'] = this.prevPageUrl;
+    data['to'] = this.to;
+    data['total'] = this.total;
     return data;
   }
 }
@@ -124,20 +121,30 @@ class Data {
   int? mileage;
   String? gearshift;
   int? price;
-  // void starttime;
-  // void endtime;
-  // void minimumbitamount;
+  String? starttime;
+  String? endtime;
+  int? minimumbitamount;
   String? seoUrl;
   String? registration;
   String? insurance;
   String? rto;
   String? taxupto;
+  String? tagIds;
   String? fitnessupto;
   String? location;
   String? status;
+  int? vehicleIdentificationNumber;
   String? createdAt;
   String? updatedAt;
+  String? categoryName;
   String? image;
+  String? name;
+  int? years;
+  int? months;
+  int? days;
+  int? hours;
+  int? minutes;
+  int? seconds;
 
   Data(
       {this.id,
@@ -153,20 +160,30 @@ class Data {
       this.mileage,
       this.gearshift,
       this.price,
-      // this.starttime,
-      // this.endtime,
-      // this.minimumbitamount,
+      this.starttime,
+      this.endtime,
+      this.minimumbitamount,
       this.seoUrl,
       this.registration,
       this.insurance,
       this.rto,
       this.taxupto,
+      this.tagIds,
       this.fitnessupto,
       this.location,
       this.status,
+      this.vehicleIdentificationNumber,
       this.createdAt,
       this.updatedAt,
-      this.image});
+      this.categoryName,
+      this.image,
+      this.name,
+      this.years,
+      this.months,
+      this.days,
+      this.hours,
+      this.minutes,
+      this.seconds});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -182,51 +199,71 @@ class Data {
     mileage = json['mileage'];
     gearshift = json['gearshift'];
     price = json['price'];
-    // starttime = json['starttime'];
-    // endtime = json['endtime'];
-    // minimumbitamount = json['minimumbitamount'];
+    starttime = json['starttime'];
+    endtime = json['endtime'];
+    minimumbitamount = json['minimumbitamount'];
     seoUrl = json['seo_url'];
     registration = json['registration'];
     insurance = json['insurance'];
     rto = json['rto'];
     taxupto = json['taxupto'];
+    tagIds = json['tag_ids'];
     fitnessupto = json['fitnessupto'];
     location = json['location'];
     status = json['status'];
+    vehicleIdentificationNumber = json['vehicle_identification_number'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    categoryName = json['category_name'];
     image = json['image'];
+    name = json['name'];
+    years = json['years'];
+    months = json['months'];
+    days = json['days'];
+    hours = json['hours'];
+    minutes = json['minutes'];
+    seconds = json['seconds'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['type'] = type;
-    data['vehicletype'] = vehicletype;
-    data['category_id'] = categoryId;
-    data['brand_id'] = brandId;
-    data['vehicle_name'] = vehicleName;
-    data['description'] = description;
-    data['fueltype'] = fueltype;
-    data['owner'] = owner;
-    data['modelyear'] = modelyear;
-    data['mileage'] = mileage;
-    data['gearshift'] = gearshift;
-    data['price'] = price;
-    // data['starttime'] = starttime;
-    // data['endtime'] = endtime;
-    // data['minimumbitamount'] = minimumbitamount;
-    data['seo_url'] = seoUrl;
-    data['registration'] = registration;
-    data['insurance'] = insurance;
-    data['rto'] = rto;
-    data['taxupto'] = taxupto;
-    data['fitnessupto'] = fitnessupto;
-    data['location'] = location;
-    data['status'] = status;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    data['image'] = image;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['type'] = this.type;
+    data['vehicletype'] = this.vehicletype;
+    data['category_id'] = this.categoryId;
+    data['brand_id'] = this.brandId;
+    data['vehicle_name'] = this.vehicleName;
+    data['description'] = this.description;
+    data['fueltype'] = this.fueltype;
+    data['owner'] = this.owner;
+    data['modelyear'] = this.modelyear;
+    data['mileage'] = this.mileage;
+    data['gearshift'] = this.gearshift;
+    data['price'] = this.price;
+    data['starttime'] = this.starttime;
+    data['endtime'] = this.endtime;
+    data['minimumbitamount'] = this.minimumbitamount;
+    data['seo_url'] = this.seoUrl;
+    data['registration'] = this.registration;
+    data['insurance'] = this.insurance;
+    data['rto'] = this.rto;
+    data['taxupto'] = this.taxupto;
+    data['tag_ids'] = this.tagIds;
+    data['fitnessupto'] = this.fitnessupto;
+    data['location'] = this.location;
+    data['status'] = this.status;
+    data['vehicle_identification_number'] = this.vehicleIdentificationNumber;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    data['category_name'] = this.categoryName;
+    data['image'] = this.image;
+    data['name'] = this.name;
+    data['years'] = this.years;
+    data['months'] = this.months;
+    data['days'] = this.days;
+    data['hours'] = this.hours;
+    data['minutes'] = this.minutes;
+    data['seconds'] = this.seconds;
     return data;
   }
 }
@@ -245,10 +282,10 @@ class Links {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['url'] = url;
-    data['label'] = label;
-    data['active'] = active;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['url'] = this.url;
+    data['label'] = this.label;
+    data['active'] = this.active;
     return data;
   }
 }
