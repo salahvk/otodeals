@@ -30,8 +30,10 @@ placeBid(BuildContext context) async {
         showAnimatedSnackBar(context, "Bid Placed",
             type: AnimatedSnackBarType.success);
       } else {
-        showAnimatedSnackBar(context, "Bid Placed",
-            type: AnimatedSnackBarType.success);
+        showAnimatedSnackBar(
+          context,
+          jsonResponse['message'],
+        );
       }
 
       // Navigator.of(context).pop();
