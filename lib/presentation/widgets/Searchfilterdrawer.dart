@@ -93,10 +93,18 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     Checkbox(
                       value: _isChecked1,
                       onChanged: (value) {
-                        Searchcontroller.fueltypecontroller.text='&filter_fueltype[]=diesel';
+
                         setState(() {
                           _isChecked1 = value ?? false;
                         });
+                       if(_isChecked1){
+                         _isChecked2 = false;
+          _isChecked3 = false;
+          _isChecked4 = false;
+          Searchcontroller.fueltypecontroller.text = '&filter_fueltype[]=diesel';
+                       }else{
+                        Searchcontroller.fueltypecontroller.text = '';
+                       }
                       },
                     ),
                     Text(
@@ -110,10 +118,18 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     Checkbox(
                       value: _isChecked2,
                       onChanged: (value) {
-                         Searchcontroller.fueltypecontroller.text='&filter_fueltype[]=petrol';
+                      
                         setState(() {
                           _isChecked2 = value ?? false;
                         });
+                        if (_isChecked2) {
+          _isChecked1 = false;
+          _isChecked3 = false;
+          _isChecked4 = false;
+          Searchcontroller.fueltypecontroller.text = '&filter_fueltype[]=petrol';
+        } else {
+          Searchcontroller.fueltypecontroller.text = '';
+        }
                       },
                     ),
                     Text(
@@ -127,10 +143,19 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     Checkbox(
                       value: _isChecked3,
                       onChanged: (value) {
-                         Searchcontroller.fueltypecontroller.text='&filter_fueltype[]=hybrid';
+                       
                         setState(() {
                           _isChecked3 = value ?? false;
                         });
+                         if (_isChecked3) {
+          _isChecked1 = false;
+          _isChecked2 = false;
+          _isChecked4 = false;
+          Searchcontroller.fueltypecontroller.text = '&filter_fueltype[]=hybrid';
+        } else {
+          Searchcontroller.fueltypecontroller.text = '';
+        }
+
                       },
                     ),
                     Text(
@@ -144,10 +169,18 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     Checkbox(
                       value: _isChecked4,
                       onChanged: (value) {
-                           Searchcontroller.fueltypecontroller.text='&filter_fueltype[]=electric';
+                        
                         setState(() {
                           _isChecked4 = value ?? false;
                         });
+                         if (_isChecked4) {
+          _isChecked1 = false;
+          _isChecked2 = false;
+          _isChecked3 = false;
+          Searchcontroller.fueltypecontroller.text = '&filter_fueltype[]=electric';
+        } else {
+          Searchcontroller.fueltypecontroller.text = '';
+        }
                       },
                     ),
                     Text(
@@ -170,12 +203,16 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     Checkbox(
                       value: _isautomatic,
                       onChanged: (value) {
-                        Searchcontroller.gearshiftcontroller.text='&filter_gearshift[]=automatic';
+                   
                         setState(() {
                           _isautomatic = value ?? false;
                         });
-                        if(_isautomatic=false){
-                          Searchcontroller.gearshiftcontroller.text='';
+                        if(_isautomatic){
+                          _ismanual=false;
+                          Searchcontroller.gearshiftcontroller.text='&filter_gearshift[]=automatic';
+                        }
+                        else{
+                             Searchcontroller.gearshiftcontroller.text='';
                         }
                       },
                     ),
@@ -190,12 +227,13 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     Checkbox(
                       value: _ismanual,
                       onChanged: (value) {
-                         Searchcontroller.gearshiftcontroller.text='&filter_gearshift[]=manual';
+                  
                         setState(() {
                           _ismanual = value ?? false;
                         });
-                         if(_ismanual=false){
-                          Searchcontroller.gearshiftcontroller.text='';
+                         if(_ismanual){
+                          _isautomatic=false;
+                           Searchcontroller.gearshiftcontroller.text='&filter_gearshift[]=manual';
                         }
                         
                       },
@@ -265,37 +303,70 @@ class _FilterDrawerState extends State<FilterDrawer> {
               ],
             ),
             const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18.0),
-              child: ElevatedButton(
-                onPressed: () {
-                fetchSearchResults(context);
-                  
-                  print(_currentRangeValues.start);
-                    print(_currentRangeValues.end);
-                  print(_currentRangeYears);
-                  // SearchFilters selectedFilters = SearchFilters(
-                  //   fuelTypes: getSelectedFuelTypes(),
-                  //   gearShifts: getSelectedGearShifts(),
-                  //  minmodelYear:_currentRangeYears.start,
-                  //  maxmodelYear:_currentRangeYears.end,
-                  //   minPrice: _currentRangeValues.start,
-                  //   maxPrice: _currentRangeValues.end,
-                  // );
-                  // print(selectedFilters);
-                  // widget.onFiltersChanged(selectedFilters);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colormanager.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                    fetchSearchResults(context);
+                    Navigator.pop(context);
+                      
+                      print(_currentRangeValues.start);
+                        print(_currentRangeValues.end);
+                      print(_currentRangeYears);
+                      // SearchFilters selectedFilters = SearchFilters(
+                      //   fuelTypes: getSelectedFuelTypes(),
+                      //   gearShifts: getSelectedGearShifts(),
+                      //  minmodelYear:_currentRangeYears.start,
+                      //  maxmodelYear:_currentRangeYears.end,
+                      //   minPrice: _currentRangeValues.start,
+                      //   maxPrice: _currentRangeValues.end,
+                      // );
+                      // print(selectedFilters);
+                      // widget.onFiltersChanged(selectedFilters);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colormanager.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Text(
+                      "Apply Filter",
+                      style: getMediumtStyle(color: Colors.white, fontSize: 15),
+                    ),
                   ),
                 ),
-                child: Text(
-                  "Apply Filter",
-                  style: getMediumtStyle(color: Colors.white, fontSize: 15),
-                ),
-              ),
+                 ElevatedButton(
+                    onPressed: () {
+                   Searchcontroller.fueltypecontroller.clear();
+                    Searchcontroller.gearshiftcontroller.clear();
+                     Searchcontroller.maxpricecontroller.clear();
+                      Searchcontroller.minpricecontroller.clear();
+                       Searchcontroller.yearrange1controller.clear();
+                        Searchcontroller.yearrange2controller.clear();
+              
+                   
+                    Navigator.pop(context);
+                      
+                      print(_currentRangeValues.start);
+                        print(_currentRangeValues.end);
+                      print(_currentRangeYears);
+                      
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colormanager.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Text(
+                      "Clear Filter",
+                      style: getMediumtStyle(color: Colors.white, fontSize: 15),
+                    ),
+                  ),
+              ],
             ),
           ],
         ),
