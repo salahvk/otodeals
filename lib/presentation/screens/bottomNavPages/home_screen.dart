@@ -24,7 +24,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool isBuySelected = true;
+  bool isBuySelected =true;
   int selectedContainer = 0;
   bool isRowVisible = true;
 
@@ -393,25 +393,26 @@ class Live extends StatefulWidget {
 }
 
 class _LiveState extends State<Live> {
-  void inputcurrentlyrunnigbid(index) {
-    final homeres = Provider.of<DataProvider>(context, listen: true);
-    int? id = homeres.homemodel?.currentlyRunning![index].id;
-    homeres.id = id;
-    getvehicledetails(context, id!);
-    Navigator.of(context).push(FadePageRoute(page: Porductdetails()));
-  }
+  // void inputcurrentlyrunnigbid(index)async {
+  //   final homeres = Provider.of<DataProvider>(context, listen:false);
+  //   int? id = homeres.homemodel?.currentlyRunning![index].id;
+  //   homeres.id = id;
+  //  await getvehicledetails(context, id!);
+
+  //   Navigator.of(context).push(FadePageRoute(page: Porductdetails()));
+  // }
 
   @override
   Widget build(BuildContext context) {
     final homeres = Provider.of<DataProvider>(context, listen: true);
-    void inputlatestarrivals(index) async {
-      final homeres = Provider.of<DataProvider>(context, listen: false);
-      int? id = homeres.homemodel?.saleVehicles![index].id;
-      homeres.id = id;
-      await getvehicledetails(context, id!);
+  void inputcurrentlyrunnigbid(index)async {
+    final homeres = Provider.of<DataProvider>(context, listen:false);
+    int? id = homeres.homemodel?.currentlyRunning![index].id;
+    homeres.id = id;
+   await getvehicledetails(context, id!);
 
-      Navigator.of(context).push(FadePageRoute(page: Porductdetails()));
-    }
+    Navigator.of(context).push(FadePageRoute(page: Porductdetails()));
+  }
 
     final size = MediaQuery.of(context).size;
 
@@ -426,8 +427,8 @@ class _LiveState extends State<Live> {
               padding: const EdgeInsets.all(10.0),
               child: InkWell(
                 onTap: () {
-                  // inputcurrentlyrunnigbid(index);
-                  inputlatestarrivals(index);
+                  inputcurrentlyrunnigbid(index);
+                  // inputlatestarrivals(index);
                 },
                 child: Container(
                   // height: size.height / 3.7,
@@ -455,7 +456,7 @@ class _LiveState extends State<Live> {
                                 homeres.homemodel?.currentlyRunning![index]
                                         .vehicleName ??
                                     "",
-                                style: getSemiBoldStyle(color: Colors.black)),
+                                style: getMediumtStyle(color: Colors.black,fontSize: 15)),
                             Container(
                               width: 40,
                               height: 15,
@@ -477,7 +478,7 @@ class _LiveState extends State<Live> {
                         height: 70,
                         width: 150,
                         child: Image.network(
-                            "$endpoint ${homeres.homemodel?.currentlyRunning?[index].image}"),
+                            "$endpoint${homeres.homemodel?.currentlyRunning?[index].image}"),
                       ),
                       const SizedBox(
                         height: 10,
@@ -596,25 +597,25 @@ class Upcoming extends StatefulWidget {
 }
 
 class _UpcomingState extends State<Upcoming> {
-  void inputbidnow(index) {
+  void inputbidnow(index)async {
     final homeres = Provider.of<DataProvider>(context, listen: false);
     int? id = homeres.homemodel?.bidVehicles![index].id;
     homeres.id = id;
-    getvehicledetails(context, id!);
+    await getvehicledetails(context, id!);
     Navigator.of(context).push(FadePageRoute(page: Porductdetails()));
   }
 
   @override
   Widget build(BuildContext context) {
     final homeres = Provider.of<DataProvider>(context, listen: true);
-    void inputlatestarrivals(index) async {
-      final homeres = Provider.of<DataProvider>(context, listen: false);
-      int? id = homeres.homemodel?.saleVehicles![index].id;
-      homeres.id = id;
-      await getvehicledetails(context, id!);
+    void inputbidnow(index)async {
+    final homeres = Provider.of<DataProvider>(context, listen: false);
+    int? id = homeres.homemodel?.bidVehicles![index].id;
+    homeres.id = id;
+    await getvehicledetails(context, id!);
+    Navigator.of(context).push(FadePageRoute(page: Porductdetails()));
+  }
 
-      Navigator.of(context).push(FadePageRoute(page: Porductdetails()));
-    }
 
     final size = MediaQuery.of(context).size;
 
@@ -627,7 +628,8 @@ class _UpcomingState extends State<Upcoming> {
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
-                inputlatestarrivals(index);
+                inputbidnow(index);
+                // inputlatestarrivals(index);
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -681,7 +683,7 @@ class _UpcomingState extends State<Upcoming> {
                         height: 70,
                         width: 150,
                         child: Image.network(
-                            "$endpoint ${homeres.homemodel?.bidVehicles?[index].image}"),
+                            "$endpoint${homeres.homemodel?.bidVehicles?[index].image}"),
                       ),
                       const SizedBox(
                         height: 10,
