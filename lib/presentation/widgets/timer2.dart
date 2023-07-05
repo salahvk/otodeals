@@ -34,10 +34,12 @@ class _TimerScreenState extends State<TimerScreen> {
     final homeres = Provider.of<DataProvider>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await gethome(context);
-        final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+      final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
 
-      DateTime startTime = dateFormat.parse(homeres.homemodel?.nextAccutionTime?.nextstarttime ?? "0");
-      DateTime endTime = dateFormat.parse(homeres.homemodel?.nextAccutionTime?.nextendtime ?? "0");
+      DateTime startTime = dateFormat
+          .parse(homeres.homemodel?.nextAccutionTime?.nextstarttime ?? "0");
+      DateTime endTime = dateFormat
+          .parse(homeres.homemodel?.nextAccutionTime?.nextendtime ?? "0");
 
       duration = endTime.difference(startTime);
       startTimer();
@@ -50,7 +52,7 @@ class _TimerScreenState extends State<TimerScreen> {
   //   timer?.cancel(); // Cancel the timer
   //   super.dispose();
   // }
-   void startTimer() {
+  void startTimer() {
     if (timer != null) {
       timer!.cancel();
     }
@@ -73,7 +75,7 @@ class _TimerScreenState extends State<TimerScreen> {
     return Container(
       child: TimerBuilder.periodic(Duration(seconds: 1), builder: (context) {
         DateTime currentTime = DateTime.now();
-          final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+        final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
 
         DateTime startTime = DateTime.parse(
             homeres.homemodel?.nextAccutionTime?.nextstarttime.toString() ??
@@ -100,9 +102,9 @@ class _TimerScreenState extends State<TimerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: years.toString(), header: 'Years'),
-              SizedBox(width: 8),
+              SizedBox(width: 20),
               TimeContainer(value: months.toString(), header: 'Months'),
-              SizedBox(width: 8),
+              SizedBox(width: 20),
               TimeContainer(value: days.toString(), header: 'Days'),
             ],
           );
@@ -111,9 +113,9 @@ class _TimerScreenState extends State<TimerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: months.toString(), header: 'Months'),
-              SizedBox(width: 8),
+              SizedBox(width: 20),
               TimeContainer(value: days.toString(), header: 'Days'),
-              SizedBox(width: 8),
+              SizedBox(width: 20),
               TimeContainer(value: hours.toString(), header: 'Hours'),
             ],
           );
@@ -122,9 +124,9 @@ class _TimerScreenState extends State<TimerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: days.toString(), header: 'Days'),
-              SizedBox(width: 8),
+              SizedBox(width: 20),
               TimeContainer(value: hours.toString(), header: 'Hours'),
-              SizedBox(width: 8),
+              SizedBox(width: 20),
               TimeContainer(value: minutes.toString(), header: 'Minutes'),
             ],
           );
@@ -133,9 +135,9 @@ class _TimerScreenState extends State<TimerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: hours.toString(), header: 'Hours'),
-              SizedBox(width: 8),
+              SizedBox(width: 20),
               TimeContainer(value: minutes.toString(), header: 'Minutes'),
-              SizedBox(width: 8),
+              SizedBox(width: 20),
               TimeContainer(value: seconds.toString(), header: 'Seconds'),
             ],
           );
@@ -156,27 +158,25 @@ class TimeContainer extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: 80,
-          height: 80,
+          width: 100,
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 246, 245, 245),
-            borderRadius: BorderRadius.circular(8),
+            color: Color.fromARGB(255, 241, 240, 240),
+            borderRadius: BorderRadius.circular(15),
           ),
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
                   Text(
                     value,
                     style:
-                        getBoldStyle(fontSize:20, color: Colormanager.black),
+                        getBoldStyle(fontSize: 35, color: Colormanager.black),
                   ),
-                  SizedBox(height: 8,),
                   Text(
                     header,
                     style: getSemiBoldStyle(
-                        color: Colormanager.primary, fontSize: 12.6),
+                        color: Colormanager.primary, fontSize: 10),
                   ),
                 ],
               ),

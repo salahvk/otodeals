@@ -10,16 +10,22 @@ import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:otodeals/data/providers/vehicledetails.dart';
 import 'package:provider/provider.dart';
 
-Future<bool> placeBid(BuildContext context) async {
+Future<bool> buyNow(BuildContext context) async {
   final vres = Provider.of<Vehicledetailsprovider>(context, listen: false);
 
   final apiToken = Hive.box("token").get('api_token');
-  final bidAmount = ProductController.bidController.text;
+  final name = ProductController.nameController.text;
+  final phone = ProductController.phoneNoController.text;
+  final mail = ProductController.mailController.text;
+  final address = ProductController.addressController.text;
+  final city = ProductController.cityController.text;
+  final location = ProductController.locationController.text;
+  final product = vres.vehdet?.vehicle?.id;
   if (apiToken == null) return false;
 
   try {
     final url =
-        '${ApiEndpoint.placeBid}?product_id=${vres.vehdet?.vehicle?.id.toString()}&bid_amount=$bidAmount';
+        '${ApiEndpoint.buyNow}?product_id=$product&name=$name&email=$mail&phone_number=$phone&address=$address&city=$city&location=$location';
     print(url);
     var response = await http.post(Uri.parse(url),
         headers: {"device-id": 'abc', "api-token": apiToken});
@@ -27,7 +33,7 @@ Future<bool> placeBid(BuildContext context) async {
       log(response.body);
       var jsonResponse = jsonDecode(response.body);
       if (jsonResponse['result'] != false) {
-        showAnimatedSnackBar(context, "Bid Placed",
+        showAnimatedSnackBar(context, jsonResponse['message'],
             type: AnimatedSnackBarType.success);
         return true;
       } else {

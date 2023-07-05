@@ -9,8 +9,10 @@ import 'package:otodeals/core/util/animatedsnackbar.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:otodeals/data/providers/vehicledetails.dart';
 import 'package:otodeals/data/repositories/placebid.dart';
+import 'package:otodeals/presentation/widgets/bidlisttile.dart';
 
 import 'package:otodeals/presentation/widgets/bottom_nav.dart';
+import 'package:otodeals/presentation/widgets/buynow_listtile.dart';
 
 import 'package:provider/provider.dart';
 
@@ -36,6 +38,7 @@ class _PorductdetailsState extends State<Porductdetails> {
     final vres = Provider.of<Vehicledetailsprovider>(context, listen: true);
     ProductController.bidController.text =
         vres.vehdet?.vehicle?.price.toString() ?? '';
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
           child: Padding(
@@ -50,10 +53,11 @@ class _PorductdetailsState extends State<Porductdetails> {
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(30),
                             topRight: Radius.circular(30),
-                            bottomLeft: Radius.circular(60),
-                            bottomRight: Radius.circular(60))),
+                            bottomLeft: Radius.circular(40),
+                            bottomRight: Radius.circular(40))),
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(top: 40.0, left: 30),
@@ -69,7 +73,7 @@ class _PorductdetailsState extends State<Porductdetails> {
                                 height: 10,
                               ),
                               Text(
-                                vres.vehdet?.vehicle?.price.toString() ?? "",
+                                "Rs. ${vres.vehdet?.vehicle?.price.toString()}",
                                 style: getBoldStyle(
                                     color: Colormanager.white, fontSize: 20),
                               )
@@ -77,7 +81,8 @@ class _PorductdetailsState extends State<Porductdetails> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 150.0, top: 45),
+                          padding: EdgeInsets.only(
+                              bottom: size.height * .18, right: 35),
                           child: Container(
                               height: 35,
                               width: 35,
@@ -100,17 +105,13 @@ class _PorductdetailsState extends State<Porductdetails> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 150.0, left: 35),
+                    padding: EdgeInsets.only(top: size.height * .27, left: 35),
                     child: Container(
-                      height: 200,
+                      height: 180,
                       width: MediaQuery.of(context).size.width / 1.2,
                       decoration: BoxDecoration(
                           color: Colormanager.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(50),
-                              topRight: Radius.circular(50),
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20)),
+                          borderRadius: BorderRadius.circular(25),
                           boxShadow: const [
                             BoxShadow(
                                 blurRadius: 4,
@@ -138,119 +139,132 @@ class _PorductdetailsState extends State<Porductdetails> {
                             // ),
                             // ),
                           ),
-                          SizedBox(
-                            height: 5,
-                          ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Row(children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 40.0),
-                                child: Container(
-                                  height: 70,
-                                  width: 70,
-                                  decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        children: [
-                                          Image.asset(
-                                            'assets/speedometer-icon.png',
-                                            height: 30,
-                                            width: 30,
-                                          ),
-                                          SizedBox(
-                                            height: 6,
-                                          ),
-                                          Text(
-                                            vres.vehdet?.vehicle?.gearshift ??
-                                                "",
-                                            style: getSemiBoldStyle(
-                                                color: Colormanager.primary,
-                                                fontSize: 9),
-                                          ),
-                                        ],
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    height: 70,
+                                    width: 70,
+                                    decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          children: [
+                                            Image.asset(
+                                              'assets/speedometer-icon.png',
+                                              height: 30,
+                                              width: 30,
+                                            ),
+                                            SizedBox(
+                                              height: 6,
+                                            ),
+                                            Text(
+                                              vres.vehdet?.vehicle?.gearshift ??
+                                                  "",
+                                              style: getMediumtStyle(
+                                                  color: Colormanager.primary,
+                                                  fontSize: 10),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ),
-                              Container(
-                                height: 70,
-                                width: 70,
-                                decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 255, 255, 255),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      children: [
-                                        Image.asset(
-                                          'assets/car-seat-belt-icon.png',
-                                          height: 30,
-                                          width: 30,
+                                  Container(
+                                    height: 70,
+                                    width: 70,
+                                    decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          children: [
+                                            Image.asset(
+                                              'assets/car-seat-belt-icon.png',
+                                              height: 30,
+                                              width: 30,
+                                            ),
+                                            SizedBox(
+                                              height: 6,
+                                            ),
+                                            Text(
+                                              "5 seats",
+                                              style: getMediumtStyle(
+                                                  color: Colormanager.primary,
+                                                  fontSize: 10),
+                                            ),
+                                          ],
                                         ),
-                                        SizedBox(
-                                          height: 6,
-                                        ),
-                                        Text(
-                                          "5 seats",
-                                          style: getSemiBoldStyle(
-                                              color: Colormanager.primary,
-                                              fontSize: 9),
-                                        ),
-                                      ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                              Container(
-                                height: 70,
-                                width: 70,
-                                decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 255, 255, 255),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      children: [
-                                        SvgPicture.asset(
-                                          'assets/drawer_icons/gasoline-pump-svgrepo-com.svg',
-                                          height: 30,
-                                          width: 30,
+                                  Container(
+                                    height: 70,
+                                    width: 70,
+                                    decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          children: [
+                                            SvgPicture.asset(
+                                              'assets/drawer_icons/gasoline-pump-svgrepo-com.svg',
+                                              height: 30,
+                                              width: 30,
+                                            ),
+                                            SizedBox(
+                                              height: 6,
+                                            ),
+                                            Text(
+                                              vres.vehdet?.vehicle?.fueltype ??
+                                                  "",
+                                              style: getMediumtStyle(
+                                                  color: Colormanager.primary,
+                                                  fontSize: 10),
+                                            ),
+                                          ],
                                         ),
-                                        SizedBox(
-                                          height: 6,
-                                        ),
-                                        Text(
-                                          vres.vehdet?.vehicle?.fueltype ?? "",
-                                          style: getSemiBoldStyle(
-                                              color: Colormanager.primary,
-                                              fontSize: 9),
-                                        ),
-                                      ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                            ]),
+                                ]),
                           )
                         ],
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 70.0, left: 110),
-                    child: Image.network(
-                      "$endpoint${vres.vehdet?.vehicle?.productimage ?? ""}",
-                      height: 170,
-                      width: 170,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding:
+                            EdgeInsets.only(top: size.height * .18, left: 0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: Image.network(
+                            "$endpoint${vres.vehdet?.vehicle?.productimage ?? ""}",
+                            height: 130,
+                            width: size.width * .75,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ]),
                 SizedBox(
@@ -266,7 +280,7 @@ class _PorductdetailsState extends State<Porductdetails> {
                         borderRadius: BorderRadius.circular(20)),
                     child: Stack(
                       children: [
-                        Image.asset("assets/carparts.png"),
+                        Center(child: Image.asset("assets/carparts.png")),
                         Column(
                           children: [
                             Padding(
@@ -571,139 +585,7 @@ class _PorductdetailsState extends State<Porductdetails> {
                 SizedBox(
                   height: 15,
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          right: 1.0, left: 12, bottom: 10),
-                      child: ExpansionTile(
-                        trailing: SizedBox(height: 0, width: 0.2),
-                        title: Container(
-                          height: 50,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                              color: Colormanager.primary,
-                              borderRadius: BorderRadius.circular(30)),
-                          child: Center(
-                              child: Text(
-                            "PLACE YOUR BID",
-                            style: getBoldStyle(
-                                color: Colormanager.white, fontSize: 15),
-                          )),
-                        ),
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10.0, left: 2, right: 14, bottom: 20),
-                            child: Container(
-                              height: 230,
-                              width: MediaQuery.of(context).size.width / 1.3,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 239, 239, 239),
-                                borderRadius: BorderRadius.circular(20),
-                                boxShadow: const [
-                                  BoxShadow(
-                                      blurRadius: 6,
-                                      color: Color.fromARGB(255, 174, 174, 174),
-                                      blurStyle: BlurStyle.normal)
-                                ],
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 25.0,
-                                ),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "ENTER YOUR BID AMOUNT:",
-                                      style: getBoldStyle(
-                                          color: const Color.fromARGB(
-                                              255, 37, 37, 37),
-                                          fontSize: 14),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      "Bid amount must be greater than 1 lack",
-                                      style: getMediumtStyle(
-                                          color: Colormanager.greyText,
-                                          fontSize: 12),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 23.0, right: 23),
-                                      child: TextField(
-                                        controller:
-                                            ProductController.bidController,
-                                        decoration: InputDecoration(
-                                          filled: true,
-                                          fillColor: Colormanager.background,
-                                          hintStyle: getSemiBoldStyle(
-                                              fontSize: 14,
-                                              color: const Color.fromARGB(
-                                                  255, 14, 14, 14)),
-                                          enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  width: 2,
-                                                  color: Color.fromARGB(
-                                                      255, 202, 200, 200))),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 28,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        final token =
-                                            Hive.box('token').get('api_token');
-                                        if (token == null) {
-                                          Navigator.pushNamedAndRemoveUntil(
-                                              context,
-                                              Routes.loginScreen,
-                                              (route) => false);
-                                        } else {
-                                          placeBid(context);
-                                          // if (ProductController
-                                          //     .bidController.text.isEmpty) {
-                                          //   showAnimatedSnackBar(
-                                          //       context, "Enter a bid amount");
-                                          // } else {}
-                                        }
-                                      },
-                                      child: Container(
-                                        height: 40,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                1.2,
-                                        decoration: BoxDecoration(
-                                            color: Colormanager.primary,
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
-                                        child: Center(
-                                            child: Text(
-                                          "PLACE YOUR BID",
-                                          style: getSemiBoldStyle(
-                                              color: Colormanager.white,
-                                              fontSize: 15),
-                                        )),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                vres.vehdet?.vehicle?.type == 'sale' ? BuyNow() : BidListTile(),
                 SizedBox(
                   height: 4,
                 ),
@@ -722,7 +604,8 @@ class _PorductdetailsState extends State<Porductdetails> {
                               color: Color.fromARGB(255, 184, 185, 198))
                         ]),
                     child: Padding(
-                      padding: EdgeInsets.only(top: 36.0, right: 6, left: 6),
+                      padding: EdgeInsets.only(
+                          top: 30, right: 6, left: 6, bottom: 30),
                       child: GestureDetector(
                         onTap: () {
                           setState(() {
