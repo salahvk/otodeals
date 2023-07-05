@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 // import 'package:otodeals/core/color_manager.dart';
@@ -21,36 +22,48 @@ class TimerScreen extends StatefulWidget {
 class _TimerScreenState extends State<TimerScreen> {
   static var countdownDuration = Duration(minutes: 15);
 
-  Duration duration = Duration();
+  // Duration duration = Duration();
 
   Timer? timer;
   bool countDown = true;
   int index = 0;
+  late Duration duration;
 
   @override
   void initState() {
     final homeres = Provider.of<DataProvider>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await gethome(context);
+        final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+
+      DateTime startTime = dateFormat.parse(homeres.homemodel?.nextAccutionTime?.nextstarttime ?? "0");
+      DateTime endTime = dateFormat.parse(homeres.homemodel?.nextAccutionTime?.nextendtime ?? "0");
+
+      duration = endTime.difference(startTime);
+      startTimer();
     });
-
-    // int hours;
-    // int mints;
-    // int secs;
-    // hours = int.parse(homeres.homemodel?.bidVehicles?[widget.index].hours.toString()??"0");
-    // mints = int.parse(homeres.homemodel?.bidVehicles?[widget.index].minutes.toString()??"0");
-    // secs = int.parse(homeres.homemodel?.bidVehicles?[widget.index].seconds.toString()??"0");
-    // countdownDuration = Duration(hours: hours, minutes: mints, seconds: secs);
-    // startTimer();
-    // reset();
-
     super.initState();
   }
 
   @override
-  void dispose() {
-    timer?.cancel(); // Cancel the timer
-    super.dispose();
+  // void dispose() {
+  //   timer?.cancel(); // Cancel the timer
+  //   super.dispose();
+  // }
+   void startTimer() {
+    if (timer != null) {
+      timer!.cancel();
+    }
+    timer = Timer.periodic(Duration(seconds: 1), (_) {
+      if (duration.inSeconds > 0) {
+        setState(() {
+          duration = duration - Duration(seconds: 1);
+        });
+      } else {
+        // Countdown has ended
+        timer!.cancel();
+      }
+    });
   }
 
   @override
@@ -60,6 +73,7 @@ class _TimerScreenState extends State<TimerScreen> {
     return Container(
       child: TimerBuilder.periodic(Duration(seconds: 1), builder: (context) {
         DateTime currentTime = DateTime.now();
+          final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
 
         DateTime startTime = DateTime.parse(
             homeres.homemodel?.nextAccutionTime?.nextstarttime.toString() ??
@@ -86,9 +100,9 @@ class _TimerScreenState extends State<TimerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: years.toString(), header: 'Years'),
-              SizedBox(width: 2),
+              SizedBox(width: 8),
               TimeContainer(value: months.toString(), header: 'Months'),
-              SizedBox(width: 2),
+              SizedBox(width: 8),
               TimeContainer(value: days.toString(), header: 'Days'),
             ],
           );
@@ -97,9 +111,9 @@ class _TimerScreenState extends State<TimerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: months.toString(), header: 'Months'),
-              SizedBox(width: 2),
+              SizedBox(width: 8),
               TimeContainer(value: days.toString(), header: 'Days'),
-              SizedBox(width: 2),
+              SizedBox(width: 8),
               TimeContainer(value: hours.toString(), header: 'Hours'),
             ],
           );
@@ -108,9 +122,9 @@ class _TimerScreenState extends State<TimerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: days.toString(), header: 'Days'),
-              SizedBox(width: 2),
+              SizedBox(width: 8),
               TimeContainer(value: hours.toString(), header: 'Hours'),
-              SizedBox(width: 2),
+              SizedBox(width: 8),
               TimeContainer(value: minutes.toString(), header: 'Minutes'),
             ],
           );
@@ -119,9 +133,9 @@ class _TimerScreenState extends State<TimerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: hours.toString(), header: 'Hours'),
-              SizedBox(width: 2),
+              SizedBox(width: 8),
               TimeContainer(value: minutes.toString(), header: 'Minutes'),
-              SizedBox(width: 2),
+              SizedBox(width: 8),
               TimeContainer(value: seconds.toString(), header: 'Seconds'),
             ],
           );
@@ -142,8 +156,8 @@ class TimeContainer extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: 75,
-          height: 75,
+          width: 80,
+          height: 80,
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 246, 245, 245),
             borderRadius: BorderRadius.circular(8),
@@ -156,12 +170,13 @@ class TimeContainer extends StatelessWidget {
                   Text(
                     value,
                     style:
-                        getBoldStyle(fontSize: 17, color: Colormanager.black),
+                        getBoldStyle(fontSize:20, color: Colormanager.black),
                   ),
+                  SizedBox(height: 8,),
                   Text(
                     header,
                     style: getSemiBoldStyle(
-                        color: Colormanager.primary, fontSize: 12),
+                        color: Colormanager.primary, fontSize: 12.6),
                   ),
                 ],
               ),

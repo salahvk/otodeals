@@ -8,11 +8,12 @@ import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/repositories/vehicledetails.dart';
 import 'package:otodeals/presentation/screens/productdetails.dart';
 import 'package:otodeals/presentation/widgets/custom_drawer.dart';
-import 'package:otodeals/presentation/widgets/livetimer.dart';
+// import 'package:otodeals/presentation/widgets/livetimer.dart';
 import 'package:otodeals/presentation/widgets/numberinput.dart';
 
-import 'package:otodeals/presentation/widgets/timer.dart';
+// import 'package:otodeals/presentation/widgets/timer.dart';
 import 'package:otodeals/presentation/widgets/timer2.dart';
+
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,8 +24,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool isBuySelected = true;
-  int selectedContainer = 0;
+  bool isBuySelected = false;
+  int selectedContainer = 1;
   bool isRowVisible = true;
 
   @override
@@ -591,7 +592,7 @@ class _LiveState extends State<Live> {
                                   "RS. ${homeres.homemodel?.currentlyRunning![index].price.toString()}",
                                   style: getBoldStyle(
                                       color: Colors.black, fontSize: 15)),
-                              LivetimerScreen(index)
+                              // LivetimerScreen(index)
                             ],
                           ),
                         )
@@ -676,7 +677,7 @@ class _UpcomingState extends State<Upcoming> {
                                         .vehicleName ??
                                     "",
                                 style: getMediumtStyle(
-                                    color: Colors.black, fontSize: 20)),
+                                    color: Colors.black, fontSize:18)),
                             //  Container(
                             //                   width: 40,
                             //                   height: 15,
@@ -820,7 +821,7 @@ class _UpcomingState extends State<Upcoming> {
                                       color: Colors.black, fontSize: 15)),
                               Padding(
                                 padding: const EdgeInsets.only(right: 10),
-                                child: AttendanceScreen(index),
+                              //   child: AttendanceScreen(index),
                               ),
                             ],
                           ),
@@ -1005,7 +1006,7 @@ class _BuyState extends State<Buy> {
                                           .vehicleName ??
                                       "",
                                   style: getMediumtStyle(
-                                      color: Colors.black, fontSize: 15)),
+                                      color: Colors.black, fontSize: 18)),
                             ),
                             InkWell(
                               onTap: () => _showDialog(context),
@@ -1033,8 +1034,8 @@ class _BuyState extends State<Buy> {
                         ),
                       ),
                       Container(
-                        // height:100,
-                        width: 240,
+                       height: 130,
+                            width: size.width * .8,
                         color: Colors.amber,
                         child: Image.network(
                           "$endpoint${homeres.homemodel?.saleVehicles?[index].image}",
