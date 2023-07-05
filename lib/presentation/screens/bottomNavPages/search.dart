@@ -14,6 +14,7 @@ import 'package:otodeals/presentation/widgets/Searchfilterdrawer.dart';
 
 
 import 'package:http/http.dart' as http;
+import 'package:otodeals/presentation/widgets/testtime.dart';
 import 'package:provider/provider.dart';
 
 class Searchs extends StatefulWidget {
@@ -277,136 +278,143 @@ class BuyFunction extends StatelessWidget {
       print(l);
 
     // Replace this with your GridViewBuilder implementation for the Buy functionality
-    return GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent:300,
-                            childAspectRatio: 3 / 3,
-                            crossAxisSpacing:16,
-                            mainAxisExtent:220,
-                            mainAxisSpacing: 20),
-                    itemCount:res.vlist?.products?.data?.length??0,
-                    itemBuilder: (BuildContext ctx,index ) {
-                      return InkWell(
-                        onTap: () {
-                          // Navigator.push(context,
-                          //     MaterialPageRoute(builder: (ctx) {
-                          //   return const LoadingListPage();
-                          // }));
-                          // final id = homeData![index].id;
-                          // servicerProvider.serviceId = id;
-                          // getSubService(context, id);
-                        },
-                        child: Container(
-                          height:200,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 10.0,
-                                  color: Colors.grey.shade300,
-                                  offset: const Offset(2, 2.5),
-                                ),
-                              ],
-                              color: Colormanager.white,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top:10.0,left:10.0,right:10.0),
-                                child: Column(
-                                  
-                                  // mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(res.vlist?.products?.data![index].vehicleName??"",
-                                            style: getSemiBoldStyle(
-                                                color: Colors.black)),
-                                        // Container(
-                                        //   width: 40,
-                                        //   height: 15,
-                                        //   decoration: BoxDecoration(
-                                        //       color: Colormanager.primary,
-                                        //       borderRadius:
-                                        //           BorderRadius.circular(15)),
-                                        //   child: Center(
-                                        //     child: Text(
-                                        //       "Bid Now",
-                                        //       style: getRegularStyle(
-                                        //           color: Colormanager.white,
-                                        //           fontSize: 7),
-                                        //     ),
-                                        //   ),
-                                        // )
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(res.vlist?.products?.data![index].price.toString()??"",
-                                            style: getMediumtStyle(
-                                                color: Colors.black, fontSize: 10)),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    SizedBox(
-                                      width: size.width,
-                                      height: 110,
-                                      child:Image.network( "$endpoint${res.vlist?.products?.data![index].image}",
-                                        width: 60,
-                                        
-                                           
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 15,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        SizedBox(
-                                            width: 30,
-                                            height:20,
-                                            child:
-                                                Image.asset('assets/petrol.png')),
-                                        Text(res.vlist?.products?.data![index].fueltype??"",
-                                            style: getMediumtStyle(
-                                                color: Colormanager.textColor,
-                                                fontSize: 10)),
-                                        Text(res.vlist?.products?.data![index].gearshift??"",
-                                            style: getMediumtStyle(
-                                                color: Colormanager.textColor,
-                                                fontSize: 10)),
-                                      ],
-                                    
-                                   
-                                    // Text(homeData![index].service ?? '',
-                                    //     textAlign: TextAlign.center,
-                                    //     style: getRegularStyle(
-                                    //         color: Colormanager.primary,
-                                    //         fontSize:
-                                    //            10
-                                    ),
-                                
-                              
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                              maxCrossAxisExtent:300,
+                              childAspectRatio: 3 / 3,
+                              crossAxisSpacing:16,
+                              mainAxisExtent:220,
+                              mainAxisSpacing: 20),
+                      itemCount:res.vlist?.products?.data?.length??0,
+                      itemBuilder: (BuildContext ctx,index ) {
+                        return InkWell(
+                          onTap: () {
+                            // Navigator.push(context,
+                            //     MaterialPageRoute(builder: (ctx) {
+                            //   return const LoadingListPage();
+                            // }));
+                            // final id = homeData![index].id;
+                            // servicerProvider.serviceId = id;
+                            // getSubService(context, id);
+                          },
+                          child: Container(
+                            height:200,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 10.0,
+                                    color: Colors.grey.shade300,
+                                    offset: const Offset(2, 2.5),
+                                  ),
                                 ],
+                                color: Colormanager.white,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top:10.0,left:10.0,right:10.0),
+                                  child: Column(
+                                    
+                                    // mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(res.vlist?.products?.data![index].vehicleName??"",
+                                              style: getSemiBoldStyle(
+                                                  color: Colors.black,fontSize:15)),
+                                          // Container(
+                                          //   width: 40,
+                                          //   height: 15,
+                                          //   decoration: BoxDecoration(
+                                          //       color: Colormanager.primary,
+                                          //       borderRadius:
+                                          //           BorderRadius.circular(15)),
+                                          //   child: Center(
+                                          //     child: Text(
+                                          //       "Bid Now",
+                                          //       style: getRegularStyle(
+                                          //           color: Colormanager.white,
+                                          //           fontSize: 7),
+                                          //     ),
+                                          //   ),
+                                          // )
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("Rs.${res.vlist?.products?.data![index].price.toString()??""}",
+                                              style: getMediumtStyle(
+                                                  color: Colors.black, fontSize:13)),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Container(
+                                        // color: Colors.amber,
+                                        // width: size.width,
+                                        height:size.height/8,
+                                        child:ClipRRect(
+                                          borderRadius: BorderRadius.circular(7),
+                                          child: Image.network( "$endpoint${res.vlist?.products?.data![index].image}",
+                                            // width: 60,
+                                            
+                                               
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 15,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          SizedBox(
+                                              width: 30,
+                                              height:20,
+                                              child:
+                                                  Image.asset('assets/petrol.png')),
+                                          Text(res.vlist?.products?.data![index].fueltype??"",
+                                              style: getMediumtStyle(
+                                                  color: Colormanager.textColor,
+                                                  fontSize: 13)),
+                                          Text(res.vlist?.products?.data![index].gearshift??"",
+                                              style:  getMediumtStyle(
+                                                  color: Colormanager.textColor,
+                                                  fontSize: 13)),
+                                        ],
+                                      
+                                     
+                                      // Text(homeData![index].service ?? '',
+                                      //     textAlign: TextAlign.center,
+                                      //     style: getRegularStyle(
+                                      //         color: Colormanager.primary,
+                                      //         fontSize:
+                                      //            10
+                                      ),
+                                  
+                                
+                                  ],
+                                  ),
                                 ),
-                              ),
-                           
-                      ])));
-                });
+                             
+                        ])));
+                  }),
+    );
   }
 }
 
@@ -419,149 +427,157 @@ class BidFunction extends StatelessWidget {
        final res=Provider.of<Vehicleprovider>(context,listen: true);
       final size = MediaQuery.of(context).size;
     // Replace this with your GridViewBuilder implementation for the Bid functionality
-    return GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent:300,
-                            childAspectRatio: 3 / 3,
-                            crossAxisSpacing:16,
-                            mainAxisExtent:280,
-                            mainAxisSpacing: 20),
-                    itemCount:res.vlist?.products?.data?.length??0,
-                    itemBuilder: (BuildContext ctx, index) {
-                      return InkWell(
-                        onTap: () {
-                          // Navigator.push(context,
-                          //     MaterialPageRoute(builder: (ctx) {
-                          //   return const LoadingListPage();
-                          // }));
-                          // final id = homeData![index].id;
-                          // servicerProvider.serviceId = id;
-                          // getSubService(context, id);
-                        },
-                        child: Container(
-                          height:size.height,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 10.0,
-                                  color: Colors.grey.shade300,
-                                  offset: const Offset(2, 2.5),
-                                ),
-                              ],
-                              color: Colormanager.white,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top:10.0,left:10.0,right:10.0),
-                                child: Column(
-                                  
-                                  // mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(res.vlist?.products?.data![index].vehicleName??"",
-                                            style: getSemiBoldStyle(
-                                                color: Colors.black)),
-                                        // Container(
-                                        //   width: 40,
-                                        //   height: 15,
-                                        //   decoration: BoxDecoration(
-                                        //       color: Colormanager.primary,
-                                        //       borderRadius:
-                                        //           BorderRadius.circular(15)),
-                                        //   child: Center(
-                                        //     child: Text(
-                                        //       "Bid Now",
-                                        //       style: getRegularStyle(
-                                        //           color: Colormanager.white,
-                                        //           fontSize: 7),
-                                        //     ),
-                                        //   ),
-                                        // )
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(res.vlist?.products?.data![index].price.toString()??"",
-                                            style: getMediumtStyle(
-                                                color: Colors.black, fontSize: 10)),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    SizedBox(
-                                      width: size.width,
-                                      height: 100,
-                                      child: Image.network(
-                                            "$endpoint${res.vlist?.products?.data![index].image}",
-                                        width: 60,
-                                        
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 15,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        SizedBox(
-                                            width: 30,
-                                            height:20,
-                                            child:
-                                                Image.asset('assets/petrol.png')),
-                                        Text(res.vlist?.products?.data![index].fueltype??"",
-                                            style: getMediumtStyle(
-                                                color: Colormanager.textColor,
-                                                fontSize: 10)),
-                                        Text(res.vlist?.products?.data![index].gearshift??"",
-                                            style: getMediumtStyle(
-                                                color: Colormanager.textColor,
-                                                fontSize: 10)),
-                                      ],
-                                    
-                                   
-                                    // Text(homeData![index].service ?? '',
-                                    //     textAlign: TextAlign.center,
-                                    //     style: getRegularStyle(
-                                    //         color: Colormanager.primary,
-                                    //         fontSize:
-                                    //            10
-                                    //                )),
-                                ),
-                                
-                              
-                                ],
-                                ),
-                              ),
-                              SizedBox(height:23,),
-                                Container(
-                                  height: 70,
-                                  width: 250,
-                                  decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 255, 254, 254),
-                                    borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight:Radius.circular(15) )
-                  
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                              maxCrossAxisExtent:290,
+                              childAspectRatio: 3 /3,
+                              crossAxisSpacing:13,
+                              mainAxisExtent:279,
+                              mainAxisSpacing: 20),
+                      itemCount:res.vlist?.products?.data?.length??0,
+                      itemBuilder: (context,index) {
+                        return InkWell(
+                          onTap: () {
+                            // Navigator.push(context,
+                            //     MaterialPageRoute(builder: (ctx) {
+                            //   return const LoadingListPage();
+                            // }));
+                            // final id = homeData![index].id;
+                            // servicerProvider.serviceId = id;
+                            // getSubService(context, id);
+                          },
+                          child: Container(
+                            // height:size.height,
+                            width: size.width/4,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 10.0,
+                                    color: Colors.grey.shade300,
+                                    offset: const Offset(2, 2.5),
                                   ),
-                                  // child:AttendanceScreen(),
-                                )
-                            ],
+                                ],
+                                color: Colormanager.white,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    
+                                    // mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(res.vlist?.products?.data![index].vehicleName??"",
+                                              style: getSemiBoldStyle(
+                                    color: Colors.black, fontSize:16)),
+                                          // Container(
+                                          //   width: 40,
+                                          //   height: 15,
+                                          //   decoration: BoxDecoration(
+                                          //       color: Colormanager.primary,
+                                          //       borderRadius:
+                                          //           BorderRadius.circular(15)),
+                                          //   child: Center(
+                                          //     child: Text(
+                                          //       "Bid Now",
+                                          //       style: getRegularStyle(
+                                          //           color: Colormanager.white,
+                                          //           fontSize: 7),
+                                          //     ),
+                                          //   ),
+                                          // )
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("Rs.${res.vlist?.products?.data![index].price.toString()??""}",
+                                              style:  getMediumtStyle(
+                                      color: Colors.black, fontSize:14)),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 13,
+                                      ),
+                                      Container(
+                                        // color: Colors.amber,
+                                        // width: size.width,
+                                        height:size.height/7.3,
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(7),
+                                          child: Image.network(
+                                                "$endpoint${res.vlist?.products?.data![index].image}",
+                                            // width: 60,
+                                            
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 15,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          SizedBox(
+                                              width: 30,
+                                              height:20,
+                                              child:
+                                                  Image.asset('assets/petrol.png')),
+                                          Text(res.vlist?.products?.data![index].fueltype??"",
+                                              style: getMediumtStyle(
+                                                  color: Colormanager.textColor,
+                                                  fontSize: 13)),
+                                          Text(res.vlist?.products?.data![index].gearshift??"",
+                                              style: getMediumtStyle(
+                                                  color: Colormanager.textColor,
+                                                  fontSize: 13)),
+                                        ],
+                                      
+                                     
+                                      // Text(homeData![index].service ?? '',
+                                      //     textAlign: TextAlign.center,
+                                      //     style: getRegularStyle(
+                                      //         color: Colormanager.primary,
+                                      //         fontSize:
+                                      //            10
+                                      //                )),
+                                  ),
+                                  
+                                  
+                                  ],
+                                  ),
+                                ),
+                                SizedBox(height:17,),
+                                  Container(
+                                    // height: 60,
+                                    width: 255,
+                                    decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 246, 245, 245),
+                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight:Radius.circular(15) )
+                    
+                                    ),
+                                    child:TestScreen(index: index),
+                                  )
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    });
+                        );
+                      }),
+    );
   }
 }

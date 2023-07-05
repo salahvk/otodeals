@@ -1,138 +1,194 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/styles_manager.dart';
+import 'package:otodeals/data/providers/vehicleprovider.dart';
+
+import 'package:otodeals/data/repositories/vehiclelisting.dart';
+import 'package:provider/provider.dart';
+import 'package:timer_builder/timer_builder.dart';
+
+class TestScreen extends StatefulWidget {
+   final int? index;
+  const TestScreen({this.index,super.key});
+
+  @override
+  State<TestScreen> createState() => _TestScreenState();
+}
+
+class _TestScreenState extends State<TestScreen> {
+  static var countdownDuration = Duration(minutes: 15);
+
+  // Duration duration = Duration();
+
+  Timer? timer;
+  bool countDown = true;
+  // int index = 0;
+  late Duration duration;
+
+  @override
+  void initState() {
+   final res=Provider.of<Vehicleprovider>(context,listen:false);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await fetchSearchResults(context);
+        final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+
+      DateTime startTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].starttime ?? "0");
+      DateTime endTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].endtime?? "0");
+
+      duration = endTime.difference(startTime);
+      startTimer();
+    });
+    super.initState();
+  }
+
+  @override
+  // void dispose() {
+  //   timer?.cancel(); // Cancel the timer
+  //   super.dispose();
+  // }
+   void startTimer() {
+    if (timer != null) {
+      timer!.cancel();
+    }
+    timer = Timer.periodic(Duration(seconds: 1), (_) {
+      if (duration.inSeconds > 0) {
+        setState(() {
+          duration = duration - Duration(seconds: 1);
+        });
+      } else {
+        // Countdown has ended
+        timer!.cancel();
+      }
+    });
+  }
+
+  @override
+ Widget build(BuildContext context) {
+   
+   final res=Provider.of<Vehicleprovider>(context,listen:false);
+     final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+    DateTime startTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].starttime ?? "0");
+      DateTime endTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].endtime?? "0");
 
 
-// import 'dart:async';
+    return Container(
+      child: TimerBuilder.periodic(Duration(seconds: 1), builder: (context) {
+        DateTime currentTime = DateTime.now();
+          final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
 
-// import 'package:flutter/material.dart';
-// import 'package:otodeals/core/color_manager.dart';
-// import 'package:otodeals/core/styles_manager.dart';
-// // import 'package:otodeals/core/color_manager.dart';
-// // import 'package:otodeals/core/styles_manager.dart';
+      DateTime startTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].starttime ?? "0");
+      DateTime endTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].endtime?? "0");
+      // print(res.vlist?.products?.data![index].starttime??"0");
 
-// import 'package:otodeals/data/providers/vehicleprovider.dart';
+        if (currentTime.isAfter(endTime)) {
+          // Countdown has ended
+          return Text('Countdown Ended');
+        }
 
-// import 'package:otodeals/data/repositories/vehiclelisting.dart';
+        Duration remainingTime = endTime.difference(currentTime);
 
-// import 'package:provider/provider.dart';
-// import 'package:timer_builder/timer_builder.dart';
+        int years = remainingTime.inDays ~/ 365;
+        int months = remainingTime.inDays.remainder(365) ~/ 30;
+        int days = remainingTime.inDays.remainder(30);
+        int hours = remainingTime.inHours.remainder(24);
+        int minutes = remainingTime.inMinutes.remainder(60);
+        int seconds = remainingTime.inSeconds.remainder(60);
 
-// class TestScreen extends StatefulWidget {
+        if (years > 0) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TimeContainer(value: years.toString(), header: 'Years'),
+            
+              TimeContainer(value: months.toString(), header: 'Months'),
+            
+              TimeContainer(value: days.toString(), header: 'Days'),
+            ],
+          );
+        } else if (months > 0) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TimeContainer(value: months.toString(), header: 'Months'),
+             
+              TimeContainer(value: days.toString(), header: 'Days'),
+             
+              TimeContainer(value: hours.toString(), header: 'Hours'),
+            ],
+          );
+        } else if (days > 0) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TimeContainer(value: days.toString(), header: 'Days'),
+             
+              TimeContainer(value: hours.toString(), header: 'Hours'),
+            
+              TimeContainer(value: minutes.toString(), header: 'Minutes'),
+            ],
+          );
+        } else {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TimeContainer(value: hours.toString(), header: 'Hours'),
+              
+              TimeContainer(value: minutes.toString(), header: 'Minutes'),
+           
+              TimeContainer(value: seconds.toString(), header: 'Seconds'),
+            ],
+          );
+        }
+      }),
+    );
+  }
+}
 
-//   const TestScreen ({super.key});
+class TimeContainer extends StatelessWidget {
+  final String value;
+  final String header;
 
-//   @override
-//   _TestScreenState createState() => _TestScreenState();
-// }
+  const TimeContainer({super.key, required this.value, required this.header});
 
-// class _TestScreenState extends State<TestScreen> {
-//   static var countdownDuration = Duration(minutes:15);
- 
-//   Duration duration = Duration();
- 
-//   Timer? timer;
-//   bool countDown = true;
-//   int index=0;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          width: 53,
+          // height: 40,
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 246, 245, 245),
+            borderRadius: BorderRadius.circular(2),
+          ),
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Column(
+                children: [
+                  Text(
+                    value,
+                    style:
+                        getSemiBoldStyle(fontSize:17, color: Colormanager.black),
+                  ),
+                  const SizedBox(height:4,),
+                 
+                  Text(
+                    header,
+                    style: getMediumtStyle(
+                        color: Colormanager.primary, fontSize:11),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
   
-
-//   @override
-//   void initState() {
-//        final res=Provider.of<Vehicleprovider>(context,listen:false);
-//      WidgetsBinding.instance.addPostFrameCallback((timeStamp)async {
-//   await fetchSearchResults(context);
-//     });
-
-     
-//     // int hours;
-//     // int mints;
-//     // int secs;
-//     // hours = int.parse(homeres.homemodel?.bidVehicles?[widget.index].hours.toString()??"0");
-//     // mints = int.parse(homeres.homemodel?.bidVehicles?[widget.index].minutes.toString()??"0");
-//     // secs = int.parse(homeres.homemodel?.bidVehicles?[widget.index].seconds.toString()??"0");
-//     // countdownDuration = Duration(hours: hours, minutes: mints, seconds: secs);
-//     // startTimer();
-//     // reset();
-    
-//     super.initState();
-//   }
-  
-
-
-//   @override
-// Widget build(BuildContext context) {
-//   final res=Provider.of<Vehicleprovider>(context,listen: true);
-
-//   return Container(
-    
-//     child: TimerBuilder.periodic(Duration(seconds: 1), builder: (context) {
-//       print('Start Time: ${res.vlist?.products?.data![index].starttime}');
-// print('End Time: ${res.vlist?.products?.data![index].endtime}');
-//       DateTime currentTime = DateTime.now();
-
-//       DateTime startTime = DateTime.parse(res.vlist?.products?.data![index].starttime??"0");
-//       DateTime endTime = DateTime.parse(res.vlist?.products?.data![index].endtime??"0");
-
-//       if (currentTime.isAfter(endTime)) {
-//         // Countdown has ended
-//         return Text('Countdown Ended');
-//       }
-
-//       Duration remainingTime = endTime.difference(currentTime);
-
-//       int days = remainingTime.inDays;
-//       int hours = remainingTime.inHours.remainder(24);
-//       int minutes = remainingTime.inMinutes.remainder(60);
-//       int seconds = remainingTime.inSeconds.remainder(60);
-
-//       return Row(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           TimeContainer(value: days.toString(), header: 'Days'),
-//           SizedBox(width:2),
-//           TimeContainer(value: hours.toString().padLeft(2, '0'), header: 'Hours'),
-//           SizedBox(width:2),
-//           TimeContainer(value: minutes.toString().padLeft(2, '0'), header: 'Minutes'),
-//           SizedBox(width:2),
-//           TimeContainer(value: seconds.toString().padLeft(2, '0'), header: 'Seconds'),
-//         ],
-//       );
-//     }),
-//   );
-// }
-// }
-// class TimeContainer extends StatelessWidget {
-//   final String value;
-//   final String header;
-
-//   TimeContainer({required this.value, required this.header});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: [
-//         Container(
-//           width: 40,
-//           height: 40,
-//           decoration: BoxDecoration(
-//             color: Colormanager.background,
-//             borderRadius: BorderRadius.circular(8),
-//           ),
-//           child: Center(
-//             child: Column(
-//               children: [
-//                 Text(
-//                   value,
-//                   style: getBoldStyle(fontSize:10, color:Colormanager.black),
-//                 ),
-//                  Text(
-//           header,
-//           style: getSemiBoldStyle(color: Colormanager.primary,fontSize:6),
-//         ),
-//               ],
-//             ),
-//           ),
-//         ),
-       
-       
-//       ],
-//     );
-//   }
-// }

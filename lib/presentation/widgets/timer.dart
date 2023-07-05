@@ -33,6 +33,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
     final homeres = Provider.of<DataProvider>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await gethome(context);
+      
     });
 
     // int hours;
