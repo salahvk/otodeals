@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/controllers.dart';
@@ -11,8 +9,8 @@ import 'package:otodeals/data/repositories/vehiclelisting.dart';
 
 import 'package:otodeals/presentation/widgets/Searchfilterdrawer.dart';
 
-import 'package:http/http.dart' as http;
-import 'package:otodeals/presentation/widgets/testtime.dart';
+import 'package:otodeals/presentation/widgets/searchbidtimer.dart';
+
 import 'package:provider/provider.dart';
 
 class Searchs extends StatefulWidget {

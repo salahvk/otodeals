@@ -4,7 +4,6 @@ import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/providers/otp_provider.dart';
 import 'package:otodeals/data/providers/vehicledetails.dart';
 import 'package:otodeals/data/providers/vehicleprovider.dart';
-import 'package:otodeals/presentation/widgets/testtime.dart';
 
 import 'package:provider/provider.dart';
 import 'package:hive_flutter/adapters.dart';

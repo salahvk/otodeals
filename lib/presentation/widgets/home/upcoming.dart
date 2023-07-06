@@ -6,7 +6,7 @@ import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/repositories/vehicledetails.dart';
 import 'package:otodeals/presentation/screens/productdetails.dart';
-import 'package:otodeals/presentation/widgets/timer.dart';
+import 'package:otodeals/presentation/widgets/homebidtimer.dart';
 import 'package:provider/provider.dart';
 
 class Upcoming extends StatefulWidget {
