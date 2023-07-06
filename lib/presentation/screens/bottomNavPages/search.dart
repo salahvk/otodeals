@@ -9,7 +9,7 @@ import 'package:otodeals/data/repositories/vehiclelisting.dart';
 
 import 'package:otodeals/presentation/widgets/Searchfilterdrawer.dart';
 
-import 'package:otodeals/presentation/widgets/searchbidtimer.dart';
+import 'package:otodeals/presentation/widgets/Timers/searchbidtimer.dart';
 
 import 'package:provider/provider.dart';
 
@@ -564,7 +564,7 @@ class BidFunction extends StatelessWidget {
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(15),
                               topRight: Radius.circular(15))),
-                      child: TestScreen(index: index),
+                      child: SearchtimerScreen(index: index),
                     )
                   ],
                 ),

@@ -1,26 +1,22 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
-// import 'package:otodeals/core/color_manager.dart';
-// import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/repositories/homeweb.dart';
-
 import 'package:provider/provider.dart';
 import 'package:timer_builder/timer_builder.dart';
 
-class AttendanceScreen extends StatefulWidget {
+class LivetimerScreen extends StatefulWidget {
   final int index;
-  const AttendanceScreen(this.index, {super.key});
+  const LivetimerScreen(this.index, {super.key});
 
   @override
-  _AttendanceScreenState createState() => _AttendanceScreenState();
+  _LivetimerScreenState createState() => _LivetimerScreenState();
 }
 
-class _AttendanceScreenState extends State<AttendanceScreen> {
+class _LivetimerScreenState extends State<LivetimerScreen> {
   static var countdownDuration = Duration(minutes: 15);
 
   Duration duration = Duration();
@@ -30,13 +26,13 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
   int index = 0;
 
   @override
-  void initState() {
+ void initState() {
     final res = Provider.of<DataProvider>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await gethome(context);
        final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
-           DateTime startTime = dateFormat.parse(res.homemodel?.bidVehicles![widget.index].starttime??DateTime.now().toString());
-      DateTime endTime = dateFormat.parse(res.homemodel?.bidVehicles![widget.index].endtime??DateTime.now().toString());
+           DateTime startTime = dateFormat.parse(res.homemodel?.currentlyRunning![widget.index].starttime??DateTime.now().toString());
+      DateTime endTime = dateFormat.parse(res.homemodel?.currentlyRunning![widget.index].endtime??DateTime.now().toString());
 
        
       duration = endTime.difference(startTime);
@@ -46,9 +42,8 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
     });
     super.initState();
   }
-  
-  @override
-    void startTimer() {
+
+  void startTimer() {
     if (timer != null) {
       timer!.cancel();
     }
@@ -63,25 +58,25 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
       }
     });
   }
-
+  
 
 
   @override
-  Widget build(BuildContext context) {
+   Widget build(BuildContext context) {
    
    final res=Provider.of<DataProvider>(context,listen:false);
-     final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
-    DateTime startTime = dateFormat.parse(res.homemodel?.bidVehicles![widget.index].starttime??DateTime.now().toString());
-      DateTime endTime = dateFormat.parse(res.homemodel?.bidVehicles![widget.index].endtime??DateTime.now().toString());
+     final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');    
+       DateTime startTime = dateFormat.parse(res.homemodel?.currentlyRunning![widget.index].starttime??DateTime.now().toString());
+      DateTime endTime = dateFormat.parse(res.homemodel?.currentlyRunning![widget.index].endtime??DateTime.now().toString());
 
 
     return Container(
       child: TimerBuilder.periodic(Duration(seconds: 1), builder: (context) {
         DateTime currentTime = DateTime.now();
           final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
-    DateTime startTime = dateFormat.parse(res.homemodel?.bidVehicles![widget.index].starttime??DateTime.now().toString());
-      DateTime endTime = dateFormat.parse(res.homemodel?.bidVehicles![widget.index].endtime??DateTime.now().toString());
-      // print(res.vlist?.products?.data![index].starttime??"0");
+      DateTime startTime = dateFormat.parse(res.homemodel?.currentlyRunning![widget.index].starttime??DateTime.now().toString());
+      DateTime endTime = dateFormat.parse(res.homemodel?.currentlyRunning![widget.index].endtime??DateTime.now().toString());
+
 
         if (currentTime.isAfter(endTime)) {
           // Countdown has ended
@@ -165,24 +160,21 @@ class TimeContainer extends StatelessWidget {
             borderRadius: BorderRadius.circular(2),
           ),
           child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: Column(
-                children: [
-                  Text(
-                    value,
-                    style:
-                        getSemiBoldStyle(fontSize:13, color: Colormanager.black),
-                  ),
-                  const SizedBox(height:4,),
-                 
-                  Text(
-                    header,
-                    style: getMediumtStyle(
-                        color: Colormanager.primary, fontSize:9),
-                  ),
-                ],
-              ),
+            child: Column(
+              children: [
+                Text(
+                  value,
+                  style:
+                      getSemiBoldStyle(fontSize:13, color: Colormanager.black),
+                ),
+                const SizedBox(height:4,),
+               
+                Text(
+                  header,
+                  style: getMediumtStyle(
+                      color: Colormanager.primary, fontSize:9),
+                ),
+              ],
             ),
           ),
         ),

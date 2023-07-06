@@ -7,7 +7,8 @@ import 'package:otodeals/presentation/widgets/custom_drawer.dart';
 import 'package:otodeals/presentation/widgets/home/buy.dart';
 import 'package:otodeals/presentation/widgets/home/live.dart';
 import 'package:otodeals/presentation/widgets/home/upcoming.dart';
-import 'package:otodeals/presentation/widgets/timer2.dart';
+import 'package:otodeals/presentation/widgets/Timers/nextauctiontimer.dart';
+
 
 import 'package:provider/provider.dart';
 

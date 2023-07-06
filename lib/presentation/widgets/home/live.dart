@@ -7,6 +7,8 @@ import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/repositories/vehicledetails.dart';
 import 'package:otodeals/presentation/screens/productdetails.dart';
+import 'package:otodeals/presentation/widgets/Timers/homelivetimer.dart';
+
 import 'package:provider/provider.dart';
 
 class Live extends StatefulWidget {
@@ -17,15 +19,6 @@ class Live extends StatefulWidget {
 }
 
 class _LiveState extends State<Live> {
-  // void inputcurrentlyrunnigbid(index)async {
-  //   final homeres = Provider.of<DataProvider>(context, listen:false);
-  //   int? id = homeres.homemodel?.currentlyRunning![index].id;
-  //   homeres.id = id;
-  //  await getvehicledetails(context, id!);
-
-  //   Navigator.of(context).push(FadePageRoute(page: Porductdetails()));
-  // }
-
   @override
   Widget build(BuildContext context) {
     final homeres = Provider.of<DataProvider>(context, listen: true);
@@ -192,41 +185,47 @@ class _LiveState extends State<Live> {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 5,
+                       const SizedBox(
+                          height: 20,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0, right: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Highest Bid",
-                                style: getMediumtStyle(
-                                    color: Colors.black, fontSize: 10),
-                              ),
-                              Text(
-                                "Last Call",
-                                style: getMediumtStyle(
-                                    color: Colormanager.primary, fontSize: 10),
-                              )
-                            ],
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Minimum Bid Amount",
+                                  style: getSemiBoldStyle(
+                                      color: Colormanager.black, fontSize: 10),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                    "RS. ${homeres.homemodel?.currentlyRunning![index].price.toString()}",
+                                    style: getBoldStyle(
+                                        color: Colors.black, fontSize: 15))
+                              ],
+                            ),
+                         
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Last Call",
+                                  style: getSemiBoldStyle(
+                                      color: Colormanager.primary,
+                                      fontSize: 10),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                               LivetimerScreen(index)
+                              ],
+                            ),
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 8.0, right: 10, top: 5),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                  "RS. ${homeres.homemodel?.currentlyRunning![index].price.toString()}",
-                                  style: getBoldStyle(
-                                      color: Colors.black, fontSize: 15)),
-                              // LivetimerScreen(index)
-                            ],
-                          ),
-                        )
                       ],
                     ),
                   ),
