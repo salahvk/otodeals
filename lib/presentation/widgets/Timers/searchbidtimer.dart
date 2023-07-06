@@ -10,15 +10,15 @@ import 'package:otodeals/data/repositories/vehiclelisting.dart';
 import 'package:provider/provider.dart';
 import 'package:timer_builder/timer_builder.dart';
 
-class TestScreen extends StatefulWidget {
-  final int? index;
-  const TestScreen({this.index, super.key});
+class SearchtimerScreen extends StatefulWidget {
+   final int? index;
+  const SearchtimerScreen({this.index,super.key});
 
   @override
-  State<TestScreen> createState() => _SearchtimerScreenState();
+  State<SearchtimerScreen> createState() => _SearchtimerScreenState();
 }
 
-class _SearchtimerScreenState extends State<TestScreen> {
+class _SearchtimerScreenState extends State<SearchtimerScreen> {
   static var countdownDuration = Duration(minutes: 15);
 
   // Duration duration = Duration();
@@ -30,17 +30,13 @@ class _SearchtimerScreenState extends State<TestScreen> {
 
   @override
   void initState() {
-    final res = Provider.of<Vehicleprovider>(context, listen: false);
+   final res=Provider.of<Vehicleprovider>(context,listen:false);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await fetchSearchResults(context);
-      final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+        final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
 
-      DateTime startTime = dateFormat.parse(
-          res.vlist?.products?.data![widget.index!].starttime ??
-              DateTime.now().toString());
-      DateTime endTime = dateFormat.parse(
-          res.vlist?.products?.data![widget.index!].endtime ??
-              DateTime.now().toString());
+      DateTime startTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].starttime ??DateTime.now().toString());
+      DateTime endTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].endtime??DateTime.now().toString());
 
       duration = endTime.difference(startTime);
       startTimer();
@@ -53,7 +49,7 @@ class _SearchtimerScreenState extends State<TestScreen> {
   //   timer?.cancel(); // Cancel the timer
   //   super.dispose();
   // }
-  void startTimer() {
+   void startTimer() {
     if (timer != null) {
       timer!.cancel();
     }
@@ -70,28 +66,22 @@ class _SearchtimerScreenState extends State<TestScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final res = Provider.of<Vehicleprovider>(context, listen: false);
-    final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
-    DateTime startTime = dateFormat.parse(
-        res.vlist?.products?.data![widget.index!].starttime ??
-            DateTime.now().toString());
-    DateTime endTime = dateFormat.parse(
-        res.vlist?.products?.data![widget.index!].endtime ??
-            DateTime.now().toString());
+ Widget build(BuildContext context) {
+   
+   final res=Provider.of<Vehicleprovider>(context,listen:false);
+     final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+    DateTime startTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].starttime ??DateTime.now().toString());
+      DateTime endTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].endtime??DateTime.now().toString());
+
 
     return Container(
       child: TimerBuilder.periodic(Duration(seconds: 1), builder: (context) {
         DateTime currentTime = DateTime.now();
-        final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+          final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
 
-        DateTime startTime = dateFormat.parse(
-            res.vlist?.products?.data![widget.index!].starttime ??
-                DateTime.now().toString());
-        DateTime endTime = dateFormat.parse(
-            res.vlist?.products?.data![widget.index!].endtime ??
-                DateTime.now().toString());
-        // print(res.vlist?.products?.data![index].starttime??"0");
+      DateTime startTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].starttime ??DateTime.now().toString());
+      DateTime endTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].endtime??DateTime.now().toString());
+      // print(res.vlist?.products?.data![index].starttime??"0");
 
         if (currentTime.isAfter(endTime)) {
           // Countdown has ended
@@ -112,7 +102,9 @@ class _SearchtimerScreenState extends State<TestScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: years.toString(), header: 'Years'),
+            
               TimeContainer(value: months.toString(), header: 'Months'),
+            
               TimeContainer(value: days.toString(), header: 'Days'),
             ],
           );
@@ -121,7 +113,9 @@ class _SearchtimerScreenState extends State<TestScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: months.toString(), header: 'Months'),
+             
               TimeContainer(value: days.toString(), header: 'Days'),
+             
               TimeContainer(value: hours.toString(), header: 'Hours'),
             ],
           );
@@ -130,7 +124,9 @@ class _SearchtimerScreenState extends State<TestScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: days.toString(), header: 'Days'),
+             
               TimeContainer(value: hours.toString(), header: 'Hours'),
+            
               TimeContainer(value: minutes.toString(), header: 'Minutes'),
             ],
           );
@@ -139,7 +135,9 @@ class _SearchtimerScreenState extends State<TestScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: hours.toString(), header: 'Hours'),
+              
               TimeContainer(value: minutes.toString(), header: 'Minutes'),
+           
               TimeContainer(value: seconds.toString(), header: 'Seconds'),
             ],
           );
@@ -171,24 +169,17 @@ class TimeContainer extends StatelessWidget {
               padding: const EdgeInsets.all(2.0),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 10,
-                  ),
                   Text(
                     value,
-                    style: getSemiBoldStyle(
-                        fontSize: 17, color: Colormanager.black),
+                    style:
+                        getSemiBoldStyle(fontSize:17, color: Colormanager.black),
                   ),
-                  const SizedBox(
-                    height: 4,
-                  ),
+                  const SizedBox(height:4,),
+                 
                   Text(
                     header,
                     style: getMediumtStyle(
-                        color: Colormanager.buttonText, fontSize: 11),
-                  ),
-                  const SizedBox(
-                    height: 10,
+                        color: Colormanager.primary, fontSize:11),
                   ),
                 ],
               ),
@@ -199,3 +190,5 @@ class TimeContainer extends StatelessWidget {
     );
   }
 }
+
+  
