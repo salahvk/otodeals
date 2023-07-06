@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/routes_manager.dart';
@@ -106,9 +107,15 @@ class _UpcomingState extends State<Upcoming> {
                           child: SizedBox(
                             height: 130,
                             width: size.width * .8,
-                            child: Image.network(
-                              "$endpoint${homeres.homemodel?.bidVehicles?[index].image}",
+                            child: CachedNetworkImage(
+                              imageUrl:
+                                  "$endpoint${homeres.homemodel?.bidVehicles?[index].image}",
                               fit: BoxFit.cover,
+                              errorWidget: (context, url, error) {
+                                return Container(
+                                  color: Colors.grey,
+                                );
+                              },
                             ),
                           ),
                         ),
