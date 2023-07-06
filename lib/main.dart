@@ -25,8 +25,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final token = Hive.box('token').get('api_token');
-    print(token);
-    // String rout = RouteGenerator.getRoute.toString();
     final initialRoutes =
         token != null ? Routes.mainScreen : Routes.welcomeScreen;
     return MultiProvider(
