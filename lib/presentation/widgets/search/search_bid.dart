@@ -12,8 +12,8 @@ import 'package:otodeals/presentation/widgets/Timers/searchbidtimer.dart';
 import 'package:provider/provider.dart';
 
 class BidFunction extends StatelessWidget {
-  final List<VehicleListing> searchResults;
-  const BidFunction({Key? key, required this.searchResults}) : super(key: key);
+
+  const BidFunction({Key? key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

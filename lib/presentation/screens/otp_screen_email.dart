@@ -219,7 +219,7 @@ Future verifyOtpApi(BuildContext context) async {
     });
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body);
-      log(response.body);
+      // log(response.body);
       // print(jsonResponse);
       var customerdetails = OtpVerification.fromJson(jsonResponse);
       otpProvider.getOtpVerifiedData(customerdetails);

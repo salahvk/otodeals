@@ -24,7 +24,7 @@ Future<bool> placeBid(BuildContext context) async {
     var response = await http.post(Uri.parse(url),
         headers: {"device-id": 'abc', "api-token": apiToken});
     if (response.statusCode == 200) {
-      log(response.body);
+      // log(response.body);
       var jsonResponse = jsonDecode(response.body);
       if (jsonResponse['result'] != false) {
         showAnimatedSnackBar(context, "Bid Placed",

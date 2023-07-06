@@ -3,6 +3,7 @@ import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/styles_manager.dart';
+import 'package:otodeals/data/repositories/resetpassword.dart';
 import 'package:otodeals/data/repositories/vehiclelisting.dart';
 
 class FilterDrawer extends StatefulWidget {
@@ -31,8 +32,8 @@ class _FilterDrawerState extends State<FilterDrawer> {
   //   100,
   //   (int index) => DateTime.now().year - index,
   // );
-  RangeValues _currentRangeValues = RangeValues(60000, 40000000);
-  final double _interval = 10000000.0;
+  RangeValues _currentRangeValues = RangeValues(1, 100);
+  // final double _interval = 1;
 
   RangeValues _currentRangeYears = RangeValues(1994, 2023);
   final double _yearinterval = 1;
@@ -254,11 +255,10 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 SizedBox(height: 3),
                 RangeSlider(
                   values: _currentRangeYears,
-                  min: 1994,
+                  min: 1990,
                   max: 2023,
-                  divisions:
-                      (_currentRangeYears.end - _currentRangeYears.start) ~/
-                          _yearinterval,
+                  divisions:33,
+                     
                   labels: RangeLabels(
                     '${_currentRangeYears.start.round()}',
                     '${_currentRangeYears.end.round()}',
@@ -284,14 +284,13 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 SizedBox(height: 3),
                 RangeSlider(
                   values: _currentRangeValues,
-                  min: 60000,
-                  max: 40000000,
+                  min: 0,
+                  max: 100,
                   divisions:
-                      (_currentRangeValues.end - _currentRangeValues.start) ~/
-                          _interval,
+                    10,
                   labels: RangeLabels(
-                    '${_currentRangeValues.start.round()}',
-                    '${_currentRangeValues.end.round()}',
+                    '${_currentRangeValues.start}',
+                    '${_currentRangeValues.end}',
                   ),
                   onChanged: (RangeValues values) {
                     Searchcontroller.minpricecontroller.text =
@@ -315,10 +314,8 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     onPressed: () {
                       fetchSearchResults(context);
                       Navigator.pop(context);
+               
 
-                      print(_currentRangeValues.start);
-                      print(_currentRangeValues.end);
-                      print(_currentRangeYears);
                       // SearchFilters selectedFilters = SearchFilters(
                       //   fuelTypes: getSelectedFuelTypes(),
                       //   gearShifts: getSelectedGearShifts(),
@@ -353,9 +350,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
 
                     Navigator.pop(context);
 
-                    print(_currentRangeValues.start);
-                    print(_currentRangeValues.end);
-                    print(_currentRangeYears);
+          
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colormanager.primary,

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/controllers.dart';
@@ -32,6 +33,7 @@ print(url);
       final jsonData = json.decode(response.body);
       final data=VehicleListing.fromJson(jsonData);
       provider.vlistdata(data);
+      // log(response.body);
       // print(jsonData);
       // print(data);
 

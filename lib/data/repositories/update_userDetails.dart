@@ -22,7 +22,7 @@ updateProfileDetails(BuildContext context) async {
           Uri.parse('${ApiEndpoint.profileEdit}?name=$name&email=$mail'),
           headers: {"device-id": 'abc', "api-token": apiToken});
       if (response.statusCode == 200) {
-        log(response.body);
+        // log(response.body);
         Navigator.of(context).pop();
         await postprofileData(context);
 

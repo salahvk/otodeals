@@ -55,9 +55,9 @@ class _SearchtimerScreenState extends State<SearchtimerScreen> {
     }
     timer = Timer.periodic(Duration(seconds: 1), (_) {
       if (duration.inSeconds > 0) {
-        setState(() {
+        // setState(() {
           duration = duration - Duration(seconds: 1);
-        });
+        // });
       } else {
         // Countdown has ended
         timer!.cancel();

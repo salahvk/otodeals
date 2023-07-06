@@ -9,8 +9,8 @@ import 'package:otodeals/data/providers/vehicleprovider.dart';
 import 'package:provider/provider.dart';
 
 class BuyFunction extends StatelessWidget {
-  final List<VehicleListing> searchResults;
-  const BuyFunction({Key? key, required this.searchResults}) : super(key: key);
+ 
+  const BuyFunction({Key? key,}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final res = Provider.of<Vehicleprovider>(context, listen: true);

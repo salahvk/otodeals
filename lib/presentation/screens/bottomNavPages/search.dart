@@ -9,6 +9,7 @@ import 'package:otodeals/presentation/widgets/home/live.dart';
 import 'package:otodeals/presentation/widgets/home/upcoming.dart';
 import 'package:otodeals/presentation/widgets/search/search_bid.dart';
 import 'package:otodeals/presentation/widgets/search/search_buy.dart';
+import 'package:otodeals/presentation/widgets/search/search_upcomingbid.dart';
 
 class Searchs extends StatefulWidget {
   const Searchs({Key? key}) : super(key: key);
@@ -87,6 +88,7 @@ class _SearchsState extends State<Searchs> {
                             Builder(
                               builder: (context) => InkWell(
                                   onTap: () {
+                                    
                                     Scaffold.of(context).openEndDrawer();
                                   },
                                   child: Image.asset("assets/menu.png")),
@@ -220,6 +222,9 @@ class _SearchsState extends State<Searchs> {
                               onTap: () async {
                                 toggleSelection(false);
                                isRowVisible=true;
+                                  Searchcontroller.vehicletypecontroller.text =
+                                    "bid";
+                                await fetchSearchResults(context);
                               },
                               child: Container(
                                 width: 45.0,
@@ -327,9 +332,9 @@ class _SearchsState extends State<Searchs> {
               SizedBox(height:30,),
               isBuySelected
                   ? BuyFunction(
-                      searchResults: const [],
+                     
                     )
-                  : selectedContainer == 1?Live():Upcoming()
+                  : selectedContainer == 1?BidFunction():UpcomingbidFunction()
             ],
           ),
         ),
