@@ -17,6 +17,9 @@ class Searchs extends StatefulWidget {
 
 class _SearchsState extends State<Searchs> {
   bool isBuySelected = true;
+
+  int selectedContainer = 1;
+  bool isRowVisible = true;
   String s = "abc";
   // List<dynamic>allresults=[];
   //  List<dynamic> searchResults = [];
@@ -236,7 +239,87 @@ class _SearchsState extends State<Searchs> {
                   ],
                 ),
               ),
-              SizedBox(height: 40.0),
+              SizedBox(height: 20.0),
+              Visibility(
+                visible: isRowVisible,
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                selectedContainer = 1;
+                              });
+                            },
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  // color: selectedContainer == 1 ? Colors.blue : Colors.transparent,
+                                  ),
+                              child: Center(
+                                child: Text(
+                                  'LIVE',
+                                  style: getMediumtStyle(
+                                    fontSize: 15,
+                                    color:
+                                        const Color.fromARGB(255, 33, 32, 32),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                selectedContainer = 2;
+                              });
+                            },
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  // color: selectedContainer == 2 ? Colors.blue : Colors.transparent,
+                                  ),
+                              child: Center(
+                                child: Text(
+                                  'UPCOMING',
+                                  style: getMediumtStyle(
+                                    color:
+                                        const Color.fromARGB(255, 33, 32, 32),
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 2),
+                    Row(
+                      children: [
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 12.0, right: 5.4),
+                          child: AnimatedContainer(
+                            duration: Duration(milliseconds: 300),
+                            height: 2,
+                            width: MediaQuery.of(context).size.width / 2.5,
+                            margin: EdgeInsets.only(
+                                left: selectedContainer == 1
+                                    ? 0
+                                    : MediaQuery.of(context).size.width / 1.8),
+                            color: Colormanager.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
               isBuySelected
                   ? BuyFunction(
                       searchResults: const [],
