@@ -6,11 +6,15 @@ import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:otodeals/data/models/vehiclelisting.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/providers/vehicleprovider.dart';
+
+import 'package:otodeals/presentation/widgets/Timers/searchupcomingtimer.dart';
+
 import 'package:provider/provider.dart';
 
-class BuyFunction extends StatelessWidget {
+class UpcomingbidFunction extends StatelessWidget {
   final List<VehicleListing> searchResults;
-  const BuyFunction({Key? key, required this.searchResults}) : super(key: key);
+  const UpcomingbidFunction({Key? key, required this.searchResults}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final res = Provider.of<Vehicleprovider>(context, listen: true);
@@ -51,25 +55,25 @@ class BuyFunction extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                                  res.vlist?.products?.data![index]
+                                  res.vlist?.upcomingbid?.data![index]
                                           .vehicleName ??
                                       "",
                               style: getMediumtStyle(
                                   color: Colors.black, fontSize: 20)),
-                          Container(
-                            width: 60,
-                            height: 20,
-                            decoration: BoxDecoration(
-                                color: Colormanager.primary,
-                                borderRadius: BorderRadius.circular(15)),
-                            child: Center(
-                              child: Text(
-                                "Bid Now",
-                                style: getMediumtStyle(
-                                    color: Colormanager.white, fontSize: 9),
-                              ),
-                            ),
-                          )
+                          // Container(
+                          //   width: 60,
+                          //   height: 20,
+                          //   decoration: BoxDecoration(
+                          //       color: Colormanager.primary,
+                          //       borderRadius: BorderRadius.circular(15)),
+                          //   child: Center(
+                          //     child: Text(
+                          //       "Bid Now",
+                          //       style: getMediumtStyle(
+                          //           color: Colormanager.white, fontSize: 9),
+                          //     ),
+                          //   ),
+                          // )
                         ],
                       ),
                       SizedBox(
@@ -82,7 +86,7 @@ class BuyFunction extends StatelessWidget {
                           width: size.width * .8,
                           child: CachedNetworkImage(
                             imageUrl:
-                               "$endpoint${res.vlist?.products?.data![index].image}",
+                               "$endpoint${res.vlist?.upcomingbid?.data![index].image}",
                             fit: BoxFit.cover,
                             errorWidget: (context, url, error) {
                               return Container(
@@ -107,7 +111,7 @@ class BuyFunction extends StatelessWidget {
                               padding: const EdgeInsets.all(5.0),
                               child: Center(
                                   child: Text(
-                              res.vlist?.products?.data![index].fueltype ??
+                              res.vlist?.upcomingbid?.data![index].fueltype ??
                                       "",
                                 style: getMediumtStyle(
                                     color: Colormanager.buttonText,
@@ -124,7 +128,7 @@ class BuyFunction extends StatelessWidget {
                               padding: const EdgeInsets.all(5.0),
                               child: Center(
                                   child: Text(
-                                 res.vlist?.products?.data![index].gearshift ??
+                                 res.vlist?.upcomingbid?.data![index].gearshift ??
                                       "",
                                 style: getMediumtStyle(
                                     color: Colormanager.buttonText,
@@ -141,7 +145,7 @@ class BuyFunction extends StatelessWidget {
                               padding: const EdgeInsets.all(5.0),
                               child: Center(
                                   child: Text(
-                                "Mileage: ${ res.vlist?.products?.data![index].mileage ?? ""}"
+                                "Mileage: ${ res.vlist?.upcomingbid?.data![index].mileage ?? ""}"
                                  ,
                                 style: getMediumtStyle(
                                     color: Colormanager.buttonText,
@@ -158,7 +162,7 @@ class BuyFunction extends StatelessWidget {
                               padding: const EdgeInsets.all(5.0),
                               child: Center(
                                   child: Text(
-                                "OWNER: ${ res.vlist?.products?.data![index].owner ??""}",
+                                "OWNER: ${ res.vlist?.upcomingbid?.data![index].owner ??""}",
                                 style: getMediumtStyle(
                                     color: Colormanager.buttonText,
                                     fontSize: 10),
@@ -177,7 +181,7 @@ class BuyFunction extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Highest Bid",
+                                "Minimum Bid Amount",
                                 style: getSemiBoldStyle(
                                     color: Colormanager.black, fontSize: 10),
                               ),
@@ -185,7 +189,7 @@ class BuyFunction extends StatelessWidget {
                                 height: 10,
                               ),
                               Text(
-                                  "RS. ${res.vlist?.products?.data![index].price.toString() ?? ""}",
+                                  "RS. ${res.vlist?.upcomingbid?.data![index].price.toString() ?? ""}",
                                   style: getBoldStyle(
                                       color: Colors.black, fontSize: 15))
                             ],
@@ -194,36 +198,16 @@ class BuyFunction extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Text(
-                              //   "Last Call",
-                              //   style: getSemiBoldStyle(
-                              //       color: Colormanager.primary,
-                              //       fontSize: 10),
-                              // ),
+                              Text(
+                                "Starts In",
+                                style: getSemiBoldStyle(
+                                    color: Colormanager.primary,
+                                    fontSize: 10),
+                              ),
                               SizedBox(
                                 height: 10,
                               ),
-                           InkWell(
-                                onTap: () {},
-                                child: Container(
-                                  // width: 70,
-                                  // height: 17,
-                                  decoration: BoxDecoration(
-                                      color: Colormanager.primary,
-                                      borderRadius: BorderRadius.circular(15)),
-                                  child: Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Text(
-                                        "Request to Buy",
-                                        style: getSemiBoldStyle(
-                                            color: Colormanager.white,
-                                            fontSize: 10),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
+                          SearchtimerupScreen(index:index)
                             ],
                           ),
                         ],
@@ -234,6 +218,4 @@ class BuyFunction extends StatelessWidget {
               ),
             ),
           );
-        });
-  }
-}
+        });}}

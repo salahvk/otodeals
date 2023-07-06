@@ -5,6 +5,8 @@ import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/repositories/vehiclelisting.dart';
 
 import 'package:otodeals/presentation/widgets/Searchfilterdrawer.dart';
+import 'package:otodeals/presentation/widgets/home/live.dart';
+import 'package:otodeals/presentation/widgets/home/upcoming.dart';
 import 'package:otodeals/presentation/widgets/search/search_bid.dart';
 import 'package:otodeals/presentation/widgets/search/search_buy.dart';
 
@@ -16,7 +18,7 @@ class Searchs extends StatefulWidget {
 }
 
 class _SearchsState extends State<Searchs> {
-  bool isBuySelected = true;
+  bool isBuySelected = false;
 
   int selectedContainer = 1;
   bool isRowVisible = true;
@@ -28,7 +30,7 @@ class _SearchsState extends State<Searchs> {
   String? type;
   @override
   void initState() {
-    Searchcontroller.vehicletypecontroller.text = "sale";
+    Searchcontroller.vehicletypecontroller.text = "bid";
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await fetchSearchResults(context);
@@ -191,9 +193,12 @@ class _SearchsState extends State<Searchs> {
                           Align(
                             alignment: Alignment(-1, 0),
                             child: GestureDetector(
-                              onTap: () => toggleSelection(
-                                true,
-                              ),
+                              onTap: ()async { toggleSelection(true);
+                                isRowVisible=false;
+                               Searchcontroller.vehicletypecontroller.text =
+                                    "sale";
+                                await fetchSearchResults(context);
+                            },
                               child: Container(
                                 width: 45.0,
                                 color: Colors.transparent,
@@ -214,9 +219,7 @@ class _SearchsState extends State<Searchs> {
                             child: GestureDetector(
                               onTap: () async {
                                 toggleSelection(false);
-                                Searchcontroller.vehicletypecontroller.text =
-                                    "bid";
-                                await fetchSearchResults(context);
+                               isRowVisible=true;
                               },
                               child: Container(
                                 width: 45.0,
@@ -317,16 +320,16 @@ class _SearchsState extends State<Searchs> {
                         ),
                       ],
                     ),
+                    
                   ],
                 ),
               ),
+              SizedBox(height:30,),
               isBuySelected
                   ? BuyFunction(
                       searchResults: const [],
                     )
-                  : BidFunction(
-                      searchResults: const [],
-                    ),
+                  : selectedContainer == 1?Live():Upcoming()
             ],
           ),
         ),

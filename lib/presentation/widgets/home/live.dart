@@ -33,206 +33,204 @@ class _LiveState extends State<Live> {
 
     final size = MediaQuery.of(context).size;
 
-    return Container(
-      child: ListView.builder(
-          scrollDirection: Axis.vertical,
-          itemCount: 10,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: InkWell(
-                onTap: () {
-                  inputcurrentlyrunnigbid(index);
-                  // inputlatestarrivals(index);
-                },
-                child: Container(
-                  // height: size.height / 3.7,
-                  width: size.width / 1.17,
-                  decoration: BoxDecoration(
-                      color: Colormanager.background,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color.fromARGB(255, 194, 193, 193)
-                              .withOpacity(0.5), // Shadow color
-                          spreadRadius: 5, // Spread radius of the shadow
-                          blurRadius: 6, // Blur radius of the shadow
-                          offset: Offset(0, 3), // Offset of the shadow
-                        ),
-                      ]),
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                                homeres.homemodel?.currentlyRunning![index]
-                                        .vehicleName ??
-                                    "",
+    return ListView.builder(
+        scrollDirection: Axis.vertical,
+        itemCount: 10,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: InkWell(
+              onTap: () {
+                inputcurrentlyrunnigbid(index);
+                // inputlatestarrivals(index);
+              },
+              child: Container(
+                // height: size.height / 3.7,
+                width: size.width / 1.17,
+                decoration: BoxDecoration(
+                    color: Colormanager.background,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color.fromARGB(255, 194, 193, 193)
+                            .withOpacity(0.5), // Shadow color
+                        spreadRadius: 5, // Spread radius of the shadow
+                        blurRadius: 6, // Blur radius of the shadow
+                        offset: Offset(0, 3), // Offset of the shadow
+                      ),
+                    ]),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              homeres.homemodel?.currentlyRunning![index]
+                                      .vehicleName ??
+                                  "",
+                              style: getMediumtStyle(
+                                  color: Colors.black, fontSize: 20)),
+                          Container(
+                            width: 60,
+                            height: 20,
+                            decoration: BoxDecoration(
+                                color: Colormanager.primary,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Center(
+                              child: Text(
+                                "Bid Now",
                                 style: getMediumtStyle(
-                                    color: Colors.black, fontSize: 20)),
-                            Container(
-                              width: 60,
-                              height: 20,
-                              decoration: BoxDecoration(
-                                  color: Colormanager.primary,
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: Center(
-                                child: Text(
-                                  "Bid Now",
-                                  style: getMediumtStyle(
-                                      color: Colormanager.white, fontSize: 9),
-                                ),
+                                    color: Colormanager.white, fontSize: 9),
                               ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: SizedBox(
-                            height: 130,
-                            width: size.width * .8,
-                            child: CachedNetworkImage(
-                              imageUrl:
-                                  "$endpoint${homeres.homemodel?.currentlyRunning?[index].image}",
-                              fit: BoxFit.cover,
-                              errorWidget: (context, url, error) {
-                                return Container(
-                                  color: Colors.grey,
-                                );
-                              },
                             ),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: SizedBox(
+                          height: 130,
+                          width: size.width * .8,
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                "$endpoint${homeres.homemodel?.currentlyRunning?[index].image}",
+                            fit: BoxFit.cover,
+                            errorWidget: (context, url, error) {
+                              return Container(
+                                color: Colors.grey,
+                              );
+                            },
                           ),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                              width: 80,
-                              decoration: BoxDecoration(
-                                  color: Colormanager.buttonBox,
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Center(
-                                    child: Text(
-                                  "Model: ${homeres.homemodel?.currentlyRunning![index].modelyear.toString()}",
-                                  style: getMediumtStyle(
-                                      color: Colormanager.buttonText,
-                                      fontSize: 10),
-                                )),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            width: 80,
+                            decoration: BoxDecoration(
+                                color: Colormanager.buttonBox,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Center(
+                                  child: Text(
+                                "Model: ${homeres.homemodel?.currentlyRunning![index].modelyear.toString()}",
+                                style: getMediumtStyle(
+                                    color: Colormanager.buttonText,
+                                    fontSize: 10),
+                              )),
+                            ),
+                          ),
+                          Container(
+                            width: 80,
+                            decoration: BoxDecoration(
+                                color: Colormanager.buttonBox,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Center(
+                                  child: Text(
+                                homeres.homemodel?.currentlyRunning![index]
+                                        .fueltype ??
+                                    "",
+                                style: getMediumtStyle(
+                                    color: Colormanager.buttonText,
+                                    fontSize: 10),
+                              )),
+                            ),
+                          ),
+                          Container(
+                            width: 80,
+                            decoration: BoxDecoration(
+                                color: Colormanager.buttonBox,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Center(
+                                  child: Text(
+                                "Mileage: ${homeres.homemodel?.currentlyRunning![index].mileage.toString()}",
+                                style: getMediumtStyle(
+                                    color: Colormanager.buttonText,
+                                    fontSize: 10),
+                              )),
+                            ),
+                          ),
+                          Container(
+                            width: 80,
+                            decoration: BoxDecoration(
+                                color: Colormanager.buttonBox,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Center(
+                                  child: Text(
+                                "OWNER: ${homeres.homemodel?.currentlyRunning![index].owner.toString()}",
+                                style: getMediumtStyle(
+                                    color: Colormanager.buttonText,
+                                    fontSize: 10),
+                              )),
+                            ),
+                          ),
+                        ],
+                      ),
+                     const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Highest Bid",
+                                style: getSemiBoldStyle(
+                                    color: Colormanager.black, fontSize: 10),
                               ),
-                            ),
-                            Container(
-                              width: 80,
-                              decoration: BoxDecoration(
-                                  color: Colormanager.buttonBox,
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Center(
-                                    child: Text(
-                                  homeres.homemodel?.currentlyRunning![index]
-                                          .fueltype ??
-                                      "",
-                                  style: getMediumtStyle(
-                                      color: Colormanager.buttonText,
-                                      fontSize: 10),
-                                )),
+                              SizedBox(
+                                height: 10,
                               ),
-                            ),
-                            Container(
-                              width: 80,
-                              decoration: BoxDecoration(
-                                  color: Colormanager.buttonBox,
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Center(
-                                    child: Text(
-                                  "Mileage: ${homeres.homemodel?.currentlyRunning![index].mileage.toString()}",
-                                  style: getMediumtStyle(
-                                      color: Colormanager.buttonText,
-                                      fontSize: 10),
-                                )),
+                              Text(
+                                  "RS. ${homeres.homemodel?.currentlyRunning![index].price.toString()}",
+                                  style: getBoldStyle(
+                                      color: Colors.black, fontSize: 15))
+                            ],
+                          ),
+                       
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Last Call",
+                                style: getSemiBoldStyle(
+                                    color: Colormanager.primary,
+                                    fontSize: 10),
                               ),
-                            ),
-                            Container(
-                              width: 80,
-                              decoration: BoxDecoration(
-                                  color: Colormanager.buttonBox,
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Center(
-                                    child: Text(
-                                  "OWNER: ${homeres.homemodel?.currentlyRunning![index].owner.toString()}",
-                                  style: getMediumtStyle(
-                                      color: Colormanager.buttonText,
-                                      fontSize: 10),
-                                )),
+                              SizedBox(
+                                height: 10,
                               ),
-                            ),
-                          ],
-                        ),
-                       const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Minimum Bid Amount",
-                                  style: getSemiBoldStyle(
-                                      color: Colormanager.black, fontSize: 10),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                    "RS. ${homeres.homemodel?.currentlyRunning![index].price.toString()}",
-                                    style: getBoldStyle(
-                                        color: Colors.black, fontSize: 15))
-                              ],
-                            ),
-                         
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Last Call",
-                                  style: getSemiBoldStyle(
-                                      color: Colormanager.primary,
-                                      fontSize: 10),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                               LivetimerScreen(index)
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                             LivetimerScreen(index)
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
-            );
-          }),
-    );
+            ),
+          );
+        });
   }
 }
