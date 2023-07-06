@@ -276,9 +276,13 @@ class _PorductdetailsState extends State<Porductdetails> {
                         borderRadius: BorderRadius.circular(20)),
                     child: Stack(
                       children: [
-                        Center(child: Image.network("${vres.vehdet?.bodyImage}",fit: BoxFit.cover,)),
+                        Center(
+                            child: Image.network(
+                          "${vres.vehdet?.bodyImage}",
+                          fit: BoxFit.cover,
+                        )),
                         Column(
-                          children: [
+                          children: const [
                             // Padding(
                             //   padding:
                             //       const EdgeInsets.only(left: 0.0, right: 80),
@@ -570,17 +574,27 @@ class _PorductdetailsState extends State<Porductdetails> {
                   ),
                 ),
                 SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
-                Text(
-                  "NEXT AUCTION CLOSES IN",
-                  style: getSemiBoldStyle(color: Colors.black, fontSize: 16),
-                ),
-                VehicledetailTimerScreen(),
-                SizedBox(
-                  height: 15,
-                ),
-                vres.vehdet?.vehicle?.type == 'sale' ? BuyNow() : BidListTile(),
+                vres.vehdet?.vehicle?.type == 'sale'
+                    ? BuyNow()
+                    : Column(
+                        children: [
+                          Text(
+                            "NEXT AUCTION CLOSES IN",
+                            style: getSemiBoldStyle(
+                                color: Colors.black, fontSize: 16),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          VehicledetailTimerScreen(),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          BidListTile(),
+                        ],
+                      ),
                 SizedBox(
                   height: 4,
                 ),
