@@ -12,47 +12,43 @@ import 'package:otodeals/data/repositories/homeweb.dart';
 import 'package:provider/provider.dart';
 import 'package:timer_builder/timer_builder.dart';
 
-class TimerScreen extends StatefulWidget {
-  const TimerScreen({super.key});
+class AttendanceScreen extends StatefulWidget {
+  final int index;
+  const AttendanceScreen(this.index, {super.key});
 
   @override
-  _TimerScreenState createState() => _TimerScreenState();
+  _AttendanceScreenState createState() => _AttendanceScreenState();
 }
 
-class _TimerScreenState extends State<TimerScreen> {
+class _AttendanceScreenState extends State<AttendanceScreen> {
   static var countdownDuration = Duration(minutes: 15);
 
-  // Duration duration = Duration();
+  Duration duration = Duration();
 
   Timer? timer;
   bool countDown = true;
   int index = 0;
-  late Duration duration;
 
   @override
   void initState() {
-    final homeres = Provider.of<DataProvider>(context, listen: false);
+    final res = Provider.of<DataProvider>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await gethome(context);
-      final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+       final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+           DateTime startTime = dateFormat.parse(res.homemodel?.bidVehicles![widget.index].starttime??DateTime.now().toString());
+      DateTime endTime = dateFormat.parse(res.homemodel?.bidVehicles![widget.index].endtime??DateTime.now().toString());
 
-      DateTime startTime = dateFormat
-          .parse(homeres.homemodel?.nextAccutionTime?.nextstarttime ??DateTime.now().toString());
-      DateTime endTime = dateFormat
-          .parse(homeres.homemodel?.nextAccutionTime?.nextendtime ??DateTime.now().toString());
-
+       
       duration = endTime.difference(startTime);
       startTimer();
+
+      
     });
     super.initState();
   }
-
+  
   @override
-  // void dispose() {
-  //   timer?.cancel(); // Cancel the timer
-  //   super.dispose();
-  // }
-  void startTimer() {
+    void startTimer() {
     if (timer != null) {
       timer!.cancel();
     }
@@ -68,20 +64,24 @@ class _TimerScreenState extends State<TimerScreen> {
     });
   }
 
+
+
   @override
   Widget build(BuildContext context) {
-    final homeres = Provider.of<DataProvider>(context, listen: false);
+   
+   final res=Provider.of<DataProvider>(context,listen:false);
+     final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+    DateTime startTime = dateFormat.parse(res.homemodel?.bidVehicles![widget.index].starttime??DateTime.now().toString());
+      DateTime endTime = dateFormat.parse(res.homemodel?.bidVehicles![widget.index].endtime??DateTime.now().toString());
+
 
     return Container(
       child: TimerBuilder.periodic(Duration(seconds: 1), builder: (context) {
         DateTime currentTime = DateTime.now();
-        final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
-
-        DateTime startTime = DateTime.parse(
-            homeres.homemodel?.nextAccutionTime?.nextstarttime.toString() ??
-                DateTime.now().toString());
-        DateTime endTime = DateTime.parse(
-            homeres.homemodel?.nextAccutionTime?.nextendtime.toString() ??DateTime.now().toString());
+          final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+    DateTime startTime = dateFormat.parse(res.homemodel?.bidVehicles![widget.index].starttime??DateTime.now().toString());
+      DateTime endTime = dateFormat.parse(res.homemodel?.bidVehicles![widget.index].endtime??DateTime.now().toString());
+      // print(res.vlist?.products?.data![index].starttime??"0");
 
         if (currentTime.isAfter(endTime)) {
           // Countdown has ended
@@ -102,9 +102,9 @@ class _TimerScreenState extends State<TimerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: years.toString(), header: 'Years'),
-              SizedBox(width: 20),
+            
               TimeContainer(value: months.toString(), header: 'Months'),
-              SizedBox(width: 20),
+            
               TimeContainer(value: days.toString(), header: 'Days'),
             ],
           );
@@ -113,9 +113,9 @@ class _TimerScreenState extends State<TimerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: months.toString(), header: 'Months'),
-              SizedBox(width: 20),
+             
               TimeContainer(value: days.toString(), header: 'Days'),
-              SizedBox(width: 20),
+             
               TimeContainer(value: hours.toString(), header: 'Hours'),
             ],
           );
@@ -124,9 +124,9 @@ class _TimerScreenState extends State<TimerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: days.toString(), header: 'Days'),
-              SizedBox(width: 20),
+             
               TimeContainer(value: hours.toString(), header: 'Hours'),
-              SizedBox(width: 20),
+            
               TimeContainer(value: minutes.toString(), header: 'Minutes'),
             ],
           );
@@ -135,9 +135,9 @@ class _TimerScreenState extends State<TimerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: hours.toString(), header: 'Hours'),
-              SizedBox(width: 20),
+              
               TimeContainer(value: minutes.toString(), header: 'Minutes'),
-              SizedBox(width: 20),
+           
               TimeContainer(value: seconds.toString(), header: 'Seconds'),
             ],
           );
@@ -158,25 +158,28 @@ class TimeContainer extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: 100,
+          width: 43,
+          // height: 40,
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 241, 240, 240),
-            borderRadius: BorderRadius.circular(15),
+            color: Color.fromARGB(255, 246, 245, 245),
+            borderRadius: BorderRadius.circular(2),
           ),
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(2.0),
               child: Column(
                 children: [
                   Text(
                     value,
                     style:
-                        getBoldStyle(fontSize: 35, color: Colormanager.black),
+                        getSemiBoldStyle(fontSize:13, color: Colormanager.black),
                   ),
+                  const SizedBox(height:4,),
+                 
                   Text(
                     header,
-                    style: getSemiBoldStyle(
-                        color: Colormanager.primary, fontSize: 10),
+                    style: getMediumtStyle(
+                        color: Colormanager.primary, fontSize:9),
                   ),
                 ],
               ),
@@ -187,3 +190,5 @@ class TimeContainer extends StatelessWidget {
     );
   }
 }
+
+  

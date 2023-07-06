@@ -1,18 +1,18 @@
 class VehicleListing {
   bool? result;
   Products? products;
-  Products? upcomingbid;
+  // Products? upcomingbid;
 
-  VehicleListing({this.result, this.products, this.upcomingbid});
+  VehicleListing({this.result, this.products,});
 
   VehicleListing.fromJson(Map<String, dynamic> json) {
     result = json['result'];
     products = json['products'] != null
         ? new Products.fromJson(json['products'])
         : null;
-    upcomingbid = json['upcomingbid'] != null
-        ? new Products.fromJson(json['upcomingbid'])
-        : null;
+    // upcomingbid = json['upcomingbid'] != null
+    //     ? new Products.fromJson(json['upcomingbid'])
+    //     : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -21,9 +21,9 @@ class VehicleListing {
     if (this.products != null) {
       data['products'] = this.products!.toJson();
     }
-    if (this.upcomingbid != null) {
-      data['upcomingbid'] = this.upcomingbid!.toJson();
-    }
+    // if (this.upcomingbid != null) {
+    //   data['upcomingbid'] = this.upcomingbid!.toJson();
+    // }
     return data;
   }
 }

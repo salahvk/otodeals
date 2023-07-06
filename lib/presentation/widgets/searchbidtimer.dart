@@ -35,8 +35,8 @@ class _TestScreenState extends State<TestScreen> {
       await fetchSearchResults(context);
         final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
 
-      DateTime startTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].starttime ?? "0");
-      DateTime endTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].endtime?? "0");
+      DateTime startTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].starttime ??DateTime.now().toString());
+      DateTime endTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].endtime??DateTime.now().toString());
 
       duration = endTime.difference(startTime);
       startTimer();
@@ -70,8 +70,8 @@ class _TestScreenState extends State<TestScreen> {
    
    final res=Provider.of<Vehicleprovider>(context,listen:false);
      final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
-    DateTime startTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].starttime ?? "0");
-      DateTime endTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].endtime?? "0");
+    DateTime startTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].starttime ??DateTime.now().toString());
+      DateTime endTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].endtime??DateTime.now().toString());
 
 
     return Container(
@@ -79,8 +79,8 @@ class _TestScreenState extends State<TestScreen> {
         DateTime currentTime = DateTime.now();
           final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
 
-      DateTime startTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].starttime ?? "0");
-      DateTime endTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].endtime?? "0");
+      DateTime startTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].starttime ??DateTime.now().toString());
+      DateTime endTime = dateFormat.parse(res.vlist?.products?.data![widget.index!].endtime??DateTime.now().toString());
       // print(res.vlist?.products?.data![index].starttime??"0");
 
         if (currentTime.isAfter(endTime)) {
