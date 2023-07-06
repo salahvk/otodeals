@@ -1,5 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/styles_manager.dart';
@@ -9,6 +9,7 @@ import 'package:otodeals/presentation/widgets/Timers/vehicledetailtimer.dart';
 import 'package:otodeals/presentation/widgets/bidlisttile.dart';
 import 'package:otodeals/presentation/widgets/bottom_nav.dart';
 import 'package:otodeals/presentation/widgets/buynow_listtile.dart';
+import 'package:otodeals/presentation/widgets/detail_card.dart';
 import 'package:provider/provider.dart';
 
 class Porductdetails extends StatefulWidget {
@@ -38,230 +39,323 @@ class _PorductdetailsState extends State<Porductdetails> {
     return Scaffold(
       body: SingleChildScrollView(
           child: Padding(
-              padding: const EdgeInsets.only(top: 26),
+              padding: const EdgeInsets.only(top: 35, left: 30, right: 30),
               child: Column(children: [
-                Stack(children: [
-                  Container(
-                    height: 250,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        color: Colormanager.primary,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30),
-                            bottomLeft: Radius.circular(40),
-                            bottomRight: Radius.circular(40))),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 40.0, left: 30),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                vres.vehdet?.vehicle?.vehicleName ?? "",
-                                style: getSemiBoldStyle(
-                                    color: Colormanager.white, fontSize: 20),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "Rs. ${vres.vehdet?.vehicle?.price.toString()}",
-                                style: getBoldStyle(
-                                    color: Colormanager.white, fontSize: 20),
-                              )
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              bottom: size.height * .18, right: 35),
-                          child: Container(
-                              height: 35,
-                              width: 35,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                        blurRadius: 5,
-                                        color: Colormanager.white,
-                                        spreadRadius: 0,
-                                        offset: Offset(0, 4))
-                                  ],
-                                  color: Colormanager.white),
-                              child: Icon(
-                                Icons.favorite,
-                                color: Colormanager.primary,
-                              )),
-                        )
-                      ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      vres.vehdet?.vehicle?.vehicleName ?? "",
+                      style: getSemiBoldStyle(
+                          color: Colormanager.black, fontSize: 30),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: size.height * .27, left: 35),
-                    child: Container(
-                      height: 180,
-                      width: MediaQuery.of(context).size.width / 1.2,
+                    Container(
+                      width: 70,
+                      height: 30,
                       decoration: BoxDecoration(
-                          color: Colormanager.white,
-                          borderRadius: BorderRadius.circular(25),
-                          boxShadow: const [
-                            BoxShadow(
-                                blurRadius: 4,
-                                color: Color.fromARGB(255, 147, 146, 146))
-                          ]),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 80),
-                            // child: Container(
-                            // height: 27,
-                            // width: 67,
-                            // decoration: BoxDecoration(
-                            // borderRadius: BorderRadius.circular(15),
-                            // color: Colors.amber,
-                            // ),
-                            // child: Padding(
-                            // padding: const EdgeInsets.only(left:10.0),
-                            // child: Row(
-                            // children: [
-                            // Icon(Icons.star,color: Colors.white,size:18,),
-                            // Text(vres.vehdet?.vehicle?.type??"",style: getSemiBoldStyle(color:Colormanager.white,fontSize:15),)
-                            // ],
-                            // ),
-                            // ),
-                            // ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: 70,
-                                    width: 70,
-                                    decoration: BoxDecoration(
-                                        color:
-                                            Color.fromARGB(255, 255, 255, 255),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: Center(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          children: [
-                                            Image.asset(
-                                              'assets/speedometer-icon.png',
-                                              height: 30,
-                                              width: 30,
-                                            ),
-                                            SizedBox(
-                                              height: 6,
-                                            ),
-                                            Text(
-                                              vres.vehdet?.vehicle?.gearshift ??
-                                                  "",
-                                              style: getMediumtStyle(
-                                                  color: Colormanager.primary,
-                                                  fontSize: 10),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 70,
-                                    width: 70,
-                                    decoration: BoxDecoration(
-                                        color:
-                                            Color.fromARGB(255, 255, 255, 255),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: Center(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          children: [
-                                            Image.asset(
-                                              'assets/car-seat-belt-icon.png',
-                                              height: 30,
-                                              width: 30,
-                                            ),
-                                            SizedBox(
-                                              height: 6,
-                                            ),
-                                            Text(
-                                              "5 seats",
-                                              style: getMediumtStyle(
-                                                  color: Colormanager.primary,
-                                                  fontSize: 10),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 70,
-                                    width: 70,
-                                    decoration: BoxDecoration(
-                                        color:
-                                            Color.fromARGB(255, 255, 255, 255),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: Center(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          children: [
-                                            SvgPicture.asset(
-                                              'assets/drawer_icons/gasoline-pump-svgrepo-com.svg',
-                                              height: 30,
-                                              width: 30,
-                                            ),
-                                            SizedBox(
-                                              height: 6,
-                                            ),
-                                            Text(
-                                              vres.vehdet?.vehicle?.fueltype ??
-                                                  "",
-                                              style: getMediumtStyle(
-                                                  color: Colormanager.primary,
-                                                  fontSize: 10),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ]),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding:
-                            EdgeInsets.only(top: size.height * .18, left: 0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: Image.network(
-                            "$endpoint${vres.vehdet?.vehicle?.productimage ?? ""}",
-                            height: 130,
-                            width: size.width * .75,
-                            fit: BoxFit.cover,
-                          ),
+                          color: Colormanager.primary,
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Center(
+                        child: Text(
+                          "Bid",
+                          style: getMediumtStyle(
+                              color: Colormanager.white, fontSize: 14),
                         ),
                       ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Rs. ${vres.vehdet?.vehicle?.price.toString()}",
+                      style: getBoldStyle(
+                          color: Colormanager.primary, fontSize: 24),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            "$endpoint${vres.vehdet?.vehicle?.productimage ?? ""}",
+                        height: 180,
+                        width: size.width * .85,
+                        fit: BoxFit.cover,
+                        errorWidget: (context, url, error) {
+                          return Container(
+                            color: Colormanager.grey,
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5, bottom: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      DetailCard(
+                          text:
+                              "Model: ${vres.vehdet?.vehicle?.modelyear.toString()}"),
+                      DetailCard(
+                          text: "${vres.vehdet?.vehicle?.fueltype.toString()}"),
+                      DetailCard(
+                          text:
+                              "Mileage: ${vres.vehdet?.vehicle?.mileage.toString()}"),
+                      DetailCard(
+                          text:
+                              "OWNER: ${vres.vehdet?.vehicle?.owner.toString()}"),
                     ],
                   ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    DetailCard(
+                        text:
+                            "Location: ${vres.vehdet?.vehicle?.location.toString()}"),
+                    DetailCard(
+                        text:
+                            "Registration: ${vres.vehdet?.vehicle?.registration.toString()}"),
+                    DetailCard(
+                        text: "${vres.vehdet?.vehicle?.gearshift.toString()}"),
+                    DetailCard(
+                        text: "RTO: ${vres.vehdet?.vehicle?.rto.toString()}")
+                  ],
+                ),
+                Stack(children: const [
+                  // Container(
+                  //   height: 250,
+                  //   width: MediaQuery.of(context).size.width,
+                  //   decoration: BoxDecoration(
+                  //       color: Colormanager.primary,
+                  //       borderRadius: BorderRadius.only(
+                  //           topLeft: Radius.circular(30),
+                  //           topRight: Radius.circular(30),
+                  //           bottomLeft: Radius.circular(40),
+                  //           bottomRight: Radius.circular(40))),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     crossAxisAlignment: CrossAxisAlignment.center,
+                  //     children: [
+                  //       Padding(
+                  //         padding: const EdgeInsets.only(top: 20.0, left: 30),
+                  //         child: Column(
+                  //           crossAxisAlignment: CrossAxisAlignment.start,
+                  //           children: [
+                  //             Text(
+                  //               vres.vehdet?.vehicle?.vehicleName ?? "",
+                  //               style: getSemiBoldStyle(
+                  //                   color: Colormanager.white, fontSize: 30),
+                  //             ),
+                  //             SizedBox(
+                  //               height: 10,
+                  //             ),
+                  //             Text(
+                  //               "Rs. ${vres.vehdet?.vehicle?.price.toString()}",
+                  //               style: getBoldStyle(
+                  //                   color: Colormanager.white, fontSize: 20),
+                  //             )
+                  //           ],
+                  //         ),
+                  //       ),
+                  //       Padding(
+                  //         padding: EdgeInsets.only(
+                  //             bottom: size.height * .18, right: 35),
+                  //         child: Container(
+                  //             height: 35,
+                  //             width: 35,
+                  //             decoration: BoxDecoration(
+                  //                 borderRadius: BorderRadius.circular(20),
+                  //                 boxShadow: const [
+                  //                   BoxShadow(
+                  //                       blurRadius: 5,
+                  //                       color: Colormanager.white,
+                  //                       spreadRadius: 0,
+                  //                       offset: Offset(0, 4))
+                  //                 ],
+                  //                 color: Colormanager.white),
+                  //             child: Icon(
+                  //               Icons.favorite,
+                  //               color: Colormanager.primary,
+                  //             )),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
+                  // Padding(
+                  //   padding: EdgeInsets.only(top: size.height * .27, left: 35),
+                  //   child: Container(
+                  //     height: 180,
+                  //     width: MediaQuery.of(context).size.width / 1.2,
+                  //     decoration: BoxDecoration(
+                  //         color: Colormanager.white,
+                  //         borderRadius: BorderRadius.circular(25),
+                  //         boxShadow: const [
+                  //           BoxShadow(
+                  //               blurRadius: 4,
+                  //               color: Color.fromARGB(255, 147, 146, 146))
+                  //         ]),
+                  //     child: Column(
+                  //       children: [
+                  //         Padding(
+                  //           padding: const EdgeInsets.only(top: 80),
+                  //           // child: Container(
+                  //           // height: 27,
+                  //           // width: 67,
+                  //           // decoration: BoxDecoration(
+                  //           // borderRadius: BorderRadius.circular(15),
+                  //           // color: Colors.amber,
+                  //           // ),
+                  //           // child: Padding(
+                  //           // padding: const EdgeInsets.only(left:10.0),
+                  //           // child: Row(
+                  //           // children: [
+                  //           // Icon(Icons.star,color: Colors.white,size:18,),
+                  //           // Text(vres.vehdet?.vehicle?.type??"",style: getSemiBoldStyle(color:Colormanager.white,fontSize:15),)
+                  //           // ],
+                  //           // ),
+                  //           // ),
+                  //           // ),
+                  //         ),
+                  //         Padding(
+                  //           padding: const EdgeInsets.all(8.0),
+                  //           child: Row(
+                  //               mainAxisAlignment: MainAxisAlignment.center,
+                  //               children: [
+                  //                 Container(
+                  //                   height: 70,
+                  //                   width: 70,
+                  //                   decoration: BoxDecoration(
+                  //                       color:
+                  //                           Color.fromARGB(255, 255, 255, 255),
+                  //                       borderRadius:
+                  //                           BorderRadius.circular(10)),
+                  //                   child: Center(
+                  //                     child: Padding(
+                  //                       padding: const EdgeInsets.all(8.0),
+                  //                       child: Column(
+                  //                         children: [
+                  //                           Image.asset(
+                  //                             'assets/speedometer-icon.png',
+                  //                             height: 30,
+                  //                             width: 30,
+                  //                           ),
+                  //                           SizedBox(
+                  //                             height: 6,
+                  //                           ),
+                  //                           Text(
+                  //                             vres.vehdet?.vehicle?.gearshift ??
+                  //                                 "",
+                  //                             style: getMediumtStyle(
+                  //                                 color: Colormanager.primary,
+                  //                                 fontSize: 10),
+                  //                           ),
+                  //                         ],
+                  //                       ),
+                  //                     ),
+                  //                   ),
+                  //                 ),
+                  //                 Container(
+                  //                   height: 70,
+                  //                   width: 70,
+                  //                   decoration: BoxDecoration(
+                  //                       color:
+                  //                           Color.fromARGB(255, 255, 255, 255),
+                  //                       borderRadius:
+                  //                           BorderRadius.circular(10)),
+                  //                   child: Center(
+                  //                     child: Padding(
+                  //                       padding: const EdgeInsets.all(8.0),
+                  //                       child: Column(
+                  //                         children: [
+                  //                           Image.asset(
+                  //                             'assets/car-seat-belt-icon.png',
+                  //                             height: 30,
+                  //                             width: 30,
+                  //                           ),
+                  //                           SizedBox(
+                  //                             height: 6,
+                  //                           ),
+                  //                           Text(
+                  //                             "5 seats",
+                  //                             style: getMediumtStyle(
+                  //                                 color: Colormanager.primary,
+                  //                                 fontSize: 10),
+                  //                           ),
+                  //                         ],
+                  //                       ),
+                  //                     ),
+                  //                   ),
+                  //                 ),
+                  //                 Container(
+                  //                   height: 70,
+                  //                   width: 70,
+                  //                   decoration: BoxDecoration(
+                  //                       color:
+                  //                           Color.fromARGB(255, 255, 255, 255),
+                  //                       borderRadius:
+                  //                           BorderRadius.circular(10)),
+                  //                   child: Center(
+                  //                     child: Padding(
+                  //                       padding: const EdgeInsets.all(8.0),
+                  //                       child: Column(
+                  //                         children: [
+                  //                           SvgPicture.asset(
+                  //                             'assets/drawer_icons/gasoline-pump-svgrepo-com.svg',
+                  //                             height: 30,
+                  //                             width: 30,
+                  //                           ),
+                  //                           SizedBox(
+                  //                             height: 6,
+                  //                           ),
+                  //                           Text(
+                  //                             vres.vehdet?.vehicle?.fueltype ??
+                  //                                 "",
+                  //                             style: getMediumtStyle(
+                  //                                 color: Colormanager.primary,
+                  //                                 fontSize: 10),
+                  //                           ),
+                  //                         ],
+                  //                       ),
+                  //                     ),
+                  //                   ),
+                  //                 ),
+                  //               ]),
+                  //         )
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     Padding(
+                  //       padding:
+                  //           EdgeInsets.only(top: size.height * .18, left: 0),
+                  //       child: ClipRRect(
+                  //         borderRadius: BorderRadius.circular(5),
+                  //         child: Image.network(
+                  //           "$endpoint${vres.vehdet?.vehicle?.productimage ?? ""}",
+                  //           height: 130,
+                  //           width: size.width * .75,
+                  //           fit: BoxFit.cover,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                 ]),
                 SizedBox(
                   height: 25,
