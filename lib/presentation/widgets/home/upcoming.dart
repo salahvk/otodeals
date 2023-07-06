@@ -7,7 +7,8 @@ import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/repositories/vehicledetails.dart';
 import 'package:otodeals/presentation/screens/productdetails.dart';
-import 'package:otodeals/presentation/widgets/homebidtimer.dart';
+
+import 'package:otodeals/presentation/widgets/Timers/homeupcomingtimer.dart';
 import 'package:provider/provider.dart';
 
 class Upcoming extends StatefulWidget {
@@ -197,6 +198,7 @@ class _UpcomingState extends State<Upcoming> {
                           height: 20,
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -215,9 +217,7 @@ class _UpcomingState extends State<Upcoming> {
                                         color: Colors.black, fontSize: 15))
                               ],
                             ),
-                            SizedBox(
-                              width: size.width / 4.2,
-                            ),
+                         
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

@@ -85,7 +85,8 @@ class _TimerScreenState extends State<TimerScreen> {
 
         if (currentTime.isAfter(endTime)) {
           // Countdown has ended
-          return Text('Countdown Ended');
+          // return Text('Countdown Ended');
+          gethome(context);
         }
 
         Duration remainingTime = endTime.difference(currentTime);

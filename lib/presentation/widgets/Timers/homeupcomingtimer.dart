@@ -1,14 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
-// import 'package:otodeals/core/color_manager.dart';
-// import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/repositories/homeweb.dart';
-
 import 'package:provider/provider.dart';
 import 'package:timer_builder/timer_builder.dart';
 
@@ -165,24 +161,21 @@ class TimeContainer extends StatelessWidget {
             borderRadius: BorderRadius.circular(2),
           ),
           child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: Column(
-                children: [
-                  Text(
-                    value,
-                    style:
-                        getSemiBoldStyle(fontSize:13, color: Colormanager.black),
-                  ),
-                  const SizedBox(height:4,),
-                 
-                  Text(
-                    header,
-                    style: getMediumtStyle(
-                        color: Colormanager.primary, fontSize:9),
-                  ),
-                ],
-              ),
+            child: Column(
+              children: [
+                Text(
+                  value,
+                  style:
+                      getSemiBoldStyle(fontSize:13, color: Colormanager.black),
+                ),
+                const SizedBox(height:4,),
+               
+                Text(
+                  header,
+                  style: getMediumtStyle(
+                      color: Colormanager.primary, fontSize:9),
+                ),
+              ],
             ),
           ),
         ),
