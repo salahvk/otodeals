@@ -1,14 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
-import 'package:otodeals/data/models/vehiclelisting.dart';
-import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/providers/vehicleprovider.dart';
-
+import 'package:otodeals/data/repositories/vehicledetails.dart';
+import 'package:otodeals/presentation/screens/productdetails.dart';
 import 'package:otodeals/presentation/widgets/Timers/searchupcomingtimer.dart';
-
 import 'package:provider/provider.dart';
 
 class UpcomingbidFunction extends StatelessWidget {
@@ -18,7 +17,14 @@ class UpcomingbidFunction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final res = Provider.of<Vehicleprovider>(context, listen: true);
-    final size = MediaQuery.of(context).size;   final homeres = Provider.of<DataProvider>(context, listen: true);
+    final size = MediaQuery.of(context).size;   
+     void inputupcomingbidlive(index)async{
+     final res = Provider.of<Vehicleprovider>(context, listen:false);
+     int? id= res.vlist?.upcomingbid?.data![index].id;
+     res.id=id;
+     await getvehicledetails(context, id!);
+      Navigator.of(context).push(FadePageRoute(page: Porductdetails()));
+    }
     return ListView.builder(
         scrollDirection: Axis.vertical,
         itemCount: res.vlist?.products?.data?.length ?? 0,
@@ -29,8 +35,7 @@ class UpcomingbidFunction extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: InkWell(
               onTap: () {
-                // inputcurrentlyrunnigbid(index);
-                // inputlatestarrivals(index);
+                inputupcomingbidlive(index);
               },
               child: Container(
                 // height: size.height / 3.7,

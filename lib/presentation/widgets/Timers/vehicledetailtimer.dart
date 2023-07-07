@@ -8,6 +8,7 @@ import 'package:otodeals/core/styles_manager.dart';
 
 import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/providers/vehicledetails.dart';
+import 'package:otodeals/data/providers/vehicleprovider.dart';
 import 'package:otodeals/data/repositories/homeweb.dart';
 import 'package:otodeals/data/repositories/vehicledetails.dart';
 
@@ -33,7 +34,7 @@ class _VehicledetailTimerScreenState extends State<VehicledetailTimerScreen> {
 
   @override
   void initState() {
-    final homeres = Provider.of<DataProvider>(context, listen: false);
+    final homeres = Provider.of<Vehicleprovider>(context, listen: false);
     
   int? id=homeres.id;
  final vehres = Provider.of<Vehicledetailsprovider>(context, listen:false);
