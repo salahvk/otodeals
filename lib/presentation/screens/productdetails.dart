@@ -134,6 +134,47 @@ class _PorductdetailsState extends State<Porductdetails> {
                         text: "RTO: ${vres.vehdet?.vehicle?.rto.toString()}")
                   ],
                 ),
+               const SizedBox(height: 15,),
+                 Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Minimum Bid Amount",
+                                  style: getSemiBoldStyle(
+                                      color: Colormanager.black, fontSize: 10),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                    "RS. ${vres.vehdet?.vehicle?.minimumbitamount.toString()}",
+                                    style: getBoldStyle(
+                                        color: Colors.black, fontSize: 15))
+                              ],
+                            ),
+                         
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Starts In",
+                                  style: getSemiBoldStyle(
+                                      color: Colormanager.primary,
+                                      fontSize: 10),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                  VehicledetailTimerScreen(),
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 15,),
+
                 ExpansionTile(
                   trailing: SizedBox(
                     height: 0,
@@ -695,15 +736,8 @@ class _PorductdetailsState extends State<Porductdetails> {
                     ? BuyNow()
                     : Column(
                         children: [
-                          Text(
-                            "NEXT AUCTION CLOSES IN",
-                            style: getSemiBoldStyle(
-                                color: Colors.black, fontSize: 16),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          VehicledetailTimerScreen(),
+                          
+                      
                           SizedBox(
                             height: 15,
                           ),

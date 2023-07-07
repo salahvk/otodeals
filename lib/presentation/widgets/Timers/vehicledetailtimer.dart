@@ -109,9 +109,9 @@ class _VehicledetailTimerScreenState extends State<VehicledetailTimerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: years.toString(), header: 'Years'),
-              SizedBox(width: 20),
+          
               TimeContainer(value: months.toString(), header: 'Months'),
-              SizedBox(width: 20),
+            
               TimeContainer(value: days.toString(), header: 'Days'),
             ],
           );
@@ -120,9 +120,9 @@ class _VehicledetailTimerScreenState extends State<VehicledetailTimerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: months.toString(), header: 'Months'),
-              SizedBox(width: 20),
+            
               TimeContainer(value: days.toString(), header: 'Days'),
-              SizedBox(width: 20),
+              
               TimeContainer(value: hours.toString(), header: 'Hours'),
             ],
           );
@@ -131,9 +131,9 @@ class _VehicledetailTimerScreenState extends State<VehicledetailTimerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: days.toString(), header: 'Days'),
-              SizedBox(width: 20),
+            
               TimeContainer(value: hours.toString(), header: 'Hours'),
-              SizedBox(width: 20),
+           
               TimeContainer(value: minutes.toString(), header: 'Minutes'),
             ],
           );
@@ -142,9 +142,9 @@ class _VehicledetailTimerScreenState extends State<VehicledetailTimerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TimeContainer(value: hours.toString(), header: 'Hours'),
-              SizedBox(width: 20),
+          
               TimeContainer(value: minutes.toString(), header: 'Minutes'),
-              SizedBox(width: 20),
+             
               TimeContainer(value: seconds.toString(), header: 'Seconds'),
             ],
           );
@@ -153,7 +153,6 @@ class _VehicledetailTimerScreenState extends State<VehicledetailTimerScreen> {
     );
   }
 }
-
 class TimeContainer extends StatelessWidget {
   final String value;
   final String header;
@@ -165,28 +164,28 @@ class TimeContainer extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: 100,
+          width: 43,
+          // height: 40,
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 241, 240, 240),
-            borderRadius: BorderRadius.circular(15),
+            color: Color.fromARGB(255, 246, 245, 245),
+            borderRadius: BorderRadius.circular(2),
           ),
           child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  Text(
-                    value,
-                    style:
-                        getBoldStyle(fontSize: 35, color: Colormanager.black),
-                  ),
-                  Text(
-                    header,
-                    style: getSemiBoldStyle(
-                        color: Colormanager.primary, fontSize: 10),
-                  ),
-                ],
-              ),
+            child: Column(
+              children: [
+                Text(
+                  value,
+                  style:
+                      getSemiBoldStyle(fontSize:13, color: Colormanager.black),
+                ),
+                const SizedBox(height:4,),
+               
+                Text(
+                  header,
+                  style: getMediumtStyle(
+                      color: Colormanager.primary, fontSize:9),
+                ),
+              ],
             ),
           ),
         ),
