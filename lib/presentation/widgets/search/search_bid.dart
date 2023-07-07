@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
-import 'package:otodeals/data/models/vehiclelisting.dart';
+
 import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/providers/vehicleprovider.dart';
-import 'package:otodeals/presentation/widgets/Timers/homelivetimer.dart';
+
 import 'package:otodeals/presentation/widgets/Timers/searchbidtimer.dart';
 
 import 'package:provider/provider.dart';

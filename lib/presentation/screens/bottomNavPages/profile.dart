@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/repositories/logout_func.dart';
+import 'package:otodeals/data/repositories/mybidlist.dart';
 import 'package:otodeals/data/repositories/profileweb.dart';
 
 import 'package:otodeals/presentation/screens/editprofile.dart';
@@ -322,7 +323,8 @@ class _MyprofileState extends State<Myprofile> {
                               Column(
                                 children: [
                                   InkWell(
-                                    onTap: () {
+                                    onTap: () async{
+                                      await getbidhistorydetails(context);
                                       Navigator.of(context).push(
                                           FadePageRoute(page: MyBidList()));
                                     },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/routes_manager.dart';
+import 'package:otodeals/data/providers/bidprovider.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/providers/otp_provider.dart';
 import 'package:otodeals/data/providers/vehicledetails.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => DataProvider()),
           ChangeNotifierProvider(create: (_) => Vehicleprovider()),
           ChangeNotifierProvider(create: (_) => Vehicledetailsprovider()),
+          ChangeNotifierProvider(create: (_) => Bidprovider()),
         ],
         child: MaterialApp(
           title: 'Otodeals',

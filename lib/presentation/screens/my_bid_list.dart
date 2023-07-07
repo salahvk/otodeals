@@ -2,6 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
+import 'package:otodeals/data/api/api_endpoint.dart';
+import 'package:otodeals/data/providers/bidprovider.dart';
+import 'package:otodeals/data/repositories/mybidlist.dart';
+import 'package:otodeals/presentation/widgets/Timers/bidtimer.dart';
+import 'package:otodeals/presentation/widgets/bottom_nav.dart';
+import 'package:provider/provider.dart';
 
 class MyBidList extends StatefulWidget {
   const MyBidList({super.key});
@@ -13,8 +19,17 @@ class MyBidList extends StatefulWidget {
 class _SearchScreenState extends State<MyBidList> {
   List<bool> isSelected = [true, false];
   @override
+  void initState() {
+    //  WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+    //   await getbidhistorydetails(context);
+    //  });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final bidres=Provider.of<Bidprovider>(context,listen:false);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -137,163 +152,212 @@ class _SearchScreenState extends State<MyBidList> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(18, 10, 14, 0),
-                child: GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 210,
-                            childAspectRatio: 3 / 3,
-                            crossAxisSpacing: 11,
-                            mainAxisExtent: 228,
-                            mainAxisSpacing: 20),
-                    itemCount: 10,
-                    itemBuilder: (BuildContext ctx, index) {
-                      return InkWell(
-                        onTap: () {
-                          // Navigator.push(context,
-                          //     MaterialPageRoute(builder: (ctx) {
-                          //   return const LoadingListPage();
-                          // }));
-                          // final id = homeData![index].id;
-                          // servicerProvider.serviceId = id;
-                          // getSubService(context, id);
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 10.0,
-                                  color: Colors.grey.shade300,
-                                  offset: const Offset(2, 2.5),
-                                ),
-                              ],
-                              color: Colormanager.white,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(7.0),
-                            child: Column(
-                              // mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text("HYUNDAI",
-                                        style: getSemiBoldStyle(
-                                            color: Colors.black)),
-                                    // Container(
-                                    //   width: 40,
-                                    //   height: 15,
-                                    //   decoration: BoxDecoration(
-                                    //       color: Colormanager.primary,
-                                    //       borderRadius:
-                                    //           BorderRadius.circular(15)),
-                                    //   child: Center(
-                                    //     child: Text(
-                                    //       "Bid Now",
-                                    //       style: getRegularStyle(
-                                    //           color: Colormanager.white,
-                                    //           fontSize: 7),
-                                    //     ),
-                                    //   ),
-                                    // )
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  children: [
-                                    Text("RS 4.64 - 5.99 Lakh",
-                                        style: getMediumtStyle(
-                                            color: Colors.black, fontSize: 10)),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                SizedBox(
-                                  width: size.width,
-                                  height: 100,
-                                  child: CachedNetworkImage(
-                                    width: 60,
-                                    imageUrl:
-                                        "https://wallpapercave.com/wp/wp2060860.jpg",
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                        width: 20,
-                                        height: 20,
-                                        child:
-                                            Image.asset('assets/petrol.png')),
-                                    Text("PETROL",
-                                        style: getMediumtStyle(
-                                            color: Colormanager.textColor,
-                                            fontSize: 10)),
-                                    Text("35667 KM",
-                                        style: getMediumtStyle(
-                                            color: Colormanager.textColor,
-                                            fontSize: 10)),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                   Text("Bid Amount:",style: getMediumtStyle(color:Colors.black,fontSize:12),),
-                                    Container(
-                                      height:19,
-                                      width:57,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Colormanager.primary,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(left:3.0,right: 3),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Image.asset('assets/tag.png',color: Colormanager.white,height:15,),
-                                            Text("90000",style: getMediumtStyle(color:Colormanager.white,fontSize:10),)
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                )
-                                // Text(homeData![index].service ?? '',
-                                //     textAlign: TextAlign.center,
-                                //     style: getRegularStyle(
-                                //         color: Colormanager.primary,
-                                //         fontSize:
-                                //            10
-                                //                )),
-                              ],
-                            ),
+              ListView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: bidres.bidvar?.bidHistory?.length??0,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: InkWell(
+              onTap: () {
+                // inputbidnow(index);
+                // inputlatestarrivals(index);
+              },
+              child: Container(
+                // height: size.height / 3.6,
+                width: size.width / 1.17,
+                decoration: BoxDecoration(
+                    color: Colormanager.background,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color.fromARGB(255, 194, 193, 193)
+                            .withOpacity(0.5), // Shadow color
+                        spreadRadius: 5, // Spread radius of the shadow
+                        blurRadius: 6, // Blur radius of the shadow
+                        offset: Offset(0, 3), // Offset of the shadow
+                      ),
+                    ]),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              bidres.bidvar?.bidHistory![index].vehicleName??"",
+                              style: getMediumtStyle(
+                                  color: Colors.black, fontSize: 18)),
+                          //  Container(
+                          //                   width: 40,
+                          //                   height: 15,
+                          //                   decoration: BoxDecoration(
+                          //                       color: Colormanager.primary,
+                          //                       borderRadius:
+                          //                           BorderRadius.circular(15)),
+                          //                   child: Center(
+                          //                     child: Text(
+                          //                       "Bid Now",
+                          //                       style: getRegularStyle(
+                          //                           color: Colormanager.white,
+                          //                           fontSize: 7),
+                          //                     ),
+                          //                   ),
+                          //                 )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: SizedBox(
+                          height: 130,
+                          width: size.width * .8,
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                "$endpoint${bidres.bidvar?.bidHistory![index].image}",
+                            fit: BoxFit.cover,
+                            errorWidget: (context, url, error) {
+                              return Container(
+                                color: Colors.grey,
+                              );
+                            },
                           ),
                         ),
-                      );
-                    }),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            width: 80,
+                            decoration: BoxDecoration(
+                                color: Colormanager.buttonBox,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Center(
+                                  child: Text(
+                                "Model: ${bidres.bidvar?.bidHistory![index].modelyear.toString()}",
+                                style: getMediumtStyle(
+                                    color: Colormanager.buttonText,
+                                    fontSize: 10),
+                              )),
+                            ),
+                          ),
+                          Container(
+                            width: 80,
+                            decoration: BoxDecoration(
+                                color: Colormanager.buttonBox,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Center(
+                                  child: Text(
+                                bidres.bidvar?.bidHistory![index]
+                                        .fueltype ??
+                                    "",
+                                style: getMediumtStyle(
+                                    color: Colormanager.buttonText,
+                                    fontSize: 10),
+                              )),
+                            ),
+                          ),
+                          Container(
+                            width: 80,
+                            decoration: BoxDecoration(
+                                color: Colormanager.buttonBox,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Center(
+                                  child: Text(
+                                "Mileage: ${bidres.bidvar?.bidHistory![index].mileage.toString()}",
+                                style: getMediumtStyle(
+                                    color: Colormanager.buttonText,
+                                    fontSize: 10),
+                              )),
+                            ),
+                          ),
+                          Container(
+                            width: 80,
+                            decoration: BoxDecoration(
+                                color: Colormanager.buttonBox,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Center(
+                                  child: Text(
+                                "Owner: ${bidres.bidvar?.bidHistory![index].owner.toString()}",
+                                style: getMediumtStyle(
+                                    color: Colormanager.buttonText,
+                                    fontSize: 10),
+                              )),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Minimum Bid Amount",
+                                style: getSemiBoldStyle(
+                                    color: Colormanager.black, fontSize: 10),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                  "RS. ${bidres.bidvar?.bidHistory![index].minimumbitamount.toString()}",
+                                  style: getBoldStyle(
+                                      color: Colors.black, fontSize: 15))
+                            ],
+                          ),
+                       
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Starts In",
+                                style: getSemiBoldStyle(
+                                    color: Colormanager.primary,
+                                    fontSize: 10),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                         BidtimerScreen(index: index,) 
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ),
+              ),
+            );
+          }),
             ],
           ),
         ),
+        
       ),
+       bottomNavigationBar: const BottomNavigationWidget(),
     );
   }
 }

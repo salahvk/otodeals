@@ -22,4 +22,5 @@ class ApiEndpoint {
   static String profileEdit = "$api/profile-edit";
   static String buyNow = "$api/buy-now";
   static String placeBid = "$api/place-bid";
+  static String bidhistory="$api/bid-history"; 
 }
