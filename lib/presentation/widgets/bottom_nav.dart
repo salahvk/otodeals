@@ -8,6 +8,7 @@ class BottomNavigationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return ValueListenableBuilder(
       valueListenable: indexChangeNotifier,
       builder: (BuildContext context, int newIndex, _) {

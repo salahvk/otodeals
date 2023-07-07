@@ -13,6 +13,7 @@ Future getvehicledetails(BuildContext context, int id) async {
   String s = 'abc';
   Vehicledetails? data;
   try {
+    print(id);
     print(url);
     final provider =
         Provider.of<Vehicledetailsprovider>(context, listen: false);

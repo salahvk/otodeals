@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:otodeals/data/providers/bidprovider.dart';
+import 'package:otodeals/data/repositories/vehicledetails.dart';
+import 'package:otodeals/presentation/screens/productdetails.dart';
 
 import 'package:otodeals/presentation/widgets/Timers/bidtimer.dart';
 import 'package:otodeals/presentation/widgets/bottom_nav.dart';
@@ -30,6 +33,13 @@ class _SearchScreenState extends State<MyBidList> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final bidres=Provider.of<Bidprovider>(context,listen:false);
+    void inputbidhistory(index)async{
+      final res=Provider.of<Bidprovider>(context,listen: false);
+      int? id=res.bidvar?.bidHistory![index].id;
+      await getvehicledetails(context, id!);
+        Navigator.of(context).push(FadePageRoute(page: Porductdetails()));
+
+    }
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
