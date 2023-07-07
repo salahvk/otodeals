@@ -89,7 +89,7 @@ class _PorductdetailsState extends State<Porductdetails> {
                         imageUrl:
                             "$endpoint${vres.vehdet?.vehicle?.productimage ?? ""}",
                         height: 180,
-                        // width: size.width * .9,
+                        width: size.width * .9,
                         fit: BoxFit.cover,
                         errorWidget: (context, url, error) {
                           return Container(
@@ -1012,40 +1012,255 @@ class _PorductdetailsState extends State<Porductdetails> {
                                           color: Colormanager.primary,
                                         )),
                                   ),
-                                  title: Container(
-                                    child: Text(
-                                      "Gallery",
-                                      style: getSemiBoldStyle(
-                                          color: Colormanager.black,
-                                          fontSize: 22),
-                                    ),
+                                  title: Text(
+                                    "Product Images",
+                                    style: getSemiBoldStyle(
+                                        color: Colormanager.black,
+                                        fontSize: 22),
                                   ),
                                   children: [
-                                    Container(
-                                      color: Colormanager.background,
-                                      height: 120,
-                                      width: MediaQuery.of(context).size.width,
-                                      child: ListView.builder(
-                                          itemCount: 6,
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 8, right: 8),
+                                      child: SizedBox(
+                                        height: 150,
+                                        width: size.width,
+                                        child: ListView.builder(
+                                          itemCount: vres
+                                              .vehdet?.productimages?.length,
                                           scrollDirection: Axis.horizontal,
                                           itemBuilder: (context, index) {
                                             return Padding(
                                               padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Container(
-                                                height: 60,
-                                                width: 90,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20)),
-                                                child: Image.asset(
-                                                    'assets/cars.jpg'),
+                                                  const EdgeInsets.fromLTRB(
+                                                      0, 8, 8, 8),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                child: CachedNetworkImage(
+                                                  width: 200,
+                                                  imageUrl:
+                                                      "$endpoint${vres.vehdet?.productimages?[index].productimage}",
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             );
-                                          }),
-                                    ),
+                                          },
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                              Card(
+                                elevation: 10,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(24.0),
+                                ),
+                                child: ExpansionTile(
+                                  trailing: Container(
+                                    height: 37,
+                                    width: 37,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                              blurRadius: 5,
+                                              color: Color.fromARGB(
+                                                  255, 198, 197, 197),
+                                              spreadRadius: 0,
+                                              offset: Offset(0, 4))
+                                        ],
+                                        color: Colormanager.white),
+                                    child: Transform.rotate(
+                                        angle: 3.14159 * 1.5,
+                                        child: Icon(
+                                          Icons.arrow_back_ios,
+                                          size: 16,
+                                          color: Colormanager.primary,
+                                        )),
+                                  ),
+                                  title: Text(
+                                    "Interiors",
+                                    style: getSemiBoldStyle(
+                                        color: Colormanager.black,
+                                        fontSize: 22),
+                                  ),
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 8, right: 8),
+                                      child: SizedBox(
+                                        height: 150,
+                                        width: size.width,
+                                        child: ListView.builder(
+                                          itemCount:
+                                              vres.vehdet?.interiors?.length,
+                                          scrollDirection: Axis.horizontal,
+                                          itemBuilder: (context, index) {
+                                            return Padding(
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      0, 8, 8, 8),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                child: CachedNetworkImage(
+                                                  width: 200,
+                                                  imageUrl:
+                                                      "$endpoint${vres.vehdet?.interiors?[index].interiorImage}",
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                              Card(
+                                elevation: 10,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(24.0),
+                                ),
+                                child: ExpansionTile(
+                                  trailing: Container(
+                                    height: 37,
+                                    width: 37,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                              blurRadius: 5,
+                                              color: Color.fromARGB(
+                                                  255, 198, 197, 197),
+                                              spreadRadius: 0,
+                                              offset: Offset(0, 4))
+                                        ],
+                                        color: Colormanager.white),
+                                    child: Transform.rotate(
+                                        angle: 3.14159 * 1.5,
+                                        child: Icon(
+                                          Icons.arrow_back_ios,
+                                          size: 16,
+                                          color: Colormanager.primary,
+                                        )),
+                                  ),
+                                  title: Text(
+                                    "Exteriors",
+                                    style: getSemiBoldStyle(
+                                        color: Colormanager.black,
+                                        fontSize: 22),
+                                  ),
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 8, right: 8),
+                                      child: SizedBox(
+                                        height: 150,
+                                        width: size.width,
+                                        child: ListView.builder(
+                                          itemCount:
+                                              vres.vehdet?.exteriors?.length,
+                                          scrollDirection: Axis.horizontal,
+                                          itemBuilder: (context, index) {
+                                            return Padding(
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      0, 8, 8, 8),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                child: CachedNetworkImage(
+                                                  width: 200,
+                                                  imageUrl:
+                                                      "$endpoint${vres.vehdet?.exteriors?[index].exteriorImage}",
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                              Card(
+                                elevation: 10,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(24.0),
+                                ),
+                                child: ExpansionTile(
+                                  trailing: Container(
+                                    height: 37,
+                                    width: 37,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                              blurRadius: 5,
+                                              color: Color.fromARGB(
+                                                  255, 198, 197, 197),
+                                              spreadRadius: 0,
+                                              offset: Offset(0, 4))
+                                        ],
+                                        color: Colormanager.white),
+                                    child: Transform.rotate(
+                                        angle: 3.14159 * 1.5,
+                                        child: Icon(
+                                          Icons.arrow_back_ios,
+                                          size: 16,
+                                          color: Colormanager.primary,
+                                        )),
+                                  ),
+                                  title: Text(
+                                    "ACS",
+                                    style: getSemiBoldStyle(
+                                        color: Colormanager.black,
+                                        fontSize: 22),
+                                  ),
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 8, right: 8),
+                                      child: SizedBox(
+                                        height: 150,
+                                        width: size.width,
+                                        child: ListView.builder(
+                                          itemCount: vres.vehdet?.acs?.length,
+                                          scrollDirection: Axis.horizontal,
+                                          itemBuilder: (context, index) {
+                                            return Padding(
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      0, 8, 8, 8),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                child: CachedNetworkImage(
+                                                  width: 200,
+                                                  imageUrl:
+                                                      "$endpoint${vres.vehdet?.acs?[index].acImage}",
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    )
                                   ],
                                 ),
                               ),
