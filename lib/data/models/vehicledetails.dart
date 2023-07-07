@@ -166,47 +166,48 @@ class Vehicle {
   String? productimage;
   String? years;
   String? months;
-  String? days;
-  String? hours;
-  String? minutes;
-  String? seconds;
+  // String? days;
+  // String? hours;
+  // String? minutes;
+  // String? seconds;
 
-  Vehicle(
-      {this.id,
-      this.type,
-      this.vehicletype,
-      this.categoryId,
-      this.brandId,
-      this.vehicleName,
-      this.description,
-      this.fueltype,
-      this.owner,
-      this.modelyear,
-      this.mileage,
-      this.gearshift,
-      this.price,
-      this.starttime,
-      this.endtime,
-      this.minimumbitamount,
-      this.seoUrl,
-      this.registration,
-      this.insurance,
-      this.rto,
-      this.taxupto,
-      this.tagIds,
-      this.fitnessupto,
-      this.location,
-      this.status,
-      this.vehicleIdentificationNumber,
-      this.createdAt,
-      this.updatedAt,
-      this.productimage,
-      this.years,
-      this.months,
-      this.days,
-      this.hours,
-      this.minutes,
-      this.seconds});
+  Vehicle({
+    this.id,
+    this.type,
+    this.vehicletype,
+    this.categoryId,
+    this.brandId,
+    this.vehicleName,
+    this.description,
+    this.fueltype,
+    this.owner,
+    this.modelyear,
+    this.mileage,
+    this.gearshift,
+    this.price,
+    this.starttime,
+    this.endtime,
+    this.minimumbitamount,
+    this.seoUrl,
+    this.registration,
+    this.insurance,
+    this.rto,
+    this.taxupto,
+    this.tagIds,
+    this.fitnessupto,
+    this.location,
+    this.status,
+    this.vehicleIdentificationNumber,
+    this.createdAt,
+    this.updatedAt,
+    this.productimage,
+    this.years,
+    this.months,
+    // this.days,
+    // this.hours,
+    // this.minutes,
+    // this.seconds
+  });
 
   Vehicle.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -240,10 +241,10 @@ class Vehicle {
     productimage = json['productimage'];
     years = json['years'];
     months = json['months'];
-    days = json['days'];
-    hours = json['hours'];
-    minutes = json['minutes'];
-    seconds = json['seconds'];
+    // days = json['days'];
+    // hours = json['hours'];
+    // minutes = json['minutes'];
+    // seconds = json['seconds'];
   }
 
   Map<String, dynamic> toJson() {
@@ -279,10 +280,10 @@ class Vehicle {
     data['productimage'] = productimage;
     data['years'] = years;
     data['months'] = months;
-    data['days'] = days;
-    data['hours'] = hours;
-    data['minutes'] = minutes;
-    data['seconds'] = seconds;
+    // data['days'] = days;
+    // data['hours'] = hours;
+    // data['minutes'] = minutes;
+    // data['seconds'] = seconds;
     return data;
   }
 }
@@ -407,50 +408,51 @@ class Similarproducts {
   String? updatedAt;
   String? categoryName;
   String? productimage;
-  String? years;
-  String? months;
-  String? days;
-  String? hours;
-  String? minutes;
-  String? seconds;
+  // String? years;
+  // String? months;
+  // String? days;
+  // String? hours;
+  // String? minutes;
+  // String? seconds;
 
-  Similarproducts(
-      {this.id,
-      this.type,
-      this.vehicletype,
-      this.categoryId,
-      this.brandId,
-      this.vehicleName,
-      this.description,
-      this.fueltype,
-      this.owner,
-      this.modelyear,
-      this.mileage,
-      this.gearshift,
-      this.price,
-      this.starttime,
-      this.endtime,
-      this.minimumbitamount,
-      this.seoUrl,
-      this.registration,
-      this.insurance,
-      this.rto,
-      this.taxupto,
-      this.tagIds,
-      this.fitnessupto,
-      this.location,
-      this.status,
-      this.vehicleIdentificationNumber,
-      this.createdAt,
-      this.updatedAt,
-      this.categoryName,
-      this.productimage,
-      this.years,
-      this.months,
-      this.days,
-      this.hours,
-      this.minutes,
-      this.seconds});
+  Similarproducts({
+    this.id,
+    this.type,
+    this.vehicletype,
+    this.categoryId,
+    this.brandId,
+    this.vehicleName,
+    this.description,
+    this.fueltype,
+    this.owner,
+    this.modelyear,
+    this.mileage,
+    this.gearshift,
+    this.price,
+    this.starttime,
+    this.endtime,
+    this.minimumbitamount,
+    this.seoUrl,
+    this.registration,
+    this.insurance,
+    this.rto,
+    this.taxupto,
+    this.tagIds,
+    this.fitnessupto,
+    this.location,
+    this.status,
+    this.vehicleIdentificationNumber,
+    this.createdAt,
+    this.updatedAt,
+    this.categoryName,
+    this.productimage,
+    // this.years,
+    // this.months,
+    // this.days,
+    // this.hours,
+    // this.minutes,
+    // this.seconds
+  });
 
   Similarproducts.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -483,12 +485,12 @@ class Similarproducts {
     updatedAt = json['updated_at'];
     categoryName = json['category_name'];
     productimage = json['productimage'];
-    years = json['years'];
-    months = json['months'];
-    days = json['days'];
-    hours = json['hours'];
-    minutes = json['minutes'];
-    seconds = json['seconds'];
+    // years = json['years'];
+    // months = json['months'];
+    // days = json['days'];
+    // hours = json['hours'];
+    // minutes = json['minutes'];
+    // seconds = json['seconds'];
   }
 
   Map<String, dynamic> toJson() {
@@ -523,12 +525,12 @@ class Similarproducts {
     data['updated_at'] = updatedAt;
     data['category_name'] = categoryName;
     data['productimage'] = productimage;
-    data['years'] = years;
-    data['months'] = months;
-    data['days'] = days;
-    data['hours'] = hours;
-    data['minutes'] = minutes;
-    data['seconds'] = seconds;
+    // data['years'] = years;
+    // data['months'] = months;
+    // data['days'] = days;
+    // data['hours'] = hours;
+    // data['minutes'] = minutes;
+    // data['seconds'] = seconds;
     return data;
   }
 }
