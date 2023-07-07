@@ -4,7 +4,7 @@ import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:otodeals/data/providers/bidprovider.dart';
-import 'package:otodeals/data/repositories/mybidlist.dart';
+
 import 'package:otodeals/presentation/widgets/Timers/bidtimer.dart';
 import 'package:otodeals/presentation/widgets/bottom_nav.dart';
 import 'package:provider/provider.dart';

@@ -89,7 +89,7 @@ class _PorductdetailsState extends State<Porductdetails> {
                         imageUrl:
                             "$endpoint${vres.vehdet?.vehicle?.productimage ?? ""}",
                         height: 180,
-                        width: size.width * .9,
+                        // width: size.width * .9,
                         fit: BoxFit.cover,
                         errorWidget: (context, url, error) {
                           return Container(
