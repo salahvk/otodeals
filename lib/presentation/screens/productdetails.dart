@@ -134,6 +134,334 @@ class _PorductdetailsState extends State<Porductdetails> {
                         text: "RTO: ${vres.vehdet?.vehicle?.rto.toString()}")
                   ],
                 ),
+                ExpansionTile(
+                  trailing: SizedBox(
+                    height: 0,
+                  ),
+                  tilePadding: EdgeInsets.only(left: 30),
+                  title: Container(
+                    height: 40,
+                    // width: size.width * .5,
+                    decoration: BoxDecoration(
+                        color: Colormanager.primary,
+                        borderRadius: BorderRadius.circular(30)),
+                    child: Center(
+                        child: Text(
+                      "Show Vehicle Parts",
+                      style:
+                          getBoldStyle(color: Colormanager.white, fontSize: 15),
+                    )),
+                  ),
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 500,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 245, 245, 245),
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Stack(
+                          children: [
+                            Center(
+                                child: Image.network(
+                              "${vres.vehdet?.bodyImage}",
+                              fit: BoxFit.cover,
+                            )),
+                            Column(
+                              children: const [
+                                // Padding(
+                                //   padding:
+                                //       const EdgeInsets.only(left: 0.0, right: 80),
+                                //   child: Container(
+                                //     height: 20,
+                                //     width: 25,
+                                //     decoration: BoxDecoration(
+                                //       color: const Color(0xffbfd836e),
+                                //       borderRadius: BorderRadius.circular(10),
+                                //     ),
+                                //     child: Center(
+                                //         child: Text(
+                                //       "E1",
+                                //       style: getMediumtStyle(
+                                //           color: Colors.white, fontSize: 10),
+                                //     )),
+                                //   ),
+                                // ),
+                                // SizedBox(
+                                //   height: 68,
+                                // ),
+                                // Row(
+                                //   children: [
+                                //     Padding(
+                                //       padding: const EdgeInsets.only(left: 60.0),
+                                //       child: Container(
+                                //         height: 20,
+                                //         width: 25,
+                                //         decoration: BoxDecoration(
+                                //           color: Color(0xffbbdb7368),
+                                //           borderRadius: BorderRadius.circular(10),
+                                //         ),
+                                //         child: Center(
+                                //             child: Text(
+                                //           "E2",
+                                //           style: getMediumtStyle(
+                                //               color: Colors.white, fontSize: 10),
+                                //         )),
+                                //       ),
+                                //     ),
+                                //     SizedBox(
+                                //       width: 40,
+                                //     ),
+                                //     Padding(
+                                //       padding: const EdgeInsets.only(
+                                //         left: 13.0,
+                                //       ),
+                                //       child: Container(
+                                //         height: 20,
+                                //         width: 28,
+                                //         decoration: BoxDecoration(
+                                //           color: Color(0xffb6c0bce),
+                                //           borderRadius: BorderRadius.circular(10),
+                                //         ),
+                                //         child: Center(
+                                //             child: Text(
+                                //           "A2",
+                                //           style: getMediumtStyle(
+                                //               color: Colors.white, fontSize: 10),
+                                //         )),
+                                //       ),
+                                //     ),
+                                //     SizedBox(
+                                //       width: 40,
+                                //     ),
+                                //     Padding(
+                                //       padding: const EdgeInsets.only(left: 70.0),
+                                //       child: Container(
+                                //         height: 20,
+                                //         width: 28,
+                                //         decoration: BoxDecoration(
+                                //           color: Color(0xFFb13a36),
+                                //           borderRadius: BorderRadius.circular(10),
+                                //         ),
+                                //         child: Center(
+                                //             child: Text(
+                                //           "S2",
+                                //           style: getMediumtStyle(
+                                //               color: Colors.white, fontSize: 10),
+                                //         )),
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
+                                // SizedBox(
+                                //   height: 45,
+                                // ),
+                                // Padding(
+                                //   padding:
+                                //       const EdgeInsets.only(left: 0.0, right: 40),
+                                //   child: Container(
+                                //     height: 20,
+                                //     width: 28,
+                                //     decoration: BoxDecoration(
+                                //       color: Color(0xffb4c8ee5),
+                                //       borderRadius: BorderRadius.circular(10),
+                                //     ),
+                                //     child: Center(
+                                //         child: Text(
+                                //       "G1",
+                                //       style: getMediumtStyle(
+                                //           color: Colors.white, fontSize: 10),
+                                //     )),
+                                //   ),
+                                // ),
+                                // Row(
+                                //   children: [
+                                //     SizedBox(
+                                //       height: 2,
+                                //     ),
+                                //     Padding(
+                                //       padding: const EdgeInsets.only(
+                                //           left: 50.0, right: 100),
+                                //       child: Container(
+                                //         height: 20,
+                                //         width: 28,
+                                //         decoration: BoxDecoration(
+                                //           color: Color(0xffbb13a36),
+                                //           borderRadius: BorderRadius.circular(10),
+                                //         ),
+                                //         child: Center(
+                                //             child: Text(
+                                //           "S2",
+                                //           style: getMediumtStyle(
+                                //               color: Colors.white, fontSize: 10),
+                                //         )),
+                                //       ),
+                                //     ),
+                                //     SizedBox(
+                                //       width: 10,
+                                //     ),
+                                //     Padding(
+                                //       padding: const EdgeInsets.only(
+                                //           left: 100.0, right: 50),
+                                //       child: Container(
+                                //         height: 20,
+                                //         width: 28,
+                                //         decoration: BoxDecoration(
+                                //           color: Color(0xffbfd836e),
+                                //           borderRadius: BorderRadius.circular(10),
+                                //         ),
+                                //         child: Center(
+                                //             child: Text(
+                                //           "E1",
+                                //           style: getMediumtStyle(
+                                //               color: Colors.white, fontSize: 10),
+                                //         )),
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
+                                // SizedBox(
+                                //   height: 50,
+                                // ),
+                                // Padding(
+                                //   padding: const EdgeInsets.only(
+                                //       left: 100.0, right: 100),
+                                //   child: Container(
+                                //     height: 20,
+                                //     width: 28,
+                                //     decoration: BoxDecoration(
+                                //       color: Color(0xffbfd836e),
+                                //       borderRadius: BorderRadius.circular(10),
+                                //     ),
+                                //     child: Center(
+                                //         child: Text(
+                                //       "E1",
+                                //       style: getMediumtStyle(
+                                //           color: Colors.white, fontSize: 10),
+                                //     )),
+                                //   ),
+                                // ),
+                                // SizedBox(
+                                //   height: 0,
+                                // ),
+                                // Padding(
+                                //   padding:
+                                //       const EdgeInsets.only(left: 0.0, right: 240),
+                                //   child: Container(
+                                //     height: 20,
+                                //     width: 28,
+                                //     decoration: BoxDecoration(
+                                //       color: Color(0xffbfd836e),
+                                //       borderRadius: BorderRadius.circular(10),
+                                //     ),
+                                //     child: Center(
+                                //         child: Text(
+                                //       "E1",
+                                //       style: getMediumtStyle(
+                                //           color: Colors.white, fontSize: 10),
+                                //     )),
+                                //   ),
+                                // ),
+                                // SizedBox(
+                                //   height: 60,
+                                // ),
+                                // Row(
+                                //   children: [
+                                //     SizedBox(
+                                //       height: 2,
+                                //     ),
+                                //     Padding(
+                                //       padding: const EdgeInsets.only(
+                                //           left: 60.0, right: 80),
+                                //       child: Container(
+                                //         height: 20,
+                                //         width: 28,
+                                //         decoration: BoxDecoration(
+                                //           color: Color(0xffb6c0bce),
+                                //           borderRadius: BorderRadius.circular(10),
+                                //         ),
+                                //         child: Center(
+                                //             child: Text(
+                                //           "A2",
+                                //           style: getMediumtStyle(
+                                //               color: Colors.white, fontSize: 10),
+                                //         )),
+                                //       ),
+                                //     ),
+                                //     SizedBox(
+                                //       width: 10,
+                                //     ),
+                                //     Padding(
+                                //       padding: const EdgeInsets.only(
+                                //           left: 100.0, right: 50),
+                                //       child: Container(
+                                //         height: 20,
+                                //         width: 28,
+                                //         decoration: BoxDecoration(
+                                //           color: Color(0xffb6c0bce),
+                                //           borderRadius: BorderRadius.circular(10),
+                                //         ),
+                                //         child: Center(
+                                //             child: Text(
+                                //           "A2",
+                                //           style: getMediumtStyle(
+                                //               color: Colors.white, fontSize: 10),
+                                //         )),
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
+                                // SizedBox(
+                                //   height: 60,
+                                // ),
+                                // Padding(
+                                //   padding:
+                                //       const EdgeInsets.only(left: 20.0, right: 50),
+                                //   child: Container(
+                                //     height: 20,
+                                //     width: 28,
+                                //     decoration: BoxDecoration(
+                                //       color: Color(0xffb6c0bce),
+                                //       borderRadius: BorderRadius.circular(10),
+                                //     ),
+                                //     child: Center(
+                                //         child: Text(
+                                //       "A2",
+                                //       style: getMediumtStyle(
+                                //           color: Colors.white, fontSize: 10),
+                                //     )),
+                                //   ),
+                                // ),
+                                // SizedBox(
+                                //   height: 25,
+                                // ),
+                                // Padding(
+                                //   padding:
+                                //       const EdgeInsets.only(left: 0.0, right: 70),
+                                //   child: Container(
+                                //     height: 20,
+                                //     width: 25,
+                                //     decoration: BoxDecoration(
+                                //       color: Color(0xffbbdb7368),
+                                //       borderRadius: BorderRadius.circular(10),
+                                //     ),
+                                //     child: Center(
+                                //         child: Text(
+                                //       "E2",
+                                //       style: getMediumtStyle(
+                                //           color: Colors.white, fontSize: 10),
+                                //     )),
+                                //   ),
+                                // ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 Stack(children: const [
                   // Container(
                   //   height: 250,
@@ -359,313 +687,6 @@ class _PorductdetailsState extends State<Porductdetails> {
                 ]),
                 SizedBox(
                   height: 25,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 500,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 245, 245, 245),
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Stack(
-                      children: [
-                        Center(
-                            child: Image.network(
-                          "${vres.vehdet?.bodyImage}",
-                          fit: BoxFit.cover,
-                        )),
-                        Column(
-                          children: const [
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.only(left: 0.0, right: 80),
-                            //   child: Container(
-                            //     height: 20,
-                            //     width: 25,
-                            //     decoration: BoxDecoration(
-                            //       color: const Color(0xffbfd836e),
-                            //       borderRadius: BorderRadius.circular(10),
-                            //     ),
-                            //     child: Center(
-                            //         child: Text(
-                            //       "E1",
-                            //       style: getMediumtStyle(
-                            //           color: Colors.white, fontSize: 10),
-                            //     )),
-                            //   ),
-                            // ),
-                            // SizedBox(
-                            //   height: 68,
-                            // ),
-                            // Row(
-                            //   children: [
-                            //     Padding(
-                            //       padding: const EdgeInsets.only(left: 60.0),
-                            //       child: Container(
-                            //         height: 20,
-                            //         width: 25,
-                            //         decoration: BoxDecoration(
-                            //           color: Color(0xffbbdb7368),
-                            //           borderRadius: BorderRadius.circular(10),
-                            //         ),
-                            //         child: Center(
-                            //             child: Text(
-                            //           "E2",
-                            //           style: getMediumtStyle(
-                            //               color: Colors.white, fontSize: 10),
-                            //         )),
-                            //       ),
-                            //     ),
-                            //     SizedBox(
-                            //       width: 40,
-                            //     ),
-                            //     Padding(
-                            //       padding: const EdgeInsets.only(
-                            //         left: 13.0,
-                            //       ),
-                            //       child: Container(
-                            //         height: 20,
-                            //         width: 28,
-                            //         decoration: BoxDecoration(
-                            //           color: Color(0xffb6c0bce),
-                            //           borderRadius: BorderRadius.circular(10),
-                            //         ),
-                            //         child: Center(
-                            //             child: Text(
-                            //           "A2",
-                            //           style: getMediumtStyle(
-                            //               color: Colors.white, fontSize: 10),
-                            //         )),
-                            //       ),
-                            //     ),
-                            //     SizedBox(
-                            //       width: 40,
-                            //     ),
-                            //     Padding(
-                            //       padding: const EdgeInsets.only(left: 70.0),
-                            //       child: Container(
-                            //         height: 20,
-                            //         width: 28,
-                            //         decoration: BoxDecoration(
-                            //           color: Color(0xFFb13a36),
-                            //           borderRadius: BorderRadius.circular(10),
-                            //         ),
-                            //         child: Center(
-                            //             child: Text(
-                            //           "S2",
-                            //           style: getMediumtStyle(
-                            //               color: Colors.white, fontSize: 10),
-                            //         )),
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
-                            // SizedBox(
-                            //   height: 45,
-                            // ),
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.only(left: 0.0, right: 40),
-                            //   child: Container(
-                            //     height: 20,
-                            //     width: 28,
-                            //     decoration: BoxDecoration(
-                            //       color: Color(0xffb4c8ee5),
-                            //       borderRadius: BorderRadius.circular(10),
-                            //     ),
-                            //     child: Center(
-                            //         child: Text(
-                            //       "G1",
-                            //       style: getMediumtStyle(
-                            //           color: Colors.white, fontSize: 10),
-                            //     )),
-                            //   ),
-                            // ),
-                            // Row(
-                            //   children: [
-                            //     SizedBox(
-                            //       height: 2,
-                            //     ),
-                            //     Padding(
-                            //       padding: const EdgeInsets.only(
-                            //           left: 50.0, right: 100),
-                            //       child: Container(
-                            //         height: 20,
-                            //         width: 28,
-                            //         decoration: BoxDecoration(
-                            //           color: Color(0xffbb13a36),
-                            //           borderRadius: BorderRadius.circular(10),
-                            //         ),
-                            //         child: Center(
-                            //             child: Text(
-                            //           "S2",
-                            //           style: getMediumtStyle(
-                            //               color: Colors.white, fontSize: 10),
-                            //         )),
-                            //       ),
-                            //     ),
-                            //     SizedBox(
-                            //       width: 10,
-                            //     ),
-                            //     Padding(
-                            //       padding: const EdgeInsets.only(
-                            //           left: 100.0, right: 50),
-                            //       child: Container(
-                            //         height: 20,
-                            //         width: 28,
-                            //         decoration: BoxDecoration(
-                            //           color: Color(0xffbfd836e),
-                            //           borderRadius: BorderRadius.circular(10),
-                            //         ),
-                            //         child: Center(
-                            //             child: Text(
-                            //           "E1",
-                            //           style: getMediumtStyle(
-                            //               color: Colors.white, fontSize: 10),
-                            //         )),
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
-                            // SizedBox(
-                            //   height: 50,
-                            // ),
-                            // Padding(
-                            //   padding: const EdgeInsets.only(
-                            //       left: 100.0, right: 100),
-                            //   child: Container(
-                            //     height: 20,
-                            //     width: 28,
-                            //     decoration: BoxDecoration(
-                            //       color: Color(0xffbfd836e),
-                            //       borderRadius: BorderRadius.circular(10),
-                            //     ),
-                            //     child: Center(
-                            //         child: Text(
-                            //       "E1",
-                            //       style: getMediumtStyle(
-                            //           color: Colors.white, fontSize: 10),
-                            //     )),
-                            //   ),
-                            // ),
-                            // SizedBox(
-                            //   height: 0,
-                            // ),
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.only(left: 0.0, right: 240),
-                            //   child: Container(
-                            //     height: 20,
-                            //     width: 28,
-                            //     decoration: BoxDecoration(
-                            //       color: Color(0xffbfd836e),
-                            //       borderRadius: BorderRadius.circular(10),
-                            //     ),
-                            //     child: Center(
-                            //         child: Text(
-                            //       "E1",
-                            //       style: getMediumtStyle(
-                            //           color: Colors.white, fontSize: 10),
-                            //     )),
-                            //   ),
-                            // ),
-                            // SizedBox(
-                            //   height: 60,
-                            // ),
-                            // Row(
-                            //   children: [
-                            //     SizedBox(
-                            //       height: 2,
-                            //     ),
-                            //     Padding(
-                            //       padding: const EdgeInsets.only(
-                            //           left: 60.0, right: 80),
-                            //       child: Container(
-                            //         height: 20,
-                            //         width: 28,
-                            //         decoration: BoxDecoration(
-                            //           color: Color(0xffb6c0bce),
-                            //           borderRadius: BorderRadius.circular(10),
-                            //         ),
-                            //         child: Center(
-                            //             child: Text(
-                            //           "A2",
-                            //           style: getMediumtStyle(
-                            //               color: Colors.white, fontSize: 10),
-                            //         )),
-                            //       ),
-                            //     ),
-                            //     SizedBox(
-                            //       width: 10,
-                            //     ),
-                            //     Padding(
-                            //       padding: const EdgeInsets.only(
-                            //           left: 100.0, right: 50),
-                            //       child: Container(
-                            //         height: 20,
-                            //         width: 28,
-                            //         decoration: BoxDecoration(
-                            //           color: Color(0xffb6c0bce),
-                            //           borderRadius: BorderRadius.circular(10),
-                            //         ),
-                            //         child: Center(
-                            //             child: Text(
-                            //           "A2",
-                            //           style: getMediumtStyle(
-                            //               color: Colors.white, fontSize: 10),
-                            //         )),
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
-                            // SizedBox(
-                            //   height: 60,
-                            // ),
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.only(left: 20.0, right: 50),
-                            //   child: Container(
-                            //     height: 20,
-                            //     width: 28,
-                            //     decoration: BoxDecoration(
-                            //       color: Color(0xffb6c0bce),
-                            //       borderRadius: BorderRadius.circular(10),
-                            //     ),
-                            //     child: Center(
-                            //         child: Text(
-                            //       "A2",
-                            //       style: getMediumtStyle(
-                            //           color: Colors.white, fontSize: 10),
-                            //     )),
-                            //   ),
-                            // ),
-                            // SizedBox(
-                            //   height: 25,
-                            // ),
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.only(left: 0.0, right: 70),
-                            //   child: Container(
-                            //     height: 20,
-                            //     width: 25,
-                            //     decoration: BoxDecoration(
-                            //       color: Color(0xffbbdb7368),
-                            //       borderRadius: BorderRadius.circular(10),
-                            //     ),
-                            //     child: Center(
-                            //         child: Text(
-                            //       "E2",
-                            //       style: getMediumtStyle(
-                            //           color: Colors.white, fontSize: 10),
-                            //     )),
-                            //   ),
-                            // ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
                 ),
                 SizedBox(
                   height: 20,
