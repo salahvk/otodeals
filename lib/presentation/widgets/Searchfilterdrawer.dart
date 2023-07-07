@@ -3,17 +3,16 @@ import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/styles_manager.dart';
-import 'package:otodeals/data/repositories/resetpassword.dart';
+
 import 'package:otodeals/data/repositories/vehiclelisting.dart';
 
+
 class FilterDrawer extends StatefulWidget {
-  // final SearchFilters initialFilters;
-  // final Function(SearchFilters) onFiltersChanged;
+ 
 
   const FilterDrawer({
     Key? key,
-    // required this.initialFilters,
-    // required this.onFiltersChanged,
+ 
   }) : super(key: key);
 
   @override
@@ -21,6 +20,8 @@ class FilterDrawer extends StatefulWidget {
 }
 
 class _FilterDrawerState extends State<FilterDrawer> {
+
+   
   bool _isChecked1 = false;
   bool _isChecked2 = false;
   bool _isChecked3 = false;
@@ -45,6 +46,12 @@ class _FilterDrawerState extends State<FilterDrawer> {
   @override
   void initState() {
     super.initState();
+      _isChecked1 = Searchcontroller.fueltypecontroller.text.contains('diesel');
+    _isChecked2 =Searchcontroller.fueltypecontroller.text.contains('petrol');
+    _isChecked3 = Searchcontroller.fueltypecontroller.text.contains('hybrid');
+    _isChecked4 =Searchcontroller.fueltypecontroller.text.contains('electric');
+    _isautomatic =Searchcontroller.gearshiftcontroller.text.contains('automatic');
+    _ismanual = Searchcontroller.gearshiftcontroller.text.contains('manual');
     // selectedYear = DateTime.now().year;
   }
 
@@ -103,7 +110,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                           Searchcontroller.fueltypecontroller.text =
                               '&filter_fueltype[]=diesel';
                         } else {
-                          Searchcontroller.fueltypecontroller.text = '';
+                        Searchcontroller.fueltypecontroller.clear();
                         }
                       },
                     ),
@@ -129,7 +136,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                           Searchcontroller.fueltypecontroller.text =
                               '&filter_fueltype[]=petrol';
                         } else {
-                          Searchcontroller.fueltypecontroller.text = '';
+                         Searchcontroller.fueltypecontroller.clear();
                         }
                       },
                     ),
@@ -155,7 +162,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                           Searchcontroller.fueltypecontroller.text =
                               '&filter_fueltype[]=hybrid';
                         } else {
-                          Searchcontroller.fueltypecontroller.text = '';
+                                    Searchcontroller.fueltypecontroller.clear();
                         }
                       },
                     ),
@@ -181,7 +188,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                           Searchcontroller.fueltypecontroller.text =
                               '&filter_fueltype[]=electric';
                         } else {
-                          Searchcontroller.fueltypecontroller.text = '';
+                                   Searchcontroller.fueltypecontroller.clear();
                         }
                       },
                     ),
@@ -214,7 +221,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                           Searchcontroller.gearshiftcontroller.text =
                               '&filter_gearshift[]=automatic';
                         } else {
-                          Searchcontroller.gearshiftcontroller.text = '';
+                                     Searchcontroller.gearshiftcontroller.clear();
                         }
                       },
                     ),
@@ -233,6 +240,8 @@ class _FilterDrawerState extends State<FilterDrawer> {
                           _isautomatic = false;
                           Searchcontroller.gearshiftcontroller.text =
                               '&filter_gearshift[]=manual';
+                        }else{
+                        Searchcontroller.gearshiftcontroller.clear();
                         }
                       },
                     ),
@@ -341,14 +350,16 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 ),
                 ElevatedButton(
                   onPressed: () {
+                     
                     Searchcontroller.fueltypecontroller.clear();
                     Searchcontroller.gearshiftcontroller.clear();
                     Searchcontroller.maxpricecontroller.clear();
                     Searchcontroller.minpricecontroller.clear();
                     Searchcontroller.yearrange1controller.clear();
                     Searchcontroller.yearrange2controller.clear();
-
+                    
                     Navigator.pop(context);
+                      fetchSearchResults(context);
 
           
                   },
