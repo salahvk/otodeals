@@ -39,7 +39,7 @@ class _PorductdetailsState extends State<Porductdetails> {
     return Scaffold(
       body: SingleChildScrollView(
           child: Padding(
-              padding: const EdgeInsets.only(top: 35, left: 30, right: 30),
+              padding: const EdgeInsets.only(top: 35, left: 20, right: 20),
               child: Column(children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,7 +89,7 @@ class _PorductdetailsState extends State<Porductdetails> {
                         imageUrl:
                             "$endpoint${vres.vehdet?.vehicle?.productimage ?? ""}",
                         height: 180,
-                        width: size.width * .85,
+                        width: size.width * .9,
                         fit: BoxFit.cover,
                         errorWidget: (context, url, error) {
                           return Container(
@@ -101,7 +101,7 @@ class _PorductdetailsState extends State<Porductdetails> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 5, bottom: 10),
+                  padding: const EdgeInsets.only(top: 15, bottom: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -134,47 +134,64 @@ class _PorductdetailsState extends State<Porductdetails> {
                         text: "RTO: ${vres.vehdet?.vehicle?.rto.toString()}")
                   ],
                 ),
-               const SizedBox(height: 15,),
-                 Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Minimum Bid Amount",
-                                  style: getSemiBoldStyle(
-                                      color: Colormanager.black, fontSize: 10),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                    "RS. ${vres.vehdet?.vehicle?.minimumbitamount.toString()}",
-                                    style: getBoldStyle(
-                                        color: Colors.black, fontSize: 15))
-                              ],
-                            ),
-                         
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Starts In",
-                                  style: getSemiBoldStyle(
-                                      color: Colormanager.primary,
-                                      fontSize: 10),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                  VehicledetailTimerScreen(),
-                              ],
-                            ),
-                          ],
+                const SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Minimum Bid Amount",
+                          style: getSemiBoldStyle(
+                              color: Colormanager.black, fontSize: 10),
                         ),
-                        SizedBox(height: 15,),
-
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                            "RS. ${vres.vehdet?.vehicle?.minimumbitamount.toString()}",
+                            style:
+                                getBoldStyle(color: Colors.black, fontSize: 15))
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Starts In",
+                          style: getSemiBoldStyle(
+                              color: Colormanager.primary, fontSize: 10),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        VehicledetailTimerScreen(),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                vres.vehdet?.vehicle?.type == 'sale'
+                    ? BuyNow()
+                    : Column(
+                        children: const [
+                          SizedBox(
+                            height: 15,
+                          ),
+                          BidListTile(),
+                        ],
+                      ),
+                SizedBox(
+                  height: 4,
+                ),
+                SizedBox(
+                  height: 15,
+                ),
                 ExpansionTile(
                   trailing: SizedBox(
                     height: 0,
@@ -726,27 +743,6 @@ class _PorductdetailsState extends State<Porductdetails> {
                   //   ],
                   // ),
                 ]),
-                SizedBox(
-                  height: 25,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                vres.vehdet?.vehicle?.type == 'sale'
-                    ? BuyNow()
-                    : Column(
-                        children: [
-                          
-                      
-                          SizedBox(
-                            height: 15,
-                          ),
-                          BidListTile(),
-                        ],
-                      ),
-                SizedBox(
-                  height: 4,
-                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: AnimatedContainer(
@@ -801,13 +797,11 @@ class _PorductdetailsState extends State<Porductdetails> {
                                           color: Colormanager.primary,
                                         )),
                                   ),
-                                  title: Container(
-                                    child: Text(
-                                      "Overview",
-                                      style: getSemiBoldStyle(
-                                          color: Colormanager.black,
-                                          fontSize: 22),
-                                    ),
+                                  title: Text(
+                                    "Overview",
+                                    style: getSemiBoldStyle(
+                                        color: Colormanager.black,
+                                        fontSize: 22),
                                   ),
                                   children: [
                                     Padding(
@@ -829,35 +823,25 @@ class _PorductdetailsState extends State<Porductdetails> {
                                                   width: 10,
                                                 ),
                                                 Text(
-                                                  "Registeration",
+                                                  "Registration",
                                                   style: getMediumtStyle(
                                                       fontSize: 13.0,
                                                       color:
                                                           const Color.fromARGB(
                                                               255, 0, 0, 0)),
                                                 ),
-                                                SizedBox(
-                                                  width: 90,
-                                                ),
+                                                Spacer(),
                                                 Text(
-                                                  "OCT-2020",
+                                                  vres.vehdet?.vehicle
+                                                          ?.registration
+                                                          .toString() ??
+                                                      '',
                                                   style: getBoldStyle(
                                                       color: Colors.black),
                                                 )
                                               ],
                                             ),
-                                            SizedBox(height: 10.0),
-                                            Container(
-                                              height: 0.8,
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              color: Color.fromARGB(
-                                                  255, 158, 155, 155),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
+                                            Divider(thickness: 2),
                                             Row(
                                               children: [
                                                 Image.asset(
@@ -869,37 +853,25 @@ class _PorductdetailsState extends State<Porductdetails> {
                                                   width: 10,
                                                 ),
                                                 Text(
-                                                  "Manufacturing Year",
+                                                  "Insurance",
                                                   style: getMediumtStyle(
                                                       color:
                                                           const Color.fromARGB(
                                                               255, 0, 0, 0),
                                                       fontSize: 13),
                                                 ),
-                                                SizedBox(
-                                                  width: 50,
-                                                ),
+                                                Spacer(),
                                                 Text(
-                                                  "OCT-2020",
+                                                  vres.vehdet?.vehicle
+                                                          ?.insurance
+                                                          .toString() ??
+                                                      '',
                                                   style: getBoldStyle(
                                                       color: Colors.black),
                                                 )
                                               ],
                                             ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Container(
-                                              height: 0.8,
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              color: Color.fromARGB(
-                                                  255, 158, 155, 155),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
+                                            Divider(thickness: 2),
                                             Row(
                                               children: [
                                                 Image.asset(
@@ -911,109 +883,101 @@ class _PorductdetailsState extends State<Porductdetails> {
                                                   width: 10,
                                                 ),
                                                 Text(
-                                                  "Odometer",
+                                                  "Rto",
                                                   style: getMediumtStyle(
                                                       color:
                                                           const Color.fromARGB(
                                                               255, 0, 0, 0),
                                                       fontSize: 13),
                                                 ),
-                                                SizedBox(
-                                                  width: 110,
-                                                ),
+                                                Spacer(),
                                                 Text(
-                                                  "23,040km",
+                                                  vres.vehdet?.vehicle?.rto
+                                                          .toString() ??
+                                                      '',
                                                   style: getBoldStyle(
                                                       color: Colors.black),
                                                 )
                                               ],
                                             ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Container(
-                                              height: 0.8,
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              color: Color.fromARGB(
-                                                  255, 158, 155, 155),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
+                                            Divider(thickness: 2),
                                             Row(
                                               children: [
-                                                Image.asset(
-                                                  'assets/automatic-transmission.png',
-                                                  color: Colormanager.primary,
-                                                  height: 30,
-                                                ),
+                                                Icon(Icons.monetization_on),
                                                 SizedBox(
                                                   width: 10,
                                                 ),
                                                 Text(
-                                                  "Transmission",
+                                                  "Tax Upto",
                                                   style: getMediumtStyle(
                                                       color:
                                                           const Color.fromARGB(
                                                               255, 0, 0, 0),
                                                       fontSize: 13),
                                                 ),
-                                                SizedBox(
-                                                  width: 100,
-                                                ),
+                                                Spacer(),
                                                 Text(
-                                                  "Manual",
+                                                  vres.vehdet?.vehicle?.taxupto
+                                                          .toString() ??
+                                                      '',
                                                   style: getBoldStyle(
                                                       color: Colors.black),
                                                 )
                                               ],
                                             ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Container(
-                                              height: 0.8,
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              color: Color.fromARGB(
-                                                  255, 163, 163, 163),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Center(
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 70.0),
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      "View More Details",
-                                                      style: getMediumtStyle(
-                                                          color: Colormanager
-                                                              .primary,
-                                                          fontSize: 14),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    Transform.rotate(
-                                                        angle: 3.14159 * 1.5,
-                                                        child: Icon(
-                                                          Icons.arrow_back_ios,
-                                                          size: 15,
-                                                          color: Colormanager
-                                                              .primary,
-                                                        )),
-                                                  ],
+                                            Divider(thickness: 2),
+                                            Row(
+                                              children: [
+                                                Icon(Icons.car_crash),
+                                                SizedBox(
+                                                  width: 10,
                                                 ),
-                                              ),
-                                            )
+                                                Text(
+                                                  "Fitness Upto",
+                                                  style: getMediumtStyle(
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              255, 0, 0, 0),
+                                                      fontSize: 13),
+                                                ),
+                                                Spacer(),
+                                                Text(
+                                                  vres.vehdet?.vehicle
+                                                          ?.fitnessupto
+                                                          .toString() ??
+                                                      '',
+                                                  style: getBoldStyle(
+                                                      color: Colors.black),
+                                                )
+                                              ],
+                                            ),
+                                            Divider(thickness: 2),
+                                            Row(
+                                              children: [
+                                                Icon(Icons.car_crash),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text(
+                                                  "Vehicle Id",
+                                                  style: getMediumtStyle(
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              255, 0, 0, 0),
+                                                      fontSize: 13),
+                                                ),
+                                                Spacer(),
+                                                Text(
+                                                  vres.vehdet?.vehicle
+                                                          ?.vehicleIdentificationNumber
+                                                          .toString() ??
+                                                      '',
+                                                  style: getBoldStyle(
+                                                      color: Colors.black),
+                                                )
+                                              ],
+                                            ),
+                                            Divider(thickness: 2),
                                           ])),
                                     ),
                                   ],

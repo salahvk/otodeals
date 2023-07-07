@@ -2,14 +2,14 @@ class Vehicledetails {
   bool? result;
   Vehicle? vehicle;
   Vehiclespecification? vehiclespecification;
-  // List? similarproducts;
+  List<Similarproducts>? similarproducts;
   List<Productimages>? productimages;
-  // List? interiors;
-  // List? exteriors;
-  // List? acs;
-  // List? certifieds;
-  // List? replacements;
-  // List? oilchange;
+  List<Interiors>? interiors;
+  List<Exteriors>? exteriors;
+  List<Acs>? acs;
+  List<void>? certifieds;
+  List<void>? replacements;
+  List<void>? oilchange;
   List<Brands>? brands;
   String? bodyImage;
 
@@ -17,14 +17,14 @@ class Vehicledetails {
       {this.result,
       this.vehicle,
       this.vehiclespecification,
-      // this.similarproducts,
+      this.similarproducts,
       this.productimages,
-      // this.interiors,
-      // this.exteriors,
-      // this.acs,
-      // this.certifieds,
-      // this.replacements,
-      // this.oilchange,
+      this.interiors,
+      this.exteriors,
+      this.acs,
+      this.certifieds,
+      this.replacements,
+      this.oilchange,
       this.brands,
       this.bodyImage});
 
@@ -33,54 +33,54 @@ class Vehicledetails {
     vehicle =
         json['vehicle'] != null ? Vehicle.fromJson(json['vehicle']) : null;
     vehiclespecification = json['vehiclespecification'] != null
-        ?  Vehiclespecification.fromJson(json['vehiclespecification'])
+        ? Vehiclespecification.fromJson(json['vehiclespecification'])
         : null;
-    // if (json['similarproducts'] != null) {
-    //   similarproducts = <Null>[];
-    //   json['similarproducts'].forEach((v) {
-    //     similarproducts!.add(new fromJson(v));
-    //   });
-    // }
+    if (json['similarproducts'] != null) {
+      similarproducts = <Similarproducts>[];
+      json['similarproducts'].forEach((v) {
+        similarproducts!.add(Similarproducts.fromJson(v));
+      });
+    }
     if (json['productimages'] != null) {
       productimages = <Productimages>[];
       json['productimages'].forEach((v) {
         productimages!.add(Productimages.fromJson(v));
       });
     }
-    // if (json['interiors'] != null) {
-    //   interiors = <Null>[];
-    //   json['interiors'].forEach((v) {
-    //     interiors!.add(new Null.fromJson(v));
-    //   });
-    // }
-    // if (json['exteriors'] != null) {
-    //   exteriors = <Null>[];
-    //   json['exteriors'].forEach((v) {
-    //     exteriors!.add(new Null.fromJson(v));
-    //   });
-    // }
-    // if (json['acs'] != null) {
-    //   acs = <Null>[];
-    //   json['acs'].forEach((v) {
-    //     acs!.add(new Null.fromJson(v));
-    //   });
-    // }
+    if (json['interiors'] != null) {
+      interiors = <Interiors>[];
+      json['interiors'].forEach((v) {
+        interiors!.add(Interiors.fromJson(v));
+      });
+    }
+    if (json['exteriors'] != null) {
+      exteriors = <Exteriors>[];
+      json['exteriors'].forEach((v) {
+        exteriors!.add(Exteriors.fromJson(v));
+      });
+    }
+    if (json['acs'] != null) {
+      acs = <Acs>[];
+      json['acs'].forEach((v) {
+        acs!.add(Acs.fromJson(v));
+      });
+    }
     // if (json['certifieds'] != null) {
     //   certifieds = <Null>[];
     //   json['certifieds'].forEach((v) {
-    //     certifieds!.add(new Null.fromJson(v));
+    //     certifieds!.add(void.fromJson(v));
     //   });
     // }
     // if (json['replacements'] != null) {
     //   replacements = <Null>[];
     //   json['replacements'].forEach((v) {
-    //     replacements!.add(new Null.fromJson(v));
+    //     replacements!.add(void.fromJson(v));
     //   });
     // }
     // if (json['oilchange'] != null) {
     //   oilchange = <Null>[];
     //   json['oilchange'].forEach((v) {
-    //     oilchange!.add(new Null.fromJson(v));
+    //     oilchange!.add(void.fromJson(v));
     //   });
     // }
     if (json['brands'] != null) {
@@ -101,31 +101,30 @@ class Vehicledetails {
     if (vehiclespecification != null) {
       data['vehiclespecification'] = vehiclespecification!.toJson();
     }
-    // if (this.similarproducts != null) {
-    //   data['similarproducts'] =
-    //       this.similarproducts!.map((v) => v.toJson()).toList();
-    // }
-    if (productimages != null) {
-      data['productimages'] =
-          productimages!.map((v) => v.toJson()).toList();
+    if (similarproducts != null) {
+      data['similarproducts'] =
+          similarproducts!.map((v) => v.toJson()).toList();
     }
-    // if (this.interiors != null) {
-    //   data['interiors'] = this.interiors!.map((v) => v.toJson()).toList();
+    if (productimages != null) {
+      data['productimages'] = productimages!.map((v) => v.toJson()).toList();
+    }
+    if (interiors != null) {
+      data['interiors'] = interiors!.map((v) => v.toJson()).toList();
+    }
+    if (exteriors != null) {
+      data['exteriors'] = exteriors!.map((v) => v.toJson()).toList();
+    }
+    if (acs != null) {
+      data['acs'] = acs!.map((v) => v.toJson()).toList();
+    }
+    // if (certifieds != null) {
+    //   data['certifieds'] = certifieds!.map((v) => v.toJson()).toList();
     // }
-    // if (this.exteriors != null) {
-    //   data['exteriors'] = this.exteriors!.map((v) => v.toJson()).toList();
+    // if (replacements != null) {
+    //   data['replacements'] = replacements!.map((v) => v.toJson()).toList();
     // }
-    // if (this.acs != null) {
-    //   data['acs'] = this.acs!.map((v) => v.toJson()).toList();
-    // }
-    // if (this.certifieds != null) {
-    //   data['certifieds'] = this.certifieds!.map((v) => v.toJson()).toList();
-    // }
-    // if (this.replacements != null) {
-    //   data['replacements'] = this.replacements!.map((v) => v.toJson()).toList();
-    // }
-    // if (this.oilchange != null) {
-    //   data['oilchange'] = this.oilchange!.map((v) => v.toJson()).toList();
+    // if (oilchange != null) {
+    //   data['oilchange'] = oilchange!.map((v) => v.toJson()).toList();
     // }
     if (brands != null) {
       data['brands'] = brands!.map((v) => v.toJson()).toList();
@@ -151,25 +150,26 @@ class Vehicle {
   int? price;
   String? starttime;
   String? endtime;
-  int? minimumbitamount;
+  var minimumbitamount;
   String? seoUrl;
   String? registration;
   String? insurance;
   String? rto;
   String? taxupto;
+  String? tagIds;
   String? fitnessupto;
   String? location;
   String? status;
+  int? vehicleIdentificationNumber;
   String? createdAt;
   String? updatedAt;
   String? productimage;
-  // String? years;
-  // String? months;
-  // String? days;
-  // int? hours;
-  // int? minutes;
-  // int? seconds;
-  String? label;
+  String? years;
+  String? months;
+  String? days;
+  String? hours;
+  String? minutes;
+  String? seconds;
 
   Vehicle(
       {this.id,
@@ -193,19 +193,20 @@ class Vehicle {
       this.insurance,
       this.rto,
       this.taxupto,
+      this.tagIds,
       this.fitnessupto,
       this.location,
       this.status,
+      this.vehicleIdentificationNumber,
       this.createdAt,
       this.updatedAt,
       this.productimage,
-      // this.years,
-      // this.months,
-      // this.days,
-      // this.hours,
-      // this.minutes,
-      // this.seconds,
-      this.label});
+      this.years,
+      this.months,
+      this.days,
+      this.hours,
+      this.minutes,
+      this.seconds});
 
   Vehicle.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -229,19 +230,20 @@ class Vehicle {
     insurance = json['insurance'];
     rto = json['rto'];
     taxupto = json['taxupto'];
+    tagIds = json['tag_ids'];
     fitnessupto = json['fitnessupto'];
     location = json['location'];
     status = json['status'];
+    vehicleIdentificationNumber = json['vehicle_identification_number'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     productimage = json['productimage'];
-    // years = json['years'];
-    // months = json['months'];
-    // days = json['days'];
-    // hours = int.parse(json['hours']);
-    // minutes = int.parse(json['minutes']);
-    // seconds = int.parse(json['seconds']);
-    label = json['label'];
+    years = json['years'];
+    months = json['months'];
+    days = json['days'];
+    hours = json['hours'];
+    minutes = json['minutes'];
+    seconds = json['seconds'];
   }
 
   Map<String, dynamic> toJson() {
@@ -267,19 +269,20 @@ class Vehicle {
     data['insurance'] = insurance;
     data['rto'] = rto;
     data['taxupto'] = taxupto;
+    data['tag_ids'] = tagIds;
     data['fitnessupto'] = fitnessupto;
     data['location'] = location;
     data['status'] = status;
+    data['vehicle_identification_number'] = vehicleIdentificationNumber;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     data['productimage'] = productimage;
-    // data['years'] = this.years;
-    // data['months'] = this.months;
-    // data['days'] = this.days;
-    // data['hours'] = this.hours.toString();
-    // data['minutes'] = this.minutes.toString();
-    // data['seconds'] = this.seconds.toString();
-    data['label'] = label;
+    data['years'] = years;
+    data['months'] = months;
+    data['days'] = days;
+    data['hours'] = hours;
+    data['minutes'] = minutes;
+    data['seconds'] = seconds;
     return data;
   }
 }
@@ -373,6 +376,163 @@ class Vehiclespecification {
   }
 }
 
+class Similarproducts {
+  int? id;
+  String? type;
+  String? vehicletype;
+  int? categoryId;
+  int? brandId;
+  String? vehicleName;
+  String? description;
+  String? fueltype;
+  int? owner;
+  int? modelyear;
+  int? mileage;
+  String? gearshift;
+  int? price;
+  void starttime;
+  void endtime;
+  void minimumbitamount;
+  String? seoUrl;
+  String? registration;
+  String? insurance;
+  String? rto;
+  String? taxupto;
+  String? tagIds;
+  String? fitnessupto;
+  String? location;
+  String? status;
+  int? vehicleIdentificationNumber;
+  String? createdAt;
+  String? updatedAt;
+  String? categoryName;
+  String? productimage;
+  String? years;
+  String? months;
+  String? days;
+  String? hours;
+  String? minutes;
+  String? seconds;
+
+  Similarproducts(
+      {this.id,
+      this.type,
+      this.vehicletype,
+      this.categoryId,
+      this.brandId,
+      this.vehicleName,
+      this.description,
+      this.fueltype,
+      this.owner,
+      this.modelyear,
+      this.mileage,
+      this.gearshift,
+      this.price,
+      this.starttime,
+      this.endtime,
+      this.minimumbitamount,
+      this.seoUrl,
+      this.registration,
+      this.insurance,
+      this.rto,
+      this.taxupto,
+      this.tagIds,
+      this.fitnessupto,
+      this.location,
+      this.status,
+      this.vehicleIdentificationNumber,
+      this.createdAt,
+      this.updatedAt,
+      this.categoryName,
+      this.productimage,
+      this.years,
+      this.months,
+      this.days,
+      this.hours,
+      this.minutes,
+      this.seconds});
+
+  Similarproducts.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    type = json['type'];
+    vehicletype = json['vehicletype'];
+    categoryId = json['category_id'];
+    brandId = json['brand_id'];
+    vehicleName = json['vehicle_name'];
+    description = json['description'];
+    fueltype = json['fueltype'];
+    owner = json['owner'];
+    modelyear = json['modelyear'];
+    mileage = json['mileage'];
+    gearshift = json['gearshift'];
+    price = json['price'];
+    starttime = json['starttime'];
+    endtime = json['endtime'];
+    minimumbitamount = json['minimumbitamount'];
+    seoUrl = json['seo_url'];
+    registration = json['registration'];
+    insurance = json['insurance'];
+    rto = json['rto'];
+    taxupto = json['taxupto'];
+    tagIds = json['tag_ids'];
+    fitnessupto = json['fitnessupto'];
+    location = json['location'];
+    status = json['status'];
+    vehicleIdentificationNumber = json['vehicle_identification_number'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    categoryName = json['category_name'];
+    productimage = json['productimage'];
+    years = json['years'];
+    months = json['months'];
+    days = json['days'];
+    hours = json['hours'];
+    minutes = json['minutes'];
+    seconds = json['seconds'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['type'] = type;
+    data['vehicletype'] = vehicletype;
+    data['category_id'] = categoryId;
+    data['brand_id'] = brandId;
+    data['vehicle_name'] = vehicleName;
+    data['description'] = description;
+    data['fueltype'] = fueltype;
+    data['owner'] = owner;
+    data['modelyear'] = modelyear;
+    data['mileage'] = mileage;
+    data['gearshift'] = gearshift;
+    data['price'] = price;
+    // data['starttime'] = starttime;
+    // data['endtime'] = endtime;
+    // data['minimumbitamount'] = minimumbitamount;
+    data['seo_url'] = seoUrl;
+    data['registration'] = registration;
+    data['insurance'] = insurance;
+    data['rto'] = rto;
+    data['taxupto'] = taxupto;
+    data['tag_ids'] = tagIds;
+    data['fitnessupto'] = fitnessupto;
+    data['location'] = location;
+    data['status'] = status;
+    data['vehicle_identification_number'] = vehicleIdentificationNumber;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['category_name'] = categoryName;
+    data['productimage'] = productimage;
+    data['years'] = years;
+    data['months'] = months;
+    data['days'] = days;
+    data['hours'] = hours;
+    data['minutes'] = minutes;
+    data['seconds'] = seconds;
+    return data;
+  }
+}
+
 class Productimages {
   int? id;
   int? productId;
@@ -406,6 +566,129 @@ class Productimages {
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     data['productimage'] = productimage;
+    return data;
+  }
+}
+
+class Interiors {
+  int? id;
+  String? productId;
+  String? interiorText;
+  int? interiorRating;
+  String? interiorImage;
+  String? createdAt;
+  String? updatedAt;
+
+  Interiors(
+      {this.id,
+      this.productId,
+      this.interiorText,
+      this.interiorRating,
+      this.interiorImage,
+      this.createdAt,
+      this.updatedAt});
+
+  Interiors.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    productId = json['product_id'];
+    interiorText = json['interior_text'];
+    interiorRating = json['interior_rating'];
+    interiorImage = json['interior_image'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['product_id'] = productId;
+    data['interior_text'] = interiorText;
+    data['interior_rating'] = interiorRating;
+    data['interior_image'] = interiorImage;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    return data;
+  }
+}
+
+class Exteriors {
+  int? id;
+  String? productId;
+  String? exteriorText;
+  int? exteriorRating;
+  String? exteriorImage;
+  String? createdAt;
+  String? updatedAt;
+
+  Exteriors(
+      {this.id,
+      this.productId,
+      this.exteriorText,
+      this.exteriorRating,
+      this.exteriorImage,
+      this.createdAt,
+      this.updatedAt});
+
+  Exteriors.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    productId = json['product_id'];
+    exteriorText = json['exterior_text'];
+    exteriorRating = json['exterior_rating'];
+    exteriorImage = json['exterior_image'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['product_id'] = productId;
+    data['exterior_text'] = exteriorText;
+    data['exterior_rating'] = exteriorRating;
+    data['exterior_image'] = exteriorImage;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    return data;
+  }
+}
+
+class Acs {
+  int? id;
+  String? productId;
+  String? acText;
+  int? acRating;
+  String? acImage;
+  String? createdAt;
+  String? updatedAt;
+
+  Acs(
+      {this.id,
+      this.productId,
+      this.acText,
+      this.acRating,
+      this.acImage,
+      this.createdAt,
+      this.updatedAt});
+
+  Acs.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    productId = json['product_id'];
+    acText = json['ac_text'];
+    acRating = json['ac_rating'];
+    acImage = json['ac_image'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['product_id'] = productId;
+    data['ac_text'] = acText;
+    data['ac_rating'] = acRating;
+    data['ac_image'] = acImage;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
