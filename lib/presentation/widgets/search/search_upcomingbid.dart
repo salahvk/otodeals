@@ -11,23 +11,25 @@ import 'package:otodeals/presentation/widgets/Timers/searchupcomingtimer.dart';
 import 'package:provider/provider.dart';
 
 class UpcomingbidFunction extends StatelessWidget {
-
-  const UpcomingbidFunction({Key? key, }) : super(key: key);
+  const UpcomingbidFunction({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final res = Provider.of<Vehicleprovider>(context, listen: true);
-    final size = MediaQuery.of(context).size;   
-     void inputupcomingbidlive(index)async{
-     final res = Provider.of<Vehicleprovider>(context, listen:false);
-     int? id= res.vlist?.upcomingbid?.data![index].id;
-     res.id=id;
-     await getvehicledetails(context, id!);
+    final size = MediaQuery.of(context).size;
+    void inputupcomingbidlive(index) async {
+      final res = Provider.of<Vehicleprovider>(context, listen: false);
+      int? id = res.vlist?.upcomingbid?.data![index].id;
+      res.id = id;
+      await getvehicledetails(context, id!);
       Navigator.of(context).push(FadePageRoute(page: Porductdetails()));
     }
+
     return ListView.builder(
         scrollDirection: Axis.vertical,
-        itemCount: res.vlist?.products?.data?.length ?? 0,
+        itemCount: res.vlist?.upcomingbid?.data?.length ?? 0,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
@@ -60,9 +62,9 @@ class UpcomingbidFunction extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                                  res.vlist?.upcomingbid?.data![index]
-                                          .vehicleName ??
-                                      "",
+                              res.vlist?.upcomingbid?.data![index]
+                                      .vehicleName ??
+                                  "",
                               style: getMediumtStyle(
                                   color: Colors.black, fontSize: 20)),
                           // Container(
@@ -91,7 +93,7 @@ class UpcomingbidFunction extends StatelessWidget {
                           width: size.width * .8,
                           child: CachedNetworkImage(
                             imageUrl:
-                               "$endpoint${res.vlist?.upcomingbid?.data![index].image}",
+                                "$endpoint${res.vlist?.upcomingbid?.data![index].image}",
                             fit: BoxFit.cover,
                             errorWidget: (context, url, error) {
                               return Container(
@@ -116,8 +118,8 @@ class UpcomingbidFunction extends StatelessWidget {
                               padding: const EdgeInsets.all(5.0),
                               child: Center(
                                   child: Text(
-                              res.vlist?.upcomingbid?.data![index].fueltype ??
-                                      "",
+                                res.vlist?.upcomingbid?.data![index].fueltype ??
+                                    "",
                                 style: getMediumtStyle(
                                     color: Colormanager.buttonText,
                                     fontSize: 10),
@@ -133,8 +135,9 @@ class UpcomingbidFunction extends StatelessWidget {
                               padding: const EdgeInsets.all(5.0),
                               child: Center(
                                   child: Text(
-                                 res.vlist?.upcomingbid?.data![index].gearshift ??
-                                      "",
+                                res.vlist?.upcomingbid?.data![index]
+                                        .gearshift ??
+                                    "",
                                 style: getMediumtStyle(
                                     color: Colormanager.buttonText,
                                     fontSize: 10),
@@ -150,8 +153,7 @@ class UpcomingbidFunction extends StatelessWidget {
                               padding: const EdgeInsets.all(5.0),
                               child: Center(
                                   child: Text(
-                                "Mileage: ${ res.vlist?.upcomingbid?.data![index].mileage ?? ""}"
-                                 ,
+                                "Mileage: ${res.vlist?.upcomingbid?.data![index].mileage ?? ""}",
                                 style: getMediumtStyle(
                                     color: Colormanager.buttonText,
                                     fontSize: 10),
@@ -167,7 +169,7 @@ class UpcomingbidFunction extends StatelessWidget {
                               padding: const EdgeInsets.all(5.0),
                               child: Center(
                                   child: Text(
-                                "OWNER: ${ res.vlist?.upcomingbid?.data![index].owner ??""}",
+                                "OWNER: ${res.vlist?.upcomingbid?.data![index].owner ?? ""}",
                                 style: getMediumtStyle(
                                     color: Colormanager.buttonText,
                                     fontSize: 10),
@@ -176,7 +178,7 @@ class UpcomingbidFunction extends StatelessWidget {
                           ),
                         ],
                       ),
-                     const SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Row(
@@ -199,20 +201,18 @@ class UpcomingbidFunction extends StatelessWidget {
                                       color: Colors.black, fontSize: 15))
                             ],
                           ),
-                       
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 "Starts In",
                                 style: getSemiBoldStyle(
-                                    color: Colormanager.primary,
-                                    fontSize: 10),
+                                    color: Colormanager.primary, fontSize: 10),
                               ),
                               SizedBox(
                                 height: 10,
                               ),
-                          SearchtimerupScreen(index:index)
+                              SearchtimerupScreen(index: index)
                             ],
                           ),
                         ],
@@ -223,4 +223,6 @@ class UpcomingbidFunction extends StatelessWidget {
               ),
             ),
           );
-        });}}
+        });
+  }
+}
