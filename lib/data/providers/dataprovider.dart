@@ -3,6 +3,7 @@ import 'package:otodeals/data/models/customer_detail.dart';
 
 
 import 'package:otodeals/data/models/home.dart';
+import 'package:otodeals/data/models/payment_model.dart';
 import 'package:otodeals/data/models/profilemodel.dart';
 import 'package:otodeals/data/models/vehiclebrands.dart';
 
@@ -36,7 +37,11 @@ void vbranddata(value){
   vbrands=value;
   notifyListeners();
 }
-
+PaymentDetailsModel? paydata;
+void paydetail(value){
+  paydata=value;
+  notifyListeners();
+}
 
 
 
