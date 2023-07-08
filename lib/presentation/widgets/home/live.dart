@@ -8,6 +8,7 @@ import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/repositories/vehicledetails.dart';
 import 'package:otodeals/presentation/screens/productdetails.dart';
 import 'package:otodeals/presentation/widgets/Timers/homelivetimer.dart';
+import 'package:otodeals/presentation/widgets/numberinput.dart';
 
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,109 @@ class Live extends StatefulWidget {
 }
 
 class _LiveState extends State<Live> {
+  void _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: FractionallySizedBox(
+            widthFactor: 0.5,
+            child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colormanager.primary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+                child: Text("2000")),
+          ),
+          content: Container(
+            height: 160,
+            width: 210,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 20,
+                      width: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colormanager.grey,
+                      ),
+                      child: Center(
+                          child: Text(
+                        "5000",
+                        style: getSemiBoldStyle(
+                            color: Colormanager.black, fontSize: 12),
+                      )),
+                    ),
+                    Container(
+                      height: 20,
+                      width: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colormanager.grey,
+                      ),
+                      child: Center(
+                          child: Text(
+                        "10000",
+                        style: getSemiBoldStyle(
+                            color: Colormanager.black, fontSize: 12),
+                      )),
+                    ),
+                    Container(
+                      height: 20,
+                      width: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colormanager.grey,
+                      ),
+                      child: Center(
+                          child: Text(
+                        "20000",
+                        style: getSemiBoldStyle(
+                            color: Colormanager.black, fontSize: 12),
+                      )),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                AddButton(),
+                const SizedBox(
+                  height: 20,
+                ),
+                Center(
+                  child: SizedBox(
+                    width: 130,
+                    child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colormanager.black,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                        child: Text(
+                          "place Bid",
+                          style: getSemiBoldStyle(
+                              color: Colormanager.white, fontSize: 16),
+                        )),
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final homeres = Provider.of<DataProvider>(context, listen: true);
@@ -74,17 +178,20 @@ class _LiveState extends State<Live> {
                                   "",
                               style: getMediumtStyle(
                                   color: Colors.black, fontSize: 20)),
-                          Container(
-                            width: 60,
-                            height: 20,
-                            decoration: BoxDecoration(
-                                color: Colormanager.primary,
-                                borderRadius: BorderRadius.circular(15)),
-                            child: Center(
-                              child: Text(
-                                "Bid Now",
-                                style: getMediumtStyle(
-                                    color: Colormanager.white, fontSize: 9),
+                          InkWell(
+                            onTap: () => _showDialog(context),
+                            child: Container(
+                              width: 60,
+                              height: 20,
+                              decoration: BoxDecoration(
+                                  color: Colormanager.primary,
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: Center(
+                                child: Text(
+                                  "Bid Now",
+                                  style: getMediumtStyle(
+                                      color: Colormanager.white, fontSize: 9),
+                                ),
                               ),
                             ),
                           )
@@ -184,7 +291,7 @@ class _LiveState extends State<Live> {
                           ),
                         ],
                       ),
-                     const SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Row(
@@ -207,20 +314,18 @@ class _LiveState extends State<Live> {
                                       color: Colors.black, fontSize: 15))
                             ],
                           ),
-                       
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 "Last Call",
                                 style: getSemiBoldStyle(
-                                    color: Colormanager.primary,
-                                    fontSize: 10),
+                                    color: Colormanager.primary, fontSize: 10),
                               ),
                               SizedBox(
                                 height: 10,
                               ),
-                             LivetimerScreen(index)
+                              LivetimerScreen(index)
                             ],
                           ),
                         ],

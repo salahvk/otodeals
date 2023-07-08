@@ -178,28 +178,28 @@ class _BuyState extends State<Buy> {
                                   style: getMediumtStyle(
                                       color: Colors.black, fontSize: 20)),
                             ),
-                            InkWell(
-                              onTap: () => _showDialog(context),
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(right: 8.0, top: 5),
-                                child: Container(
-                                  width: 60,
-                                  height: 20,
-                                  decoration: BoxDecoration(
-                                      color: Colormanager.primary,
-                                      borderRadius: BorderRadius.circular(15)),
-                                  child: Center(
-                                    child: Text(
-                                      "Buy Now",
-                                      style: getSemiBoldStyle(
-                                          color: Colormanager.white,
-                                          fontSize: 10),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
+                            // InkWell(
+                            //   onTap: () => _showDialog(context),
+                            //   child: Padding(
+                            //     padding:
+                            //         const EdgeInsets.only(right: 8.0, top: 5),
+                            //     child: Container(
+                            //       width: 60,
+                            //       height: 20,
+                            //       decoration: BoxDecoration(
+                            //           color: Colormanager.primary,
+                            //           borderRadius: BorderRadius.circular(15)),
+                            //       child: Center(
+                            //         child: Text(
+                            //           "Buy Now",
+                            //           style: getSemiBoldStyle(
+                            //               color: Colormanager.white,
+                            //               fontSize: 10),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // )
                           ],
                         ),
                         SizedBox(

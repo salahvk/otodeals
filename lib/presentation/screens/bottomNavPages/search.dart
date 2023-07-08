@@ -5,8 +5,6 @@ import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/repositories/vehiclelisting.dart';
 
 import 'package:otodeals/presentation/widgets/Searchfilterdrawer.dart';
-import 'package:otodeals/presentation/widgets/home/live.dart';
-import 'package:otodeals/presentation/widgets/home/upcoming.dart';
 import 'package:otodeals/presentation/widgets/search/search_bid.dart';
 import 'package:otodeals/presentation/widgets/search/search_buy.dart';
 import 'package:otodeals/presentation/widgets/search/search_upcomingbid.dart';
@@ -88,7 +86,6 @@ class _SearchsState extends State<Searchs> {
                             Builder(
                               builder: (context) => InkWell(
                                   onTap: () {
-                                    
                                     Scaffold.of(context).openEndDrawer();
                                   },
                                   child: Image.asset("assets/menu.png")),
@@ -195,12 +192,13 @@ class _SearchsState extends State<Searchs> {
                           Align(
                             alignment: Alignment(-1, 0),
                             child: GestureDetector(
-                              onTap: ()async { toggleSelection(true);
-                                isRowVisible=false;
-                               Searchcontroller.vehicletypecontroller.text =
+                              onTap: () async {
+                                toggleSelection(true);
+                                isRowVisible = false;
+                                Searchcontroller.vehicletypecontroller.text =
                                     "sale";
                                 await fetchSearchResults(context);
-                            },
+                              },
                               child: Container(
                                 width: 45.0,
                                 color: Colors.transparent,
@@ -221,8 +219,8 @@ class _SearchsState extends State<Searchs> {
                             child: GestureDetector(
                               onTap: () async {
                                 toggleSelection(false);
-                               isRowVisible=true;
-                                  Searchcontroller.vehicletypecontroller.text =
+                                isRowVisible = true;
+                                Searchcontroller.vehicletypecontroller.text =
                                     "bid";
                                 await fetchSearchResults(context);
                               },
@@ -325,16 +323,67 @@ class _SearchsState extends State<Searchs> {
                         ),
                       ],
                     ),
-                    
                   ],
                 ),
               ),
-              SizedBox(height:30,),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 0.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 20,
+                      width: 105,
+                      decoration: BoxDecoration(
+                          color: Colormanager.grey,
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Center(
+                          child: Text(
+                        "PREMIUM CAR",
+                        style: getMediumtStyle(
+                            color: Colormanager.black, fontSize: 10),
+                      )),
+                    ),
+                    Container(
+                      height: 20,
+                      width: 160,
+                      decoration: BoxDecoration(
+                          color: Colormanager.grey,
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Center(
+                          child: Text(
+                        "NO STRUCTURAL DAMAGE",
+                        style: getMediumtStyle(
+                            color: Colormanager.black, fontSize: 10),
+                      )),
+                    ),
+                    Container(
+                      height: 20,
+                      width: 105,
+                      decoration: BoxDecoration(
+                          color: Colormanager.grey,
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Center(
+                          child: Text(
+                        "1st OWNER",
+                        style: getMediumtStyle(
+                            color: Colormanager.black, fontSize: 10),
+                      )),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
               isBuySelected
-                  ? BuyFunction(
-                     
-                    )
-                  : selectedContainer == 1?BidFunction():UpcomingbidFunction()
+                  ? BuyFunction()
+                  : selectedContainer == 1
+                      ? BidFunction()
+                      : UpcomingbidFunction()
             ],
           ),
         ),
