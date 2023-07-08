@@ -3,14 +3,14 @@ import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 
 
-class AddButton extends StatefulWidget {
-  const AddButton({Key? key}) : super(key: key);
+class PaymentButton extends StatefulWidget {
+  const PaymentButton({Key? key}) : super(key: key);
 
   @override
-  State<AddButton> createState() => _AddButtonState();
+  State<PaymentButton> createState() => _PaymentButtonState();
 }
 
-class _AddButtonState extends State<AddButton> {
+class _PaymentButtonState extends State<PaymentButton> {
   int up=5000;
   
 
@@ -42,11 +42,11 @@ class _AddButtonState extends State<AddButton> {
         // width:30,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-             
+               color: Colormanager.primary,
         ),
    
-        child: ElevatedButton(onPressed: (){decrement();}, child: Text("-",style: getMediumtStyle(color: Colormanager.black,fontSize:20),),style:  ElevatedButton.styleFrom(
-                primary: Colormanager.white,
+        child: ElevatedButton(onPressed: (){decrement();}, child: Text("-",style: getMediumtStyle(color: Colormanager.white,fontSize:20),),style:  ElevatedButton.styleFrom(
+                primary: Colormanager.primary,
               
               ))),
         Padding(
@@ -71,11 +71,11 @@ class _AddButtonState extends State<AddButton> {
               // width: 20,
              decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-              //  color: Colormanager.primary,
+               color: Colormanager.primary,
         ),
-              child: ElevatedButton(onPressed: (){increment();}, child:Center(child: Icon(Icons.add,color: Colormanager.black,size: 18,)),style:
+              child: ElevatedButton(onPressed: (){increment();}, child:Center(child: Icon(Icons.add,color: Colormanager.white,size: 18,)),style:
               ElevatedButton.styleFrom(
-                primary: Colormanager.white,
+                primary: Colormanager.primary,
                 
               ),),
             ),

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
-import 'package:otodeals/presentation/widgets/numberinput.dart';
+// import 'package:otodeals/presentation/widgets/numberinput.dart';
+import 'package:otodeals/presentation/widgets/numberinputvalpackage.dart';
 import 'package:otodeals/presentation/widgets/payslip.dart';
 
 class Paymentpage extends StatefulWidget {
@@ -64,7 +65,7 @@ class _PaymentpageState extends State<Paymentpage> {
                       SizedBox(
                   height: size.height * .02,
                 ),
-                AddButton(),
+                PaymentButton(),
                      SizedBox(
                   height: size.height * .02,
                 ),
