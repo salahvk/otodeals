@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
+import 'package:otodeals/data/providers/dataprovider.dart';
+import 'package:otodeals/data/repositories/paymentstore.dart';
+import 'package:otodeals/data/repositories/subscriptionpackage.dart';
 // import 'package:otodeals/presentation/widgets/numberinput.dart';
 import 'package:otodeals/presentation/widgets/numberinputvalpackage.dart';
 import 'package:otodeals/presentation/widgets/payslip.dart';
+import 'package:provider/provider.dart';
 
 class Paymentpage extends StatefulWidget {
   const Paymentpage({super.key});
@@ -14,10 +18,20 @@ class Paymentpage extends StatefulWidget {
 }
 
 class _PaymentpageState extends State<Paymentpage> {
+    void initState() {
+  
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await getsubscription(context);
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
+    final payres=Provider.of<DataProvider>(context,listen:false);
        final size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.all(25.0),
         child: Column(
@@ -32,36 +46,54 @@ class _PaymentpageState extends State<Paymentpage> {
                   height: size.height * .08,
                 ),
                 Text("Please Subscribe Validity Package To \nContinue",style:getSemiBoldStyle(color:Colormanager.black,fontSize:16),),
-                  SizedBox(
-                  height: size.height * .04,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text("Bank Account Details\t:",style: getMediumtStyle(color:Colormanager.textColor,fontSize: 14),)
-                  ],
-                ),   SizedBox(
-                  height: size.height * .04,
-                ),
-                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text("Subscription Charges\t:",style: getMediumtStyle(color:Colormanager.textColor,fontSize: 14),)
-                  ],
-                ),
+                
+                SizedBox(
+                  height: 145,
+                  child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: payres.paydata?.paymentDetails?.length??0,
+                     itemBuilder: (BuildContext context,int index) {  
+                    return Padding(
+                      padding: const EdgeInsets.only(top:20.0),
+                      child: Container(
+                        // color: Colors.amber,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text("${payres.paydata?.paymentDetails![index].displayName??""}\t:",style: getMediumtStyle(color:Colormanager.textColor,fontSize: 14),),
+                            SizedBox(width:10,),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(payres.paydata?.paymentDetails![index].value??""),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                     }
+                  ),
+                ),  
+                //  Row(
+                //   mainAxisAlignment: MainAxisAlignment.start,
+                //   children: [
+                //     Text("Subscription Charges\t:",style: getMediumtStyle(color:Colormanager.textColor,fontSize: 14),)
+                //   ],
+                // ),
+                //    SizedBox(
+                //   height: size.height * .04,
+                // ),
+                //  Row(
+                //   mainAxisAlignment: MainAxisAlignment.start,
+                //   children: [
+                //     Text("Validity In Months\t:",style: getMediumtStyle(color:Colormanager.textColor,fontSize: 14),)
+                //   ],
+                // ),
                    SizedBox(
-                  height: size.height * .04,
+                  height: size.height * .01,
                 ),
-                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text("Validity In Months\t:",style: getMediumtStyle(color:Colormanager.textColor,fontSize: 14),)
-                  ],
-                ),
-                   SizedBox(
-                  height: size.height * .04,
-                ),
-                 Text("Payment Amount",style: getMediumtStyle(color:Colormanager.textColor,fontSize: 14),),
+                Text("Payment Amount",style: getMediumtStyle(color:Colormanager.textColor,fontSize: 14),),
                       SizedBox(
                   height: size.height * .02,
                 ),
@@ -79,6 +111,20 @@ class _PaymentpageState extends State<Paymentpage> {
                 ),
 
                 UploadPaySlipScreen(),
+                     SizedBox(
+                  height: size.height * .06,
+                ),
+                Center(
+                  child: ElevatedButton(onPressed: (){
+                    getpaystore(context);
+
+                  }, child:Center(child:Text("Pay",style: getSemiBoldStyle(color:Colormanager.white),)),
+                  style:
+              ElevatedButton.styleFrom(
+                primary: Colormanager.primary,
+                
+              ),),
+                )
 
                 
 

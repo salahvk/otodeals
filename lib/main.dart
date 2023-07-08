@@ -3,6 +3,7 @@ import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/data/providers/bidprovider.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/providers/otp_provider.dart';
+import 'package:otodeals/data/providers/pathprovider.dart';
 import 'package:otodeals/data/providers/vehicledetails.dart';
 import 'package:otodeals/data/providers/vehicleprovider.dart';
 import 'package:otodeals/presentation/screens/paymentpage.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => Vehicleprovider()),
           ChangeNotifierProvider(create: (_) => Vehicledetailsprovider()),
           ChangeNotifierProvider(create: (_) => Bidprovider()),
+          ChangeNotifierProvider(create: (_)=>FilePathProvider(),)
         ],
         child: MaterialApp(
           title: 'Otodeals',

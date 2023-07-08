@@ -11,6 +11,7 @@ import 'package:otodeals/core/util/animatedsnackbar.dart';
 
 
 import 'package:otodeals/data/repositories/registerweb.dart';
+import 'package:otodeals/presentation/screens/paymentpage.dart';
 
 
 
@@ -75,7 +76,7 @@ final confirmpassword=Registercontrollerr.confirmpasswordController.text;
   else{
    var res= await postRegisterData(context);
    if(res['result']!=false){
-  Navigator.of(context).pushNamed(Routes.loginScreen);
+   
   showAnimatedSnackBar(context,"You have successfully Registerd",type: AnimatedSnackBarType.success);
    }
   }
@@ -324,6 +325,7 @@ final confirmpassword=Registercontrollerr.confirmpasswordController.text;
                 child: ElevatedButton(
                   onPressed: () {
                   validateInput();
+     
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colormanager.primary,

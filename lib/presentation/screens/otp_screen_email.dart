@@ -206,6 +206,7 @@ class _OTPscreenmailState extends State<OTPscreenmail> {
 }
 
 Future verifyOtpApi(BuildContext context) async {
+  
   final otpProvider = Provider.of<OTPProvider>(context, listen: false);
   //final provider = Provider.of<DataProvider>(context, listen: false);
   print(Mailotpcontroller.otpcontroller.text);
@@ -214,6 +215,7 @@ Future verifyOtpApi(BuildContext context) async {
     final url =
         "${ApiEndpoint.otpemail}?email=${Forgetpasswordcontroller.emailController.text}&otp=${Mailotpcontroller.otpcontroller.text}";
     print(url);
+    String s = 'abc';
     var response = await http.post(Uri.parse(url), headers: {
       "device-id": s,
     });

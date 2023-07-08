@@ -64,3 +64,9 @@ class ProductController {
   static TextEditingController cityController = TextEditingController();
   static TextEditingController locationController = TextEditingController();
 }
+
+class PaystoreController{
+  static TextEditingController emailcontroller=TextEditingController();
+  static TextEditingController paymentamount=TextEditingController();
+  static TextEditingController path=TextEditingController();
+}

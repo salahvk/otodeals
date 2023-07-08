@@ -6,6 +6,7 @@ import 'package:otodeals/data/api/api_endpoint.dart';
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:otodeals/presentation/screens/paymentpage.dart';
 // import 'package:otodeals/data/viewmodel/registerviewmodel.dart';
 
 Future postRegisterData(BuildContext context) async {
@@ -33,6 +34,11 @@ Future postRegisterData(BuildContext context) async {
         print(jsonResponse);
         return jsonResponse;
       } else {
+                        Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Paymentpage()),
+    );
+
         return jsonResponse;
       }
     }

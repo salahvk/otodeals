@@ -5,11 +5,12 @@ import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:http/http.dart' as http;
 
-final email = Forgetpasswordcontroller.emailController.text;
-String url = "${ApiEndpoint.forgetpassword}?email=$email";
-String s = 'abc';
+
 
 postForgetpasswordData(BuildContext context) async {
+  final email = Forgetpasswordcontroller.emailController.text;
+String url = "${ApiEndpoint.forgetpassword}?email=$email";
+String s = 'abc';
   print(url);
 
   try {

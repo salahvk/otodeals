@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/styles_manager.dart';
 
 
@@ -11,14 +12,17 @@ class PaymentButton extends StatefulWidget {
 }
 
 class _PaymentButtonState extends State<PaymentButton> {
-  int up=5000;
+   PaystoreController? controller;
+  int up=0;
+
   
 
   void increment(){
 
     setState(() {
-      if(up>=5000&&up<50000) {
+      if(up>=500&&up<50000) {
         up++;
+        PaystoreController.paymentamount.text=up.toString();
       }
     });
   }
@@ -27,10 +31,19 @@ class _PaymentButtonState extends State<PaymentButton> {
     setState(() {
       if(up>5000) {
         up--;
+         PaystoreController.paymentamount.text=up.toString();
       }
     });
   }
 
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+     PaystoreController.paymentamount.text = '5000';
+        up = int.parse(PaystoreController.paymentamount.text) ;
+     
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -63,7 +76,14 @@ class _PaymentButtonState extends State<PaymentButton> {
             borderRadius: BorderRadius.circular(10)
     
           ),
-          child: Center(child: Text('$up',style: getBoldStyle(color: Colormanager.black,fontSize:14),)),),
+          child: Padding(
+            padding: const EdgeInsets.only(left:40.0),
+            child: TextFormField(decoration: InputDecoration(
+        border: UnderlineInputBorder(
+          borderSide: BorderSide.none,
+        ),
+      ),controller:PaystoreController.paymentamount    ,style: getBoldStyle(color: Colormanager.black,fontSize:14),),
+          ),),
         ),
         
             Container(

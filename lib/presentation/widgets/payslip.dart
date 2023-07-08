@@ -1,7 +1,14 @@
+
+
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/styles_manager.dart';
+import 'package:otodeals/data/providers/pathprovider.dart';
+import 'package:provider/provider.dart';
 
 class UploadPaySlipScreen extends StatefulWidget {
   @override
@@ -9,6 +16,8 @@ class UploadPaySlipScreen extends StatefulWidget {
 }
 
 class _UploadPaySlipScreenState extends State<UploadPaySlipScreen> {
+  File?path;
+
   String? filePath;
 
   Future<void> _openFileExplorer() async {
@@ -18,6 +27,12 @@ class _UploadPaySlipScreenState extends State<UploadPaySlipScreen> {
     );
 
     if (result != null) {
+      print("aaaa");
+         filePath = result.files.single.path;
+      final Path = File(filePath??"");
+       final filePathProvider = Provider.of<FilePathProvider>(context, listen: false);
+        filePathProvider.setFilePath( Path );
+        print(filePathProvider.filePath);
       setState(() {
         filePath = result.files.single.path;
       });
@@ -26,6 +41,8 @@ class _UploadPaySlipScreenState extends State<UploadPaySlipScreen> {
 
   @override
   Widget build(BuildContext context) {
+     
+   
       final size = MediaQuery.of(context).size;
     return Center(
       child: Column(
