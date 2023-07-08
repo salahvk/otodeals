@@ -4,9 +4,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:otodeals/core/controllers.dart';
+import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/util/animatedsnackbar.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:http/http.dart' as http;
+import 'package:otodeals/presentation/screens/paymentpage.dart';
 
 // import 'package:otodeals/data/providers/dataprovider.dart';
 // import 'package:provider/provider.dart';
@@ -38,12 +40,20 @@ Future postLoginData(BuildContext context) async {
 
     if (jsonResponse['result'] == false) {
       print("aaaaaaa///");
+      if(jsonResponse['message'].toString().contains(' subscription package is expired')){
+          showAnimatedSnackBar(context, "Your account subscription package is expired!!");
+      Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Paymentpage()),
+    );
+      }else{
       print(jsonResponse['result']);
       showAnimatedSnackBar(context, "Invalid username&password");
       //  log(jsonResponse['result']);
       //  log(jsonResponse);
       print(jsonResponse);
       return jsonResponse;
+      }
     } else {
       print("ssss");
       //   var customerdetails = CustomerDDetails.fromJson(jsonResponse);

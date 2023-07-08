@@ -5,6 +5,7 @@ import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/providers/otp_provider.dart';
 import 'package:otodeals/data/providers/vehicledetails.dart';
 import 'package:otodeals/data/providers/vehicleprovider.dart';
+import 'package:otodeals/presentation/screens/paymentpage.dart';
 
 import 'package:provider/provider.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
           ),
           initialRoute: initialRoutes,
           onGenerateRoute: RouteGenerator.getRoute,
-          // home: TestScreen()
+          // home: Paymentpage() 
         ));
   }
 }

@@ -38,13 +38,16 @@ class _AddButtonState extends State<AddButton> {
     return Padding(
       padding: const EdgeInsets.only(top:4.0,left:8),
       child: Row(children: [
-       Container(height:30,
-        width:40,
-        child: ElevatedButton(onPressed: (){decrement();}, child: Text("-",style: getMediumtStyle(color: Colormanager.black,fontSize:20),),style:  ElevatedButton.styleFrom(
-                primary: Colormanager.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)
-                )
+       Container(height:28,
+        // width:30,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+               color: Colormanager.primary,
+        ),
+   
+        child: ElevatedButton(onPressed: (){decrement();}, child: Text("-",style: getMediumtStyle(color: Colormanager.white,fontSize:20),),style:  ElevatedButton.styleFrom(
+                primary: Colormanager.primary,
+              
               ))),
         Padding(
           padding: const EdgeInsets.all(6.0),
@@ -64,14 +67,16 @@ class _AddButtonState extends State<AddButton> {
         ),
         
             Container(
-              height: 30,
-              width: 40,
-              child: ElevatedButton(onPressed: (){increment();}, child:Icon(Icons.add,color: Colormanager.black,size: 18,),style:
+              height:28,
+              // width: 20,
+             decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+               color: Colormanager.primary,
+        ),
+              child: ElevatedButton(onPressed: (){increment();}, child:Center(child: Icon(Icons.add,color: Colormanager.white,size: 18,)),style:
               ElevatedButton.styleFrom(
-                primary: Colormanager.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)
-                )
+                primary: Colormanager.primary,
+                
               ),),
             ),
       ],),
