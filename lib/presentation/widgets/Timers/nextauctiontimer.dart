@@ -36,10 +36,12 @@ class _TimerScreenState extends State<TimerScreen> {
       await gethome(context);
       final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
 
-      DateTime startTime = dateFormat
-          .parse(homeres.homemodel?.nextAccutionTime?.nextstarttime ??DateTime.now().toString());
-      DateTime endTime = dateFormat
-          .parse(homeres.homemodel?.nextAccutionTime?.nextendtime ??DateTime.now().toString());
+      DateTime startTime = dateFormat.parse(
+          homeres.homemodel?.nextAccutionTime?.nextStartTime ??
+              DateTime.now().toString());
+      DateTime endTime = dateFormat.parse(
+          homeres.homemodel?.nextAccutionTime?.nextEndTime ??
+              DateTime.now().toString());
 
       duration = endTime.difference(startTime);
       startTimer();
@@ -59,7 +61,7 @@ class _TimerScreenState extends State<TimerScreen> {
     timer = Timer.periodic(Duration(seconds: 1), (_) {
       if (duration.inSeconds > 0) {
         // setState(() {
-          duration = duration - Duration(seconds: 1);
+        duration = duration - Duration(seconds: 1);
         // });
       } else {
         // Countdown has ended
@@ -78,10 +80,11 @@ class _TimerScreenState extends State<TimerScreen> {
         final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
 
         DateTime startTime = DateTime.parse(
-            homeres.homemodel?.nextAccutionTime?.nextstarttime.toString() ??
+            homeres.homemodel?.nextAccutionTime?.nextStartTime.toString() ??
                 DateTime.now().toString());
         DateTime endTime = DateTime.parse(
-            homeres.homemodel?.nextAccutionTime?.nextendtime.toString() ??DateTime.now().toString());
+            homeres.homemodel?.nextAccutionTime?.nextEndTime.toString() ??
+                DateTime.now().toString());
 
         if (currentTime.isAfter(endTime)) {
           // Countdown has ended

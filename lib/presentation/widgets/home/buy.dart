@@ -7,7 +7,6 @@ import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/repositories/vehicledetails.dart';
 import 'package:otodeals/presentation/screens/productdetails.dart';
-import 'package:otodeals/presentation/widgets/numberinput.dart';
 import 'package:provider/provider.dart';
 
 class Buy extends StatefulWidget {
@@ -18,109 +17,6 @@ class Buy extends StatefulWidget {
 }
 
 class _BuyState extends State<Buy> {
-  void _showDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: FractionallySizedBox(
-            widthFactor: 0.5,
-            child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colormanager.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
-                child: Text("2000")),
-          ),
-          content: Container(
-            height: 160,
-            width: 210,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      height: 20,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colormanager.grey,
-                      ),
-                      child: Center(
-                          child: Text(
-                        "5000",
-                        style: getSemiBoldStyle(
-                            color: Colormanager.black, fontSize: 12),
-                      )),
-                    ),
-                    Container(
-                      height: 20,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colormanager.grey,
-                      ),
-                      child: Center(
-                          child: Text(
-                        "10000",
-                        style: getSemiBoldStyle(
-                            color: Colormanager.black, fontSize: 12),
-                      )),
-                    ),
-                    Container(
-                      height: 20,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colormanager.grey,
-                      ),
-                      child: Center(
-                          child: Text(
-                        "20000",
-                        style: getSemiBoldStyle(
-                            color: Colormanager.black, fontSize: 12),
-                      )),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                AddButton(),
-                const SizedBox(
-                  height: 20,
-                ),
-                Center(
-                  child: SizedBox(
-                    width: 130,
-                    child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colormanager.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        ),
-                        child: Text(
-                          "place Bid",
-                          style: getSemiBoldStyle(
-                              color: Colormanager.white, fontSize: 16),
-                        )),
-                  ),
-                )
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
   void inputlatestarrivals(index) async {
     final homeres = Provider.of<DataProvider>(context, listen: false);
     int? id = homeres.homemodel?.saleVehicles![index].id;

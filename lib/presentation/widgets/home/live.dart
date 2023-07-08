@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
+import 'package:otodeals/core/util/bid_diologue.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/repositories/vehicledetails.dart';
 import 'package:otodeals/presentation/screens/productdetails.dart';
 import 'package:otodeals/presentation/widgets/Timers/homelivetimer.dart';
-import 'package:otodeals/presentation/widgets/numberinput.dart';
 
 import 'package:provider/provider.dart';
 
@@ -24,101 +24,7 @@ class _LiveState extends State<Live> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: FractionallySizedBox(
-            widthFactor: 0.5,
-            child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colormanager.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
-                child: Text("2000")),
-          ),
-          content: Container(
-            height: 160,
-            width: 210,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      height: 20,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colormanager.grey,
-                      ),
-                      child: Center(
-                          child: Text(
-                        "5000",
-                        style: getSemiBoldStyle(
-                            color: Colormanager.black, fontSize: 12),
-                      )),
-                    ),
-                    Container(
-                      height: 20,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colormanager.grey,
-                      ),
-                      child: Center(
-                          child: Text(
-                        "10000",
-                        style: getSemiBoldStyle(
-                            color: Colormanager.black, fontSize: 12),
-                      )),
-                    ),
-                    Container(
-                      height: 20,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colormanager.grey,
-                      ),
-                      child: Center(
-                          child: Text(
-                        "20000",
-                        style: getSemiBoldStyle(
-                            color: Colormanager.black, fontSize: 12),
-                      )),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                AddButton(),
-                const SizedBox(
-                  height: 20,
-                ),
-                Center(
-                  child: SizedBox(
-                    width: 130,
-                    child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colormanager.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        ),
-                        child: Text(
-                          "place Bid",
-                          style: getSemiBoldStyle(
-                              color: Colormanager.white, fontSize: 16),
-                        )),
-                  ),
-                )
-              ],
-            ),
-          ),
-        );
+        return BidDiologue();
       },
     );
   }
@@ -220,73 +126,90 @@ class _LiveState extends State<Live> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      Wrap(
+                        runAlignment: WrapAlignment.end,
+                        alignment: WrapAlignment.end,
                         children: [
                           Container(
-                            width: 80,
                             decoration: BoxDecoration(
                                 color: Colormanager.buttonBox,
                                 borderRadius: BorderRadius.circular(5)),
                             child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Center(
-                                  child: Text(
-                                "Model: ${homeres.homemodel?.currentlyRunning![index].modelyear.toString()}",
-                                style: getMediumtStyle(
-                                    color: Colormanager.buttonText,
-                                    fontSize: 10),
-                              )),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                              child: IntrinsicWidth(
+                                child: Center(
+                                    child: Text(
+                                  "Model: ${homeres.homemodel?.currentlyRunning![index].modelyear.toString()}",
+                                  style: getMediumtStyle(
+                                      color: Colormanager.buttonText,
+                                      fontSize: 10),
+                                )),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colormanager.buttonBox,
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 5),
+                                child: IntrinsicWidth(
+                                  child: Center(
+                                      child: Text(
+                                    homeres.homemodel?.currentlyRunning![index]
+                                            .fueltype ??
+                                        "",
+                                    style: getMediumtStyle(
+                                        color: Colormanager.buttonText,
+                                        fontSize: 10),
+                                  )),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colormanager.buttonBox,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: IntrinsicWidth(
+                                  child: Center(
+                                    child: Text(
+                                      "Mileage: ${homeres.homemodel?.currentlyRunning![index].mileage.toString()}",
+                                      style: getMediumtStyle(
+                                          color: Colormanager.buttonText,
+                                          fontSize: 10),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                           Container(
-                            width: 80,
+                            // width: 80,
                             decoration: BoxDecoration(
                                 color: Colormanager.buttonBox,
                                 borderRadius: BorderRadius.circular(5)),
                             child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Center(
-                                  child: Text(
-                                homeres.homemodel?.currentlyRunning![index]
-                                        .fueltype ??
-                                    "",
-                                style: getMediumtStyle(
-                                    color: Colormanager.buttonText,
-                                    fontSize: 10),
-                              )),
-                            ),
-                          ),
-                          Container(
-                            width: 80,
-                            decoration: BoxDecoration(
-                                color: Colormanager.buttonBox,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Center(
-                                  child: Text(
-                                "Mileage: ${homeres.homemodel?.currentlyRunning![index].mileage.toString()}",
-                                style: getMediumtStyle(
-                                    color: Colormanager.buttonText,
-                                    fontSize: 10),
-                              )),
-                            ),
-                          ),
-                          Container(
-                            width: 80,
-                            decoration: BoxDecoration(
-                                color: Colormanager.buttonBox,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Center(
-                                  child: Text(
-                                "OWNER: ${homeres.homemodel?.currentlyRunning![index].owner.toString()}",
-                                style: getMediumtStyle(
-                                    color: Colormanager.buttonText,
-                                    fontSize: 10),
-                              )),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                              child: IntrinsicWidth(
+                                child: Center(
+                                    child: Text(
+                                  "OWNER: ${homeres.homemodel?.currentlyRunning![index].owner.toString()}",
+                                  style: getMediumtStyle(
+                                      color: Colormanager.buttonText,
+                                      fontSize: 10),
+                                )),
+                              ),
                             ),
                           ),
                         ],

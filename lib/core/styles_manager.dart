@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 TextStyle _getTextStyle(double fontSize, Color color, FontWeight fontWeight) {
-  return GoogleFonts.montserrat(
+  return GoogleFonts.abel(
     fontSize: fontSize,
     color: color,
     fontWeight: fontWeight,
@@ -72,5 +72,3 @@ class FontWeightManager {
   static const FontWeight bold = FontWeight.w700;
   static const FontWeight extraBold = FontWeight.w800;
 }
-
-

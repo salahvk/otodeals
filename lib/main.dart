@@ -6,7 +6,6 @@ import 'package:otodeals/data/providers/otp_provider.dart';
 import 'package:otodeals/data/providers/pathprovider.dart';
 import 'package:otodeals/data/providers/vehicledetails.dart';
 import 'package:otodeals/data/providers/vehicleprovider.dart';
-import 'package:otodeals/presentation/screens/paymentpage.dart';
 
 import 'package:provider/provider.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -37,17 +36,17 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => Vehicleprovider()),
           ChangeNotifierProvider(create: (_) => Vehicledetailsprovider()),
           ChangeNotifierProvider(create: (_) => Bidprovider()),
-          ChangeNotifierProvider(create: (_)=>FilePathProvider(),)
+          ChangeNotifierProvider(
+            create: (_) => FilePathProvider(),
+          )
         ],
         child: MaterialApp(
           title: 'Otodeals',
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
+          theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: false),
           initialRoute: initialRoutes,
           onGenerateRoute: RouteGenerator.getRoute,
-          // home: Paymentpage() 
+          // home: Paymentpage()
         ));
   }
 }

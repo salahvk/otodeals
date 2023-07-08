@@ -4,13 +4,15 @@ class Home {
   List<CurrentlyRunning>? currentlyRunning;
   List<SaleVehicles>? saleVehicles;
   List<BidVehicles>? bidVehicles;
+  List<Tags>? tags;
 
   Home(
       {this.result,
       this.nextAccutionTime,
       this.currentlyRunning,
       this.saleVehicles,
-      this.bidVehicles});
+      this.bidVehicles,
+      this.tags});
 
   Home.fromJson(Map<String, dynamic> json) {
     result = json['result'];
@@ -35,6 +37,12 @@ class Home {
         bidVehicles!.add(BidVehicles.fromJson(v));
       });
     }
+    if (json['tags'] != null) {
+      tags = <Tags>[];
+      json['tags'].forEach((v) {
+        tags!.add(Tags.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -48,17 +56,21 @@ class Home {
           currentlyRunning!.map((v) => v.toJson()).toList();
     }
     if (saleVehicles != null) {
-      data['sale_vehicles'] =
-          saleVehicles!.map((v) => v.toJson()).toList();
+      data['sale_vehicles'] = saleVehicles!.map((v) => v.toJson()).toList();
     }
     if (bidVehicles != null) {
       data['bid_vehicles'] = bidVehicles!.map((v) => v.toJson()).toList();
+    }
+    if (tags != null) {
+      data['tags'] = tags!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class NextAccutionTime {
+  String? nextStartTime;
+  String? nextEndTime;
   String? years;
   String? months;
   String? days;
@@ -66,21 +78,21 @@ class NextAccutionTime {
   String? minutes;
   String? seconds;
   String? label;
-  String? nextstarttime;
-  String? nextendtime;
 
   NextAccutionTime(
-      {this.years,
+      {this.nextStartTime,
+      this.nextEndTime,
+      this.years,
       this.months,
       this.days,
       this.hours,
       this.minutes,
       this.seconds,
-      this.label,
-      this.nextstarttime,
-      this.nextendtime});
+      this.label});
 
   NextAccutionTime.fromJson(Map<String, dynamic> json) {
+    nextStartTime = json['next_start_time'];
+    nextEndTime = json['next_end_time'];
     years = json['years'];
     months = json['months'];
     days = json['days'];
@@ -88,12 +100,12 @@ class NextAccutionTime {
     minutes = json['minutes'];
     seconds = json['seconds'];
     label = json['label'];
-    nextstarttime=json['next_start_time'];
-    nextendtime=json['next_end_time'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['next_start_time'] = nextStartTime;
+    data['next_end_time'] = nextEndTime;
     data['years'] = years;
     data['months'] = months;
     data['days'] = days;
@@ -101,8 +113,6 @@ class NextAccutionTime {
     data['minutes'] = minutes;
     data['seconds'] = seconds;
     data['label'] = label;
-    data['next_start_time']=nextstarttime;
-    data['next_end_time']=nextendtime;
     return data;
   }
 }
@@ -129,11 +139,19 @@ class CurrentlyRunning {
   String? insurance;
   String? rto;
   String? taxupto;
+  String? tagIds;
   String? fitnessupto;
   String? location;
   String? status;
+  int? vehicleIdentificationNumber;
   String? createdAt;
   String? updatedAt;
+  int? interiorRating;
+  int? exteriorRating;
+  int? engineRating;
+  int? damageRating;
+  int? acRating;
+  int? otherRating;
   String? image;
 
   CurrentlyRunning(
@@ -158,11 +176,19 @@ class CurrentlyRunning {
       this.insurance,
       this.rto,
       this.taxupto,
+      this.tagIds,
       this.fitnessupto,
       this.location,
       this.status,
+      this.vehicleIdentificationNumber,
       this.createdAt,
       this.updatedAt,
+      this.interiorRating,
+      this.exteriorRating,
+      this.engineRating,
+      this.damageRating,
+      this.acRating,
+      this.otherRating,
       this.image});
 
   CurrentlyRunning.fromJson(Map<String, dynamic> json) {
@@ -187,11 +213,19 @@ class CurrentlyRunning {
     insurance = json['insurance'];
     rto = json['rto'];
     taxupto = json['taxupto'];
+    tagIds = json['tag_ids'];
     fitnessupto = json['fitnessupto'];
     location = json['location'];
     status = json['status'];
+    vehicleIdentificationNumber = json['vehicle_identification_number'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    interiorRating = json['interior_rating'];
+    exteriorRating = json['exterior_rating'];
+    engineRating = json['engine_rating'];
+    damageRating = json['damage_rating'];
+    acRating = json['ac_rating'];
+    otherRating = json['other_rating'];
     image = json['image'];
   }
 
@@ -218,11 +252,19 @@ class CurrentlyRunning {
     data['insurance'] = insurance;
     data['rto'] = rto;
     data['taxupto'] = taxupto;
+    data['tag_ids'] = tagIds;
     data['fitnessupto'] = fitnessupto;
     data['location'] = location;
     data['status'] = status;
+    data['vehicle_identification_number'] = vehicleIdentificationNumber;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    data['interior_rating'] = interiorRating;
+    data['exterior_rating'] = exteriorRating;
+    data['engine_rating'] = engineRating;
+    data['damage_rating'] = damageRating;
+    data['ac_rating'] = acRating;
+    data['other_rating'] = otherRating;
     data['image'] = image;
     return data;
   }
@@ -250,11 +292,19 @@ class SaleVehicles {
   String? insurance;
   String? rto;
   String? taxupto;
+  String? tagIds;
   String? fitnessupto;
   String? location;
   String? status;
+  int? vehicleIdentificationNumber;
   String? createdAt;
   String? updatedAt;
+  int? interiorRating;
+  int? exteriorRating;
+  int? engineRating;
+  int? damageRating;
+  int? acRating;
+  int? otherRating;
   String? image;
 
   SaleVehicles(
@@ -279,11 +329,19 @@ class SaleVehicles {
       this.insurance,
       this.rto,
       this.taxupto,
+      this.tagIds,
       this.fitnessupto,
       this.location,
       this.status,
+      this.vehicleIdentificationNumber,
       this.createdAt,
       this.updatedAt,
+      this.interiorRating,
+      this.exteriorRating,
+      this.engineRating,
+      this.damageRating,
+      this.acRating,
+      this.otherRating,
       this.image});
 
   SaleVehicles.fromJson(Map<String, dynamic> json) {
@@ -308,11 +366,19 @@ class SaleVehicles {
     insurance = json['insurance'];
     rto = json['rto'];
     taxupto = json['taxupto'];
+    tagIds = json['tag_ids'];
     fitnessupto = json['fitnessupto'];
     location = json['location'];
     status = json['status'];
+    vehicleIdentificationNumber = json['vehicle_identification_number'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    interiorRating = json['interior_rating'];
+    exteriorRating = json['exterior_rating'];
+    engineRating = json['engine_rating'];
+    damageRating = json['damage_rating'];
+    acRating = json['ac_rating'];
+    otherRating = json['other_rating'];
     image = json['image'];
   }
 
@@ -339,11 +405,19 @@ class SaleVehicles {
     data['insurance'] = insurance;
     data['rto'] = rto;
     data['taxupto'] = taxupto;
+    data['tag_ids'] = tagIds;
     data['fitnessupto'] = fitnessupto;
     data['location'] = location;
     data['status'] = status;
+    data['vehicle_identification_number'] = vehicleIdentificationNumber;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    data['interior_rating'] = interiorRating;
+    data['exterior_rating'] = exteriorRating;
+    data['engine_rating'] = engineRating;
+    data['damage_rating'] = damageRating;
+    data['ac_rating'] = acRating;
+    data['other_rating'] = otherRating;
     data['image'] = image;
     return data;
   }
@@ -371,11 +445,19 @@ class BidVehicles {
   String? insurance;
   String? rto;
   String? taxupto;
+  String? tagIds;
   String? fitnessupto;
   String? location;
   String? status;
+  int? vehicleIdentificationNumber;
   String? createdAt;
   String? updatedAt;
+  int? interiorRating;
+  int? exteriorRating;
+  int? engineRating;
+  int? damageRating;
+  int? acRating;
+  int? otherRating;
   String? image;
   int? years;
   int? months;
@@ -406,11 +488,19 @@ class BidVehicles {
       this.insurance,
       this.rto,
       this.taxupto,
+      this.tagIds,
       this.fitnessupto,
       this.location,
       this.status,
+      this.vehicleIdentificationNumber,
       this.createdAt,
       this.updatedAt,
+      this.interiorRating,
+      this.exteriorRating,
+      this.engineRating,
+      this.damageRating,
+      this.acRating,
+      this.otherRating,
       this.image,
       this.years,
       this.months,
@@ -441,11 +531,19 @@ class BidVehicles {
     insurance = json['insurance'];
     rto = json['rto'];
     taxupto = json['taxupto'];
+    tagIds = json['tag_ids'];
     fitnessupto = json['fitnessupto'];
     location = json['location'];
     status = json['status'];
+    vehicleIdentificationNumber = json['vehicle_identification_number'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    interiorRating = json['interior_rating'];
+    exteriorRating = json['exterior_rating'];
+    engineRating = json['engine_rating'];
+    damageRating = json['damage_rating'];
+    acRating = json['ac_rating'];
+    otherRating = json['other_rating'];
     image = json['image'];
     years = json['years'];
     months = json['months'];
@@ -478,11 +576,19 @@ class BidVehicles {
     data['insurance'] = insurance;
     data['rto'] = rto;
     data['taxupto'] = taxupto;
+    data['tag_ids'] = tagIds;
     data['fitnessupto'] = fitnessupto;
     data['location'] = location;
     data['status'] = status;
+    data['vehicle_identification_number'] = vehicleIdentificationNumber;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    data['interior_rating'] = interiorRating;
+    data['exterior_rating'] = exteriorRating;
+    data['engine_rating'] = engineRating;
+    data['damage_rating'] = damageRating;
+    data['ac_rating'] = acRating;
+    data['other_rating'] = otherRating;
     data['image'] = image;
     data['years'] = years;
     data['months'] = months;
@@ -490,6 +596,31 @@ class BidVehicles {
     data['hours'] = hours;
     data['minutes'] = minutes;
     data['seconds'] = seconds;
+    return data;
+  }
+}
+
+class Tags {
+  int? id;
+  String? name;
+  String? createdAt;
+  String? updatedAt;
+
+  Tags({this.id, this.name, this.createdAt, this.updatedAt});
+
+  Tags.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

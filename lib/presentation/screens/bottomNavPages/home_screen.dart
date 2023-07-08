@@ -9,7 +9,6 @@ import 'package:otodeals/presentation/widgets/home/live.dart';
 import 'package:otodeals/presentation/widgets/home/upcoming.dart';
 import 'package:otodeals/presentation/widgets/Timers/nextauctiontimer.dart';
 
-
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -186,11 +185,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               alignment: Alignment.center,
                               child: Text(
                                 'BUY',
-                                style: TextStyle(
-                                  color: isBuySelected
-                                      ? Colors.black
-                                      : Colors.white,
-                                ),
+                                style: getMediumtStyle(
+                                    color: isBuySelected
+                                        ? Colormanager.black
+                                        : Colormanager.white,
+                                    fontSize: 15),
                               ),
                             ),
                           ),
@@ -208,11 +207,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               alignment: Alignment.center,
                               child: Text(
                                 'BID',
-                                style: TextStyle(
-                                  color: isBuySelected
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
+                                style: getMediumtStyle(
+                                    color: isBuySelected
+                                        ? Colormanager.white
+                                        : Colormanager.black,
+                                    fontSize: 15),
                               ),
                             ),
                           ),
@@ -327,7 +326,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   borderRadius: BorderRadius.circular(5)),
                               child: Center(
                                   child: Text(
-                                "PREMIUM CAR",
+                                homeres.homemodel?.tags?[0].name ?? '',
                                 style: getMediumtStyle(
                                     color: Colormanager.black, fontSize: 10),
                               )),
@@ -340,7 +339,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   borderRadius: BorderRadius.circular(5)),
                               child: Center(
                                   child: Text(
-                                "NO STRUCTURAL DAMAGE",
+                                homeres.homemodel?.tags?[1].name ?? '',
                                 style: getMediumtStyle(
                                     color: Colormanager.black, fontSize: 10),
                               )),
@@ -353,7 +352,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   borderRadius: BorderRadius.circular(5)),
                               child: Center(
                                   child: Text(
-                                "1st OWNER",
+                                homeres.homemodel?.tags?[2].name ?? '',
                                 style: getMediumtStyle(
                                     color: Colormanager.black, fontSize: 10),
                               )),
@@ -371,7 +370,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     ? Buy()
                     : selectedContainer == 1
                         ? Live()
-                        : Upcoming()
+                        : Upcoming(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: SizedBox(
+                      width: size.width,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colormanager
+                                .primary, // Set your desired color here
+                          ),
+                          onPressed: () {},
+                          child: Text("View More"))),
+                )
               ],
             ),
           ),
