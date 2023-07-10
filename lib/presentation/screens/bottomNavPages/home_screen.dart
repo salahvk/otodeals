@@ -9,9 +9,6 @@ import 'package:otodeals/presentation/widgets/home/buy.dart';
 import 'package:otodeals/presentation/widgets/home/live.dart';
 import 'package:otodeals/presentation/widgets/home/upcoming.dart';
 import 'package:otodeals/presentation/widgets/Timers/nextauctiontimer.dart';
-import 'package:otodeals/presentation/widgets/search/search_bid.dart';
-import 'package:otodeals/presentation/widgets/search/search_buy.dart';
-import 'package:otodeals/presentation/widgets/search/search_upcomingbid.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -316,52 +313,30 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 0.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
+                      Wrap(
+                        alignment: WrapAlignment.center,
+                        children: List.generate(
+                            homeres.homemodel?.tags?.length ?? 0, (index) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                            child: Container(
                               height: 20,
                               width: 105,
                               decoration: BoxDecoration(
-                                  color: Colormanager.grey,
-                                  borderRadius: BorderRadius.circular(5)),
+                                color: Colormanager.grey,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
                               child: Center(
-                                  child: Text(
-                                homeres.homemodel?.tags?[0].name ?? '',
-                                style: getMediumtStyle(
-                                    color: Colormanager.black, fontSize: 10),
-                              )),
+                                child: Text(
+                                  homeres.homemodel?.tags?[index].name ?? '',
+                                  style: getMediumtStyle(
+                                      color: Colormanager.black, fontSize: 10),
+                                ),
+                              ),
                             ),
-                            Container(
-                              height: 20,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  color: Colormanager.grey,
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Center(
-                                  child: Text(
-                                homeres.homemodel?.tags?[1].name ?? '',
-                                style: getMediumtStyle(
-                                    color: Colormanager.black, fontSize: 10),
-                              )),
-                            ),
-                            Container(
-                              height: 20,
-                              width: 105,
-                              decoration: BoxDecoration(
-                                  color: Colormanager.grey,
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Center(
-                                  child: Text(
-                                homeres.homemodel?.tags?[2].name ?? '',
-                                style: getMediumtStyle(
-                                    color: Colormanager.black, fontSize: 10),
-                              )),
-                            ),
-                          ],
-                        ),
+                          );
+                        }),
                       )
                     ],
                   ),
@@ -384,7 +359,32 @@ class _HomeScreenState extends State<HomeScreen> {
                                 .primary, // Set your desired color here
                           ),
                           onPressed: () {
-                            isBuySelected ?Navigator.push(context,MaterialPageRoute(builder: ((context) =>Searchs(isBuySelected:true ,selectedContainer: 1,isRowVisible: false,)))):selectedContainer==1?Navigator.push(context,MaterialPageRoute(builder: ((context) =>Searchs(isBuySelected:false ,selectedContainer: 1,isRowVisible:true,)))):Navigator.push(context,MaterialPageRoute(builder: ((context) =>Searchs(isBuySelected:false ,selectedContainer:2,isRowVisible:true,))));
+                            isBuySelected
+                                ? Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: ((context) => Searchs(
+                                              isBuySelected: true,
+                                              selectedContainer: 1,
+                                              isRowVisible: false,
+                                            ))))
+                                : selectedContainer == 1
+                                    ? Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: ((context) => Searchs(
+                                                  isBuySelected: false,
+                                                  selectedContainer: 1,
+                                                  isRowVisible: true,
+                                                ))))
+                                    : Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: ((context) => Searchs(
+                                                  isBuySelected: false,
+                                                  selectedContainer: 2,
+                                                  isRowVisible: true,
+                                                ))));
                           },
                           child: Text("View More"))),
                 )
