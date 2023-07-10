@@ -8,6 +8,7 @@ import 'package:otodeals/data/providers/vehicleprovider.dart';
 import 'package:otodeals/data/repositories/vehicledetails.dart';
 import 'package:otodeals/presentation/screens/productdetails.dart';
 import 'package:otodeals/presentation/widgets/Timers/searchupcomingtimer.dart';
+import 'package:otodeals/presentation/widgets/home/redContainer.dart';
 import 'package:provider/provider.dart';
 
 class UpcomingbidFunction extends StatelessWidget {
@@ -33,6 +34,7 @@ class UpcomingbidFunction extends StatelessWidget {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
+          final vehicleDetails = res.vlist?.upcomingbid?.data![index];
           return Padding(
             padding: const EdgeInsets.all(10.0),
             child: InkWell(
@@ -106,76 +108,40 @@ class UpcomingbidFunction extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      Wrap(
+                        // runAlignment: WrapAlignment.start,
+                        alignment: WrapAlignment.spaceBetween,
                         children: [
-                          Container(
-                            width: 80,
-                            decoration: BoxDecoration(
-                                color: Colormanager.buttonBox,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Center(
-                                  child: Text(
-                                res.vlist?.upcomingbid?.data![index].fueltype ??
-                                    "",
-                                style: getMediumtStyle(
-                                    color: Colormanager.buttonText,
-                                    fontSize: 10),
-                              )),
-                            ),
-                          ),
-                          Container(
-                            width: 80,
-                            decoration: BoxDecoration(
-                                color: Colormanager.buttonBox,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Center(
-                                  child: Text(
-                                res.vlist?.upcomingbid?.data![index]
-                                        .gearshift ??
-                                    "",
-                                style: getMediumtStyle(
-                                    color: Colormanager.buttonText,
-                                    fontSize: 10),
-                              )),
-                            ),
-                          ),
-                          Container(
-                            width: 80,
-                            decoration: BoxDecoration(
-                                color: Colormanager.buttonBox,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Center(
-                                  child: Text(
-                                "Mileage: ${res.vlist?.upcomingbid?.data![index].mileage ?? ""}",
-                                style: getMediumtStyle(
-                                    color: Colormanager.buttonText,
-                                    fontSize: 10),
-                              )),
-                            ),
-                          ),
-                          Container(
-                            width: 80,
-                            decoration: BoxDecoration(
-                                color: Colormanager.buttonBox,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Center(
-                                  child: Text(
-                                "OWNER: ${res.vlist?.upcomingbid?.data![index].owner ?? ""}",
-                                style: getMediumtStyle(
-                                    color: Colormanager.buttonText,
-                                    fontSize: 10),
-                              )),
-                            ),
-                          ),
+                          RedContainer(
+                              text:
+                                  "Model: ${vehicleDetails?.modelyear.toString()}"),
+                          RedContainer(text: vehicleDetails?.fueltype ?? ""),
+                          RedContainer(
+                              text:
+                                  "Mileage: ${vehicleDetails?.mileage.toString()}"),
+                          RedContainer(
+                              text:
+                                  "Owner: ${vehicleDetails?.owner.toString()}"),
+                          vehicleDetails?.interiorRating == 0
+                              ? Container()
+                              : RedContainer(
+                                  text:
+                                      "Inte Rate : ${vehicleDetails?.interiorRating.toString()}"),
+                          vehicleDetails?.exteriorRating == 0
+                              ? Container()
+                              : RedContainer(
+                                  text:
+                                      "Exter Rate : ${vehicleDetails?.exteriorRating.toString()}"),
+                          vehicleDetails?.engineRating == 0
+                              ? Container()
+                              : RedContainer(
+                                  text:
+                                      "Eng Rate : ${vehicleDetails?.interiorRating.toString()}"),
+                          vehicleDetails?.damageRating == 0
+                              ? Container()
+                              : RedContainer(
+                                  text:
+                                      "Dmg Rate : ${vehicleDetails?.exteriorRating.toString()}"),
                         ],
                       ),
                       const SizedBox(

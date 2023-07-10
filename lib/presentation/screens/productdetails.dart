@@ -71,8 +71,8 @@ class _PorductdetailsState extends State<Porductdetails> {
                     ),
                     SizedBox(height: 16),
                     Center(
-                        child: Image.network(
-                      "${vres.vehdet?.bodyImage}",
+                        child: CachedNetworkImage(
+                      imageUrl: "${vres.vehdet?.bodyImage}",
                       fit: BoxFit.cover,
                     )),
                     SizedBox(height: 16),
@@ -1611,7 +1611,7 @@ class _PorductdetailsState extends State<Porductdetails> {
                   )
                 ]))),
       ),
-      bottomNavigationBar:  BottomNavigationWidget(),
+      bottomNavigationBar: BottomNavigationWidget(),
     );
   }
 }
