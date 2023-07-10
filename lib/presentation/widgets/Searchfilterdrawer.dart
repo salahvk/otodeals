@@ -27,20 +27,38 @@ class _FilterDrawerState extends State<FilterDrawer> {
   bool isModalYearVisible = false;
   bool isFuelTypeVisible = false;
   bool isTransmissionVisible = false;
-  // int? selectedYear;
-  // List<int> years = List<int>.generate(
-  //   100,
-  //   (int index) => DateTime.now().year - index,
-  // );
-  final RangeValues _currentRangeValues = RangeValues(1, 100);
-  // final double _interval = 1;
+  String? selectedFuelTypes;
+  String? selectedTransmission;
+  String? ModelYears;
 
-  final RangeValues _currentRangeYears = RangeValues(1994, 2023);
-  final double _yearinterval = 1;
-  final minyear = Searchcontroller.yearrange1controller.text;
-  final maxyear = Searchcontroller.yearrange2controller.text;
+  
+  final Modelyear = Searchcontroller.yearrange1controller.text;
   final minprice = Searchcontroller.minpricecontroller.text;
   final maxprice = Searchcontroller.maxpricecontroller.text;
+
+void updateselectedYears(){
+  ModelYears=selectedYears.join(',');
+
+}
+  
+  void updateSelectedTransmission() {
+  List<String> transmisson = [];
+  if (_isautomatic ) transmisson.add('automatic');
+  if (_ismanual) transmisson.add('manual');
+
+  selectedTransmission = transmisson.join(',');
+}
+
+
+  void updateSelectedFuelTypes() {
+  List<String> fuelTypes = [];
+  if (_isChecked1) fuelTypes.add('diesel');
+  if (_isChecked2) fuelTypes.add('petrol');
+  if (_isChecked3) fuelTypes.add('hybrid');
+  if (_isChecked4) fuelTypes.add('electric');
+
+  selectedFuelTypes = fuelTypes.join(',');
+}
 
   @override
   void initState() {
@@ -134,6 +152,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                             dense: true,
                             value: selectedYears.contains(year),
                             onChanged: (value) {
+
                               setState(() {
                                 if (value ?? false) {
                                   selectedYears.add(year);
@@ -141,6 +160,9 @@ class _FilterDrawerState extends State<FilterDrawer> {
                                   selectedYears.remove(year);
                                 }
                               });
+                              updateselectedYears();
+                              Searchcontroller.yearrange1controller.text='&modelyear=$ModelYears';
+
                             },
                           );
                         },
@@ -182,18 +204,18 @@ class _FilterDrawerState extends State<FilterDrawer> {
                             Checkbox(
                               value: _isChecked1,
                               onChanged: (value) {
+                  
                                 setState(() {
                                   _isChecked1 = value ?? false;
                                 });
-                                // if (_isChecked1) {
-                                // _isChecked2 = false;
-                                // _isChecked3 = false;
-                                // _isChecked4 = false;
+                                updateSelectedFuelTypes();
+                            
                                 Searchcontroller.fueltypecontroller.text =
-                                    '&filter_fueltype[]=diesel';
+                                    '&filter_fueltype=$selectedFuelTypes';
                                 // } else {
                                 //   Searchcontroller.fueltypecontroller.clear();
                                 // }
+                                print(selectedFuelTypes);
                               },
                             ),
                             Text(
@@ -211,14 +233,13 @@ class _FilterDrawerState extends State<FilterDrawer> {
                                 setState(() {
                                   _isChecked2 = value ?? false;
                                 });
-                                // if (_isChecked2) {
-                                // _isChecked1 = false;
-                                // _isChecked3 = false;
-                                // _isChecked4 = false;
+                                
+                                updateSelectedFuelTypes();
+                             
                                 Searchcontroller.fueltypecontroller.text =
-                                    '&filter_fueltype[]=petrol';
+                                    '&filter_fueltype=$selectedFuelTypes';
                                 // } else {
-                                Searchcontroller.fueltypecontroller.clear();
+                                // Searchcontroller.fueltypecontroller.clear();
                                 // }
                               },
                             ),
@@ -237,14 +258,12 @@ class _FilterDrawerState extends State<FilterDrawer> {
                                 setState(() {
                                   _isChecked3 = value ?? false;
                                 });
-                                // if (_isChecked3) {
-                                // _isChecked1 = false;
-                                // _isChecked2 = false;
-                                // _isChecked4 = false;
+                                updateSelectedFuelTypes();
+                                
                                 Searchcontroller.fueltypecontroller.text =
-                                    '&filter_fueltype[]=hybrid';
+                                    '&filter_fueltype=$selectedFuelTypes';
                                 // } else {
-                                Searchcontroller.fueltypecontroller.clear();
+                      
                                 // }
                               },
                             ),
@@ -263,14 +282,12 @@ class _FilterDrawerState extends State<FilterDrawer> {
                                 setState(() {
                                   _isChecked4 = value ?? false;
                                 });
-                                // if (_isChecked4) {
-                                //   _isChecked1 = false;
-                                //   _isChecked2 = false;
-                                //   _isChecked3 = false;
+                                updateSelectedFuelTypes();
+                               
                                 Searchcontroller.fueltypecontroller.text =
-                                    '&filter_fueltype[]=electric';
+                                    '&filter_fueltype=$selectedFuelTypes';
                                 // } else {
-                                Searchcontroller.fueltypecontroller.clear();
+                 
                                 // }
                               },
                             ),
@@ -319,16 +336,15 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         Checkbox(
                           value: _isautomatic,
                           onChanged: (value) {
+                        
                             setState(() {
                               _isautomatic = value ?? false;
                             });
-                            if (_isautomatic) {
-                              // _ismanual = false;
+                            updateSelectedTransmission();
+                           
                               Searchcontroller.gearshiftcontroller.text =
-                                  '&filter_gearshift[]=automatic';
-                            } else {
-                              Searchcontroller.gearshiftcontroller.clear();
-                            }
+                                  '&filter_gearshift=$selectedTransmission';
+                              print(selectedTransmission);
                           },
                         ),
                         Text(
@@ -339,16 +355,15 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         Checkbox(
                           value: _ismanual,
                           onChanged: (value) {
+                            print(selectedTransmission);
                             setState(() {
                               _ismanual = value ?? false;
                             });
-                            if (_ismanual) {
-                              // _isautomatic = false;
+                            updateSelectedTransmission();
+                            
                               Searchcontroller.gearshiftcontroller.text =
-                                  '&filter_gearshift[]=manual';
-                            } else {
-                              Searchcontroller.gearshiftcontroller.clear();
-                            }
+                                  '&filter_gearshift=$selectedTransmission';
+                           
                           },
                         ),
                         Text(
@@ -453,8 +468,11 @@ class _FilterDrawerState extends State<FilterDrawer> {
                     padding: const EdgeInsets.symmetric(horizontal: 18.0),
                     child: ElevatedButton(
                       onPressed: () {
+                      
                         fetchSearchResults(context);
                         Navigator.pop(context);
+                        print(Searchcontroller.fueltypecontroller.text);
+
 
                         // SearchFilters selectedFilters = SearchFilters(
                         //   fuelTypes: getSelectedFuelTypes(),
@@ -487,7 +505,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                       Searchcontroller.maxpricecontroller.clear();
                       Searchcontroller.minpricecontroller.clear();
                       Searchcontroller.yearrange1controller.clear();
-                      Searchcontroller.yearrange2controller.clear();
+                  
 
                       Navigator.pop(context);
                       fetchSearchResults(context);

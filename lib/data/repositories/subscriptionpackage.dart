@@ -23,6 +23,7 @@ PaymentDetailsModel? paymentdata;
       final paymentdata = PaymentDetailsModel.fromJson(jsonResponse);
 
       paymentprovider.paydetail(paymentdata);
+      
 
       print(jsonResponse);
       return jsonResponse;
