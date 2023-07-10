@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:otodeals/core/color_manager.dart';
-import 'package:otodeals/core/controllers.dart';
+
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/providers/pathprovider.dart';
 import 'package:provider/provider.dart';
