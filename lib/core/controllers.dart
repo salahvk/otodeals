@@ -44,7 +44,7 @@ class Searchcontroller {
   static TextEditingController minpricecontroller = TextEditingController();
   static TextEditingController maxpricecontroller = TextEditingController();
   static TextEditingController yearrange1controller = TextEditingController();
-  static TextEditingController yearrange2controller = TextEditingController();
+
   static TextEditingController searchdatacontroller = TextEditingController();
 }
 
