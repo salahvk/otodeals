@@ -384,7 +384,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 .primary, // Set your desired color here
                           ),
                           onPressed: () {
-                            isBuySelected ?Navigator.push(context,MaterialPageRoute(builder: ((context) =>Searchs(isBuySelected:true ,selectedContainer: 1,)))):selectedContainer==1?BidFunction():UpcomingbidFunction();
+                            isBuySelected ?Navigator.push(context,MaterialPageRoute(builder: ((context) =>Searchs(isBuySelected:true ,selectedContainer: 1,isRowVisible: false,)))):selectedContainer==1?Navigator.push(context,MaterialPageRoute(builder: ((context) =>Searchs(isBuySelected:false ,selectedContainer: 1,isRowVisible:true,)))):Navigator.push(context,MaterialPageRoute(builder: ((context) =>Searchs(isBuySelected:false ,selectedContainer:2,isRowVisible:true,))));
                           },
                           child: Text("View More"))),
                 )

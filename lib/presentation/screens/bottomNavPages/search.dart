@@ -5,6 +5,7 @@ import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/repositories/vehiclelisting.dart';
 
 import 'package:otodeals/presentation/widgets/Searchfilterdrawer.dart';
+import 'package:otodeals/presentation/widgets/bottom_nav.dart';
 import 'package:otodeals/presentation/widgets/search/search_bid.dart';
 import 'package:otodeals/presentation/widgets/search/search_buy.dart';
 import 'package:otodeals/presentation/widgets/search/search_upcomingbid.dart';
@@ -12,7 +13,10 @@ import 'package:otodeals/presentation/widgets/search/search_upcomingbid.dart';
 class Searchs extends StatefulWidget {
  bool isBuySelected ;
  int selectedContainer ;
-   Searchs({Key? key,  this.isBuySelected = false, this.selectedContainer = 1}) : super(key: key);
+  bool isRowVisible;
+  // bool isnavigatethroughhome;
+  
+   Searchs({Key? key,  this.isBuySelected = false, this.selectedContainer = 1,this.isRowVisible=false,}) : super(key: key);
 
   @override
   State<Searchs> createState() => _SearchsState();
@@ -20,7 +24,7 @@ class Searchs extends StatefulWidget {
 
 class _SearchsState extends State<Searchs> {
   bool isBuySelected = false;
-
+bool isnavigatethroughhome=false;
   int selectedContainer = 1;
   bool isRowVisible = true;
   String s = "abc";
@@ -35,6 +39,10 @@ class _SearchsState extends State<Searchs> {
     super.initState();
     isBuySelected = widget.isBuySelected ;
     selectedContainer = widget.selectedContainer;
+    isRowVisible=widget.isRowVisible;
+    // isnavigatethroughhome=widget.isnavigatethroughhome;
+
+
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await fetchSearchResults(context);
     });
@@ -392,6 +400,7 @@ class _SearchsState extends State<Searchs> {
           ),
         ),
       ),
+      bottomNavigationBar:isnavigatethroughhome?BottomNavigationWidget():null,
     );
   }
 }
