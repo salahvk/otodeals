@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:developer';
+
 
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/controllers.dart';
@@ -21,7 +21,8 @@ Future<void> fetchSearchResults(BuildContext context) async {
       // final brand=Searchcontroller.vehiclebrandcontroller.text;
       final searchdata=Searchcontroller.searchdatacontroller.text;
     
-      final url="${ApiEndpoint.vehiclelisting}?type=$type&searchdata=$searchdata$gearshift$fueltype&min=$minprice&max=$maxprice&modelyear['range1']=$modelyearrange1&modelyear['range2']=$modelyearrange2";
+      final url="${ApiEndpoint.vehiclelisting}?type=$type&searchdata=$searchdata$gearshift$fueltype&min=$minprice&max=$maxprice";
+      // &modelyear=$modelyearrange1
     // final url = "${ApiEndpoint.vehiclelisting}?type=$type&filter_brand[]=$brand&filter_fueltype[]=$fueltype&filter_gearshift[]=$gearshift&min=$minprice&max=$maxprice&modelyear['range1']=$modelyearrange1&modelyear['range2']=$modelyearrange2&searchdata=$searchdata]"; // Replace with your actual web service URL
 final provider=Provider.of<Vehicleprovider>(context,listen:false);
 print(url);

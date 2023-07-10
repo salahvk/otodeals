@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/repositories/paymentstore.dart';
@@ -115,8 +116,9 @@ class _PaymentpageState extends State<Paymentpage> {
                   height: size.height * .06,
                 ),
                 Center(
-                  child: ElevatedButton(onPressed: (){
-                    getpaystore(context);
+                  child: ElevatedButton(onPressed: ()async{
+                   await getpaystore(context);
+                   Navigator.pushNamed(context,Routes.loginScreen);
 
                   }, child:Center(child:Text("Pay",style: getSemiBoldStyle(color:Colormanager.white),)),
                   style:

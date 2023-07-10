@@ -10,7 +10,9 @@ import 'package:otodeals/presentation/widgets/search/search_buy.dart';
 import 'package:otodeals/presentation/widgets/search/search_upcomingbid.dart';
 
 class Searchs extends StatefulWidget {
-  const Searchs({Key? key}) : super(key: key);
+ bool isBuySelected ;
+ int selectedContainer ;
+   Searchs({Key? key,  this.isBuySelected = false, this.selectedContainer = 1}) : super(key: key);
 
   @override
   State<Searchs> createState() => _SearchsState();
@@ -31,6 +33,8 @@ class _SearchsState extends State<Searchs> {
   void initState() {
     Searchcontroller.vehicletypecontroller.text = "bid";
     super.initState();
+    isBuySelected = widget.isBuySelected ;
+    selectedContainer = widget.selectedContainer;
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await fetchSearchResults(context);
     });

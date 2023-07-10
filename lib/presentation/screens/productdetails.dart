@@ -1611,7 +1611,7 @@ class _PorductdetailsState extends State<Porductdetails> {
                   )
                 ]))),
       ),
-      bottomNavigationBar: const BottomNavigationWidget(),
+      bottomNavigationBar:  BottomNavigationWidget(),
     );
   }
 }

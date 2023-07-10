@@ -3,12 +3,15 @@ import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
+import 'package:otodeals/presentation/screens/bottomNavPages/search.dart';
 import 'package:otodeals/presentation/widgets/custom_drawer.dart';
 import 'package:otodeals/presentation/widgets/home/buy.dart';
 import 'package:otodeals/presentation/widgets/home/live.dart';
 import 'package:otodeals/presentation/widgets/home/upcoming.dart';
 import 'package:otodeals/presentation/widgets/Timers/nextauctiontimer.dart';
-
+import 'package:otodeals/presentation/widgets/search/search_bid.dart';
+import 'package:otodeals/presentation/widgets/search/search_buy.dart';
+import 'package:otodeals/presentation/widgets/search/search_upcomingbid.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -380,7 +383,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             backgroundColor: Colormanager
                                 .primary, // Set your desired color here
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            isBuySelected ?Navigator.push(context,MaterialPageRoute(builder: ((context) =>Searchs(isBuySelected:true ,selectedContainer: 1,)))):selectedContainer==1?BidFunction():UpcomingbidFunction();
+                          },
                           child: Text("View More"))),
                 )
               ],

@@ -7,12 +7,13 @@ import 'package:otodeals/presentation/screens/bottomNavPages/profile.dart';
 
 import 'package:otodeals/presentation/screens/bottomNavPages/search.dart';
 import 'package:otodeals/presentation/widgets/bottom_nav.dart';
+import 'package:otodeals/presentation/widgets/search/search_buy.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({Key? key}) : super(key: key);
   final pages = [
     const HomeScreen(),
-    const Searchs(),
+     Searchs(),
     const CartScreen(),
     const Myprofile(),
     const MoreScreen()
@@ -31,7 +32,7 @@ class MainScreen extends StatelessWidget {
           return pages[index];
         },
       ),
-      bottomNavigationBar: const BottomNavigationWidget(),
+      bottomNavigationBar: BottomNavigationWidget(),
     );
   }
 }
