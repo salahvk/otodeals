@@ -1,12 +1,19 @@
 class VehicleListing {
   bool? result;
+  List<Tags>? tags;
   Products? products;
   Products? upcomingbid;
 
-  VehicleListing({this.result, this.products, this.upcomingbid});
+  VehicleListing({this.result, this.tags, this.products, this.upcomingbid});
 
   VehicleListing.fromJson(Map<String, dynamic> json) {
     result = json['result'];
+    if (json['tags'] != null) {
+      tags = <Tags>[];
+      json['tags'].forEach((v) {
+        tags!.add(Tags.fromJson(v));
+      });
+    }
     products =
         json['products'] != null ? Products.fromJson(json['products']) : null;
     upcomingbid = json['upcomingbid'] != null && json['upcomingbid'].isNotEmpty
@@ -17,12 +24,40 @@ class VehicleListing {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['result'] = result;
+    if (tags != null) {
+      data['tags'] = tags!.map((v) => v.toJson()).toList();
+    }
     if (products != null) {
       data['products'] = products!.toJson();
     }
     if (upcomingbid != null) {
       data['upcomingbid'] = upcomingbid!.toJson();
     }
+    return data;
+  }
+}
+
+class Tags {
+  int? id;
+  String? name;
+  String? createdAt;
+  String? updatedAt;
+
+  Tags({this.id, this.name, this.createdAt, this.updatedAt});
+
+  Tags.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
@@ -135,6 +170,12 @@ class Data {
   int? vehicleIdentificationNumber;
   String? createdAt;
   String? updatedAt;
+  int? interiorRating;
+  int? exteriorRating;
+  int? engineRating;
+  int? damageRating;
+  int? acRating;
+  int? otherRating;
   String? categoryName;
   String? image;
   String? name;
@@ -174,6 +215,12 @@ class Data {
       this.vehicleIdentificationNumber,
       this.createdAt,
       this.updatedAt,
+      this.interiorRating,
+      this.exteriorRating,
+      this.engineRating,
+      this.damageRating,
+      this.acRating,
+      this.otherRating,
       this.categoryName,
       this.image,
       this.name,
@@ -213,6 +260,12 @@ class Data {
     vehicleIdentificationNumber = json['vehicle_identification_number'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    interiorRating = json['interior_rating'];
+    exteriorRating = json['exterior_rating'];
+    engineRating = json['engine_rating'];
+    damageRating = json['damage_rating'];
+    acRating = json['ac_rating'];
+    otherRating = json['other_rating'];
     categoryName = json['category_name'];
     image = json['image'];
     name = json['name'];
@@ -254,6 +307,12 @@ class Data {
     data['vehicle_identification_number'] = vehicleIdentificationNumber;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    data['interior_rating'] = interiorRating;
+    data['exterior_rating'] = exteriorRating;
+    data['engine_rating'] = engineRating;
+    data['damage_rating'] = damageRating;
+    data['ac_rating'] = acRating;
+    data['other_rating'] = otherRating;
     data['category_name'] = categoryName;
     data['image'] = image;
     data['name'] = name;

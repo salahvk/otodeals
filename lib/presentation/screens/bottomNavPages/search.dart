@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/styles_manager.dart';
+import 'package:otodeals/data/providers/vehicleprovider.dart';
 import 'package:otodeals/data/repositories/vehiclelisting.dart';
 
 import 'package:otodeals/presentation/widgets/Searchfilterdrawer.dart';
@@ -9,14 +10,20 @@ import 'package:otodeals/presentation/widgets/bottom_nav.dart';
 import 'package:otodeals/presentation/widgets/search/search_bid.dart';
 import 'package:otodeals/presentation/widgets/search/search_buy.dart';
 import 'package:otodeals/presentation/widgets/search/search_upcomingbid.dart';
+import 'package:provider/provider.dart';
 
 class Searchs extends StatefulWidget {
- bool isBuySelected ;
- int selectedContainer ;
+  bool isBuySelected;
+  int selectedContainer;
   bool isRowVisible;
   // bool isnavigatethroughhome;
-  
-   Searchs({Key? key,  this.isBuySelected = false, this.selectedContainer = 1,this.isRowVisible=false,}) : super(key: key);
+
+  Searchs({
+    Key? key,
+    this.isBuySelected = false,
+    this.selectedContainer = 1,
+    this.isRowVisible = false,
+  }) : super(key: key);
 
   @override
   State<Searchs> createState() => _SearchsState();
@@ -24,7 +31,7 @@ class Searchs extends StatefulWidget {
 
 class _SearchsState extends State<Searchs> {
   bool isBuySelected = false;
-bool isnavigatethroughhome=false;
+  bool isnavigatethroughhome = false;
   int selectedContainer = 1;
   bool isRowVisible = true;
   String s = "abc";
@@ -37,11 +44,10 @@ bool isnavigatethroughhome=false;
   void initState() {
     Searchcontroller.vehicletypecontroller.text = "bid";
     super.initState();
-    isBuySelected = widget.isBuySelected ;
+    isBuySelected = widget.isBuySelected;
     selectedContainer = widget.selectedContainer;
-    isRowVisible=widget.isRowVisible;
+    isRowVisible = widget.isRowVisible;
     // isnavigatethroughhome=widget.isnavigatethroughhome;
-
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await fetchSearchResults(context);
@@ -58,6 +64,9 @@ bool isnavigatethroughhome=false;
   Widget build(BuildContext context) {
     // final res=Provider.of<Vehicleprovider>(context,listen: false);
     // final searchres = Provider.of<DataProvider>(context, listen: false);
+    final res = Provider.of<Vehicleprovider>(context, listen: true);
+    final tags = res.vlist?.tags;
+
     final size = MediaQuery.of(context).size;
     return Scaffold(
       endDrawer: SingleChildScrollView(
@@ -341,52 +350,29 @@ bool isnavigatethroughhome=false;
               SizedBox(
                 height: 10,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 0.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
+              Wrap(
+                alignment: WrapAlignment.center,
+                children: List.generate(tags?.length ?? 0, (index) {
+                  return Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    child: Container(
                       height: 20,
                       width: 105,
                       decoration: BoxDecoration(
-                          color: Colormanager.grey,
-                          borderRadius: BorderRadius.circular(5)),
+                        color: Colormanager.grey,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
                       child: Center(
-                          child: Text(
-                        "PREMIUM CAR",
-                        style: getMediumtStyle(
-                            color: Colormanager.black, fontSize: 10),
-                      )),
+                        child: Text(
+                          tags?[index].name ?? '',
+                          style: getMediumtStyle(
+                              color: Colormanager.black, fontSize: 10),
+                        ),
+                      ),
                     ),
-                    Container(
-                      height: 20,
-                      width: 160,
-                      decoration: BoxDecoration(
-                          color: Colormanager.grey,
-                          borderRadius: BorderRadius.circular(5)),
-                      child: Center(
-                          child: Text(
-                        "NO STRUCTURAL DAMAGE",
-                        style: getMediumtStyle(
-                            color: Colormanager.black, fontSize: 10),
-                      )),
-                    ),
-                    Container(
-                      height: 20,
-                      width: 105,
-                      decoration: BoxDecoration(
-                          color: Colormanager.grey,
-                          borderRadius: BorderRadius.circular(5)),
-                      child: Center(
-                          child: Text(
-                        "1st OWNER",
-                        style: getMediumtStyle(
-                            color: Colormanager.black, fontSize: 10),
-                      )),
-                    ),
-                  ],
-                ),
+                  );
+                }),
               ),
               SizedBox(
                 height: 10,
@@ -400,7 +386,8 @@ bool isnavigatethroughhome=false;
           ),
         ),
       ),
-      bottomNavigationBar:isnavigatethroughhome?BottomNavigationWidget():null,
+      bottomNavigationBar:
+          isnavigatethroughhome ? BottomNavigationWidget() : null,
     );
   }
 }

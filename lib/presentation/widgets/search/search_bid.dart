@@ -5,42 +5,44 @@ import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
 
-import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/providers/vehicleprovider.dart';
 import 'package:otodeals/data/repositories/vehicledetails.dart';
 import 'package:otodeals/presentation/screens/productdetails.dart';
 
 import 'package:otodeals/presentation/widgets/Timers/searchbidtimer.dart';
+import 'package:otodeals/presentation/widgets/home/redContainer.dart';
 
 import 'package:provider/provider.dart';
 
 class BidFunction extends StatelessWidget {
-
-  const BidFunction({Key? key,}) : super(key: key);
+  const BidFunction({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final res = Provider.of<Vehicleprovider>(context, listen: true);
-    final size = MediaQuery.of(context).size;   
-    void inputsearchbidlive(index)async{
-     final res = Provider.of<Vehicleprovider>(context, listen:false);
-     int? id= res.vlist?.products?.data![index].id;
-     res.id=id;
-     await getvehicledetails(context, id!);
+    final size = MediaQuery.of(context).size;
+    void inputsearchbidlive(index) async {
+      final res = Provider.of<Vehicleprovider>(context, listen: false);
+      int? id = res.vlist?.products?.data![index].id;
+      res.id = id;
+      await getvehicledetails(context, id!);
       Navigator.of(context).push(FadePageRoute(page: Porductdetails()));
     }
+
     return ListView.builder(
         scrollDirection: Axis.vertical,
         itemCount: res.vlist?.products?.data?.length ?? 0,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
+          final vehicleDetails = res.vlist?.products?.data![index];
           return Padding(
             padding: const EdgeInsets.all(10.0),
             child: InkWell(
               onTap: () {
                 inputsearchbidlive(index);
-            
               },
               child: Container(
                 // height: size.height / 3.7,
@@ -65,9 +67,8 @@ class BidFunction extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                                  res.vlist?.products?.data![index]
-                                          .vehicleName ??
-                                      "",
+                              res.vlist?.products?.data![index].vehicleName ??
+                                  "",
                               style: getMediumtStyle(
                                   color: Colors.black, fontSize: 20)),
                           Container(
@@ -96,7 +97,7 @@ class BidFunction extends StatelessWidget {
                           width: size.width * .8,
                           child: CachedNetworkImage(
                             imageUrl:
-                               "$endpoint${res.vlist?.products?.data![index].image}",
+                                "$endpoint${res.vlist?.products?.data![index].image}",
                             fit: BoxFit.cover,
                             errorWidget: (context, url, error) {
                               return Container(
@@ -109,79 +110,43 @@ class BidFunction extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      Wrap(
+                        // runAlignment: WrapAlignment.start,
+                        alignment: WrapAlignment.spaceBetween,
                         children: [
-                          Container(
-                            width: 80,
-                            decoration: BoxDecoration(
-                                color: Colormanager.buttonBox,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Center(
-                                  child: Text(
-                              res.vlist?.products?.data![index].fueltype ??
-                                      "",
-                                style: getMediumtStyle(
-                                    color: Colormanager.buttonText,
-                                    fontSize: 10),
-                              )),
-                            ),
-                          ),
-                          Container(
-                            width: 80,
-                            decoration: BoxDecoration(
-                                color: Colormanager.buttonBox,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Center(
-                                  child: Text(
-                                 res.vlist?.products?.data![index].gearshift ??
-                                      "",
-                                style: getMediumtStyle(
-                                    color: Colormanager.buttonText,
-                                    fontSize: 10),
-                              )),
-                            ),
-                          ),
-                          Container(
-                            width: 80,
-                            decoration: BoxDecoration(
-                                color: Colormanager.buttonBox,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Center(
-                                  child: Text(
-                                "Mileage: ${ res.vlist?.products?.data![index].mileage ?? ""}"
-                                 ,
-                                style: getMediumtStyle(
-                                    color: Colormanager.buttonText,
-                                    fontSize: 10),
-                              )),
-                            ),
-                          ),
-                          Container(
-                            width: 80,
-                            decoration: BoxDecoration(
-                                color: Colormanager.buttonBox,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Center(
-                                  child: Text(
-                                "OWNER: ${ res.vlist?.products?.data![index].owner ??""}",
-                                style: getMediumtStyle(
-                                    color: Colormanager.buttonText,
-                                    fontSize: 10),
-                              )),
-                            ),
-                          ),
+                          RedContainer(
+                              text:
+                                  "Model: ${vehicleDetails?.modelyear.toString()}"),
+                          RedContainer(text: vehicleDetails?.fueltype ?? ""),
+                          RedContainer(
+                              text:
+                                  "Mileage: ${vehicleDetails?.mileage.toString()}"),
+                          RedContainer(
+                              text:
+                                  "Owner: ${vehicleDetails?.owner.toString()}"),
+                          vehicleDetails?.interiorRating == 0
+                              ? Container()
+                              : RedContainer(
+                                  text:
+                                      "Inte Rate : ${vehicleDetails?.interiorRating.toString()}"),
+                          vehicleDetails?.exteriorRating == 0
+                              ? Container()
+                              : RedContainer(
+                                  text:
+                                      "Exter Rate : ${vehicleDetails?.exteriorRating.toString()}"),
+                          vehicleDetails?.engineRating == 0
+                              ? Container()
+                              : RedContainer(
+                                  text:
+                                      "Eng Rate : ${vehicleDetails?.interiorRating.toString()}"),
+                          vehicleDetails?.damageRating == 0
+                              ? Container()
+                              : RedContainer(
+                                  text:
+                                      "Dmg Rate : ${vehicleDetails?.exteriorRating.toString()}"),
                         ],
                       ),
-                     const SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Row(
@@ -204,20 +169,18 @@ class BidFunction extends StatelessWidget {
                                       color: Colors.black, fontSize: 15))
                             ],
                           ),
-                       
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 "Last Call",
                                 style: getSemiBoldStyle(
-                                    color: Colormanager.primary,
-                                    fontSize: 10),
+                                    color: Colormanager.primary, fontSize: 10),
                               ),
                               SizedBox(
                                 height: 10,
                               ),
-                             SearchtimerScreen(index:index)
+                              SearchtimerScreen(index: index)
                             ],
                           ),
                         ],
