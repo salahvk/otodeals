@@ -9,6 +9,7 @@ import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/repositories/vehicledetails.dart';
 import 'package:otodeals/presentation/screens/productdetails.dart';
 import 'package:otodeals/presentation/widgets/Timers/homelivetimer.dart';
+import 'package:otodeals/presentation/widgets/home/redContainer.dart';
 
 import 'package:provider/provider.dart';
 
@@ -49,6 +50,7 @@ class _LiveState extends State<Live> {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
+          final vehicleDetails = homeres.homemodel?.currentlyRunning![index];
           return Padding(
             padding: const EdgeInsets.all(10.0),
             child: InkWell(
@@ -127,91 +129,42 @@ class _LiveState extends State<Live> {
                         height: 10,
                       ),
                       Wrap(
-                        runAlignment: WrapAlignment.end,
-                        alignment: WrapAlignment.end,
+                        // runAlignment: WrapAlignment.start,
+                        alignment: WrapAlignment.spaceBetween,
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Colormanager.buttonBox,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              child: IntrinsicWidth(
-                                child: Center(
-                                    child: Text(
-                                  "Model: ${homeres.homemodel?.currentlyRunning![index].modelyear.toString()}",
-                                  style: getMediumtStyle(
-                                      color: Colormanager.buttonText,
-                                      fontSize: 10),
-                                )),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colormanager.buttonBox,
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 5),
-                                child: IntrinsicWidth(
-                                  child: Center(
-                                      child: Text(
-                                    homeres.homemodel?.currentlyRunning![index]
-                                            .fueltype ??
-                                        "",
-                                    style: getMediumtStyle(
-                                        color: Colormanager.buttonText,
-                                        fontSize: 10),
-                                  )),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 10),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colormanager.buttonBox,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: IntrinsicWidth(
-                                  child: Center(
-                                    child: Text(
-                                      "Mileage: ${homeres.homemodel?.currentlyRunning![index].mileage.toString()}",
-                                      style: getMediumtStyle(
-                                          color: Colormanager.buttonText,
-                                          fontSize: 10),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            // width: 80,
-                            decoration: BoxDecoration(
-                                color: Colormanager.buttonBox,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              child: IntrinsicWidth(
-                                child: Center(
-                                    child: Text(
-                                  "OWNER: ${homeres.homemodel?.currentlyRunning![index].owner.toString()}",
-                                  style: getMediumtStyle(
-                                      color: Colormanager.buttonText,
-                                      fontSize: 10),
-                                )),
-                              ),
-                            ),
-                          ),
+                          RedContainer(
+                              text:
+                                  "Model: ${vehicleDetails?.modelyear.toString()}"),
+                          RedContainer(
+                              text: homeres.homemodel?.currentlyRunning![index]
+                                      .fueltype ??
+                                  ""),
+                          RedContainer(
+                              text:
+                                  "Mileage: ${vehicleDetails?.mileage.toString()}"),
+                          RedContainer(
+                              text:
+                                  "Owner: ${vehicleDetails?.owner.toString()}"),
+                          vehicleDetails?.interiorRating == 0
+                              ? Container()
+                              : RedContainer(
+                                  text:
+                                      "Inte Rate : ${vehicleDetails?.interiorRating.toString()}"),
+                          vehicleDetails?.exteriorRating == 0
+                              ? Container()
+                              : RedContainer(
+                                  text:
+                                      "Exter Rate : ${vehicleDetails?.exteriorRating.toString()}"),
+                          vehicleDetails?.engineRating == 0
+                              ? Container()
+                              : RedContainer(
+                                  text:
+                                      "Eng Rate : ${vehicleDetails?.interiorRating.toString()}"),
+                          vehicleDetails?.damageRating == 0
+                              ? Container()
+                              : RedContainer(
+                                  text:
+                                      "Dmg Rate : ${vehicleDetails?.exteriorRating.toString()}"),
                         ],
                       ),
                       const SizedBox(
