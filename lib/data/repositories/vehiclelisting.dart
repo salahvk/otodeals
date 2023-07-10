@@ -18,10 +18,10 @@ Future<void> fetchSearchResults(BuildContext context) async {
       final maxprice=Searchcontroller.maxpricecontroller.text;
       final modelyearrange1=Searchcontroller.yearrange1controller.text;
         // final modelyearrange2=Searchcontroller.yearrange2controller.text;
-      // final brand=Searchcontroller.vehiclebrandcontroller.text;
+      final brand=Searchcontroller.vehiclebrandcontroller.text;
       final searchdata=Searchcontroller.searchdatacontroller.text;
     
-      final url="${ApiEndpoint.vehiclelisting}?type=$type&searchdata=$searchdata$gearshift$fueltype&min=$minprice&max=$maxprice$modelyearrange1";
+      final url="${ApiEndpoint.vehiclelisting}?type=$type&searchdata=$searchdata$gearshift$fueltype&min=$minprice&max=$maxprice$modelyearrange1$brand";
       // &modelyear=$modelyearrange1
     // final url = "${ApiEndpoint.vehiclelisting}?type=$type&filter_brand[]=$brand&filter_fueltype[]=$fueltype&filter_gearshift[]=$gearshift&min=$minprice&max=$maxprice&modelyear['range1']=$modelyearrange1&modelyear['range2']=$modelyearrange2&searchdata=$searchdata]"; // Replace with your actual web service URL
 final provider=Provider.of<Vehicleprovider>(context,listen:false);

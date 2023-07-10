@@ -11,6 +11,7 @@ import 'package:otodeals/presentation/screens/main_screen.dart';
 // import 'package:otodeals/presentation/screens/otp_screen.dart';
 import 'package:otodeals/presentation/screens/otp_screen_email.dart';
 import 'package:otodeals/presentation/screens/paymentpage.dart';
+import 'package:otodeals/presentation/screens/productdetails.dart';
 import 'package:otodeals/presentation/screens/reset_pass_screen.dart';
 import 'package:otodeals/presentation/screens/resgister_account.dart';
 
@@ -35,6 +36,7 @@ class Routes {
   static const String editprofilescreen='/editprofilescreen';
   static const String changePassScreen = '/changePassScreen';
    static const String subscriptionpackagescreen = '/subscriptionpackagescreen';
+   static const String productdetailscreen='/productdetailscreen';
 }
 
 class RouteGenerator {
@@ -73,6 +75,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) =>const Changepassword());
          case Routes.subscriptionpackagescreen:
         return MaterialPageRoute(builder: (_) =>const Paymentpage ());
+         case Routes.productdetailscreen:
+        return MaterialPageRoute(builder: (_) =>const Porductdetails ());
       default:
         return unDefinedRoute();
     }

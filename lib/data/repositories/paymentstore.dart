@@ -57,17 +57,18 @@ String s = 'abc';
       final response = await http.Response.fromStream(res);
        
       if (response.statusCode == 200) {
+         if(provider.filePath!.path.isEmpty){
+                    showAnimatedSnackBar(context,"Please Upload Pay Slip");
+                   }else{
         var jsonResponse = jsonDecode(response.body);
         log(response.body);
         print(jsonResponse);
         
         
         showAnimatedSnackBar(context,"Payment Details Stored Successfully.",type:AnimatedSnackBarType.success);
-       
-      } else {
-          if(provider.filePath!.path.isEmpty){
-                    showAnimatedSnackBar(context,"Please Upload Pay Slip");
                    }
+      } else {
+         
                    
 
         log(

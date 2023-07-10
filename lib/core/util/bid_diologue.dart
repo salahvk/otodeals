@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 
+
 class BidDiologue extends StatefulWidget {
   const BidDiologue({super.key});
 
@@ -36,7 +37,12 @@ class _BidDiologueState extends State<BidDiologue> {
       title: FractionallySizedBox(
         widthFactor: 0.5,
         child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                  up=up+2000;
+              });
+            
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colormanager.primary,
               shape: RoundedRectangleBorder(
@@ -54,47 +60,69 @@ class _BidDiologueState extends State<BidDiologue> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                  height: 20,
-                  width: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colormanager.grey,
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                        up=up+5000;
+                    });
+                  
+                  },
+                  child: Container(
+                    height: 20,
+                    width: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colormanager.grey,
+                    ),
+                    child: Center(
+                        child: Text(
+                      "5000",
+                      style: getSemiBoldStyle(
+                          color: Colormanager.black, fontSize: 12),
+                    )),
                   ),
-                  child: Center(
-                      child: Text(
-                    "5000",
-                    style: getSemiBoldStyle(
-                        color: Colormanager.black, fontSize: 12),
-                  )),
                 ),
-                Container(
-                  height: 20,
-                  width: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colormanager.grey,
+                InkWell(
+                  onTap: () {
+                 setState(() {
+                      up=up+10000;
+                 });
+                  },
+                  child: Container(
+                    height: 20,
+                    width: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colormanager.grey,
+                    ),
+                    child: Center(
+                        child: Text(
+                      "10000",
+                      style: getSemiBoldStyle(
+                          color: Colormanager.black, fontSize: 12),
+                    )),
                   ),
-                  child: Center(
-                      child: Text(
-                    "10000",
-                    style: getSemiBoldStyle(
-                        color: Colormanager.black, fontSize: 12),
-                  )),
                 ),
-                Container(
-                  height: 20,
-                  width: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colormanager.grey,
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      up=up+20000;
+                    });
+                  },
+                  child: Container(
+                    height: 20,
+                    width: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colormanager.grey,
+                    ),
+                    child: Center(
+                        child: Text(
+                      "20000",
+                      style: getSemiBoldStyle(
+                          color: Colormanager.black, fontSize: 12),
+                    )),
                   ),
-                  child: Center(
-                      child: Text(
-                    "20000",
-                    style: getSemiBoldStyle(
-                        color: Colormanager.black, fontSize: 12),
-                  )),
                 ),
               ],
             ),
@@ -172,7 +200,10 @@ class _BidDiologueState extends State<BidDiologue> {
               child: SizedBox(
                 width: 130,
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: ()async {
+                      // await placeBid(context);
+
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colormanager.black,
                       shape: RoundedRectangleBorder(

@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:otodeals/core/controllers.dart';
+import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/util/animatedsnackbar.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:otodeals/data/providers/vehicledetails.dart';
+
 import 'package:provider/provider.dart';
 
 Future<bool> placeBid(BuildContext context) async {
@@ -15,12 +17,16 @@ Future<bool> placeBid(BuildContext context) async {
 
   final apiToken = Hive.box("token").get('api_token');
   final bidAmount = ProductController.bidController.text;
-  if (apiToken == null) return false;
+  if (apiToken == null){
+    showAnimatedSnackBar(context,"Please Login to Place Your Bid");
+    Navigator.pushNamed(context,Routes.loginScreen);
+  };
 
   try {
     final url =
-        '${ApiEndpoint.placeBid}?product_id=${vres.vehdet?.vehicle?.id.toString()}&bid_amount=$bidAmount';
+        '${ApiEndpoint.placeBid}?product_id=${vres.vehdet?.vehicle?.id  .toString()}&bid_amount=$bidAmount';
     print(url);
+    print(vres.vehdet?.vehicle?.id.toString());
     var response = await http.post(Uri.parse(url),
         headers: {"device-id": 'abc', "api-token": apiToken});
     if (response.statusCode == 200) {

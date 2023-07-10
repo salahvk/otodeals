@@ -164,7 +164,7 @@ class BidFunction extends StatelessWidget {
                                 height: 10,
                               ),
                               Text(
-                                  "RS. ${res.vlist?.products?.data![index].price.toString() ?? ""}",
+                                  "RS. ${res.vlist?.products?.data![index].minimumbitamount.toString() ?? ""}",
                                   style: getBoldStyle(
                                       color: Colors.black, fontSize: 15))
                             ],

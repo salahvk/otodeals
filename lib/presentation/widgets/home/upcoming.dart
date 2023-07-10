@@ -30,7 +30,7 @@ class _UpcomingState extends State<Upcoming> {
 
   @override
   Widget build(BuildContext context) {
-    final homeres = Provider.of<DataProvider>(context, listen: true);
+    final homeres = Provider.of<DataProvider>(context, listen:false);
     void inputbidnow(index) async {
       final homeres = Provider.of<DataProvider>(context, listen: false);
       int? id = homeres.homemodel?.bidVehicles![index].id;

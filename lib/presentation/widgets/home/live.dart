@@ -32,14 +32,13 @@ class _LiveState extends State<Live> {
 
   @override
   Widget build(BuildContext context) {
-    final homeres = Provider.of<DataProvider>(context, listen: true);
+    final homeres = Provider.of<DataProvider>(context, listen: false);
     void inputcurrentlyrunnigbid(index) async {
-      final homeres = Provider.of<DataProvider>(context, listen: false);
+      final homeres = Provider.of<DataProvider>(context, listen:false);
       int? id = homeres.homemodel?.currentlyRunning![index].id;
       homeres.id = id;
       await getvehicledetails(context, id!);
-
-      Navigator.of(context).push(FadePageRoute(page: Porductdetails()));
+      Navigator.pushNamed(context,Routes.productdetailscreen);
     }
 
     final size = MediaQuery.of(context).size;

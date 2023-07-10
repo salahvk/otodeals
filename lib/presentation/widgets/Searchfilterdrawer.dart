@@ -3,8 +3,11 @@ import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/styles_manager.dart';
+import 'package:otodeals/data/providers/dataprovider.dart';
+import 'package:otodeals/data/repositories/vehiclebrandswebservice.dart';
 
 import 'package:otodeals/data/repositories/vehiclelisting.dart';
+import 'package:provider/provider.dart';
 
 class FilterDrawer extends StatefulWidget {
   const FilterDrawer({
@@ -17,6 +20,7 @@ class FilterDrawer extends StatefulWidget {
 
 class _FilterDrawerState extends State<FilterDrawer> {
   List<int> selectedYears = [];
+  List<String>selectedBrands=[];
   bool _isChecked1 = false;
   bool _isChecked2 = false;
   bool _isChecked3 = false;
@@ -25,11 +29,13 @@ class _FilterDrawerState extends State<FilterDrawer> {
   bool _ismanual = false;
 
   bool isModalYearVisible = false;
+  bool isBrandsVisible=false;
   bool isFuelTypeVisible = false;
   bool isTransmissionVisible = false;
   String? selectedFuelTypes;
   String? selectedTransmission;
   String? ModelYears;
+  String? Brands;
 
   
   final Modelyear = Searchcontroller.yearrange1controller.text;
@@ -40,6 +46,10 @@ void updateselectedYears(){
   ModelYears=selectedYears.join(',');
 
 }
+void updateselectedBrands(){
+  Brands=selectedBrands.join(',');
+
+}
   
   void updateSelectedTransmission() {
   List<String> transmisson = [];
@@ -48,6 +58,7 @@ void updateselectedYears(){
 
   selectedTransmission = transmisson.join(',');
 }
+ Map<String, String> brandIdMap = {}; 
 
 
   void updateSelectedFuelTypes() {
@@ -63,6 +74,9 @@ void updateselectedYears(){
   @override
   void initState() {
     super.initState();
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await getvehiclebrands(context);
+    
     _isChecked1 = Searchcontroller.fueltypecontroller.text.contains('diesel');
     _isChecked2 = Searchcontroller.fueltypecontroller.text.contains('petrol');
     _isChecked3 = Searchcontroller.fueltypecontroller.text.contains('hybrid');
@@ -70,11 +84,12 @@ void updateselectedYears(){
     _isautomatic =
         Searchcontroller.gearshiftcontroller.text.contains('automatic');
     _ismanual = Searchcontroller.gearshiftcontroller.text.contains('manual');
-    // selectedYear = DateTime.now().year;
+   }); // selectedYear = DateTime.now().year;
   }
 
   @override
   Widget build(BuildContext context) {
+      final brandsprovider = Provider.of<DataProvider>(context, listen: false);
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Container(
@@ -303,6 +318,74 @@ void updateselectedYears(){
                   ),
 
                   const SizedBox(height: 10),
+                   Padding(
+                    padding:
+                        const EdgeInsets.only(left: 18.0, top: 10, right: 20),
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          isBrandsVisible = !isBrandsVisible;
+                        });
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Brands",
+                            style: getSemiBoldStyle(
+                                color: Colors.black, fontSize: 16),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios_outlined,
+                            size: 15,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible:isBrandsVisible,
+                    child: SizedBox(
+                      height: 300,
+                      child: ListView.builder(
+                        itemCount: brandsprovider.vbrands?.brands?.length,
+                        itemBuilder: (context, index) {
+                          List? brands= brandsprovider.vbrands?.brands;
+                           String? brandId =brandsprovider.vbrands?.brands![index].id.toString() ?? "";
+                           String? brandname=brandsprovider.vbrands?.brands![index].name?? "";
+                      
+                          return CheckboxListTile(
+                            title: Padding(
+                              padding: EdgeInsets.only(
+                                  left: 8.0), // Adjust as needed
+                              child: Text(
+                             brandname,
+                                style: TextStyle(
+                                    fontSize: 16.0), // Adjust as needed
+                              ),
+                            ),
+                            dense: true,
+                            value:selectedBrands.contains(brandId),
+                            onChanged: (value) {
+
+                              setState(() {
+                                if (value ?? false) {
+                                  selectedBrands.add(brandId);
+                                } else {
+                                  selectedBrands.remove(brandId);
+                                }
+                              });
+                              updateselectedBrands();
+                              Searchcontroller.vehiclebrandcontroller.text='&filter_brand=$Brands';
+
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  
+                  const SizedBox(height: 10),
                   Padding(
                     padding:
                         const EdgeInsets.only(left: 18.0, top: 10, right: 20),
@@ -472,6 +555,7 @@ void updateselectedYears(){
                         fetchSearchResults(context);
                         Navigator.pop(context);
                         print(Searchcontroller.fueltypecontroller.text);
+                        print(Searchcontroller.vehiclebrandcontroller.text);
 
 
                         // SearchFilters selectedFilters = SearchFilters(
@@ -505,6 +589,7 @@ void updateselectedYears(){
                       Searchcontroller.maxpricecontroller.clear();
                       Searchcontroller.minpricecontroller.clear();
                       Searchcontroller.yearrange1controller.clear();
+                      Searchcontroller.vehiclebrandcontroller.clear();
                   
 
                       Navigator.pop(context);
