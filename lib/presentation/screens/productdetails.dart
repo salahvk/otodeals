@@ -95,7 +95,7 @@ class _PorductdetailsState extends State<Porductdetails> {
       body: SafeArea(
         child: SingleChildScrollView(
             child: Padding(
-                padding: const EdgeInsets.only(top: 35, left: 20, right:18),
+                padding: const EdgeInsets.only(top: 35, left: 20, right: 18),
                 child: Column(children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1611,7 +1611,7 @@ class _PorductdetailsState extends State<Porductdetails> {
                   )
                 ]))),
       ),
-      bottomNavigationBar: BottomNavigationWidget(),
+      bottomNavigationBar: BottomNavigationWidget(isInsidePage: true),
     );
   }
 }

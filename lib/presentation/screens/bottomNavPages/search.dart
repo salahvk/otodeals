@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/styles_manager.dart';
-import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/providers/vehicleprovider.dart';
 import 'package:otodeals/data/repositories/vehiclelisting.dart';
 
@@ -17,14 +16,16 @@ class Searchs extends StatefulWidget {
   bool isBuySelected;
   int selectedContainer;
   bool isRowVisible;
+  bool isnavigatethroughhome;
   // bool isnavigatethroughhome;
 
-  Searchs({
-    Key? key,
-    this.isBuySelected = false,
-    this.selectedContainer = 1,
-    this.isRowVisible = true,
-  }) : super(key: key);
+  Searchs(
+      {Key? key,
+      this.isBuySelected = false,
+      this.selectedContainer = 1,
+      this.isRowVisible = true,
+      this.isnavigatethroughhome = false})
+      : super(key: key);
 
   @override
   State<Searchs> createState() => _SearchsState();
@@ -32,8 +33,8 @@ class Searchs extends StatefulWidget {
 
 class _SearchsState extends State<Searchs> {
   bool isBuySelected = false;
-  bool isnavigatethroughhome = false;
-  int selectedContainer =1;
+
+  int selectedContainer = 1;
   bool isRowVisible = true;
   String s = "abc";
   // List<dynamic>allresults=[];
@@ -162,7 +163,7 @@ class _SearchsState extends State<Searchs> {
                 child: Row(
                   children: [
                     Text(
-                      res.vlist?.products?.data?.length.toString()??"",
+                      res.vlist?.products?.data?.length.toString() ?? "",
                       style: getSemiBoldStyle(
                         color: Colormanager.primary,
                         fontSize: 17,
@@ -228,11 +229,10 @@ class _SearchsState extends State<Searchs> {
                                 child: Text(
                                   'BUY',
                                   style: getMediumtStyle(
-                                    color: isBuySelected
-                                        ? Colors.black
-                                        : Colors.white,
-                                        fontSize: 15
-                                  ),
+                                      color: isBuySelected
+                                          ? Colors.black
+                                          : Colors.white,
+                                      fontSize: 15),
                                 ),
                               ),
                             ),
@@ -254,11 +254,10 @@ class _SearchsState extends State<Searchs> {
                                 child: Text(
                                   'BID',
                                   style: getMediumtStyle(
-                                    color: isBuySelected
-                                        ? Colors.white
-                                        : Colors.black,
-                                        fontSize: 15
-                                  ),
+                                      color: isBuySelected
+                                          ? Colors.white
+                                          : Colors.black,
+                                      fontSize: 15),
                                 ),
                               ),
                             ),
@@ -389,8 +388,11 @@ class _SearchsState extends State<Searchs> {
           ),
         ),
       ),
-      bottomNavigationBar:
-          isnavigatethroughhome ? BottomNavigationWidget() : null,
+      bottomNavigationBar: widget.isnavigatethroughhome
+          ? BottomNavigationWidget(
+              isInsidePage: true,
+            )
+          : null,
     );
   }
 }

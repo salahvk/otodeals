@@ -2,21 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 
-
 ValueNotifier<int> currentIndexNotifier = ValueNotifier<int>(0);
 
 class BottomNavigationWidget extends StatefulWidget {
-  
-  const BottomNavigationWidget({Key? key}) : super(key: key);
+  bool isInsidePage;
+  BottomNavigationWidget({Key? key, this.isInsidePage = false})
+      : super(key: key);
 
   @override
   State<BottomNavigationWidget> createState() => _BottomNavigationWidgetState();
 }
 
 class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
-  int _currentIndex=0;
-  
- 
+  final int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -39,9 +38,10 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
             elevation: 0,
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colormanager.background,
-            currentIndex:currentIndexNotifier.value,
+            currentIndex: currentIndexNotifier.value,
             onTap: (index) {
-               currentIndexNotifier.value = index;
+              widget.isInsidePage ? Navigator.pop(context) : null;
+              currentIndexNotifier.value = index;
             },
             selectedItemColor: Colormanager.primary,
             unselectedItemColor: Colors.grey,
@@ -55,15 +55,13 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.search), label: 'Search'),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_cart), label: 'Cart'),
+                  icon: Icon(Icons.car_repair), label: 'Sale'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.person_4_outlined), label: 'Profile'),
               BottomNavigationBarItem(icon: Icon(Icons.menu), label: 'More')
             ],
           ),
-          
         );
-        
       },
     );
   }

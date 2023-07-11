@@ -321,7 +321,7 @@ class _EditprofileState extends State<Editprofile> {
           ],
         ),
       )),
-      bottomNavigationBar: const BottomNavigationWidget(),
+      bottomNavigationBar: BottomNavigationWidget(isInsidePage: true),
     );
   }
 }

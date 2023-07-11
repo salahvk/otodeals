@@ -28,10 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-      final homeres = Provider.of<DataProvider>(context, listen: false);
-      gethome(context);
-
-    
+    final homeres = Provider.of<DataProvider>(context, listen: false);
+    gethome(context);
   }
 
   void toggleSelection(bool isBuy) async {
@@ -373,6 +371,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               isBuySelected: true,
                                               selectedContainer: 1,
                                               isRowVisible: false,
+                                              isnavigatethroughhome: true,
                                             ))))
                                 : selectedContainer == 1
                                     ? Navigator.push(
@@ -382,6 +381,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   isBuySelected: false,
                                                   selectedContainer: 1,
                                                   isRowVisible: true,
+                                                  isnavigatethroughhome: true,
                                                 ))))
                                     : Navigator.push(
                                         context,
@@ -390,6 +390,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   isBuySelected: false,
                                                   selectedContainer: 2,
                                                   isRowVisible: true,
+                                                  isnavigatethroughhome: true,
                                                 ))));
                           },
                           child: Text("View More"))),
