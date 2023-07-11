@@ -7,7 +7,6 @@ import 'package:otodeals/core/util/bid_diologue.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/repositories/vehicledetails.dart';
-import 'package:otodeals/presentation/screens/productdetails.dart';
 import 'package:otodeals/presentation/widgets/Timers/homelivetimer.dart';
 import 'package:otodeals/presentation/widgets/home/redContainer.dart';
 
@@ -38,6 +37,7 @@ class _LiveState extends State<Live> {
       int? id = homeres.homemodel?.currentlyRunning![index].id;
       homeres.id = id;
       await getvehicledetails(context, id!);
+      print("errorrrr");
       Navigator.pushNamed(context,Routes.productdetailscreen);
     }
 
@@ -55,7 +55,7 @@ class _LiveState extends State<Live> {
             child: InkWell(
               onTap: () {
                 inputcurrentlyrunnigbid(index);
-                // inputlatestarrivals(index);
+               
               },
               child: Container(
                 // height: size.height / 3.7,

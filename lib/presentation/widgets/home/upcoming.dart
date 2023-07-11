@@ -20,13 +20,7 @@ class Upcoming extends StatefulWidget {
 }
 
 class _UpcomingState extends State<Upcoming> {
-  void inputbidnow(index) async {
-    final homeres = Provider.of<DataProvider>(context, listen: false);
-    int? id = homeres.homemodel?.bidVehicles![index].id;
-    homeres.id = id;
-    await getvehicledetails(context, id!);
-    Navigator.of(context).push(FadePageRoute(page: Porductdetails()));
-  }
+
 
   @override
   Widget build(BuildContext context) {

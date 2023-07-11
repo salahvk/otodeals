@@ -23,6 +23,7 @@ class _BuyState extends State<Buy> {
     int? id = homeres.homemodel?.saleVehicles![index].id;
     homeres.id = id;
     await getvehicledetails(context, id!);
+    print("aaaaa");
 
     Navigator.of(context).push(FadePageRoute(page: Porductdetails()));
   }
