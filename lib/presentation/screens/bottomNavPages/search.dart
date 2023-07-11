@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/styles_manager.dart';
+import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/providers/vehicleprovider.dart';
 import 'package:otodeals/data/repositories/vehiclelisting.dart';
 
@@ -22,7 +23,7 @@ class Searchs extends StatefulWidget {
     Key? key,
     this.isBuySelected = false,
     this.selectedContainer = 1,
-    this.isRowVisible = false,
+    this.isRowVisible = true,
   }) : super(key: key);
 
   @override
@@ -32,7 +33,7 @@ class Searchs extends StatefulWidget {
 class _SearchsState extends State<Searchs> {
   bool isBuySelected = false;
   bool isnavigatethroughhome = false;
-  int selectedContainer = 1;
+  int selectedContainer =1;
   bool isRowVisible = true;
   String s = "abc";
   // List<dynamic>allresults=[];
@@ -66,7 +67,7 @@ class _SearchsState extends State<Searchs> {
     // final searchres = Provider.of<DataProvider>(context, listen: false);
     final res = Provider.of<Vehicleprovider>(context, listen: true);
     final tags = res.vlist?.tags;
-
+// print(res.vlist?.products?.data?.length.toString()??"");
     final size = MediaQuery.of(context).size;
     return Scaffold(
       endDrawer: SingleChildScrollView(
@@ -161,7 +162,7 @@ class _SearchsState extends State<Searchs> {
                 child: Row(
                   children: [
                     Text(
-                      "23",
+                      res.vlist?.products?.data?.length.toString()??"",
                       style: getSemiBoldStyle(
                         color: Colormanager.primary,
                         fontSize: 17,
@@ -226,10 +227,11 @@ class _SearchsState extends State<Searchs> {
                                 alignment: Alignment.center,
                                 child: Text(
                                   'BUY',
-                                  style: TextStyle(
+                                  style: getMediumtStyle(
                                     color: isBuySelected
                                         ? Colors.black
                                         : Colors.white,
+                                        fontSize: 15
                                   ),
                                 ),
                               ),
@@ -251,10 +253,11 @@ class _SearchsState extends State<Searchs> {
                                 alignment: Alignment.center,
                                 child: Text(
                                   'BID',
-                                  style: TextStyle(
+                                  style: getMediumtStyle(
                                     color: isBuySelected
                                         ? Colors.white
                                         : Colors.black,
+                                        fontSize: 15
                                   ),
                                 ),
                               ),

@@ -63,6 +63,7 @@ class LandingScreen extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       gethome(context);
+                      
                     Navigator.push(context,MaterialPageRoute(builder:(context)=>MainScreen()));
                     },
                     style: ElevatedButton.styleFrom(
@@ -100,10 +101,10 @@ class LandingScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
                       'LOG IN',
-                      style: TextStyle(
+                      style: getBoldStyle(
                         color: Colormanager.white,
                         fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                       
                       ),
                     ),
                   ),

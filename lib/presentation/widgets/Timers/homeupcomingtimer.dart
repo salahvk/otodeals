@@ -29,7 +29,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
   void initState() {
     final res = Provider.of<DataProvider>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      await gethome(context);
+      // await gethome(context);
        final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
            DateTime startTime = dateFormat.parse(res.homemodel?.bidVehicles![widget.index].starttime??DateTime.now().toString());
       DateTime endTime = dateFormat.parse(res.homemodel?.bidVehicles![widget.index].endtime??DateTime.now().toString());

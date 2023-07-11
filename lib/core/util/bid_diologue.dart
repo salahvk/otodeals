@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/styles_manager.dart';
+import 'package:otodeals/data/repositories/placebid.dart';
 
 
 class BidDiologue extends StatefulWidget {
@@ -11,13 +13,21 @@ class BidDiologue extends StatefulWidget {
 }
 
 class _BidDiologueState extends State<BidDiologue> {
+
   int up = 5000;
+  void initState() {
+  super.initState();
+ ProductController.bidController.text = up.toString();
+}
+
+
 
   void increment() {
     print(up);
     setState(() {
       if (up >= 5000 && up < 50000) {
         up = up + 2000;
+        ProductController.bidController.text=up.toString();
         print(up);
       }
     });
@@ -27,9 +37,11 @@ class _BidDiologueState extends State<BidDiologue> {
     setState(() {
       if (up > 5000) {
         up = up - 2000;
+            ProductController.bidController.text=up.toString();
       }
     });
   }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +52,7 @@ class _BidDiologueState extends State<BidDiologue> {
             onPressed: () {
               setState(() {
                   up=up+2000;
+                  ProductController.bidController.text=up.toString();
               });
             
             },
@@ -64,6 +77,7 @@ class _BidDiologueState extends State<BidDiologue> {
                   onTap: () {
                     setState(() {
                         up=up+5000;
+                            ProductController.bidController.text=up.toString();
                     });
                   
                   },
@@ -86,6 +100,7 @@ class _BidDiologueState extends State<BidDiologue> {
                   onTap: () {
                  setState(() {
                       up=up+10000;
+                          ProductController.bidController.text=up.toString();
                  });
                   },
                   child: Container(
@@ -107,6 +122,7 @@ class _BidDiologueState extends State<BidDiologue> {
                   onTap: () {
                     setState(() {
                       up=up+20000;
+                          ProductController.bidController.text=up.toString();
                     });
                   },
                   child: Container(
@@ -161,11 +177,39 @@ class _BidDiologueState extends State<BidDiologue> {
                           border: Border.all(color: Colormanager.black),
                           borderRadius: BorderRadius.circular(10)),
                       child: Center(
-                          child: Text(
-                        '$up',
-                        style: getBoldStyle(
+                          child: TextField(
+                          controller: ProductController.bidController,
+                          
+                           decoration: InputDecoration(
+                            
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.transparent, // Set border color to transparent
+                              ),
+                              borderRadius: BorderRadius.circular(10), // Set border radius as desired
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.transparent, // Set border color to transparent
+                              ),
+                              borderRadius: BorderRadius.circular(10), // Set border radius as desired
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.transparent, // Set border color to transparent
+                              ),
+                              borderRadius: BorderRadius.circular(10), // Set border radius as desired
+                            ),),
+                                                textAlign: TextAlign.center,
+                                                keyboardType: TextInputType.number,
+                                                
+                          onChanged: (value) {
+                            setState(() {
+                              up = int.parse(value);
+                            });},
+                                                style: getBoldStyle(
                             color: Colormanager.black, fontSize: 14),
-                      )),
+                                              )),
                     ),
                   ),
                   Container(
@@ -201,7 +245,7 @@ class _BidDiologueState extends State<BidDiologue> {
                 width: 130,
                 child: ElevatedButton(
                     onPressed: ()async {
-                      // await placeBid(context);
+                      await placeBid(context);
 
                     },
                     style: ElevatedButton.styleFrom(
@@ -211,7 +255,7 @@ class _BidDiologueState extends State<BidDiologue> {
                       ),
                     ),
                     child: Text(
-                      "place Bid",
+                      "Place Bid",
                       style: getSemiBoldStyle(
                           color: Colormanager.white, fontSize: 16),
                     )),

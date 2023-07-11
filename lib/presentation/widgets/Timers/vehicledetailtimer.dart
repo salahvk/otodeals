@@ -40,7 +40,7 @@ class _VehicledetailTimerScreenState extends State<VehicledetailTimerScreen> {
  final vehres = Provider.of<Vehicledetailsprovider>(context, listen:false);
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      await    getvehicledetails(context,id??0);
+      // await    getvehicledetails(context,id??0);
       final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
 
       DateTime startTime = dateFormat

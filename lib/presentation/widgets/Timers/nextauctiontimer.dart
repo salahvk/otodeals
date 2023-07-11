@@ -33,7 +33,7 @@ class _TimerScreenState extends State<TimerScreen> {
   void initState() {
     final homeres = Provider.of<DataProvider>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      await gethome(context);
+      // await gethome(context);
       final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
 
       DateTime startTime = dateFormat.parse(

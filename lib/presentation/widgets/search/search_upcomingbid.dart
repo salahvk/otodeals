@@ -162,7 +162,7 @@ class UpcomingbidFunction extends StatelessWidget {
                                 height: 10,
                               ),
                               Text(
-                                  "RS. ${res.vlist?.upcomingbid?.data![index].price.toString() ?? ""}",
+                                  "RS. ${res.vlist?.upcomingbid?.data![index].minimumbitamount.toString() ?? ""}",
                                   style: getBoldStyle(
                                       color: Colors.black, fontSize: 15))
                             ],

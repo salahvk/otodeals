@@ -6,8 +6,9 @@ import 'package:otodeals/presentation/screens/bottomNavPages/more_screen.dart';
 import 'package:otodeals/presentation/screens/bottomNavPages/profile.dart';
 
 import 'package:otodeals/presentation/screens/bottomNavPages/search.dart';
+import 'package:otodeals/presentation/screens/productdetails.dart';
 import 'package:otodeals/presentation/widgets/bottom_nav.dart';
-import 'package:otodeals/presentation/widgets/search/search_buy.dart';
+
 
 class MainScreen extends StatelessWidget {
   MainScreen({Key? key}) : super(key: key);
@@ -16,7 +17,8 @@ class MainScreen extends StatelessWidget {
      Searchs(),
     const CartScreen(),
     const Myprofile(),
-    const MoreScreen()
+    const MoreScreen(),
+  
   ];
 
   @override
@@ -26,9 +28,9 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       //
       backgroundColor: Colormanager.background,
-      body: ValueListenableBuilder(
-        valueListenable: indexChangeNotifier,
-        builder: (context, int index, _) {
+      body: ValueListenableBuilder<int>(
+        valueListenable: currentIndexNotifier,
+        builder: (context,index, _) {
           return pages[index];
         },
       ),

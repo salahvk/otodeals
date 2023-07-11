@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
+import 'package:otodeals/core/util/bid_diologue.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
 
 import 'package:otodeals/data/providers/vehicleprovider.dart';
@@ -14,11 +15,24 @@ import 'package:otodeals/presentation/widgets/home/redContainer.dart';
 
 import 'package:provider/provider.dart';
 
-class BidFunction extends StatelessWidget {
+class BidFunction extends StatefulWidget {
   const BidFunction({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<BidFunction> createState() => _BidFunctionState();
+}
+
+class _BidFunctionState extends State<BidFunction> {
+    void _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return BidDiologue();
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     final res = Provider.of<Vehicleprovider>(context, listen: true);
@@ -71,17 +85,20 @@ class BidFunction extends StatelessWidget {
                                   "",
                               style: getMediumtStyle(
                                   color: Colors.black, fontSize: 20)),
-                          Container(
-                            width: 60,
-                            height: 20,
-                            decoration: BoxDecoration(
-                                color: Colormanager.primary,
-                                borderRadius: BorderRadius.circular(15)),
-                            child: Center(
-                              child: Text(
-                                "Bid Now",
-                                style: getMediumtStyle(
-                                    color: Colormanager.white, fontSize: 9),
+                          InkWell(
+                            onTap: () =>_showDialog(context),
+                            child: Container(
+                              width: 60,
+                              height: 20,
+                              decoration: BoxDecoration(
+                                  color: Colormanager.primary,
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: Center(
+                                child: Text(
+                                  "Bid Now",
+                                  style: getMediumtStyle(
+                                      color: Colormanager.white, fontSize: 9),
+                                ),
                               ),
                             ),
                           )

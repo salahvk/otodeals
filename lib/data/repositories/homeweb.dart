@@ -12,6 +12,7 @@ Future gethome(BuildContext context) async {
   String s = 'abc';
   Home? homedata;
   try {
+    print("______________________________________________");
     print(url);
     final homeprovider = Provider.of<DataProvider>(context, listen: false);
 

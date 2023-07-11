@@ -2,15 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 
-ValueNotifier<int> indexChangeNotifier = ValueNotifier(0);
 
-class BottomNavigationWidget extends StatelessWidget {
+ValueNotifier<int> currentIndexNotifier = ValueNotifier<int>(0);
+
+class BottomNavigationWidget extends StatefulWidget {
+  
   const BottomNavigationWidget({Key? key}) : super(key: key);
 
   @override
+  State<BottomNavigationWidget> createState() => _BottomNavigationWidgetState();
+}
+
+class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
+  int _currentIndex=0;
+  
+ 
+  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: indexChangeNotifier,
+      valueListenable: currentIndexNotifier,
       builder: (BuildContext context, int newIndex, _) {
         return Container(
           decoration: BoxDecoration(
@@ -29,9 +39,9 @@ class BottomNavigationWidget extends StatelessWidget {
             elevation: 0,
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colormanager.background,
-            currentIndex: newIndex,
+            currentIndex:currentIndexNotifier.value,
             onTap: (index) {
-              indexChangeNotifier.value = index;
+               currentIndexNotifier.value = index;
             },
             selectedItemColor: Colormanager.primary,
             unselectedItemColor: Colors.grey,
@@ -51,7 +61,9 @@ class BottomNavigationWidget extends StatelessWidget {
               BottomNavigationBarItem(icon: Icon(Icons.menu), label: 'More')
             ],
           ),
+          
         );
+        
       },
     );
   }

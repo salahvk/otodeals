@@ -60,10 +60,10 @@ class _MyprofileState extends State<Myprofile> {
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
                       'LOG IN',
-                      style: TextStyle(
+                      style: getBoldStyle(
                         color: Colormanager.white,
                         fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                      
                       ),
                     ),
                   ),

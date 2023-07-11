@@ -3,6 +3,8 @@ import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
+import 'package:otodeals/data/repositories/homeweb.dart';
+
 import 'package:otodeals/presentation/screens/bottomNavPages/search.dart';
 import 'package:otodeals/presentation/widgets/custom_drawer.dart';
 import 'package:otodeals/presentation/widgets/home/buy.dart';
@@ -26,6 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+      final homeres = Provider.of<DataProvider>(context, listen: false);
+      gethome(context);
+
+    
   }
 
   void toggleSelection(bool isBuy) async {
