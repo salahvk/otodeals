@@ -393,7 +393,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   isnavigatethroughhome: true,
                                                 ))));
                           },
-                          child: Text("View More"))),
+                          child: Text("View More",style: getSemiBoldStyle(color:Colormanager.white,fontSize:15),))),
                 )
               ],
             ),

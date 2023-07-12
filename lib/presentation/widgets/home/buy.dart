@@ -7,6 +7,7 @@ import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/repositories/vehicledetails.dart';
 import 'package:otodeals/presentation/screens/productdetails.dart';
+import 'package:otodeals/presentation/widgets/buypopup.dart';
 import 'package:otodeals/presentation/widgets/home/redContainer.dart';
 import 'package:provider/provider.dart';
 
@@ -27,6 +28,15 @@ class _BuyState extends State<Buy> {
 
     Navigator.of(context).push(FadePageRoute(page: Porductdetails()));
   }
+   void _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return  PopupWindow();
+      },
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -181,7 +191,9 @@ class _BuyState extends State<Buy> {
                                 style: getBoldStyle(
                                     color: Colors.black, fontSize: 15)),
                             InkWell(
-                              onTap: () {},
+                              onTap: ()=>_showDialog(context),
+                               
+                              
                               child: Container(
                                 // width: 70,
                                 // height: 17,

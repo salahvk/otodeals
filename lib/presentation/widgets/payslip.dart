@@ -63,11 +63,12 @@ class _UploadPaySlipScreenState extends State<UploadPaySlipScreen> {
               child: Row(
                 children: [
                    ElevatedButton(
+                    
               onPressed: _openFileExplorer,
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colormanager.grey)
+                backgroundColor: MaterialStateProperty.all<Color>(Colormanager.primary)
               ),
-              child: Text('Browse...',style: getMediumtStyle(color:Colormanager.black,fontSize:12),),
+              child: Text('Browse...',style: getMediumtStyle(color:Colormanager.white,fontSize:12),),
                       ),
               SizedBox(width: 8),
                   Expanded(

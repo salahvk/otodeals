@@ -83,15 +83,15 @@ class _MyprofileState extends State<Myprofile> {
                         padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                         child: Row(
                           children: [
-                            InkWell(
-                                // onTap: () {
-                                //   Navigator.pop(context);
-                                // },
-                                child: Icon(
-                              Icons.arrow_back_ios,
-                              color: Colormanager.primary,
-                              size: 20,
-                            )),
+                            // InkWell(
+                            //     // onTap: () {
+                            //     //   Navigator.pop(context);
+                            //     // },
+                            //     child: Icon(
+                            //   Icons.arrow_back_ios,
+                            //   color: Colormanager.primary,
+                            //   size: 20,
+                            // )),
                             SizedBox(
                               width: 22,
                             ),
@@ -107,6 +107,7 @@ class _MyprofileState extends State<Myprofile> {
                       ),
                     ),
                   ),
+                  SizedBox(height:10,),
                   Padding(
                     padding: const EdgeInsets.only(left: 8, right: 8),
                     child: Container(
