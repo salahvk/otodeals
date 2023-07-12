@@ -44,7 +44,7 @@ class Searchcontroller {
   static TextEditingController minpricecontroller = TextEditingController();
   static TextEditingController maxpricecontroller = TextEditingController();
   static TextEditingController yearrange1controller = TextEditingController();
-
+  static TextEditingController tagcontroller=TextEditingController();
   static TextEditingController searchdatacontroller = TextEditingController();
 }
 
@@ -63,6 +63,7 @@ class ProductController {
   static TextEditingController addressController = TextEditingController();
   static TextEditingController cityController = TextEditingController();
   static TextEditingController locationController = TextEditingController();
+  static TextEditingController pidcontroller=TextEditingController();
 }
 
 class PaystoreController{
@@ -70,3 +71,4 @@ class PaystoreController{
   static TextEditingController paymentamount=TextEditingController();
   static TextEditingController path=TextEditingController();
 }
+

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:otodeals/core/util/animatedsnackbar.dart';
 import 'package:otodeals/data/api/api_endpoint.dart';
 import 'package:otodeals/data/models/vehicledetails.dart';
 import 'package:otodeals/data/providers/vehicledetails.dart';

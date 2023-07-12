@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/data/providers/dataprovider.dart';
 import 'package:otodeals/data/repositories/homeweb.dart';
+import 'package:otodeals/data/repositories/vehiclelisting.dart';
 
 import 'package:otodeals/presentation/screens/bottomNavPages/search.dart';
 import 'package:otodeals/presentation/widgets/custom_drawer.dart';
@@ -324,18 +326,55 @@ class _HomeScreenState extends State<HomeScreen> {
                           return Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 5),
-                            child: Container(
-                              height: 20,
-                              width: 105,
-                              decoration: BoxDecoration(
-                                color: Colormanager.grey,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  homeres.homemodel?.tags?[index].name ?? '',
-                                  style: getMediumtStyle(
-                                      color: Colormanager.black, fontSize: 10),
+                            child: InkWell(
+                              onTap: () {
+                                int? id=homeres.homemodel?.tags![index].id??0;
+                                 Searchcontroller.tagcontroller.text='&filter_tag=$id';
+                                 fetchSearchResults(context);
+                                  isBuySelected
+                                ? Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: ((context) => Searchs(
+                                              isBuySelected: true,
+                                              selectedContainer: 1,
+                                              isRowVisible: false,
+                                              isnavigatethroughhome: true,
+                                            ))))
+                                : selectedContainer == 1
+                                    ? Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: ((context) => Searchs(
+                                                  isBuySelected: false,
+                                                  selectedContainer: 1,
+                                                  isRowVisible: true,
+                                                  isnavigatethroughhome: true,
+                                                ))))
+                                    : Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: ((context) => Searchs(
+                                                  isBuySelected: false,
+                                                  selectedContainer: 2,
+                                                  isRowVisible: true,
+                                                  isnavigatethroughhome: true,
+                                                ))));
+
+                              },
+                              child: Container(
+                                height: 20,
+                                width: 105,
+                                decoration: BoxDecoration(
+                                  color: Colormanager.grey,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    homeres.homemodel?.tags?[index].name ?? '',
+                                    style: getMediumtStyle(
+                                        color: Colormanager.black, fontSize: 10),
+                                  ),
                                 ),
                               ),
                             ),

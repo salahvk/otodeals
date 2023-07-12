@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/asset_manager.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -35,44 +36,51 @@ class CustomDrawer extends StatelessWidget {
             const SizedBox(
               height: 25,
             ),
-            Row(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  width: 30,
-                ),
-                Image.asset(
-                  AssetImages.homeIcon,
-                  width: 20,
-                  color: Colors.black,
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  "Home",
-                  style: getMediumtStyle(color: Colors.black, fontSize: 14),
-                ),
-              ],
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context,Routes.mainScreen);
+              },
+              child: Row(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    width: 30,
+                  ),
+                  Image.asset(
+                    AssetImages.homeIcon,
+                    width: 20,
+                    color: Colors.black,
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    "Home",
+                    style: getMediumtStyle(color: Colors.black, fontSize: 14),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(
               height: 25,
             ),
-            Row(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  width: 30,
-                ),
-                Image.asset(AssetImages.sellCarIcon, width: 20),
-                const SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  "Sell Your Car",
-                  style: getMediumtStyle(color: Colors.black, fontSize: 14),
-                ),
-              ],
+            InkWell(
+              child: Row(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    width: 30,
+                  ),
+                  Image.asset(AssetImages.sellCarIcon, width: 20),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    "Sell Your Car",
+                    style: getMediumtStyle(color: Colors.black, fontSize: 14),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(
               height: 25,

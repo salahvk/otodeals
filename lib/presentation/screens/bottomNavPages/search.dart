@@ -68,7 +68,7 @@ class _SearchsState extends State<Searchs> {
     // final searchres = Provider.of<DataProvider>(context, listen: false);
     final res = Provider.of<Vehicleprovider>(context, listen: true);
     final tags = res.vlist?.tags;
-// print(res.vlist?.products?.data?.length.toString()??"");
+    // print(res.vlist?.products?.data?.length.toString()??"");
     final size = MediaQuery.of(context).size;
     return Scaffold(
       endDrawer: SingleChildScrollView(
@@ -162,8 +162,9 @@ class _SearchsState extends State<Searchs> {
                 padding: const EdgeInsets.only(left: 30),
                 child: Row(
                   children: [
-                    Text(
-                      res.vlist?.products?.data?.length.toString() ?? "",
+                    
+                    Text(isBuySelected?
+                      res.vlist?.products?.data?.length.toString() ?? "":selectedContainer==1?res.vlist?.products?.data?.length.toString()??"":res.vlist?.upcomingbid?.data?.length.toString()??"",
                       style: getSemiBoldStyle(
                         color: Colormanager.primary,
                         fontSize: 17,
@@ -358,18 +359,26 @@ class _SearchsState extends State<Searchs> {
                   return Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    child: Container(
-                      height: 20,
-                      width: 105,
-                      decoration: BoxDecoration(
-                        color: Colormanager.grey,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Center(
-                        child: Text(
-                          tags?[index].name ?? '',
-                          style: getMediumtStyle(
-                              color: Colormanager.black, fontSize: 10),
+                    child: InkWell(
+                      onTap: () {
+                      int id=res.vlist?.tags![index].id??0;
+                      Searchcontroller.tagcontroller.text='&filter_tag=$id';
+                      fetchSearchResults(context);
+
+                      },
+                      child: Container(
+                        height: 20,
+                        width: 105,
+                        decoration: BoxDecoration(
+                          color: Colormanager.grey,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Center(
+                          child: Text(
+                            tags?[index].name ?? '',
+                            style: getMediumtStyle(
+                                color: Colormanager.black, fontSize: 10),
+                          ),
                         ),
                       ),
                     ),

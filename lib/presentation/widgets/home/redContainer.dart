@@ -3,10 +3,18 @@ import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 
 class RedContainer extends StatelessWidget {
-  const RedContainer({super.key, required this.text});
+ RedContainer({super.key, required this.text,this.israting=false});
   final String text;
+  bool israting;
   @override
   Widget build(BuildContext context) {
+    String capitalizeFirstLetter(String text) {
+  if (text.isEmpty) {
+    return text;
+  }
+  return text[0].toUpperCase() + text.substring(1);
+}
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       child: Container(
@@ -16,12 +24,17 @@ class RedContainer extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           child: IntrinsicWidth(
-            child: Center(
-                child: Text(
-              text,
-              style:
-                  getMediumtStyle(color: Colormanager.buttonText, fontSize: 10),
-            )),
+            child: Row(
+              children: [
+                Center(
+                    child: Text(
+                 capitalizeFirstLetter( text),
+                  style:
+                      getMediumtStyle(color: Colormanager.buttonText, fontSize: 11),
+                ),),
+                israting?Icon(Icons.star,color: Colormanager.primary,size: 10,):Container()
+              ],
+            ),
           ),
         ),
       ),

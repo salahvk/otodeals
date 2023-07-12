@@ -149,22 +149,22 @@ class _BuyState extends State<Buy> {
                               ? Container()
                               : RedContainer(
                                   text:
-                                      "Inte Rate : ${vehicleDetails?.interiorRating.toString()}"),
+                                      "Interior Rating : ${vehicleDetails?.interiorRating.toString()}",israting: true,),
                           vehicleDetails?.exteriorRating == 0
                               ? Container()
                               : RedContainer(
                                   text:
-                                      "Exter Rate : ${vehicleDetails?.exteriorRating.toString()}"),
+                                      "Exterior Rating : ${vehicleDetails?.exteriorRating.toString()}",israting: true,),
                           vehicleDetails?.engineRating == 0
                               ? Container()
                               : RedContainer(
                                   text:
-                                      "Eng Rate : ${vehicleDetails?.interiorRating.toString()}"),
+                                      "Engine Rating : ${vehicleDetails?.interiorRating.toString()}",israting: true,),
                           vehicleDetails?.damageRating == 0
                               ? Container()
                               : RedContainer(
                                   text:
-                                      "Dmg Rate : ${vehicleDetails?.exteriorRating.toString()}"),
+                                      "Damage Rating : ${vehicleDetails?.exteriorRating.toString()}",israting: true,),
                         ],
                       ),
                       Padding(

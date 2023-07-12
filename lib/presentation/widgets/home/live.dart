@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
+import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/routes_manager.dart';
 import 'package:otodeals/core/styles_manager.dart';
 import 'package:otodeals/core/util/bid_diologue.dart';
@@ -32,9 +33,11 @@ class _LiveState extends State<Live> {
   @override
   Widget build(BuildContext context) {
     final homeres = Provider.of<DataProvider>(context, listen: false);
+    
     void inputcurrentlyrunnigbid(index) async {
       final homeres = Provider.of<DataProvider>(context, listen:false);
       int? id = homeres.homemodel?.currentlyRunning![index].id;
+      
       homeres.id = id;
       await getvehicledetails(context, id!);
       print("errorrrr");
@@ -86,7 +89,10 @@ class _LiveState extends State<Live> {
                               style: getMediumtStyle(
                                   color: Colors.black, fontSize: 20)),
                           InkWell(
-                            onTap: () => _showDialog(context),
+                            onTap: () {
+                              ProductController.pidcontroller.text=homeres.homemodel?.currentlyRunning![index].id.toString()??"";
+                              _showDialog(context);
+                            },
                             child: Container(
                               width: 60,
                               height: 20,
@@ -148,22 +154,22 @@ class _LiveState extends State<Live> {
                               ? Container()
                               : RedContainer(
                                   text:
-                                      "Inte Rate : ${vehicleDetails?.interiorRating.toString()}"),
+                                      "Interior Rating : ${vehicleDetails?.interiorRating.toString()}",israting: true,),
                           vehicleDetails?.exteriorRating == 0
                               ? Container()
                               : RedContainer(
                                   text:
-                                      "Exter Rate : ${vehicleDetails?.exteriorRating.toString()}"),
+                                      "Exterior Rating : ${vehicleDetails?.exteriorRating.toString()}",israting:true,),
                           vehicleDetails?.engineRating == 0
                               ? Container()
                               : RedContainer(
                                   text:
-                                      "Eng Rate : ${vehicleDetails?.interiorRating.toString()}"),
+                                      "Engine Rating : ${vehicleDetails?.interiorRating.toString()}",israting: true,),
                           vehicleDetails?.damageRating == 0
                               ? Container()
                               : RedContainer(
                                   text:
-                                      "Dmg Rate : ${vehicleDetails?.exteriorRating.toString()}"),
+                                      "Damage Rating : ${vehicleDetails?.exteriorRating.toString()}",israting: true,),
                         ],
                       ),
                       const SizedBox(

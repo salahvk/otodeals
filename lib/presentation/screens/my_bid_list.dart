@@ -31,11 +31,15 @@ class _SearchScreenState extends State<MyBidList> {
 
   @override
   Widget build(BuildContext context) {
+    
     final size = MediaQuery.of(context).size;
     final bidres = Provider.of<Bidprovider>(context, listen: false);
+    
     void inputbidhistory(index) async {
-      final res = Provider.of<Bidprovider>(context, listen: false);
+      final res = Provider.of<Bidprovider>(context, listen:true);
       int? id = res.bidvar?.bidHistory![index].id;
+      res.id=id;
+      print(res.bidvar?.bidHistory![index].id);
       await getvehicledetails(context, id!);
       Navigator.of(context).push(FadePageRoute(page: Porductdetails()));
     }
@@ -52,7 +56,7 @@ class _SearchScreenState extends State<MyBidList> {
                       color: Colormanager.primary,
                       borderRadius: BorderRadius.circular(25)),
                   width: size.width,
-                  height: 120,
+                  height: 90,
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
@@ -69,28 +73,30 @@ class _SearchScreenState extends State<MyBidList> {
                             Image.asset("assets/menu.png")
                           ],
                         ),
-                        Container(
-                            width: size.width,
-                            height: 35,
-                            decoration: BoxDecoration(
-                                color: Colormanager.white,
-                                borderRadius: BorderRadius.circular(8)),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'Search',
-                                  hintStyle: getSemiBoldStyle(
-                                      color: Colormanager.textColor,
-                                      fontSize: 15),
-                                  prefixIcon: const Icon(
-                                    Icons.search,
-                                    color: Colormanager.textColor,
-                                  ),
-                                  suffixIcon: const Icon(
-                                    Icons.location_on_sharp,
-                                    color: Colormanager.primary,
-                                  )),
-                            ))
+                        // Container(
+                        //     width: size.width,
+                        //     height: 35,
+                        //     decoration: BoxDecoration(
+                        //         color: Colormanager.white,
+                        //         borderRadius: BorderRadius.circular(8)),
+                        //     // child:
+                        //     // TextField(
+                        //     //   decoration: InputDecoration(
+                        //     //       border: InputBorder.none,
+                        //     //       hintText: 'Search',
+                        //     //       hintStyle: getSemiBoldStyle(
+                        //     //           color: Colormanager.textColor,
+                        //     //           fontSize: 15),
+                        //     //       prefixIcon: const Icon(
+                        //     //         Icons.search,
+                        //     //         color: Colormanager.textColor,
+                        //     //       ),
+                        //     //       suffixIcon: const Icon(
+                        //     //         Icons.location_on_sharp,
+                        //     //         color: Colormanager.primary,
+                        //     //       )),
+                        //     // ))
+                        // ),
                       ],
                     ),
                   ),
@@ -107,7 +113,7 @@ class _SearchScreenState extends State<MyBidList> {
                     RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
-                        text: '23',
+                        text: bidres.bidvar?.bidHistory?.length.toString(),
                         style: getSemiBoldStyle(
                             color: Colormanager.primary, fontSize: 16),
                         children: <TextSpan>[
@@ -172,8 +178,7 @@ class _SearchScreenState extends State<MyBidList> {
                       padding: const EdgeInsets.all(10.0),
                       child: InkWell(
                         onTap: () {
-                          // inputbidnow(index);
-                          // inputlatestarrivals(index);
+                     inputbidhistory(index);
                         },
                         child: Container(
                           // height: size.height / 3.6,

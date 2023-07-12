@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/styles_manager.dart';
+
 import 'package:otodeals/data/repositories/placebid.dart';
 
 
+
 class BidDiologue extends StatefulWidget {
-  const BidDiologue({super.key});
+
+   BidDiologue({super.key,});
 
   @override
   State<BidDiologue> createState() => _BidDiologueState();
@@ -37,6 +40,9 @@ class _BidDiologueState extends State<BidDiologue> {
     setState(() {
       if (up > 2000) {
         up = up - 2000;
+        if(up-2000<2000){
+          up=2000;
+        }
         
             ProductController.bidController.text=up.toString();
       }
@@ -46,13 +52,20 @@ class _BidDiologueState extends State<BidDiologue> {
 
   @override
   Widget build(BuildContext context) {
+  //   void homebid(index) async {
+  //     final homeres = Provider.of<DataProvider>(context, listen:false);
+  //     int? id = homeres.homemodel?.currentlyRunning![index].id;
+  //     homeres.id = id;
+  //  placeBid(context);
+  //     print("errorrrr");
+  //   }
     return AlertDialog(
       title: FractionallySizedBox(
         widthFactor: 0.5,
         child: ElevatedButton(
             onPressed: () {
               setState(() {
-                  up=up+2000;
+                  up=2000;
                   ProductController.bidController.text=up.toString();
               });
             
@@ -246,7 +259,8 @@ class _BidDiologueState extends State<BidDiologue> {
                 width: 130,
                 child: ElevatedButton(
                     onPressed: ()async {
-                      await placeBid(context);
+                         placeBid(context);
+                // homebid(index)
 
                     },
                     style: ElevatedButton.styleFrom(

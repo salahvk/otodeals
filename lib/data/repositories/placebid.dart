@@ -14,7 +14,7 @@ import 'package:provider/provider.dart';
 
 Future<bool> placeBid(BuildContext context) async {
   final vres = Provider.of<Vehicledetailsprovider>(context, listen: false);
-
+  String id=ProductController.pidcontroller.text;
   final apiToken = Hive.box("token").get('api_token');
   final bidAmount = ProductController.bidController.text;
   if (apiToken == null){
@@ -24,7 +24,7 @@ Future<bool> placeBid(BuildContext context) async {
 
   try {
     final url =
-        '${ApiEndpoint.placeBid}?product_id=${vres.vehdet?.vehicle?.id  .toString()}&bid_amount=$bidAmount';
+        '${ApiEndpoint.placeBid}?product_id=$id&bid_amount=$bidAmount';
     print(url);
     print(vres.vehdet?.vehicle?.id.toString());
     var response = await http.post(Uri.parse(url),
@@ -33,6 +33,7 @@ Future<bool> placeBid(BuildContext context) async {
       // log(response.body);
       var jsonResponse = jsonDecode(response.body);
       if (jsonResponse['result'] != false) {
+              Navigator.pop(context);
         showAnimatedSnackBar(context, "Bid Placed",
             type: AnimatedSnackBarType.success);
         return true;
