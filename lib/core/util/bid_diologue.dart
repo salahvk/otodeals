@@ -14,7 +14,7 @@ class BidDiologue extends StatefulWidget {
 
 class _BidDiologueState extends State<BidDiologue> {
 
-  int up = 5000;
+  int up = 2000;
   void initState() {
   super.initState();
  ProductController.bidController.text = up.toString();
@@ -25,7 +25,7 @@ class _BidDiologueState extends State<BidDiologue> {
   void increment() {
     print(up);
     setState(() {
-      if (up >= 5000 && up < 50000) {
+      if (up >= 2000 && up < 50000) {
         up = up + 2000;
         ProductController.bidController.text=up.toString();
         print(up);
@@ -35,8 +35,9 @@ class _BidDiologueState extends State<BidDiologue> {
 
   void decrement() {
     setState(() {
-      if (up > 5000) {
+      if (up > 2000) {
         up = up - 2000;
+        
             ProductController.bidController.text=up.toString();
       }
     });
@@ -76,7 +77,7 @@ class _BidDiologueState extends State<BidDiologue> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                        up=up+5000;
+                        up=5000;
                             ProductController.bidController.text=up.toString();
                     });
                   
@@ -99,7 +100,7 @@ class _BidDiologueState extends State<BidDiologue> {
                 InkWell(
                   onTap: () {
                  setState(() {
-                      up=up+10000;
+                      up=10000;
                           ProductController.bidController.text=up.toString();
                  });
                   },
@@ -121,7 +122,7 @@ class _BidDiologueState extends State<BidDiologue> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                      up=up+20000;
+                      up=20000;
                           ProductController.bidController.text=up.toString();
                     });
                   },
