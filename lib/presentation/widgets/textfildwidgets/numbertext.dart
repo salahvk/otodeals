@@ -32,9 +32,11 @@ class _NumberTextFieldState extends State<NumberTextField> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 25,),
+        SizedBox(
+          height: 25,
+        ),
         Container(
-          height:50,
+          height: 50,
           decoration: BoxDecoration(
             border: Border.all(
               color: Colors.grey,
@@ -42,31 +44,31 @@ class _NumberTextFieldState extends State<NumberTextField> {
             ),
             borderRadius: BorderRadius.circular(8.0),
           ),
-          child:TextField(
+          child: TextField(
             decoration: InputDecoration(
-              
               // labelText: widget.labelText,
               hintText: widget.labelText,
-              hintStyle: getMediumtStyle(color: Colormanager.greyText,fontSize: 15),
-              suffixIcon: Container(
-                width: 10,
-                padding: EdgeInsets.zero,
-               
-                child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.keyboard_arrow_up_rounded),
-                      onPressed: increaseNumber,
-                    ),
-                     SizedBox(height:0), 
-                    IconButton(
-                      icon: Icon(Icons.keyboard_arrow_down),
-                      onPressed: decreaseNumber,
-                    ),
-                  ],
-                ),
-              ),
+              hintStyle:
+                  getMediumtStyle(color: Colormanager.greyText, fontSize: 15),
+              // suffixIcon: Container(
+              //   width: 10,
+              //   padding: EdgeInsets.zero,
+
+              //   child: Column(
+              //   mainAxisAlignment: MainAxisAlignment.start,
+              //     children: [
+              //       IconButton(
+              //         icon: Icon(Icons.keyboard_arrow_up_rounded),
+              //         onPressed: increaseNumber,
+              //       ),
+              //        SizedBox(height:0),
+              //       IconButton(
+              //         icon: Icon(Icons.keyboard_arrow_down),
+              //         onPressed: decreaseNumber,
+              //       ),
+              //     ],
+              //   ),
+              // ),
             ),
             keyboardType: TextInputType.number,
             onChanged: (value) {

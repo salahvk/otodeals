@@ -25,4 +25,5 @@ class ApiEndpoint {
   static String bidhistory = "$api/bid-history";
   static String paymentDetails = "$api/payment-details";
   static String paymentdetailsStore = "$api/payment-store";
+  static String sale = "$api/sell-car";
 }

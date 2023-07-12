@@ -44,7 +44,7 @@ class Searchcontroller {
   static TextEditingController minpricecontroller = TextEditingController();
   static TextEditingController maxpricecontroller = TextEditingController();
   static TextEditingController yearrange1controller = TextEditingController();
-  static TextEditingController tagcontroller=TextEditingController();
+  static TextEditingController tagcontroller = TextEditingController();
   static TextEditingController searchdatacontroller = TextEditingController();
 }
 
@@ -63,12 +63,34 @@ class ProductController {
   static TextEditingController addressController = TextEditingController();
   static TextEditingController cityController = TextEditingController();
   static TextEditingController locationController = TextEditingController();
-  static TextEditingController pidcontroller=TextEditingController();
+  static TextEditingController pidcontroller = TextEditingController();
 }
 
-class PaystoreController{
-  static TextEditingController emailcontroller=TextEditingController();
-  static TextEditingController paymentamount=TextEditingController();
-  static TextEditingController path=TextEditingController();
+class PaystoreController {
+  static TextEditingController emailcontroller = TextEditingController();
+  static TextEditingController paymentamount = TextEditingController();
+  static TextEditingController path = TextEditingController();
 }
 
+class SaleController {
+  static TextEditingController nameController = TextEditingController();
+  static TextEditingController phoneController = TextEditingController();
+  static TextEditingController mailController = TextEditingController();
+  static TextEditingController addressController = TextEditingController();
+  static TextEditingController cityController = TextEditingController();
+  static TextEditingController locationController = TextEditingController();
+  static TextEditingController vehicleType = TextEditingController();
+  static TextEditingController modelController = TextEditingController();
+  static TextEditingController sellingPrice = TextEditingController();
+  static TextEditingController vehicleCondition = TextEditingController();
+  static TextEditingController registrationupto = TextEditingController();
+  static TextEditingController insuranceupto = TextEditingController();
+  static TextEditingController vehicleverient = TextEditingController();
+  static TextEditingController kilometerupto = TextEditingController();
+  static TextEditingController interior = TextEditingController();
+  static TextEditingController exterior = TextEditingController();
+  static TextEditingController engine = TextEditingController();
+  static TextEditingController tyre = TextEditingController();
+  static TextEditingController ac = TextEditingController();
+  static TextEditingController accident = TextEditingController();
+}
