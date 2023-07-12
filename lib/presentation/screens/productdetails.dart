@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:otodeals/core/color_manager.dart';
 import 'package:otodeals/core/controllers.dart';
 import 'package:otodeals/core/styles_manager.dart';
@@ -198,42 +200,45 @@ class _PorductdetailsState extends State<Porductdetails> {
                   const SizedBox(
                     height: 15,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Minimum Bid Amount",
-                            style: getSemiBoldStyle(
-                                color: Colormanager.black, fontSize: 10),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                              "RS. ${vres.vehdet?.vehicle?.minimumbitamount.toString()}",
-                              style: getBoldStyle(
-                                  color: Colors.black, fontSize: 15))
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Starts In",
-                            style: getSemiBoldStyle(
-                                color: Colormanager.primary, fontSize: 10),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          VehicledetailTimerScreen(),
-                        ],
-                      ),
-                    ],
-                  ),
+                  vres.vehdet?.vehicle?.type == 'sale'
+                      ? Container()
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Minimum Bid Amount",
+                                  style: getSemiBoldStyle(
+                                      color: Colormanager.black, fontSize: 10),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                    "RS. ${vres.vehdet?.vehicle?.minimumbitamount.toString()}",
+                                    style: getBoldStyle(
+                                        color: Colors.black, fontSize: 15))
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Starts In",
+                                  style: getSemiBoldStyle(
+                                      color: Colormanager.primary,
+                                      fontSize: 10),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                VehicledetailTimerScreen(),
+                              ],
+                            ),
+                          ],
+                        ),
                   SizedBox(
                     height: 10,
                   ),
@@ -804,6 +809,26 @@ class _PorductdetailsState extends State<Porductdetails> {
                     //   ],
                     // ),
                   ]),
+                  // Text(vres.vehdet?.vehicle?.description ?? ''),
+                  Html(
+                    data: vres.vehdet?.vehicle?.description ?? '',
+                    style: {
+                      'body': Style(
+                          fontSize: FontSize(18.0),
+                          textAlign: TextAlign.center,
+                          color: Colors.black,
+                          fontFamily: GoogleFonts.abel().fontFamily),
+                      // 'p': Style(
+                      //   lineHeight: LineHeight(1.5),
+                      // ),
+                      // 'strong': Style(
+                      //   fontWeight: FontWeight.bold,
+                      // ),
+                    },
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: AnimatedContainer(
@@ -1334,274 +1359,274 @@ class _PorductdetailsState extends State<Porductdetails> {
                                 SizedBox(
                                   height: 16,
                                 ),
-                                Card(
-                                  elevation: 10,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(24.0),
-                                  ),
-                                  child: ExpansionTile(
-                                    trailing: Container(
-                                      height: 37,
-                                      width: 37,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          boxShadow: const [
-                                            BoxShadow(
-                                                blurRadius: 5,
-                                                color: Color.fromARGB(
-                                                    255, 198, 197, 197),
-                                                spreadRadius: 0,
-                                                offset: Offset(0, 4))
-                                          ],
-                                          color: Colormanager.white),
-                                      child: Transform.rotate(
-                                          angle: 3.14159 * 1.5,
-                                          child: Icon(
-                                            Icons.arrow_back_ios,
-                                            size: 16,
-                                            color: Colormanager.primary,
-                                          )),
-                                    ),
-                                    title: Container(
-                                      child: Text(
-                                        "Description",
-                                        style: getSemiBoldStyle(
-                                            color: Colormanager.black,
-                                            fontSize: 22),
-                                      ),
-                                    ),
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(3.0),
-                                        child: Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 16.0),
-                                            child: Column(children: [
-                                              Row(
-                                                children: [
-                                                  Container(
-                                                      height: 24,
-                                                      width: 24,
-                                                      decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(20),
-                                                          boxShadow: const [
-                                                            BoxShadow(
-                                                                blurRadius: 5,
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        198,
-                                                                        197,
-                                                                        197),
-                                                                spreadRadius: 0,
-                                                                offset: Offset(
-                                                                    0, 4))
-                                                          ],
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              246,
-                                                              154,
-                                                              160)),
-                                                      child: Icon(
-                                                        Icons.check_sharp,
-                                                        size: 17,
-                                                        color: Colormanager
-                                                            .primary,
-                                                      )),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Text(
-                                                    "Air-conditioning",
-                                                    style: getMediumtStyle(
-                                                        fontSize: 13.0,
-                                                        color: const Color
-                                                                .fromARGB(
-                                                            255, 0, 0, 0)),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(height: 10.0),
-                                              Container(
-                                                height: 0.8,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                color: Color.fromARGB(
-                                                    255, 158, 155, 155),
-                                              ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Container(
-                                                      height: 24,
-                                                      width: 24,
-                                                      decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(20),
-                                                          boxShadow: const [
-                                                            BoxShadow(
-                                                                blurRadius: 5,
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        198,
-                                                                        197,
-                                                                        197),
-                                                                spreadRadius: 0,
-                                                                offset: Offset(
-                                                                    0, 4))
-                                                          ],
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              246,
-                                                              154,
-                                                              160)),
-                                                      child: Icon(
-                                                        Icons.check_sharp,
-                                                        size: 17,
-                                                        color: Colormanager
-                                                            .primary,
-                                                      )),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Text(
-                                                    "Engine & Transmission",
-                                                    style: getMediumtStyle(
-                                                        color: const Color
-                                                                .fromARGB(
-                                                            255, 0, 0, 0),
-                                                        fontSize: 13),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Container(
-                                                height: 0.8,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                color: Color.fromARGB(
-                                                    255, 158, 155, 155),
-                                              ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Container(
-                                                      height: 24,
-                                                      width: 24,
-                                                      decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(20),
-                                                          boxShadow: const [
-                                                            BoxShadow(
-                                                                blurRadius: 5,
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        198,
-                                                                        197,
-                                                                        197),
-                                                                spreadRadius: 0,
-                                                                offset: Offset(
-                                                                    0, 4))
-                                                          ],
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              246,
-                                                              154,
-                                                              160)),
-                                                      child: Icon(
-                                                        Icons.check_sharp,
-                                                        size: 17,
-                                                        color: Colormanager
-                                                            .primary,
-                                                      )),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Text(
-                                                    "Electricals & Interior",
-                                                    style: getMediumtStyle(
-                                                        color: const Color
-                                                                .fromARGB(
-                                                            255, 0, 0, 0),
-                                                        fontSize: 13),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Container(
-                                                height: 0.8,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                color: Color.fromARGB(
-                                                    255, 158, 155, 155),
-                                              ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              Center(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 70.0),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            bottom: 8.0),
-                                                    child: Row(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          "View More Details",
-                                                          style: getMediumtStyle(
-                                                              color:
-                                                                  Colormanager
-                                                                      .primary,
-                                                              fontSize: 14),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        Transform.rotate(
-                                                            angle:
-                                                                3.14159 * 1.5,
-                                                            child: Icon(
-                                                              Icons
-                                                                  .arrow_back_ios,
-                                                              size: 15,
-                                                              color:
-                                                                  Colormanager
-                                                                      .primary,
-                                                            )),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              )
-                                            ])),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                // Card(
+                                //   elevation: 10,
+                                //   shape: RoundedRectangleBorder(
+                                //     borderRadius: BorderRadius.circular(24.0),
+                                //   ),
+                                //   child: ExpansionTile(
+                                //     trailing: Container(
+                                //       height: 37,
+                                //       width: 37,
+                                //       decoration: BoxDecoration(
+                                //           borderRadius:
+                                //               BorderRadius.circular(20),
+                                //           boxShadow: const [
+                                //             BoxShadow(
+                                //                 blurRadius: 5,
+                                //                 color: Color.fromARGB(
+                                //                     255, 198, 197, 197),
+                                //                 spreadRadius: 0,
+                                //                 offset: Offset(0, 4))
+                                //           ],
+                                //           color: Colormanager.white),
+                                //       child: Transform.rotate(
+                                //           angle: 3.14159 * 1.5,
+                                //           child: Icon(
+                                //             Icons.arrow_back_ios,
+                                //             size: 16,
+                                //             color: Colormanager.primary,
+                                //           )),
+                                //     ),
+                                //     title: Container(
+                                //       child: Text(
+                                //         "Description",
+                                //         style: getSemiBoldStyle(
+                                //             color: Colormanager.black,
+                                //             fontSize: 22),
+                                //       ),
+                                //     ),
+                                //     children: [
+                                //       Padding(
+                                //         padding: const EdgeInsets.all(3.0),
+                                //         child: Container(
+                                //             padding: EdgeInsets.symmetric(
+                                //                 horizontal: 16.0),
+                                //             child: Column(children: [
+                                //               Row(
+                                //                 children: [
+                                //                   Container(
+                                //                       height: 24,
+                                //                       width: 24,
+                                //                       decoration: BoxDecoration(
+                                //                           borderRadius:
+                                //                               BorderRadius
+                                //                                   .circular(20),
+                                //                           boxShadow: const [
+                                //                             BoxShadow(
+                                //                                 blurRadius: 5,
+                                //                                 color: Color
+                                //                                     .fromARGB(
+                                //                                         255,
+                                //                                         198,
+                                //                                         197,
+                                //                                         197),
+                                //                                 spreadRadius: 0,
+                                //                                 offset: Offset(
+                                //                                     0, 4))
+                                //                           ],
+                                //                           color: Color.fromARGB(
+                                //                               255,
+                                //                               246,
+                                //                               154,
+                                //                               160)),
+                                //                       child: Icon(
+                                //                         Icons.check_sharp,
+                                //                         size: 17,
+                                //                         color: Colormanager
+                                //                             .primary,
+                                //                       )),
+                                //                   SizedBox(
+                                //                     width: 10,
+                                //                   ),
+                                //                   Text(
+                                //                     "Air-conditioning",
+                                //                     style: getMediumtStyle(
+                                //                         fontSize: 13.0,
+                                //                         color: const Color
+                                //                                 .fromARGB(
+                                //                             255, 0, 0, 0)),
+                                //                   ),
+                                //                 ],
+                                //               ),
+                                //               SizedBox(height: 10.0),
+                                //               Container(
+                                //                 height: 0.8,
+                                //                 width: MediaQuery.of(context)
+                                //                     .size
+                                //                     .width,
+                                //                 color: Color.fromARGB(
+                                //                     255, 158, 155, 155),
+                                //               ),
+                                //               SizedBox(
+                                //                 height: 20,
+                                //               ),
+                                //               Row(
+                                //                 children: [
+                                //                   Container(
+                                //                       height: 24,
+                                //                       width: 24,
+                                //                       decoration: BoxDecoration(
+                                //                           borderRadius:
+                                //                               BorderRadius
+                                //                                   .circular(20),
+                                //                           boxShadow: const [
+                                //                             BoxShadow(
+                                //                                 blurRadius: 5,
+                                //                                 color: Color
+                                //                                     .fromARGB(
+                                //                                         255,
+                                //                                         198,
+                                //                                         197,
+                                //                                         197),
+                                //                                 spreadRadius: 0,
+                                //                                 offset: Offset(
+                                //                                     0, 4))
+                                //                           ],
+                                //                           color: Color.fromARGB(
+                                //                               255,
+                                //                               246,
+                                //                               154,
+                                //                               160)),
+                                //                       child: Icon(
+                                //                         Icons.check_sharp,
+                                //                         size: 17,
+                                //                         color: Colormanager
+                                //                             .primary,
+                                //                       )),
+                                //                   SizedBox(
+                                //                     width: 10,
+                                //                   ),
+                                //                   Text(
+                                //                     "Engine & Transmission",
+                                //                     style: getMediumtStyle(
+                                //                         color: const Color
+                                //                                 .fromARGB(
+                                //                             255, 0, 0, 0),
+                                //                         fontSize: 13),
+                                //                   ),
+                                //                 ],
+                                //               ),
+                                //               SizedBox(
+                                //                 height: 10,
+                                //               ),
+                                //               Container(
+                                //                 height: 0.8,
+                                //                 width: MediaQuery.of(context)
+                                //                     .size
+                                //                     .width,
+                                //                 color: Color.fromARGB(
+                                //                     255, 158, 155, 155),
+                                //               ),
+                                //               SizedBox(
+                                //                 height: 20,
+                                //               ),
+                                //               Row(
+                                //                 children: [
+                                //                   Container(
+                                //                       height: 24,
+                                //                       width: 24,
+                                //                       decoration: BoxDecoration(
+                                //                           borderRadius:
+                                //                               BorderRadius
+                                //                                   .circular(20),
+                                //                           boxShadow: const [
+                                //                             BoxShadow(
+                                //                                 blurRadius: 5,
+                                //                                 color: Color
+                                //                                     .fromARGB(
+                                //                                         255,
+                                //                                         198,
+                                //                                         197,
+                                //                                         197),
+                                //                                 spreadRadius: 0,
+                                //                                 offset: Offset(
+                                //                                     0, 4))
+                                //                           ],
+                                //                           color: Color.fromARGB(
+                                //                               255,
+                                //                               246,
+                                //                               154,
+                                //                               160)),
+                                //                       child: Icon(
+                                //                         Icons.check_sharp,
+                                //                         size: 17,
+                                //                         color: Colormanager
+                                //                             .primary,
+                                //                       )),
+                                //                   SizedBox(
+                                //                     width: 10,
+                                //                   ),
+                                //                   Text(
+                                //                     "Electricals & Interior",
+                                //                     style: getMediumtStyle(
+                                //                         color: const Color
+                                //                                 .fromARGB(
+                                //                             255, 0, 0, 0),
+                                //                         fontSize: 13),
+                                //                   ),
+                                //                 ],
+                                //               ),
+                                //               SizedBox(
+                                //                 height: 10,
+                                //               ),
+                                //               Container(
+                                //                 height: 0.8,
+                                //                 width: MediaQuery.of(context)
+                                //                     .size
+                                //                     .width,
+                                //                 color: Color.fromARGB(
+                                //                     255, 158, 155, 155),
+                                //               ),
+                                //               SizedBox(
+                                //                 height: 20,
+                                //               ),
+                                //               Center(
+                                //                 child: Padding(
+                                //                   padding:
+                                //                       const EdgeInsets.only(
+                                //                           left: 70.0),
+                                //                   child: Padding(
+                                //                     padding:
+                                //                         const EdgeInsets.only(
+                                //                             bottom: 8.0),
+                                //                     child: Row(
+                                //                       crossAxisAlignment:
+                                //                           CrossAxisAlignment
+                                //                               .start,
+                                //                       children: [
+                                //                         Text(
+                                //                           "View More Details",
+                                //                           style: getMediumtStyle(
+                                //                               color:
+                                //                                   Colormanager
+                                //                                       .primary,
+                                //                               fontSize: 14),
+                                //                         ),
+                                //                         SizedBox(
+                                //                           width: 10,
+                                //                         ),
+                                //                         Transform.rotate(
+                                //                             angle:
+                                //                                 3.14159 * 1.5,
+                                //                             child: Icon(
+                                //                               Icons
+                                //                                   .arrow_back_ios,
+                                //                               size: 15,
+                                //                               color:
+                                //                                   Colormanager
+                                //                                       .primary,
+                                //                             )),
+                                //                       ],
+                                //                     ),
+                                //                   ),
+                                //                 ),
+                                //               )
+                                //             ])),
+                                //       ),
+                                //     ],
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),

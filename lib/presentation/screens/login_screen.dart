@@ -90,8 +90,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: size.height * .0312,
                       ),
                       Row(
-                        children: const [
-                          Text("Email :"),
+                        children: [
+                          Text(
+                            "Email :",
+                            style: getMediumtStyle(
+                                color: Colormanager.black, fontSize: 16),
+                          ),
                         ],
                       ),
                       SizedBox(
@@ -106,8 +110,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: size.height * .016,
                       ),
                       Row(
-                        children: const [
-                          Text("Password :"),
+                        children: [
+                          Text(
+                            "Password :",
+                            style: getMediumtStyle(
+                                color: Colormanager.black, fontSize: 16),
+                          ),
                         ],
                       ),
                       SizedBox(
@@ -131,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               icon: Icon(passwordvisible
                                   ? Icons.visibility_off
                                   : Icons.visibility),
-                              color: Colormanager.grey,
+                              color: Colormanager.primary,
                             ),
                           ),
                           keyboardType: TextInputType.visiblePassword,
@@ -153,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Text(
                             "Don't have an account?",
                             style: getMediumtStyle(
-                                color: Colormanager.greyText, fontSize: 14),
+                                color: Colormanager.black, fontSize: 14),
                           ),
                           InkWell(
                             child: Text(
@@ -218,7 +226,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: getBoldStyle(
                               color: Colormanager.white,
                               fontSize: 16,
-                             
                             ),
                           ),
                         ),
@@ -332,7 +339,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       child: Text(
                         "Forget Password?",
-                        style: getMediumtStyle(color: Colormanager.greyText),
+                        style: getMediumtStyle(color: Colormanager.black),
                       ),
                     ),
                     const SizedBox(
